@@ -1,0 +1,86 @@
+package javaSalesProject;
+
+import java.util.Scanner;
+
+public abstract class Account {
+
+	protected String username;
+	protected String password;
+	protected String privileges;
+	protected int userID;
+
+	protected static int nextNum = 1;
+
+	// All accounts are added to the arraylist upon creation now, which seriously
+	// cuts down on code
+	public Account() {
+		userID = nextNum;
+		nextNum++;
+		Driver.accounts.add(this);
+
+		//System.out.println("nextNum: " + nextNum); // debug line for testing purposes
+	}
+
+	// Constructor used when a user decides to create a new account
+	public Account(String un, String pw, String pr) {
+		username = un;
+		password = pw;
+		privileges = pr;
+		userID = nextNum;
+		nextNum++;
+		Driver.accounts.add(this);
+
+		//System.out.println("nextNum:" + nextNum); // debug line for testing purposes
+	}
+
+	// Constructor used when (re)creating accounts imported from a text file
+	public Account(String un, String pw, int id, String pr) {
+		username = un;
+		password = pw;
+		privileges = pr;
+		userID = id;
+		Driver.accounts.add(this);
+	}
+
+	public String toString() {
+		return "Username: " + username + "\nPassword: " + password + "\nPrivileges: " + privileges + "\nUserID: "
+				+ userID;
+	}
+
+	public void logout(Account account) {
+		Driver.currentUser.setUser(account);
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPrivileges() {
+		return privileges;
+	}
+
+	public void setPrivileges(String privileges) {
+		this.privileges = privileges;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
+
+}
