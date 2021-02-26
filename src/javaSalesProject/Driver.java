@@ -11,7 +11,10 @@ public class Driver {
 	static Admin rootUser;
 		
 	public static void main(String[] args) {
-	
+
+		//This is for testing purposes only and is to be deleting when testing is done
+		System.out.println("This is my change!");
+		
 		init();	
 
 		while (running) {
