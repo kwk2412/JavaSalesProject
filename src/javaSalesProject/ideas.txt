@@ -29,15 +29,11 @@ Login system
 Bidders
 	- Just like the customer class, fields to this one include the max bid, name, etc. 
 	
-	
-	
-	
-	
-Program Flow
-	- Creation of the default admin account upon first time startup and login with that account
-	- Create a new (real) admin account? (for use with the user) good grammar is good :3
-	- 
-	
+
+Menu 
+	- Perhaps a good application of linked lists would be to make menu items nodes in a list.
+	  Under certain circumstances we could add, remove, or otherwise alter specific nodes in the list
+	  according to conditions present in the program
 	-------------------------------------------------------------------------------------------------
 	Clay 2/19/21
 	
