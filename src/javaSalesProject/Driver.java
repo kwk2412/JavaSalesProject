@@ -9,11 +9,10 @@ public class Driver {
 	static CurrentUser currentUser;
 	static ArrayList<Account> accounts;
 	static Admin rootUser;
+	static ArrayList<Item> items;
+	static ArrayList<Auction> auctions;
 		
 	public static void main(String[] args) {
-
-		//This is for testing purposes only and is to be deleting when testing is done
-		System.out.println("This is my change!");
 		
 		init();	
 
@@ -55,7 +54,8 @@ public class Driver {
 			}
 			
 			else if (menuChoice == 5) {
-				boolean sure = quitConfirmation();
+				System.out.println("Are you sure you want to quit?");
+				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
 				if (sure) {
 					System.out.println("Ending program...");
 					System.exit(0);
@@ -105,7 +105,8 @@ public class Driver {
 
 			//Exit the application
 			else if (menuChoice == 5) {
-				boolean sure = quitConfirmation();
+				System.out.println("Are you sure you want to quit?");
+				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
 				if (sure) {
 					System.out.println("Ending program...");
 					System.exit(0);
@@ -203,29 +204,15 @@ public class Driver {
 		
 	}
 	
-	public static boolean quitConfirmation() {
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Are you sure you want to quit?");
-		
-		boolean valid = false;
-		while (valid == false) {
-			try {
-				String answer = scan.nextLine();
-				if (answer.equalsIgnoreCase("yes")) {
-					valid = true;
-					return true;
-				}
-				else if (answer.equalsIgnoreCase("no")) {
-					valid = true;
-					return false;
-				}
-				else System.out.println("Your input needs to be either \"yes\" or \"no\"");
-			}
-			catch (Exception e) {
-				System.out.println("Please make sure you input \"yes\" or \"no\"");
-			}
-		}
-		return false;
+	
+	public static void loadItems() {
+		//items.add(new Item("Lenovo"));
+		//items.add(new Item("Asus"));
+	}
+	
+	public static void loadAuctions() {
+		//auctions.add(new Auction("Lenovo"));
+		//auctions.add(new Auction("Asus"));
 	}
 	
 	
@@ -237,6 +224,8 @@ public class Driver {
 		currentUser = new CurrentUser();
 		rootUser = new Admin("rootUser", "password", "admin");		
 		currentUser.setUser(rootUser);
+		items = new ArrayList<Item>();
+		auctions = new ArrayList<Auction>();
 	}
 	
 	//The menu for the code that Clay wrote in the early phases of the program's creation

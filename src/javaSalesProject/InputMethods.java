@@ -30,7 +30,7 @@ public class InputMethods {
 			}
 			
 			if(threwException) {
-				System.out.println("Invalid entry. Try again");
+				System.out.println("Your input must be a \"yes\" or \"no\"");
 				System.out.println(question);
 			}
 			

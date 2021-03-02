@@ -30,10 +30,28 @@ Bidders
 	- Just like the customer class, fields to this one include the max bid, name, etc. 
 	
 
+Bids
+	- Timestamping each bid for the purpose of record keeping
+	- "Winnning bids" refer to the bids that won the auction, the bid that was submitted that resulted in that bid's 
+	  customer winning the auction 
+	- "Active bids" are part of an active and ongoing auction. They refer to bids that are still relevant in a live
+  	  auction that has not yet finished
+	
+	
+Auctions
+	- Auctions are only open from 9 to 5, so bids placed outside of those hours get stored for backlogging data
+	- Auctions only accept bids from a specified start time and the specified end time 
+	  There exist some classes that are capable of taking the time from your local machine and producing input based on that
+
+
 Menu 
 	- Perhaps a good application of linked lists would be to make menu items nodes in a list.
 	  Under certain circumstances we could add, remove, or otherwise alter specific nodes in the list
 	  according to conditions present in the program
+	  
+	  
+	  
+
 	-------------------------------------------------------------------------------------------------
 	Clay 2/19/21
 	
@@ -69,7 +87,7 @@ Menu
 	 __________________________________________________________________________________________________________________ 
 	  Kevin 3/2/2021
 	  
-	  - Included a confirmation method in the driver that verifies that the user did want to quit when he chose the exit option
-	    Menus have been altered to accomodate this change
+	  - Developed more of the framework for the Bid, Auction, and Customer class in preparation for future
+	    communication between those types
 	
 	
