@@ -29,15 +29,29 @@ Login system
 Bidders
 	- Just like the customer class, fields to this one include the max bid, name, etc. 
 	
+
+Bids
+	- Timestamping each bid for the purpose of record keeping
+	- "Winnning bids" refer to the bids that won the auction, the bid that was submitted that resulted in that bid's 
+	  customer winning the auction 
+	- "Active bids" are part of an active and ongoing auction. They refer to bids that are still relevant in a live
+  	  auction that has not yet finished
 	
 	
-	
-	
-Program Flow
-	- Creation of the default admin account upon first time startup and login with that account
-	- Create a new (real) admin account? (for use with the user) good grammar is good :3
-	- 
-	
+Auctions
+	- Auctions are only open from 9 to 5, so bids placed outside of those hours get stored for backlogging data
+	- Auctions only accept bids from a specified start time and the specified end time 
+	  There exist some classes that are capable of taking the time from your local machine and producing input based on that
+
+
+Menu 
+	- Perhaps a good application of linked lists would be to make menu items nodes in a list.
+	  Under certain circumstances we could add, remove, or otherwise alter specific nodes in the list
+	  according to conditions present in the program
+	  
+	  
+	  
+
 	-------------------------------------------------------------------------------------------------
 	Clay 2/19/21
 	
@@ -60,14 +74,15 @@ Program Flow
 	- Added the methods customerSubMenu and adminSubMenu which acts an in-between for the main menu and the admin/customer menu.
 	  This menu asks the user if he wants to log in as a new account or an existing one
 	  
-	  	__________________________________________________________________________________________________________
+
 	 Clay 2/25/21
 	 
 	 - Github Test
-	 
-	 __________________________________________________________________________________________________________
-	 Austin 2/27/21
-	 
-	 -Testing Commit	 
+		 
+	 __________________________________________________________________________________________________________________ 
+	  Kevin 3/2/2021
 	  
+	  - Developed more of the framework for the Bid, Auction, and Customer class in preparation for future
+	    communication between those types
+
 	
