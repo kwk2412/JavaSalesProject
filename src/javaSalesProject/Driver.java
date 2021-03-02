@@ -55,9 +55,11 @@ public class Driver {
 			}
 			
 			else if (menuChoice == 5) {
-				menu = false;
-				System.out.println("Ending program...");
-				System.exit(0);
+				boolean sure = quitConfirmation();
+				if (sure) {
+					System.out.println("Ending program...");
+					System.exit(0);
+				}
 			}
 		}
 	}
@@ -103,9 +105,11 @@ public class Driver {
 
 			//Exit the application
 			else if (menuChoice == 5) {
-				menu = false;
-				System.out.println("Ending program...");
-				System.exit(0);
+				boolean sure = quitConfirmation();
+				if (sure) {
+					System.out.println("Ending program...");
+					System.exit(0);
+				}
 			}
 		}
 	}
@@ -199,6 +203,31 @@ public class Driver {
 		
 	}
 	
+	
+	public static boolean quitConfirmation() {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Are you sure you want to quit?");
+		
+		boolean valid = false;
+		while (valid == false) {
+			try {
+				String answer = scan.nextLine();
+				if (answer.equalsIgnoreCase("yes")) {
+					valid = true;
+					return true;
+				}
+				else if (answer.equalsIgnoreCase("no")) {
+					valid = true;
+					return false;
+				}
+				else System.out.println("Your input needs to be either \"yes\" or \"no\"");
+			}
+			catch (Exception e) {
+				System.out.println("Please make sure you input \"yes\" or \"no\"");
+			}
+		}
+		return false;
+	}
 	
 	//All initial configurations to make the program run smoothly on startup
 	//can happen in here, this cleans up the main method and keeps things organized

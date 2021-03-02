@@ -60,7 +60,7 @@ Program Flow
 	- Added the methods customerSubMenu and adminSubMenu which acts an in-between for the main menu and the admin/customer menu.
 	  This menu asks the user if he wants to log in as a new account or an existing one
 	  
-	  	__________________________________________________________________________________________________________
+	 __________________________________________________________________________________________________________
 	 Clay 2/25/21
 	 
 	 - Github Test
@@ -68,6 +68,11 @@ Program Flow
 	 __________________________________________________________________________________________________________
 	 Austin 2/27/21
 	 
-	 -Testing Commit	 
+	 -Testing Commit	
+	 
+	 __________________________________________________________________________________________________________________ 
+	  Kevin 3/2/2021
 	  
+	  - Included a confirmation method in the driver that verifies that the user did want to quit when he chose the exit option
+	    Menus have been altered to accomodate this change
 	
