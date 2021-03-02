@@ -55,9 +55,11 @@ public class Driver {
 			}
 			
 			else if (menuChoice == 5) {
-				menu = false;
-				System.out.println("Ending program...");
-				System.exit(0);
+				boolean sure = quitConfirmation();
+				if (sure) {
+					System.out.println("Ending program...");
+					System.exit(0);
+				}
 			}
 		}
 	}
@@ -103,9 +105,11 @@ public class Driver {
 
 			//Exit the application
 			else if (menuChoice == 5) {
-				menu = false;
-				System.out.println("Ending program...");
-				System.exit(0);
+				boolean sure = quitConfirmation();
+				if (sure) {
+					System.out.println("Ending program...");
+					System.exit(0);
+				}
 			}
 		}
 	}
