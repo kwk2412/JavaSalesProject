@@ -10,9 +10,11 @@ public class Driver {
 	static ArrayList<Account> accounts;
 	static Admin rootUser;
 	static ArrayList<Item> items;
+	static ArrayList<Auction> auctions;
+
 		
 	public static void main(String[] args) {
-	
+		
 		init();	
 
 		while (running) {
@@ -53,9 +55,12 @@ public class Driver {
 			}
 			
 			else if (menuChoice == 5) {
-				menu = false;
-				System.out.println("Ending program...");
-				System.exit(0);
+				System.out.println("Are you sure you want to quit?");
+				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
+				if (sure) {
+					System.out.println("Ending program...");
+					System.exit(0);
+				}
 			}
 		}
 	}
@@ -101,9 +106,12 @@ public class Driver {
 
 			//Exit the application
 			else if (menuChoice == 5) {
-				menu = false;
-				System.out.println("Ending program...");
-				System.exit(0);
+				System.out.println("Are you sure you want to quit?");
+				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
+				if (sure) {
+					System.out.println("Ending program...");
+					System.exit(0);
+				}
 			}
 		}
 	}
@@ -198,6 +206,17 @@ public class Driver {
 	}
 	
 	
+	public static void loadItems() {
+		//items.add(new Item("Lenovo"));
+		//items.add(new Item("Asus"));
+	}
+	
+	public static void loadAuctions() {
+		//auctions.add(new Auction("Lenovo"));
+		//auctions.add(new Auction("Asus"));
+	}
+	
+	
 	//All initial configurations to make the program run smoothly on startup
 	//can happen in here, this cleans up the main method and keeps things organized
 	public static void init() {
@@ -206,6 +225,8 @@ public class Driver {
 		currentUser = new CurrentUser();
 		rootUser = new Admin("rootUser", "password", "admin");		
 		currentUser.setUser(rootUser);
+		items = new ArrayList<Item>();
+		auctions = new ArrayList<Auction>();
 	}
 	
 	//The menu for the code that Clay wrote in the early phases of the program's creation
