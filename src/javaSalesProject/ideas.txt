@@ -95,5 +95,3 @@ Menu
 	
  	  - Added a list of items to the driver in the loadItems() method. 
  	  - Adjusted the main menu so that there are now 6 options - one of them is the loadItemData option
-	
-	
