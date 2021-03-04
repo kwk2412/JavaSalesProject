@@ -9,7 +9,7 @@ public class Driver {
 	static CurrentUser currentUser;
 	static ArrayList<Account> accounts;
 	static Admin rootUser;
-	static ArrayList<Items> items;
+	static ArrayList<Item> items;
 		
 	public static void main(String[] args) {
 	
