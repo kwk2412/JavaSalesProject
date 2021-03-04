@@ -1,5 +1,7 @@
 package javaSalesProject;
 
+import java.sql.Timestamp;
+
 public class Bid {
 	
 	
@@ -11,7 +13,8 @@ public class Bid {
 	private Customer customer;
 	
 	// Timestamp must be an instance variable
-	
+	// LocalDate()
+	// Timestamp timestamp = new Timestamp(auctionID, auctionID, auctionID, auctionID, auctionID, auctionID, auctionID);
 	
 	
 	

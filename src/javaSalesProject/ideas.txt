@@ -90,4 +90,10 @@ Menu
 	  - Developed more of the framework for the Bid, Auction, and Customer class in preparation for future
 	    communication between those types
 	
+	____________________________________________________________________________________________________________________
+	  Kevin 3/4/21
+	
+ 	  - Added a list of items to the driver in the loadItems() method. 
+ 	  - Adjusted the main menu so that there are now 6 options - one of them is the loadItemData option
+	
 	
