@@ -2,7 +2,7 @@ package javaSalesProject;
 
 public class Item {
 	
-	private double startingPrice;
+  private double startingPrice;
 	private String name;
 	private double priceSold;
 	private final int INCREMENT;
@@ -64,7 +64,4 @@ public class Item {
 		return INCREMENT;
 	}
 	
-	
-	
-
 }
