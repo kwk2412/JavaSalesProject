@@ -9,7 +9,7 @@ Main menu
 	- 3) Prints the items in the items arraylist
 	- 4) Initiates admin login process
 	- 5) Initiates customer login process
-	- 6) Exit the application after asing for user's confirmation
+	- 6) Exit the application after asking for user's confirmation
 	
 	User Present:
 	- 1) Loads items array list with sample data
