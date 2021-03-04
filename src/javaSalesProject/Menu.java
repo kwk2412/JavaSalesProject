@@ -9,11 +9,12 @@ public class Menu {
 	public static int mainMenuLoggedOut() {
 		System.out.println("Main Menu\n" + 
 				"=========\n" +
-				"1. Load sample data (see information at *** below)\r\n" + 
-				"2. Process the backlogged data (see information at *** below)\r\n" + 
-				"3. Log in as administrator\r\n" + 
-				"4. Log in as customer\r\n" + 
-				"5. Exit the application\r\n");
+				"1. Load sample data\r\n" + 
+				"2. Process the backlogged data\r\n" + 
+				"3. Print items ArrayList\n" +
+				"4. Log in as administrator\r\n" + 
+				"5. Log in as customer\r\n" + 
+				"6. Exit the application\r\n");
 		
 		int choice = preventMismatchMainMenu();
 		return choice;	
@@ -27,22 +28,24 @@ public class Menu {
 			
 			System.out.println("Main Menu\n" +
 				"=========\n" +
-				"1. Load sample data (see information at *** below)\r\n" + 
-				"2. Process the backlogged data (see information at *** below)\r\n" + 
-				"3. Log out\r\n" +
-				"4. Open admin menu\r\n" + 
-				"5. Exit the application\r\n");
+				"1. Load sample data\r\n" + 
+				"2. Process the backlogged data\r\n" + 
+				"3. Print items ArrayList\n" + 
+				"4. Log out\r\n" +
+				"5. Open admin menu\r\n" + 
+				"6. Exit the application\r\n");
 		}
 		
 		else if (Driver.currentUser.getUser() instanceof Customer) {
 			
 			System.out.println("Main Menu\n" +
 					"=========\n" +
-					"1. Load sample data (see information at *** below)\r\n" + 
-					"2. Process the backlogged data (see information at *** below)\r\n" + 
-					"3. Log out\r\n" +
-					"4. Open customer menu\r\n" + 
-					"5. Exit the application\r\n");
+					"1. Load sample data\r\n" + 
+					"2. Process the backlogged data\r\n" +
+					"3. Print items ArrayList\n" +
+					"4. Log out\r\n" +
+					"5. Open customer menu\r\n" + 
+					"6. Exit the application\r\n");
 		}
 
 		int choice = preventMismatchMainMenu();

@@ -31,7 +31,6 @@ public static void customerMenu() {
 			
 			//Return to main menu
 			else if (choice == 5) {
-				System.out.println("You selected option 5");
 				menu = false;
 			}
 		}

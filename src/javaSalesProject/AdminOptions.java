@@ -37,7 +37,6 @@ public class AdminOptions {
 			
 			//Return to main menu
 			else if (choice == 6) {
-				System.out.println("You selected option 6");
 				menu = false;
 			}
 			

@@ -2,31 +2,38 @@ package javaSalesProject;
 
 public class Item {
 	
-  private double startingPrice;
+	private double startingPrice;
 	private String name;
 	private double priceSold;
-	private final int INCREMENT;
+	private int increment;
 	private int itemID;
 	private int nextNum = 100;
 	
 	
 	
 	public Item() {
-		INCREMENT = 100;
+		increment = 100;
 		itemID = nextNum;
 		nextNum++;
 	}
 	
 	
-	public Item(double startingPrice, String name, int INCREMENT) {
+	public Item(double startingPrice, String name, int increment) {
 		this.startingPrice = startingPrice;
 		this.name = name;
-		this.INCREMENT = INCREMENT;
+		this.increment = increment;
 		itemID = nextNum;
 		nextNum++;
 	}
 	
 	
+	public String toString() {
+		return "\tItem name: " + name + "\n" + 
+			   "\tStarting Price: " + startingPrice + "\n" +
+			   "\tItem ID: " + itemID + "\n" + 
+			   "\tIncrement: " + increment + "\n";
+		
+	}
 	
 	
 
@@ -61,7 +68,10 @@ public class Item {
 
 
 	public int getIncrement() {
-		return INCREMENT;
+		return increment;
 	}
 	
+	
+	
+
 }

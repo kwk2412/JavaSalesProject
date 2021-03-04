@@ -11,7 +11,6 @@ public class Driver {
 	static Admin rootUser;
 	static ArrayList<Item> items;
 	static ArrayList<Auction> auctions;
-
 		
 	public static void main(String[] args) {
 		
@@ -36,7 +35,9 @@ public class Driver {
 			int menuChoice = Menu.mainMenuLoggedOut();
 
 			if (menuChoice == 1) {
-				System.out.println("you selected 1, this will load the sample data when we get that figured out\n");
+				loadItems();
+				new SystemMessage("Data has been loaded into the ArrayList");
+
 			}
 			
 			else if (menuChoice == 2) {
@@ -45,16 +46,20 @@ public class Driver {
 			}
 			
 			else if (menuChoice == 3) {
+				printItems();
+			}
+			
+			else if (menuChoice == 4) {
 				adminSubMenu();
 				menu = false;
 			}
 			
-			else if (menuChoice == 4) {
+			else if (menuChoice == 5) {
 				customerSubMenu();
 				menu = false;
 			}
 			
-			else if (menuChoice == 5) {
+			else if (menuChoice == 6) {
 				System.out.println("Are you sure you want to quit?");
 				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
 				if (sure) {
@@ -78,7 +83,8 @@ public class Driver {
 			
 			//Load sample data
 			if (menuChoice == 1) {
-				System.out.println("you selected 1, this will load the sample data when we get that figured out\n");
+				loadItems();
+				new SystemMessage("Data has been loaded into the ArrayList");
 			}
 			
 			//Process backlogged data
@@ -87,8 +93,13 @@ public class Driver {
 				processBackloggedData();
 			}
 			
+			// Load item data
+			else if (menuChoice == 3) {
+				printItems();
+			}
+			
 			//log out
-			else if (menuChoice == 3) {		
+			else if (menuChoice == 4) {		
 				System.out.println("Log out and return to main menu?");
 				boolean answer = InputMethods.yesNoToBool("Log out and return to main menu?");
 				
@@ -99,13 +110,13 @@ public class Driver {
 			}
 			
 			//Continue as customer/admin
-			else if (menuChoice == 4) {
+			else if (menuChoice == 5) {
 				if (currentUser.getUser() instanceof Admin) AdminOptions.adminMenu();
 				else if (currentUser.getUser() instanceof Customer) CustomerOptions.customerMenu();
 			}
 
 			//Exit the application
-			else if (menuChoice == 5) {
+			else if (menuChoice == 6) {
 				System.out.println("Are you sure you want to quit?");
 				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
 				if (sure) {
@@ -183,6 +194,13 @@ public class Driver {
 		return menu;
 	}
 	
+	public static void printItems() {
+		if (items.size() == 0) new SystemMessage("Items ArrayList is empty");
+		for (int i = 0; i < items.size(); i++) {
+			System.out.println(items.get(i).toString());
+		}
+	}
+	
 	
 	
 	/*
@@ -207,8 +225,24 @@ public class Driver {
 	
 	
 	public static void loadItems() {
-		//items.add(new Item("Lenovo"));
-		//items.add(new Item("Asus"));
+		items.add(new Item(130, "Nintendo GameCube", 10));
+		items.add(new Item(160, "Sony PlayStation", 10));
+		items.add(new Item(150, "Nintendo GameBoy", 5));
+		items.add(new Item(170, "Microsoft XboX", 10));
+		items.add(new Item(125, "Nintendo 64", 5));
+		items.add(new Item(180, "Sony PlayStation 2", 5));
+		items.add(new Item(90, "Sega Dreamcast", 10));
+		items.add(new Item(190, "Sony PlayStation Portable", 10));
+		items.add(new Item(230, "Microsoft XboX 360", 10));
+		items.add(new Item(80, "Atari 2600", 15));
+		items.add(new Item(120, "Sega CD", 10));
+		items.add(new Item(90, "Magnavox Odyssey", 15));
+		items.add(new Item(250, "Nintendo GameCube", 10));
+		items.add(new Item(180, "Nintendo Virtual Boy", 20));
+		items.add(new Item(80, "Nintendo Entertainment System", 10));
+		items.add(new Item(200, "Sony PlayStation 3", 15));
+		items.add(new Item(130, "Sega GameGear", 10));
+		items.add(new Item(250, "Microsoft XboX One", 15));
 	}
 	
 	public static void loadAuctions() {
@@ -257,3 +291,4 @@ public class Driver {
 	}
 	
 }
+
