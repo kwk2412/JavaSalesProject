@@ -1,5 +1,7 @@
 package javaSalesProject;
 
+import java.text.NumberFormat;
+
 public class Item {
 	
 	private double startingPrice;
@@ -7,7 +9,7 @@ public class Item {
 	private double priceSold;
 	private int increment;
 	private int itemID;
-	private int nextNum = 100;
+	private static int nextNum = 100;
 	
 	
 	
@@ -28,8 +30,9 @@ public class Item {
 	
 	
 	public String toString() {
+		NumberFormat cf = NumberFormat.getCurrencyInstance();
 		return "\tItem name: " + name + "\n" + 
-			   "\tStarting Price: " + startingPrice + "\n" +
+			   "\tStarting Price: " + cf.format(startingPrice) + "\n" +
 			   "\tItem ID: " + itemID + "\n" + 
 			   "\tIncrement: " + increment + "\n";
 		

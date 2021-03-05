@@ -17,8 +17,12 @@ public class Driver {
 		init();	
 
 		while (running) {
-			if (currentUser.getUser().getUserID() == 1) menuNoUser();
-			else menuUserLoggedIn();
+			if (currentUser.getUser().getUserID() == 1) 
+				menuNoUser();
+			else if(currentUser.getUser() instanceof Admin)
+				menuAdminLoggedIn();
+			else
+				menuCustomerLoggedIn();
 		}		
 
 	}
@@ -60,7 +64,6 @@ public class Driver {
 			}
 			
 			else if (menuChoice == 6) {
-				System.out.println("Are you sure you want to quit?");
 				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
 				if (sure) {
 					System.out.println("Ending program...");
@@ -71,7 +74,7 @@ public class Driver {
 	}
 	
 	
-	public static void menuUserLoggedIn() { 
+	public static void menuAdminLoggedIn() { 
 		Scanner scan = new Scanner(System.in);
 		
 		boolean menu = true;
@@ -79,7 +82,7 @@ public class Driver {
 
 			//This method handles printing the appropriate version of the menu
 			//depending on whether the user is a customer or admin
-			int menuChoice = Menu.mainMenuLoggedIn();
+			int menuChoice = Menu.mainMenuAdminLoggedIn();
 			
 			//Load sample data
 			if (menuChoice == 1) {
@@ -100,8 +103,7 @@ public class Driver {
 			
 			//log out
 			else if (menuChoice == 4) {		
-				System.out.println("Log out and return to main menu?");
-				boolean answer = InputMethods.yesNoToBool("Log out and return to main menu?");
+				boolean answer = InputMethods.yesNoToBool("Log out and return to main menu? (yes or no)");
 				
 				if (answer) {
 					logout();
@@ -109,16 +111,15 @@ public class Driver {
 				}
 			}
 			
-			//Continue as customer/admin
+			//Continue as admin
 			else if (menuChoice == 5) {
-				if (currentUser.getUser() instanceof Admin) AdminOptions.adminMenu();
-				else if (currentUser.getUser() instanceof Customer) CustomerOptions.customerMenu();
+				AdminOptions.adminMenu();
+
 			}
 
 			//Exit the application
 			else if (menuChoice == 6) {
-				System.out.println("Are you sure you want to quit?");
-				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
+				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit? (yes or no)");
 				if (sure) {
 					System.out.println("Ending program...");
 					System.exit(0);
@@ -128,6 +129,59 @@ public class Driver {
 	}
 	
 	
+	public static void menuCustomerLoggedIn() { 
+		Scanner scan = new Scanner(System.in);
+		
+		boolean menu = true;
+		while (menu) {
+
+			//This method handles printing the appropriate version of the menu
+			//depending on whether the user is a customer or admin
+			int menuChoice = Menu.mainMenuCustLoggedIn();
+			
+			//Load sample data
+			if (menuChoice == 1) {
+				loadItems();
+				new SystemMessage("Data has been loaded into the ArrayList");
+			}
+			
+			//Process backlogged data
+			else if (menuChoice == 2) {
+				System.out.println("you selected 2, this will process backlogged data when we know what that means\n");
+				processBackloggedData();
+			}
+			
+			// Load item data
+			else if (menuChoice == 3) {
+				printItems();
+			}
+			
+			//log out
+			else if (menuChoice == 4) {		
+				boolean answer = InputMethods.yesNoToBool("Log out and return to main menu? (yes or no)");
+				
+				if (answer) {
+					logout();
+					menu = false;
+				}
+			}
+			
+			//Continue as customer
+			else if (menuChoice == 5) {
+				CustomerOptions.customerMenu();
+
+			}
+
+			//Exit the application
+			else if (menuChoice == 6) {
+				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit? (yes or no)");
+				if (sure) {
+					System.out.println("Ending program...");
+					System.exit(0);
+				}
+			}
+		}
+	}
 	public static void customerSubMenu() {
 		
 		AccountValidation av = new AccountValidation();
@@ -195,7 +249,8 @@ public class Driver {
 	}
 	
 	public static void printItems() {
-		if (items.size() == 0) new SystemMessage("Items ArrayList is empty");
+		if (items.size() == 0) 
+			new SystemMessage("Items ArrayList is empty");
 		for (int i = 0; i < items.size(); i++) {
 			System.out.println(items.get(i).toString());
 		}
@@ -261,33 +316,6 @@ public class Driver {
 		currentUser.setUser(rootUser);
 		items = new ArrayList<Item>();
 		auctions = new ArrayList<Auction>();
-	}
-	
-	//The menu for the code that Clay wrote in the early phases of the program's creation
-	//Created for the purpose of demonstrating how these methods would be called and used
-	public static void menuClay() {
-		
-		Scanner keyboard = new Scanner(System.in);
-		boolean done = false;
-		while(!done) {
-			System.out.println("1. create customer account. 2. Create admin account. 3. print all accounts. 4. Show current user"
-					+ " 5. Input accounts to text file. 6. Output accounts to a text file.");
-			int selection = keyboard.nextInt();
-			if(selection == 1) {
-				CreateAccount.createCustomerAccount();
-			} else if(selection == 2) {
-				CreateAccount.createAdminAccount();
-			} else if(selection == 3) {
-				Testing.printAllAccounts();
-			} else if(selection == 4) {
-				System.out.println(currentUser.toString());
-			} else if(selection == 5) {
-				ReadWriteAccounts.inputAccounts();
-			} else if(selection == 6) {
-				ReadWriteAccounts.outputAccounts();	
-			} else
-				done = true;
-		}
 	}
 	
 }
