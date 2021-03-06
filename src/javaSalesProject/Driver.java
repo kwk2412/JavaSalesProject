@@ -24,6 +24,7 @@ public class Driver {
 			else
 				menuCustomerLoggedIn();
 		}		
+
 	}
 	
 	
@@ -38,7 +39,7 @@ public class Driver {
 			int menuChoice = Menu.mainMenuLoggedOut();
 
 			if (menuChoice == 1) {
-				loadSampleItemsIntoInventory();
+				loadItems();
 				new SystemMessage("Data has been loaded into the ArrayList");
 
 			}
@@ -49,7 +50,7 @@ public class Driver {
 			}
 			
 			else if (menuChoice == 3) {
-				printCurrentInventory();
+				printItems();
 			}
 			
 			else if (menuChoice == 4) {
@@ -73,7 +74,7 @@ public class Driver {
 	}
 	
 	
-	public static void menuAdminLoggedIn() {
+	public static void menuAdminLoggedIn() { 
 		Scanner scan = new Scanner(System.in);
 		
 		boolean menu = true;
@@ -85,7 +86,7 @@ public class Driver {
 			
 			//Load sample data
 			if (menuChoice == 1) {
-				loadSampleItemsIntoInventory();
+				loadItems();
 				new SystemMessage("Data has been loaded into the ArrayList");
 			}
 			
@@ -97,7 +98,7 @@ public class Driver {
 			
 			// Load item data
 			else if (menuChoice == 3) {
-				printCurrentInventory();
+				printItems();
 			}
 			
 			//log out
@@ -115,15 +116,9 @@ public class Driver {
 				AdminOptions.adminMenu();
 
 			}
-			
-			// Create new admin account
-			else if (menuChoice == 6) {
-				CreateAccount.createAdminAccount();
-				menu = loginAttemptCheck(menu);
-			}
 
 			//Exit the application
-			else if (menuChoice == 7) {
+			else if (menuChoice == 6) {
 				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit? (yes or no)");
 				if (sure) {
 					System.out.println("Ending program...");
@@ -134,7 +129,7 @@ public class Driver {
 	}
 	
 	
-	public static void menuCustomerLoggedIn() {
+	public static void menuCustomerLoggedIn() { 
 		Scanner scan = new Scanner(System.in);
 		
 		boolean menu = true;
@@ -146,7 +141,7 @@ public class Driver {
 			
 			//Load sample data
 			if (menuChoice == 1) {
-				loadSampleItemsIntoInventory();
+				loadItems();
 				new SystemMessage("Data has been loaded into the ArrayList");
 			}
 			
@@ -158,7 +153,7 @@ public class Driver {
 			
 			// Load item data
 			else if (menuChoice == 3) {
-				printCurrentInventory();
+				printItems();
 			}
 			
 			//log out
@@ -234,7 +229,6 @@ public class Driver {
 			else if (choice == 2) {
 				CreateAccount.createAdminAccount();
 				menu = loginAttemptCheck(menu);
-				
 			}
 			
 			//Return to previous menu
@@ -249,12 +243,12 @@ public class Driver {
 			menu = false;
 		}
 		else {
-			new SystemMessage("Something went wrong with the login attempt. No user is currently logged in.");
+			System.out.println("Something went wrong with the login attempt. No user is currently logged in.");
 		}
 		return menu;
 	}
 	
-	public static void printCurrentInventory() {
+	public static void printItems() {
 		if (items.size() == 0) 
 			new SystemMessage("Items ArrayList is empty");
 		for (int i = 0; i < items.size(); i++) {
@@ -285,7 +279,7 @@ public class Driver {
 	}
 	
 	
-	public static void loadSampleItemsIntoInventory() {
+	public static void loadItems() {
 		items.add(new Item(130, "Nintendo GameCube", 10));
 		items.add(new Item(160, "Sony PlayStation", 10));
 		items.add(new Item(150, "Nintendo GameBoy", 5));
