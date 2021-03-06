@@ -111,8 +111,8 @@ Menu
 	- Added a line to some of kevins if statements
 	
 	- Adjusted the login method in the account validation class to ask the user if they would like to try 
-		a different username/password after an invalid entry is made. Did this to avoid the situation where a 
-		user forgets username/password and is stuck in an infinite loop of guessing.
+	  a different username/password after an invalid entry is made. Did this to avoid the situation where a 
+	  user forgets username/password and is stuck in an infinite loop of guessing.
 		
 	- Split menuUserLoggedIn into two sepearate menus in the driver. One for admin logged in and one for customer logged in
 	
