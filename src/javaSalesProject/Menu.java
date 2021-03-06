@@ -28,7 +28,7 @@ public class Menu {
 				"2. Process the backlogged data\r\n" + 
 				"3. Print items ArrayList\n" + 
 				"4. Log out\r\n" +
-				"5. Open admin menu\r\n" +
+				"5. Admin Options\r\n" +
 				"6. Create new admin account\n" + 
 				"7. Exit the application\r\n";
 		int choice = InputMethods.getIntFromMenu(1, 7, menu);
