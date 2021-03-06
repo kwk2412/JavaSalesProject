@@ -2,15 +2,7 @@ package javaSalesProject;
 
 public class SystemMessage {
 	
-	private String message;
-	
-	
-	public SystemMessage(String message) {
-		this.message = message;
-		printSystemMessage();
-	}
-	
-	public void printSystemMessage() {
+	public static void print(String message) {
 		System.out.println("*SYSTEM MESSAGE: " + message);
 	}
 

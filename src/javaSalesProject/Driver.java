@@ -39,9 +39,8 @@ public class Driver {
 			int menuChoice = Menu.mainMenuLoggedOut();
 
 			if (menuChoice == 1) {
-				loadItems();
-				new SystemMessage("Data has been loaded into the ArrayList");
-
+				loadSampleItemsIntoInventory();
+				SystemMessage.print("Data has been loaded into the ArrayList");
 			}
 			
 			else if (menuChoice == 2) {
@@ -54,7 +53,7 @@ public class Driver {
 			}
 			
 			else if (menuChoice == 4) {
-				adminSubMenu();
+				av.login("admin");
 				menu = false;
 			}
 			
@@ -86,8 +85,8 @@ public class Driver {
 			
 			//Load sample data
 			if (menuChoice == 1) {
-				loadItems();
-				new SystemMessage("Data has been loaded into the ArrayList");
+				loadSampleItemsIntoInventory();
+				SystemMessage.print("Data has been loaded into the ArrayList");
 			}
 			
 			//Process backlogged data
@@ -141,8 +140,8 @@ public class Driver {
 			
 			//Load sample data
 			if (menuChoice == 1) {
-				loadItems();
-				new SystemMessage("Data has been loaded into the ArrayList");
+				loadSampleItemsIntoInventory();
+				SystemMessage.print("Data has been loaded into the ArrayList");
 			}
 			
 			//Process backlogged data
@@ -210,47 +209,19 @@ public class Driver {
 		}
 	}
 	
-	public static void adminSubMenu() {
-		
-		AccountValidation av = new AccountValidation();
-		
-		boolean menu = true;
-		while (menu) {
-			
-			int choice = Menu.adminSubMenu();
-			
-			//Returning Admin
-			if (choice == 1) {
-				av.login("admin");
-				menu = loginAttemptCheck(menu);
-			}
-			
-			//New Admin
-			else if (choice == 2) {
-				CreateAccount.createAdminAccount();
-				menu = loginAttemptCheck(menu);
-			}
-			
-			//Return to previous menu
-			else if (choice == 3) {
-				menu = false;
-			}
-		}
-	}
-	
 	public static boolean loginAttemptCheck(boolean menu) {
 		if (currentUser.getUser().userID != 1) {
 			menu = false;
 		}
 		else {
-			System.out.println("Something went wrong with the login attempt. No user is currently logged in.");
+			SystemMessage.print("Something went wrong with the login attempt. No user is currently logged in.");
 		}
 		return menu;
 	}
 	
 	public static void printItems() {
 		if (items.size() == 0) 
-			new SystemMessage("Items ArrayList is empty");
+			SystemMessage.print("Items ArrayList is empty");
 		for (int i = 0; i < items.size(); i++) {
 			System.out.println(items.get(i).toString());
 		}
@@ -279,7 +250,7 @@ public class Driver {
 	}
 	
 	
-	public static void loadItems() {
+	public static void loadSampleItemsIntoInventory() {
 		items.add(new Item(130, "Nintendo GameCube", 10));
 		items.add(new Item(160, "Sony PlayStation", 10));
 		items.add(new Item(150, "Nintendo GameBoy", 5));
@@ -312,7 +283,8 @@ public class Driver {
 		running = true;
 		accounts = new ArrayList<Account>();
 		currentUser = new CurrentUser();
-		rootUser = new Admin("rootUser", "password", "admin");		
+		rootUser = new Admin("rootUser", "password", "admin");	
+		new Admin("Admin", "password", "admin");
 		currentUser.setUser(rootUser);
 		items = new ArrayList<Item>();
 		auctions = new ArrayList<Auction>();

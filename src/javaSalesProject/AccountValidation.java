@@ -44,7 +44,7 @@ public class AccountValidation {
 							//Driver.currentUser.setUser(Account accountThatJustAuthenticated);
 							//I will leave the logistics of how to pass in the right account up to you guys
 							Driver.currentUser.setUser(accountToBeLoggedIn);
-							new SystemMessage("Successful login attempt");
+							SystemMessage.print("Successful login attempt");
 							validLoginAttempt = validPassword = true;
 						}
 						else {

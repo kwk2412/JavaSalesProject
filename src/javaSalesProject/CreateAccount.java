@@ -13,6 +13,7 @@ public abstract class CreateAccount {
 		}
 		if (password != null) {
 			Driver.currentUser.setUser(new Customer(username, password, "customer"));
+			SystemMessage.print("The new account has been created");
 		}
 	}
 
@@ -24,6 +25,7 @@ public abstract class CreateAccount {
 		}
 		if (password != null) {
 			Driver.currentUser.setUser(new Admin(username, password, "admin"));
+			SystemMessage.print("The new account has been created");
 		}
 	}
 
