@@ -10,12 +10,9 @@ public class AccountValidation {
 	//This method will take care of all things related to logging a user in
 		public void login(String privileges) {
 			
-			boolean validLoginAttempt = true;
-			while (validLoginAttempt) {
+			boolean validLoginAttempt = false;
+			while (!validLoginAttempt) {
 				
-				//Since the username and password are instance variables, we don't have to pass them
-				//around amongst methods - we make use of the feature of a method to only return one thing
-				//to indicate whether certain actions were successful
 				Scanner scan = new Scanner(System.in);
 				
 				System.out.print("Enter username: ");
@@ -26,10 +23,6 @@ public class AccountValidation {
 				//Only if the username returns as something we have on file, we continue
 				if (validUsername) {
 					
-					
-					//A loop so that in the event of a failed password entry we can
-					//have the user input the password again without having them
-					//input their username again
 					boolean validPassword = false;
 					while (validPassword == false) {
 						
@@ -42,12 +35,6 @@ public class AccountValidation {
 						
 						if (validPassword) {
 							
-							//At this point a valid login has happened
-							//In the event of a successful login we must make the currently active
-							//user equal to the user account that just authenticated
-							//Since currentUser is an instance variable of the driver, we don't 
-							//need to make an object or pass anything as an argument - we can 
-							//set the value of currentUser directly from here using the 
 							Account accountToBeLoggedIn = null;
 							for (int i = 0; i < Driver.accounts.size(); i++) {
 								if (Driver.accounts.get(i).username.equals(username)) {	
@@ -57,10 +44,11 @@ public class AccountValidation {
 							//Driver.currentUser.setUser(Account accountThatJustAuthenticated);
 							//I will leave the logistics of how to pass in the right account up to you guys
 							Driver.currentUser.setUser(accountToBeLoggedIn);
-							new SystemMessage("Successful login attempt");
-							validLoginAttempt = false;
+							SystemMessage.print("Successful login attempt");
+							validLoginAttempt = validPassword = true;
 						}
 						else {
+							validPassword = validLoginAttempt = !InputMethods.yesNoToBool("Would you like to try another password? (yes or no)");
 							// Anything we want to do if the password as entered doesn't 
 							// the one associated with the username the user just entered
 						}
@@ -68,6 +56,7 @@ public class AccountValidation {
 				}
 				
 				else {
+					validLoginAttempt = !InputMethods.yesNoToBool("Would you like to try another username? (yes or no)");
 					//Anything that we do relating to a failure in finding the username as entered
 				}
 			}
@@ -89,7 +78,7 @@ public class AccountValidation {
 				}
 			}
 		
-			System.out.println("This is an incorrect username. Please try again.");	
+			System.out.println("This is an incorrect username");	
 
 			return false;
 			
@@ -115,7 +104,7 @@ public class AccountValidation {
 				return true;
 			}
 			else {
-				System.out.println("This is an incorrect password. Please try again.");
+				System.out.println("This is an incorrect password");
 				return false;
 			}
 			
