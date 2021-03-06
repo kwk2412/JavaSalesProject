@@ -89,15 +89,6 @@ public class Menu {
 		return choice;
 	}
 	
-	public static int adminSubMenu() {
-		String menu = "Admin Sub Menu\n" +
-				"==============\n" + 
-				"1. Returning Admin\n" + 
-				"2. New Admin\n" + 
-				"3. Return to previous menu\n";
-		int choice = InputMethods.getIntFromMenu(1, 3, menu);
-		return choice;	
-	}
 	
 
 	
