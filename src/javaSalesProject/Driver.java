@@ -116,7 +116,7 @@ public class Driver {
 
 			}
 			
-			// Create new admin account
+			// Create a new admin account. 
 			else if (menuChoice == 6) {
 				CreateAccount.createAdminAccount();
 				menu = loginAttemptCheck(menu);
