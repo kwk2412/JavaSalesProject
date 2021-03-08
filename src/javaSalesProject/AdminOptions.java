@@ -33,11 +33,16 @@ public class AdminOptions {
 			//Add and activate a new auction
 			else if (choice == 5) {
 				System.out.println("You selected option 5");
-			}
+			} 
 			
-			//Return to main menu
+			// Create a new admin account. 
 			else if (choice == 6) {
-				System.out.println("You selected option 6");
+				CreateAccount.createAdminAccount();
+				Driver.loginAttemptCheck(menu);
+				
+			}
+			//Return to main menu
+			else if (choice == 7) {
 				menu = false;
 			}
 			

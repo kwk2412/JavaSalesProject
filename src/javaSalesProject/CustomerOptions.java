@@ -9,7 +9,6 @@ public static void customerMenu() {
 			
 			int choice = Menu.customerMenu();
 			
-			//Check my active bids
 			if (choice == 1) {
 				System.out.println("You selected option 1");
 			}
@@ -32,7 +31,6 @@ public static void customerMenu() {
 			
 			//Return to main menu
 			else if (choice == 5) {
-				System.out.println("You selected option 5");
 				menu = false;
 			}
 		}

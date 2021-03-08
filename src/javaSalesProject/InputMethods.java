@@ -7,36 +7,29 @@ public class InputMethods {
 		Scanner keyboard = new Scanner(System.in);
 		
 		boolean validInput = false;
-		boolean threwException = false;
 		
 		String input = null;
 		while(!validInput) {
-		
-			threwException = false;
 			
 			try {
+				System.out.println(question);
 				input = keyboard.nextLine();
 				if(!input.trim().equalsIgnoreCase("yes") && !input.trim().equalsIgnoreCase("no")) {
 					throw new InvalidInputException();
 				}
+				validInput = true;
 			}
 			
 			catch (InvalidInputException iie){
-				threwException = true;
+				System.out.println("Invalid input");
+				System.out.println("Please enter either a yes or no");
 			}
 			
 			catch (Exception e) {
-				threwException = true;
+				System.out.println("Invalid input");
+				System.out.println("Please enter either a yes or no");
 			}
-			
-			if(threwException) {
-				System.out.println("Invalid entry. Try again");
-				System.out.println(question);
-			}
-			
-			else {
-				validInput = true;
-			}
+		
 		}
 		
 		if(input.trim().equalsIgnoreCase("yes")) {
@@ -45,6 +38,31 @@ public class InputMethods {
 		else {
 			return false;
 		}
+	}
+	
+	public static int getIntFromMenu(int lower, int upper, String menu) {
+		int choice = 0;
+		boolean done = false;
+		while (!done) {
+			try {
+				System.out.println(menu);
+				Scanner scan = new Scanner(System.in);
+				choice = scan.nextInt();
+				if(choice < lower || choice > upper)
+					throw new InvalidInputException();
+				done = true;
+			}
+			catch (InvalidInputException iie) {
+				System.out.println("Invalid input");
+				System.out.println("Please input a number between " + lower + " and " + upper);
+			}
+			catch (Exception e) {
+				System.out.println("Invalid input");
+				System.out.println("Please make sure your input does not contain letters or special characters.");
+			}
+			
+		}
+		return choice;
 	}
 
 }
