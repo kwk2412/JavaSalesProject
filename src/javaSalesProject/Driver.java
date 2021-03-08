@@ -116,14 +116,8 @@ public class Driver {
 
 			}
 			
-
-			// Create a new admin account. 
-			else if (menuChoice == 6) {
-				CreateAccount.createAdminAccount();
-				menu = loginAttemptCheck(menu);
-			}
 			//Exit the application
-			else if (menuChoice == 7) {
+			else if (menuChoice == 6) {
 				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit? (yes or no)");
 				if (sure) {
 					System.out.println("Ending program...");
