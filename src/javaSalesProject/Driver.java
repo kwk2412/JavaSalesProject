@@ -285,6 +285,7 @@ public class Driver {
 		currentUser = new CurrentUser();
 		rootUser = new Admin("rootUser", "password", "admin");	
 		new Admin("Admin", "password", "admin");
+		new Customer("Customer", "password", "customer");
 		currentUser.setUser(rootUser);
 		items = new ArrayList<Item>();
 		auctions = new ArrayList<Auction>();

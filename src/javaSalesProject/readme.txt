@@ -25,6 +25,10 @@ Logging in
 	- When the user chooses to log in as a customer, a sub menu shows up. From here the user can choose
 	  to create a new customer account, login as an existing customer account, or return to the previous menu.
 	  
+	- A test customer account exists, its credentials are as follows:
+		username: Customer
+		password: password
+	  
 	- The breakdown of the options is as follows:
 	  
 	  Login sub menus
