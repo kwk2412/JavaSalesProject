@@ -1,6 +1,7 @@
 Readme
 
 Main menu
+
 	- The main menu has two versions - one for when a user is logged into the application and another for when no user is present	
 	
 	No user present:
@@ -20,13 +21,14 @@ Main menu
 	- 6) Exits the application
 	
 Logging in
-	- Whether you choose to log in as an admin or a customer, the process is the same.  
-	  You are first prompted to input the username associated with the account you want to log in as.
-	  You are given a sub menu which allows you to specify your login type. The breakdown of the 
-	  options is as follows:
+
+	- When the user chooses to log in as a customer, a sub menu shows up. From here the user can choose
+	  to create a new customer account, login as an existing customer account, or return to the previous menu.
+	  
+	- The breakdown of the options is as follows:
 	  
 	  Login sub menus
-	  	- 1) Will compare your login credentials to the ones we have logged
+	  	- 1) Will compare your login credentials to those of the accounts that we have logged
 	  	- 2) Initiates the creation process of a new account
 	  	- 3) Returns to the previous menu
 	  	
@@ -38,9 +40,16 @@ Logging in
 	  		- You are prompted to input the username you want to be associated with your account
 	  		- After username input, you are prompted for the password you want to be associated with your account
 	  		- You will be logged in as that account upon account creation
-	  		
+	  
+	- Logging in as an admin is a bit different because only admins can create new admin accounts. 
+	  A default admin account is already created, the credentials to which are as follows:
+	  
+		username: Admin
+		password: password
+	  	  		
 Admin Menu
-	- The only menu option that is working is the transition back to the main menu
+	- The only menu options that are working are the transition back to the main menu
+	  and the creation of a new admin account
 	
 Customer Menu
 	- The only menu option that is working is the transition back to the main menu
