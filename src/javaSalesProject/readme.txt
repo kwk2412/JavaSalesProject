@@ -47,9 +47,11 @@ Logging in
 		username: Admin
 		password: password
 	  	  		
-Admin Menu
-	- The only menu options that are working are the transition back to the main menu
-	  and the creation of a new admin account
+Admin Main Menu
+	- The only menu option that is working is the transition back to the main menu
 	
-Customer Menu
+Admin Options Menu
+	- The creation of a new admin account can happen from within this menu 
+	
+Customer Main Menu
 	- The only menu option that is working is the transition back to the main menu
