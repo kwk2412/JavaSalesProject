@@ -10,6 +10,7 @@ public class Driver {
 	static ArrayList<Account> accounts;
 	static Admin rootUser;
 	static ArrayList<Item> items;
+	static boolean dataLoaded = false;
 	static ArrayList<Auction> auctions;
 		
 	public static void main(String[] args) {
@@ -251,24 +252,31 @@ public class Driver {
 	
 	
 	public static void loadSampleItemsIntoInventory() {
-		items.add(new Item(130, "Nintendo GameCube", 10));
-		items.add(new Item(160, "Sony PlayStation", 10));
-		items.add(new Item(150, "Nintendo GameBoy", 5));
-		items.add(new Item(170, "Microsoft XboX", 10));
-		items.add(new Item(125, "Nintendo 64", 5));
-		items.add(new Item(180, "Sony PlayStation 2", 5));
-		items.add(new Item(90, "Sega Dreamcast", 10));
-		items.add(new Item(190, "Sony PlayStation Portable", 10));
-		items.add(new Item(230, "Microsoft XboX 360", 10));
-		items.add(new Item(80, "Atari 2600", 15));
-		items.add(new Item(120, "Sega CD", 10));
-		items.add(new Item(90, "Magnavox Odyssey", 15));
-		items.add(new Item(250, "Nintendo GameCube", 10));
-		items.add(new Item(180, "Nintendo Virtual Boy", 20));
-		items.add(new Item(80, "Nintendo Entertainment System", 10));
-		items.add(new Item(200, "Sony PlayStation 3", 15));
-		items.add(new Item(130, "Sega GameGear", 10));
-		items.add(new Item(250, "Microsoft XboX One", 15));
+		if (dataLoaded == false) {
+			items.add(new Item(130, "Nintendo GameCube", 10));
+			items.add(new Item(160, "Sony PlayStation", 10));
+			items.add(new Item(150, "Nintendo GameBoy", 5));
+			items.add(new Item(170, "Microsoft XboX", 10));
+			items.add(new Item(125, "Nintendo 64", 5));
+			items.add(new Item(180, "Sony PlayStation 2", 5));
+			items.add(new Item(90, "Sega Dreamcast", 10));
+			items.add(new Item(190, "Sony PlayStation Portable", 10));
+			items.add(new Item(230, "Microsoft XboX 360", 10));
+			items.add(new Item(80, "Atari 2600", 15));
+			items.add(new Item(120, "Sega CD", 10));
+			items.add(new Item(90, "Magnavox Odyssey", 15));
+			items.add(new Item(250, "Nintendo GameCube", 10));
+			items.add(new Item(180, "Nintendo Virtual Boy", 20));
+			items.add(new Item(80, "Nintendo Entertainment System", 10));
+			items.add(new Item(200, "Sony PlayStation 3", 15));
+			items.add(new Item(130, "Sega GameGear", 10));
+			items.add(new Item(250, "Microsoft XboX One", 15));
+			
+			dataLoaded = true;
+			System.out.println("The data has been loaded into the items array list");
+		}
+		else System.out.println("The data is already loaded. Loading data twice results in inaccurate inventory records - no more data was loaded.");
+		
 	}
 	
 	public static void loadAuctions() {
