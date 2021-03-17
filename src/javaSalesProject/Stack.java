@@ -1,20 +1,20 @@
 package javaSalesProject;
 
-public class Stack {
+public class Stack<E> {
 	
 	private class Node {
 		
-		private Item item;
+		private E item;
 		private Node next;
 		private Node prev;
 		
-		Node(Item item, Node next, Node prev) {
+		Node(E item, Node next, Node prev) {
 			this.item = item;
 			this.next = next;
 			this.prev = prev;
 		}
 		
-		Node(Item item) {
+		Node(E item) {
 			this(item, null, null);
 		}
 	}
@@ -46,13 +46,13 @@ public class Stack {
 	}
 	
 	
-	public void push(Item itemToAdd) {
+	public void push(E elementToAdd) {
 		if (isEmpty() == true) {
-			first = new Node(itemToAdd);
+			first = new Node(elementToAdd);
 			last = first;
 		}
 		else {
-			last.next = new Node(itemToAdd, null, last);
+			last.next = new Node(elementToAdd, null, last);
 			last = last.next;
 		}
 	}
@@ -88,9 +88,13 @@ public class Stack {
 	*/
 	
 	
-	public Item pop() {
+	public E pop() {
+		if (isEmpty()) {
+			throw new IndexOutOfBoundsException();
+		}
+		
 		Node p = last;
-		Item e = p.item;	// The grabbing the item that we are to return
+		E e = p.item;	// The grabbing the item that we are to return
 		if (p.prev != null) {	// If it is not the only item in the list
 			last = p.prev;	// Set last to the second to last item
 			last.next = null;
@@ -136,7 +140,7 @@ public class Stack {
 	*/
 	
 	
-	private boolean remove(Item itemToBeRemoved) {
+	private boolean remove(E itemToBeRemoved) {
 		if (isEmpty() == true) {
 			return false;
 		}
@@ -171,22 +175,22 @@ public class Stack {
 	 * When supplied a given item, it will return the index at 
 	 * which that item is located in the linked list. Returns -1
 	 * if that item can't be found in the list
-	 * @param item
+	 * @param element
 	 * @return
 	 */
 	
-	public int indexOf(Item item) {
+	public int indexOf(E element) {
 		int count = 0;
 		Node p = first;
-		for (count = 0; p.item != item; count++) {
+		for (count = 0; p.item != element; count++) {
 			p = p.next;
 		}
-		if (p.item == item) return count;
+		if (p.item == element) return count;
 		else return -1;
 	}
 	
 	
-	private Item get(int index) {
+	private E get(int index) {
 		if (index < 0 || index > this.size()) {
 			throw new IndexOutOfBoundsException(String.valueOf(index));
 		}

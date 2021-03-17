@@ -1,20 +1,20 @@
 package javaSalesProject;
 
-public class Queue {
+public class Queue<E> {
 	
 	private class Node {
 		
-		private Item item;
+		private E item;
 		private Node next;
 		private Node prev;
 		
-		Node(Item item, Node next, Node prev) {
+		Node(E item, Node next, Node prev) {
 			this.item = item;
 			this.next = next;
 			this.prev = prev;
 		}
 		
-		Node(Item item) {
+		Node(E item) {
 			this(item, null, null);
 		}
 	}
@@ -47,7 +47,7 @@ public class Queue {
 	
 	
 	
-	public void enqueue(Item itemToAdd) {
+	public void enqueue(E itemToAdd) {
 		if (isEmpty() == true) {
 			first = new Node(itemToAdd);
 			last = first;
@@ -160,13 +160,17 @@ public class Queue {
 	
 	
 	// Returns the first object in the queue (the element that has been in the queue the longest)
-	public Item dequeue() {
+	
+	//Make sure to set the previous field of the Node that follows the node you are taking away to null
+	
+	public E dequeue() {
 		if (isEmpty()) {
 			throw new IndexOutOfBoundsException();
 		}
 		Node p = first;
-		Item e = p.item; // Item to be returned
+		E e = p.item; // Item to be returned
 		first = p.next;
+		first.prev = null;
 		return e;
 	}
 	
@@ -179,7 +183,7 @@ public class Queue {
 	 * @return
 	 */
 	
-	public int indexOf(Item item) {
+	public int indexOf(E item) {
 		int count = 0;
 		Node p = first;
 		for (count = 0; p.item != item; count++) {
@@ -190,14 +194,14 @@ public class Queue {
 	}
 	
 	
-	public Item peek() {
+	public E peek() {
 		if (isEmpty()) {
 			return null;
 		}
 		else return first.item;
 	}
 	
-	private Item get(int index) {
+	private E get(int index) {
 		if (index < 0 || index > this.size()) {
 			throw new IndexOutOfBoundsException(String.valueOf(index));
 		}
@@ -214,28 +218,40 @@ public class Queue {
 	
 	
 	public static void main(String[] args) {
-		Queue queue = new Queue();
+		
+		Queue<Item> items = new Queue<>();
+		Queue<Bid> bids = new Queue<>();
 		
 		Item a = new Item(25, "a", 12);
 		Item b = new Item(13, "b", 21);
 		Item c = new Item(64, "c", 26);
 		
-		queue.enqueue(a);
-		queue.enqueue(b);
-		queue.enqueue(c);
+		Bid b1 = new Bid(0);
+		Bid b2 = new Bid(0);
+		Bid b3 = new Bid(0);
+		Bid b4 = new Bid(0);
 		
-		queue.dequeue();
-		queue.dequeue();
-		queue.dequeue();
+		items.enqueue(a);
+		items.enqueue(b);
+		items.enqueue(c);
+		
+		items.dequeue();
+		items.dequeue();
+		items.dequeue();
+		
+		bids.enqueue(b1);
+		bids.enqueue(b2);
+		bids.enqueue(b3);
+		bids.enqueue(b4);
+		
+		bids.dequeue();
+		bids.dequeue();
+		bids.dequeue();
+		bids.dequeue();
 		
 		System.out.println("Now we attempt the dequeue when there is nothing to dequeue");
-		queue.dequeue();
-		
-		
-		
-		
-		
-		
+		items.dequeue();
+
 	}
 
 }
