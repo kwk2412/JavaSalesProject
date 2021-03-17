@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 public class Bid {
 	
-	
 	private double value;
 	private int auctionID;
 	

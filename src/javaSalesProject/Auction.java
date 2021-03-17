@@ -1,5 +1,6 @@
 package javaSalesProject;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -11,6 +12,8 @@ import java.util.ArrayList;
  */
 public class Auction {
 
+	
+	//This is what will likely be turned into a queue
 	private ArrayList<Bid> bids = new ArrayList<Bid>();
 	private Item item;
 	private Bid currentHighest;
@@ -19,9 +22,8 @@ public class Auction {
 	private int auctionID;
 	private int nextNum = 100;
 	
-	//how to keep track of the window for which the auction will be active
-	//LocalDate date = new LocalDate();
-	
+	// How to keep track of the window for which the auction will be active
+	//private LocalDate creationTime = new LocalDate(1999, 8, 17);
 	
 	public Auction() {
 		auctionID = nextNum;
