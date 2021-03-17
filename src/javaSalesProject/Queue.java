@@ -53,7 +53,7 @@ public class Queue {
 			last = first;
 		}
 		else {
-			last.next = new Node(itemToAdd);
+			last.next = new Node(itemToAdd, null, last);
 			last = last.next;
 		}
 	}
@@ -161,6 +161,9 @@ public class Queue {
 	
 	// Returns the first object in the queue (the element that has been in the queue the longest)
 	public Item dequeue() {
+		if (isEmpty()) {
+			throw new IndexOutOfBoundsException();
+		}
 		Node p = first;
 		Item e = p.item; // Item to be returned
 		first = p.next;
@@ -187,7 +190,14 @@ public class Queue {
 	}
 	
 	
-	public Item peek(int index) {
+	public Item peek() {
+		if (isEmpty()) {
+			return null;
+		}
+		else return first.item;
+	}
+	
+	private Item get(int index) {
 		if (index < 0 || index > this.size()) {
 			throw new IndexOutOfBoundsException(String.valueOf(index));
 		}
@@ -206,27 +216,24 @@ public class Queue {
 	public static void main(String[] args) {
 		Queue queue = new Queue();
 		
-		Item item1 = new Item(25, "item1", 12);
-		Item item2 = new Item(13, "item2", 21);
-		Item item3 = new Item(64, "item3", 26);
+		Item a = new Item(25, "a", 12);
+		Item b = new Item(13, "b", 21);
+		Item c = new Item(64, "c", 26);
 		
-		queue.enqueue(item1);
-		queue.enqueue(item2);
-		queue.enqueue(item3);
+		queue.enqueue(a);
+		queue.enqueue(b);
+		queue.enqueue(c);
 		
-		for (int i=0; i<queue.size(); i++) {
-			System.out.println(queue.peek(i).toString());
-		}
+		queue.dequeue();
+		queue.dequeue();
+		queue.dequeue();
 		
-		System.out.println("Dequeueing 1 element");
-		System.out.println(queue.dequeue());
-		System.out.println(queue.dequeue());
+		System.out.println("Now we attempt the dequeue when there is nothing to dequeue");
+		queue.dequeue();
 		
 		
-		System.out.println("There should only be one item left at this point: ");
-		for (int i=0; i<queue.size(); i++) {
-			System.out.println(queue.peek(i).toString());
-		}
+		
+		
 		
 		
 	}

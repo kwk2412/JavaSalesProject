@@ -52,7 +52,7 @@ public class Stack {
 			last = first;
 		}
 		else {
-			last.next = new Node(itemToAdd);
+			last.next = new Node(itemToAdd, null, last);
 			last = last.next;
 		}
 	}
@@ -91,15 +91,16 @@ public class Stack {
 	public Item pop() {
 		Node p = last;
 		Item e = p.item;	// The grabbing the item that we are to return
-		if (p.prev != null) {
-			p.prev = last;
+		if (p.prev != null) {	// If it is not the only item in the list
+			last = p.prev;	// Set last to the second to last item
+			last.next = null;
 		}
 		
 		// How to handle the popping of an element when there is only one element in the stack?
 		else {
-			remove(p.item);
+			last = first = null;
 		}
-		return p.item;
+		return e;
 	}
 	
 	
@@ -135,7 +136,7 @@ public class Stack {
 	*/
 	
 	
-	public boolean remove(Item itemToBeRemoved) {
+	private boolean remove(Item itemToBeRemoved) {
 		if (isEmpty() == true) {
 			return false;
 		}
@@ -185,7 +186,7 @@ public class Stack {
 	}
 	
 	
-	public Item get(int index) {
+	private Item get(int index) {
 		if (index < 0 || index > this.size()) {
 			throw new IndexOutOfBoundsException(String.valueOf(index));
 		}
@@ -198,33 +199,6 @@ public class Stack {
 			p = p.next;
 		}
 		return null;
-	}
-	
-	
-	public static void main(String[] args) {
-		Stack stack = new Stack();
-		
-		Item item1 = new Item(24, "item1", 25);
-		Item item2 = new Item(24, "item2", 25);
-		Item item3 = new Item(24, "item3", 25);
-		
-		stack.push(item1);
-		stack.push(item2);
-		stack.push(item3);
-		
-		for (int i = 0; i < stack.size(); i++) {
-			System.out.println(stack.get(i));
-		}
-		
-		System.out.println("popping an item off the stack");
-		Item e = stack.pop();
-		System.out.println(e.toString());
-		
-		System.out.println("Remaining elements in the stack: ");
-		for (int i = 0; i < stack.size(); i++) {
-			System.out.println(stack.get(0).toString());
-		}
-		
 	}
 
 }
