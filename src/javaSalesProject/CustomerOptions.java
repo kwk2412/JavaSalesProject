@@ -10,18 +10,21 @@ public static void customerMenu() {
 			int choice = Menu.customerMenu();
 			
 			if (choice == 1) {
-				System.out.println("You selected option 1");
+				// Check my active bids
+				Customer c = (Customer) Driver.currentUser.getUser();
+				System.out.println(c.activeBidsToString());
 			}
 			
 			//Check my winning bids
 			
 			else if (choice == 2) {
-				System.out.println("You selected option 2");
+				Customer c = (Customer) Driver.currentUser.getUser();
+				System.out.println(c.winningBidsToString());
 			}
 			
 			//Bid on an item
 			else if (choice == 3) {
-				System.out.println("You selected option 3");
+				AuctionMethods.bidOnAnItem();
 			}
 			
 			//Pay for an item that I won
