@@ -74,15 +74,54 @@ Menu
 	- Added the methods customerSubMenu and adminSubMenu which acts an in-between for the main menu and the admin/customer menu.
 	  This menu asks the user if he wants to log in as a new account or an existing one
 	  
-
+	   __________________________________________________________________________________________________________
 	 Clay 2/25/21
 	 
 	 - Github Test
-		 
+	 
+	 __________________________________________________________________________________________________________
+	 Austin 2/27/21
+	 
+	 -Testing Commit	
+	 
 	 __________________________________________________________________________________________________________________ 
 	  Kevin 3/2/2021
 	  
 	  - Developed more of the framework for the Bid, Auction, and Customer class in preparation for future
 	    communication between those types
-
 	
+	____________________________________________________________________________________________________________________
+	  Kevin 3/4/21
+	
+ 	  - Added a list of items to the driver in the loadItems() method. 
+ 	  - Adjusted the main menu so that there are now 6 options - one of them is the loadItemData option
+	____________________________________________________________________________________________________________________
+	Clay 3/4/21
+	
+	- Changed nextNum in the item class to static (all items had an id of 100 before)
+	
+	- Changed the toString of the item class to print the price in currency format
+	
+	- Moved menuClay to the testing class
+	
+	- Adjust getUsername and getPassword in createAccount to more efficiently validate input
+	
+	- Added (yes or no) to a few existing printlns
+	
+	- Added a line to some of kevins if statements
+	
+	- Adjusted the login method in the account validation class to ask the user if they would like to try 
+	  a different username/password after an invalid entry is made. Did this to avoid the situation where a 
+	  user forgets username/password and is stuck in an infinite loop of guessing.
+		
+	- Split menuUserLoggedIn into two sepearate menus in the driver. One for admin logged in and one for customer logged in
+	
+	- Utilized one method to validate input for all of the menu selections in the menu class. The method that does this is in the InputMethods class
+	
+	- Changed yesNoToBool in the InputMethods class so that the method prints the question the first time.
+ 	  
+	______________________________________________________________________________________________________________________
+	Kevin 3/7/21
+	
+	- Added a Customer object present in the customer array list upon program startup for testing purposes
+	- Updated the readme with its credentials

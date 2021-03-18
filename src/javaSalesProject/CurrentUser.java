@@ -14,8 +14,10 @@ public class CurrentUser {
 
 	public void setUser(Account user) {
 		this.user = user;
-		if (user != null) System.out.println("The currently logged in user has been set to: " + user.username);
-		else System.out.println("Current user has been set to null");
+		SystemMessage.print("The current user has been set to: " + user.username);
+		if (Driver.currentUser.getUser().userID == 1) {
+			SystemMessage.print("No one is logged in");
+		}
 	}
 	
 }
