@@ -14,7 +14,7 @@ public class Auction {
 
 	
 	//This is what will likely be turned into a queue
-	private ArrayList<Bid> bids = new ArrayList<Bid>();
+	private Queue<Bid> bids = new Queue<>();
 	private Item item;
 	private Bid currentHighest;
 	private double sellingPrice;	
@@ -37,10 +37,6 @@ public class Auction {
 		nextNum++;
 	}
 	
-	
-	
-	
-
 
 	public Item getItem() {
 		return item;
@@ -72,12 +68,12 @@ public class Auction {
 	}
 
 
-	public ArrayList<Bid> getBids() {
+	public Queue<Bid> getBids() {
 		return bids;
 	}
 
 
-	public void setBids(ArrayList<Bid> bids) {
+	public void setBids(Queue<Bid> bids) {
 		this.bids = bids;
 	}
 
