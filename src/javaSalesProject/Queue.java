@@ -47,13 +47,13 @@ public class Queue<E> {
 	
 	
 	
-	public void enqueue(E itemToAdd) {
+	public void enqueue(E elementToAdd) {
 		if (isEmpty() == true) {
-			first = new Node(itemToAdd);
+			first = new Node(elementToAdd);
 			last = first;
 		}
 		else {
-			last.next = new Node(itemToAdd, null, last);
+			last.next = new Node(elementToAdd, null, last);
 			last = last.next;
 		}
 	}

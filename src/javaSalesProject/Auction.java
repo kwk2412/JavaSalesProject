@@ -32,10 +32,42 @@ public class Auction {
 	
 	
 	public Auction(Item item) {
+		this.bids = bids;
 		this.item = item;
+		this.currentHighest = null;
 		auctionID = nextNum;
 		nextNum++;
 	}
+	
+	
+	public void loadAuction() {
+		
+		Bid bid1 = new Bid(150);
+		Bid bid2 = new Bid(160);
+		Bid bid3 = new Bid(170);
+		Bid bid4 = new Bid(180);
+		Bid bid5 = new Bid(190);
+		Bid bid6 = new Bid(200);
+		Bid bid7 = new Bid(210);
+		
+		bids.enqueue(bid1);
+		bids.enqueue(bid2);
+		bids.enqueue(bid3);
+		bids.enqueue(bid4);
+		bids.enqueue(bid5);
+		bids.enqueue(bid6);
+		bids.enqueue(bid7);
+	}
+	
+	/*
+	public void process() {
+		if (bids.dequeue().getValue() > currentHighest.getValue() && bids.dequeue().getValue() < the highest amount the customer is wiling to pay) {
+			if () 
+		}
+	}
+	*/
+	
+	
 	
 
 	public Item getItem() {
@@ -75,6 +107,18 @@ public class Auction {
 
 	public void setBids(Queue<Bid> bids) {
 		this.bids = bids;
+	}
+	
+	
+	public static void main(String[] args) {
+		
+		Item fakeGame = new Item(140, "Fake Game", 5);
+		Auction auction = new Auction(fakeGame);
+		auction.loadAuction();
+		
+		
+		
+		
 	}
 
 }
