@@ -18,6 +18,7 @@ public class Auction {
 	private Bid currentHighest; // bid with highest max value willing to pay lives here
 	private double currentSalesPrice;
 	private int increment;
+	private boolean active;
 
 	private int auctionID;
 	private static int nextNum = 100;
@@ -39,6 +40,7 @@ public class Auction {
 		auctionID = nextNum;
 		Driver.items.remove(item);
 		nextNum++;
+		active = true;
 	}
 	
 	public String toString() {
@@ -124,6 +126,7 @@ public class Auction {
 		}
 		
 		if(numBids >= BIDSALLOWED) {
+			active = false;
 			System.out.println("Auction over");
 			System.out.println("The winner is " + currentHighest.getCustomer().usernameIdString());
 			clearActiveBids();
@@ -135,6 +138,14 @@ public class Auction {
 		return validBid;
 	}
 	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	private void clearActiveBids() {
 		for(Bid b: bids) {
 			b.getCustomer().removeActiveBid(b);

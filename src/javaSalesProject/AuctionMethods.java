@@ -48,7 +48,7 @@ public class AuctionMethods {
 					Bid b = new Bid(value, auction, c);
 					Auction a = Driver.ongoingAuctions.get(auctionIndex);
 					SystemMessage.print("Processing Bid: \n" + b.toString());
-					if(a.processBid(b)) {
+					if(a.processBid(b) && a.isActive()) {
 						c.addCurrentBid(b);
 					}
 				}
