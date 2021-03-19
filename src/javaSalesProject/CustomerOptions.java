@@ -16,7 +16,6 @@ public static void customerMenu() {
 			}
 			
 			//Check my winning bids
-			
 			else if (choice == 2) {
 				Customer c = (Customer) Driver.currentUser.getUser();
 				System.out.println(c.winningBidsToString());

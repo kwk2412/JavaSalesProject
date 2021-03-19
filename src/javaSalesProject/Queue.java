@@ -167,11 +167,19 @@ public class Queue<E> {
 		if (isEmpty()) {
 			throw new IndexOutOfBoundsException();
 		}
-		Node p = first;
-		E e = p.item; // Item to be returned
-		first = p.next;
-		first.prev = null;
-		return e;
+		
+		if (size() != 1) {
+			Node p = first; 
+			first = p.next;
+			first.prev = null;
+			return p.item;
+		}
+		else {
+			E e = last.item;
+			return e;
+		}
+		
+		
 	}
 	
 	/**

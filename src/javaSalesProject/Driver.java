@@ -16,15 +16,44 @@ public class Driver {
 	public static void main(String[] args) {
 		
 		init();	
+		
+		Item a = new Item(50, "Item 1", 5);	
+		
+		Auction auction = new Auction(a);
+		
+		Customer john = new Customer("John", "password", "permissions");
+		Customer ralph = new Customer("Ralph", "password", "permissions");
+		Customer billy = new Customer("Billy", "password", "permissions");
+		Customer joel = new Customer("Joel", "password", "persmissions");
+		
+		Bid bid1 = new Bid(60, auction, john);
+		Bid bid2 = new Bid(80, auction, ralph);
+		Bid bid3 = new Bid(60, auction, billy);
+		Bid bid4 = new Bid(70, auction, joel);
+		
+		auction.getUnprocessedBids().enqueue(bid1);
+		auction.getUnprocessedBids().enqueue(bid2);
+		auction.getUnprocessedBids().enqueue(bid3);
+		auction.getUnprocessedBids().enqueue(bid4);
+		
+		int counter = auction.getUnprocessedBids().size();
+		while (counter > 0) {
+			auction.process();
+			System.out.println("Bid " + counter);
+			System.out.println("Current Sales Price: " + auction.getCurrentSalesPrice());
+			System.out.println("Current Highest Bid: " + auction.getCurrentHighest().getValue());
+			counter--;
+		}
+		
 
-		while (running) {
-			if (currentUser.getUser().getUserID() == 1) 
-				MainMenuOptions.menuNoUser();
-			else if(currentUser.getUser() instanceof Admin)
-				MainMenuOptions.menuAdminLoggedIn();
-			else
-				MainMenuOptions.menuCustomerLoggedIn();
-		}		
+		//while (running) {
+			//if (currentUser.getUser().getUserID() == 1) 
+			//	MainMenuOptions.menuNoUser();
+			//else if(currentUser.getUser() instanceof Admin)
+				//MainMenuOptions.menuAdminLoggedIn();
+			//else
+				//MainMenuOptions.menuCustomerLoggedIn();
+		//}		
 
 	}
 	
@@ -110,8 +139,8 @@ public class Driver {
 		ongoingAuctions = new ArrayList<Auction>();
 		completedAuctions = new ArrayList<Auction>();
 		loadSampleItemsIntoInventory();
-		loadAuctions();
-		currentUser.setUser(new Customer("Clay", "password", "customer"));
+		//loadAuctions();
+		//currentUser.setUser(new Customer("Clay", "password", "customer"));
 	}
 	
 }

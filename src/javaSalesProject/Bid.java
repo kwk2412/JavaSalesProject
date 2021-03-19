@@ -38,7 +38,7 @@ public class Bid {
 	public String toStringActive() {
 		String result = "Item name: " + auction.getItem().getName() + "\nAuctionID: " + auction.getAuctionID()
 				+ "\nBid amount: " + cf.format(value) + "\n" + "Current sales price: "
-				+ cf.format(auction.getcurrentSalesPrice());
+				+ cf.format(auction.getCurrentSalesPrice());
 		if (auction.getCurrentHighest().getCustomer().getUserID() == customer.getUserID()) {
 			result += "\nYou are the highest bidder";
 		} else {
@@ -53,7 +53,7 @@ public class Bid {
 	public String toStringWinning() {
 		String result = "Item name: " + auction.getItem().getName() + "\nAuctionID: " + auction.getAuctionID()
 				+ "\nBid amount: " + cf.format(value) + "\nFinal sales price: "
-				+ cf.format(auction.getcurrentSalesPrice()) + "\n";
+				+ cf.format(auction.getCurrentSalesPrice()) + "\n";
 
 		return result;
 	}

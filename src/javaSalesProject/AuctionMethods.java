@@ -38,7 +38,8 @@ public class AuctionMethods {
 	public static void bidOnAnItem() {
 		if (Driver.ongoingAuctions.size() == 0) {
 			System.out.println("There are no ongoing auctions");
-		} else {
+		}
+		else {
 			int auctionIndex = Menu.pickAuctionToBidOnMenu();
 			if (auctionIndex >= 0) {
 				Auction auction = Driver.ongoingAuctions.get(auctionIndex);
@@ -48,11 +49,11 @@ public class AuctionMethods {
 					Bid b = new Bid(value, auction, c);
 					Auction a = Driver.ongoingAuctions.get(auctionIndex);
 					SystemMessage.print("Processing Bid: \n" + b.toString());
-					if(a.processBid(b) && a.isActive()) {
+					if (a.processBid(b) && a.isActive()) {
 						c.addCurrentBid(b);
 					}
 				}
-			}
+			} 
 		}
 	}
 
