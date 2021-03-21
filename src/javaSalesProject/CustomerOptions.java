@@ -12,13 +12,11 @@ public class CustomerOptions {
 			// Check my active bids
 			if (choice == 1) {
 				c.printActiveBids();
-				//System.out.println(c.activeBidsToString());
 			}
 			
 			//Check my winning bids
 			else if (choice == 2) {
 				c.printWinningBids();
-				//System.out.println(c.winningBidsToString());
 			}
 			
 			//Bid on an item

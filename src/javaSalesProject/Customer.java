@@ -23,22 +23,6 @@ public class Customer extends Account {
 
 	}
 
-	/*
-	public String activeBidsToString() {
-
-		if (activeBids.size() == 0) {
-			return "You have no active bids\n";
-		}
-		
-		String result = "Your Active Bids: \n";
-		for (int i = 0; i < activeBids.size(); ++i) {
-			result += activeBids.get(i).toStringActive() + "\n";
-		}
-		System.out.println();
-
-		return result;
-	}
-	*/
 	
 	public void printActiveBids() {
 		if (activeBids.size() == 0) {
@@ -53,20 +37,7 @@ public class Customer extends Account {
 		}
 	}
 	
-	/*
-	public String winningBidsToString() {
-
-		if (winningBids.size() == 0) {
-			return "You have no winning bids\n";
-		}
-		String result = "Winning Bids: \n";
-		for (int i = 0; i < winningBids.size(); ++i) {
-			result += winningBids.get(i).toStringWinning() + "\n";
-		}
-
-		return result;
-	}
-	*/
+	
 	public void printWinningBids() {
 		if (winningBids.size() == 0) {
 			System.out.println("You have placed no bids that have won an auction");
@@ -94,7 +65,6 @@ public class Customer extends Account {
 				activeBids.remove(i);
 			}
 		}
-		
 	}
 
 	public void placeBid() {

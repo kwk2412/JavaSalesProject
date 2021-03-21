@@ -9,16 +9,9 @@ public class Bid {
 	private double value;
 	private Auction auction;
 	private boolean valid;
-
-	// Driver.currentUser.getUser()
-	// Only the currently active user can place a bid so that is where the bid
-	// creation will come from
 	private Customer customer;
+	private int time;
 
-	// Timestamp must be an instance variable
-	// LocalDate()
-	// Timestamp timestamp = new Timestamp(auctionID, auctionID, auctionID,
-	// auctionID, auctionID, auctionID, auctionID);
 
 	public Bid(double value) {
 		this.value = value;
@@ -30,6 +23,15 @@ public class Bid {
 		this.auction = auction;
 		this.customer = customer;
 		this.valid = false;
+	}
+	
+	public Bid(double value, Auction auction, Customer customer, int time) {
+		super();
+		this.value = value;
+		this.auction = auction;
+		this.customer = customer;
+		this.valid = false;
+		this.time = time;
 	}
 
 	public String toString() {
@@ -73,13 +75,7 @@ public class Bid {
 	}
 	
 	public boolean equals(Bid b) {
-		if (b.getValue() == this.value) {
-			if (b.getCustomer().userID == this.getCustomer().userID) {
-				if (b.getAuction().getAuctionID() == this.getAuction().getAuctionID()) {
-					return true;
-				}
-			}
-		}
+		if (b == this) return true;
 		return false;
 	}
 

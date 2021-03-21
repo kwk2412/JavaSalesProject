@@ -16,20 +16,23 @@ public class Driver {
 	public static void main(String[] args) {
 		
 		init();	
+
+		checkpointC();
 		
-		Item testItem = new Item(50, "Item 1", 5);
-		//Auction auction = new Auction(testItem);
-		//ongoingAuctions.add(auction);
 		
-		Item testItem2 = new Item(100, "testItem2", 10);
-		//Auction auctionTest2 = new Auction(testItem2);
-		//ongoingAuctions.add(auctionTest2);
+		/*
+		for (int i = 0; i < accounts.size(); i++) {
+			System.out.println(accounts.get(i).toString());
+		}
 		
-		Customer john = new Customer("John", "password", "permissions");
-		Customer ralph = new Customer("Ralph", "password", "permissions");
-		Customer billy = new Customer("Billy", "password", "permissions");
-		Customer joel = new Customer("Joel", "password", "persmissions");
+		Customer jake = new Customer("Jake", "password", "customer");
 		
+		for (int i = 0; i < accounts.size(); i++) {
+			System.out.println(accounts.get(i).toString());
+		}
+		
+		Bid bid = new Bid(70, auction, jake);
+		*/
 		/*
 		ArrayList<Bid> bids = new ArrayList<>();
 		
@@ -60,6 +63,25 @@ public class Driver {
 				MainMenuOptions.menuCustomerLoggedIn();
 		}		
 
+	}
+	
+	
+	public static void checkpointC() {
+		Customer john = new Customer("John", "password", "permissions");
+		
+		Auction a = new Auction(items.get(0));
+		
+		Bid bid1 = new Bid(200, a, john);		
+		Bid bid2 = new Bid(300, a, john);
+		Bid bid3 = new Bid(400, a, john);
+		Bid bid4 = new Bid(500, a, john);
+		
+		a.getUnprocessedBids().enqueue(bid1);
+		a.getUnprocessedBids().enqueue(bid2);
+		a.getUnprocessedBids().enqueue(bid3);
+		a.getUnprocessedBids().enqueue(bid4);
+		
+		a.automateAuction();
 	}
 	
 	public static boolean loginAttemptCheck(boolean menu) {

@@ -69,73 +69,15 @@ public class Auction {
 		}
 		return result;
 	}
-
-	/*
-	// returns true if the bid is accepted. Returns false if the bid is rejected
-	public boolean processBid(Bid theNewBid) {
-		boolean validBid = false;
-		// first valid bid. Sales price doesn't change
-		if (currentHighest == null) {
-			if (theNewBid.getValue() >= currentSalesPrice) {
-				currentHighest = theNewBid;
-				System.out.println("You are now the highest bidder.");
-				++numBids;
-				validBid = true;
-			} else {
-				System.out.println("Your bid was too low. It has been rejected");
-			}
-		}
-		
-		// The current highest is not equal to null and the new bid is at least an increment greater than the sales price
-		else if (theNewBid.getValue() - currentSalesPrice >= increment) {
-			validBid = true;
-			// theNewBid becomes the new currentHighest
-			// current sales price is set to an increment greater than the current highest
-			if(theNewBid.getValue() - currentHighest.getValue() >= increment) {
-				currentSalesPrice = currentHighest.getValue() + increment;
-				currentHighest = theNewBid;
-				++numBids;
-				System.out.println("Sales price increased to " + cf.format(currentSalesPrice));
-				System.out.println("You are now the highest bidder");
-				
-			} 
-			// currentHighest stays the currentHighest
-			// current sales price is set to an increment greater than theNewBid
-			else if(currentHighest.getValue() - theNewBid.getValue() >= increment) {
-				currentSalesPrice = theNewBid.getValue() + increment;
-				++numBids;
-				System.out.println("Sales price increased to " + cf.format(currentSalesPrice));
-				System.out.println("You are not the highest bidder");
-				
-			}
-			
-			// the newNew bid and currentHighest are not an increment different from one another
-			// The currentSalesPrice gets set the currentHighest
-			else {
-				currentSalesPrice = currentHighest.getValue();
-				++numBids;
-				System.out.println("Sales price increased to " + cf.format(currentSalesPrice));
-				System.out.println("You are not the highest bidder");
-				
-			}
-			
-		} else {
-			System.out.println("Your bid was too low. It has been rejected");
-		}
-		
-		System.out.println("There are " + (BIDSALLOWED - numBids) + " bids left in this auction");
-		
-		if(validBid) {
-			processedBids.push(theNewBid);
-		}
-		
-		if(numBids >= BIDSALLOWED) {
-			endAuction();
-		}
-		return validBid;
-	}
 	
-	*/
+	
+	public void automateAuction() {
+		
+		while (unprocessedBids.size() > 0) {
+			process(unprocessedBids.dequeue());
+		}
+		
+	}
 	
 	
 	public void process(Bid bid) {
@@ -178,11 +120,12 @@ public class Auction {
 	
 	
 	public void firstBid(Bid bid) {
-		if (bid.getValue() >= currentSalesPrice + increment) {
+		if (bid.getValue() >= currentSalesPrice) {
 			bid.getCustomer().addCurrentBid(bid);	// Add bid to Customer's list of bids
 			processedBids.push(bid);	// Add list to Auction's list of bids
 			currentHighest = processedBids.peek();
 			numBids++;
+			bid.setValid(true);
 		}
 		else {
 			System.out.println("First bid must at least be higher than the sales price of the item + increment\n");
@@ -205,18 +148,24 @@ public class Auction {
 		currentHighest.getCustomer().addWinningBid(currentHighest);
 	}
 	
-	//This algorithm needs to be fixed, Kevin tried but made a mess
-	// This is supposed to remove the active bids from the activeBids arraylist 
-	// of all customers that participated in the auction. but it doesn't do that 
-	public void clearActiveBids() {
-		Stack<Bid> copyBids = processedBids;
-		for (int i = copyBids.size(); i < 0; i--) {
-			if (copyBids.pop().getCustomer().getActiveBids().get(i).getAuction() == this) {
-				copyBids.pop().getCustomer().getActiveBids().remove(copyBids.pop().getCustomer().getActiveBids().get(i));
-			}
-		}	
-	}
 	
+	public void clearActiveBids() {
+		Stack<Bid> copy = new Stack<>();
+		copy = processedBids;
+		
+		while (copy.size() > 0) {
+			Bid b = copy.pop();
+			b.getCustomer().removeActiveBid(b);
+		}
+		
+		/*
+		System.out.println("To ensure that the original stack was untouched in the process of clearing active bids");
+		for (int i = processedBids.size(); i > 0; i--) {
+			System.out.println(processedBids.pop().toString());
+		}
+		*/
+	}
+
 	
 	public void printAuctionStatus() {
 		System.out.println("Item: " + item.getName());
