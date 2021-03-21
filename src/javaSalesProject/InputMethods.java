@@ -48,7 +48,7 @@ public class InputMethods {
 				System.out.println(question);
 				Scanner scan = new Scanner(System.in);
 				dub = scan.nextDouble();
-				if(dub <= 0) {
+				if (dub <= 0) {
 					throw new InvalidInputException();
 				}
 				done = true;

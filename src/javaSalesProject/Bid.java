@@ -8,6 +8,7 @@ public class Bid {
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
 	private double value;
 	private Auction auction;
+	private boolean valid;
 
 	// Driver.currentUser.getUser()
 	// Only the currently active user can place a bid so that is where the bid
@@ -28,11 +29,14 @@ public class Bid {
 		this.value = value;
 		this.auction = auction;
 		this.customer = customer;
+		this.valid = false;
 	}
 
 	public String toString() {
-		return "Item name: " + auction.getItem().getName() + "\nCustomer Username: " + customer.getUsername()
-				+ "\nBid amount: " + cf.format(value) + "\nAuction ID: " + auction.getAuctionID() + "\n";
+		return "\tItem name: " + auction.getItem().getName() + "\n" + 
+				"\tCustomer Username: " + customer.getUsername() + "\n" +
+				"\tBid amount: " + cf.format(value) + "\n" +
+				"\tAuction ID: " + auction.getAuctionID() + "\n";
 	}
 
 	public String toStringActive() {
@@ -100,4 +104,12 @@ public class Bid {
 		this.customer = customer;
 	}
 
+	public boolean isValid() {
+		return valid;
+	}
+
+	public void setValid(boolean valid) {
+		this.valid = valid;
+	}
+	
 }

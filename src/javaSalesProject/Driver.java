@@ -9,51 +9,56 @@ public class Driver {
 	static CurrentUser currentUser;
 	static ArrayList<Account> accounts;
 	static Admin rootUser;
-	static ArrayList<Item> items;
-	static ArrayList<Auction> ongoingAuctions;
-	static ArrayList<Auction> completedAuctions;
+	static ArrayList<Item> items;	// Inventory of items to auction off
+	static ArrayList<Auction> ongoingAuctions;	// All active auctions
+	static ArrayList<Auction> completedAuctions;	// Auctions that have finished
 		
 	public static void main(String[] args) {
 		
 		init();	
 		
-		Item a = new Item(50, "Item 1", 5);	
+		Item testItem = new Item(50, "Item 1", 5);
+		Auction auction = new Auction(testItem);
+		ongoingAuctions.add(auction);
 		
-		Auction auction = new Auction(a);
+		Item testItem2 = new Item(100, "testItem2", 10);
+		Auction auctionTest2 = new Auction(testItem2);
+		ongoingAuctions.add(auctionTest2);
 		
 		Customer john = new Customer("John", "password", "permissions");
 		Customer ralph = new Customer("Ralph", "password", "permissions");
 		Customer billy = new Customer("Billy", "password", "permissions");
 		Customer joel = new Customer("Joel", "password", "persmissions");
 		
-		Bid bid1 = new Bid(60, auction, john);
-		Bid bid2 = new Bid(80, auction, ralph);
-		Bid bid3 = new Bid(60, auction, billy);
-		Bid bid4 = new Bid(70, auction, joel);
+		/*
+		ArrayList<Bid> bids = new ArrayList<>();
 		
-		auction.getUnprocessedBids().enqueue(bid1);
-		auction.getUnprocessedBids().enqueue(bid2);
-		auction.getUnprocessedBids().enqueue(bid3);
-		auction.getUnprocessedBids().enqueue(bid4);
+		bids.add(new Bid(60, auction, john));
+		bids.add(new Bid(80, auction, ralph));
+		bids.add(new Bid(60, auction, billy));
+		bids.add(new Bid(70, auction, joel));
 		
-		int counter = auction.getUnprocessedBids().size();
-		while (counter > 0) {
-			auction.process();
-			System.out.println("Bid " + counter);
+		auction.getUnprocessedBids().enqueue(bids.get(0));
+		auction.getUnprocessedBids().enqueue(bids.get(1));
+		auction.getUnprocessedBids().enqueue(bids.get(2));
+		auction.getUnprocessedBids().enqueue(bids.get(3));
+		
+		for (int i = 0; i < bids.size(); i++) {
+			auction.process(bids.get(i));
+			System.out.println("Bid " + (i+1));
 			System.out.println("Current Sales Price: " + auction.getCurrentSalesPrice());
 			System.out.println("Current Highest Bid: " + auction.getCurrentHighest().getValue());
-			counter--;
 		}
-		
+		*/
 
-		//while (running) {
-			//if (currentUser.getUser().getUserID() == 1) 
-			//	MainMenuOptions.menuNoUser();
-			//else if(currentUser.getUser() instanceof Admin)
-				//MainMenuOptions.menuAdminLoggedIn();
-			//else
-				//MainMenuOptions.menuCustomerLoggedIn();
-		//}		
+		while (running) {
+			if (currentUser.getUser().getUserID() == 1) 
+				MainMenuOptions.menuNoUser();
+			else if(currentUser.getUser() instanceof Admin)
+				MainMenuOptions.menuAdminLoggedIn();
+			else
+				MainMenuOptions.menuCustomerLoggedIn();
+		}		
 
 	}
 	
@@ -140,7 +145,7 @@ public class Driver {
 		completedAuctions = new ArrayList<Auction>();
 		loadSampleItemsIntoInventory();
 		//loadAuctions();
-		//currentUser.setUser(new Customer("Clay", "password", "customer"));
+		currentUser.setUser(new Customer("Clay", "password", "customer"));
 	}
 	
 }

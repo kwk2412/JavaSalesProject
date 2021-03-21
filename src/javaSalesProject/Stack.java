@@ -104,8 +104,18 @@ public class Stack<E> {
 		else {
 			last = first = null;
 		}
+		remove(p.item);
 		return e;
 	}
+	
+	
+	public E peek() {
+		if (isEmpty()) {
+			throw new IndexOutOfBoundsException();
+		}
+		return first.item;
+	}
+	
 	
 	
 	// The remove methods will get replaced with the pop method
@@ -203,6 +213,12 @@ public class Stack<E> {
 			p = p.next;
 		}
 		return null;
+	}
+	
+	public void clear() {
+		for (int i = 0; i < size(); i++) {
+			remove(this.get(i));
+		}
 	}
 
 }

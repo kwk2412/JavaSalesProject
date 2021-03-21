@@ -14,7 +14,7 @@ public class Customer extends Account {
 
 	public Customer(String username, String password, String privileges) {
 		super(username, password, privileges);
-
+		Driver.accounts.add(this);
 	}
 
 	// Constructor used when (re)creating accounts imported from a text file
@@ -28,7 +28,8 @@ public class Customer extends Account {
 		if (activeBids.size() == 0) {
 			return "You have no active bids\n";
 		}
-		String result = "Active Bids: \n";
+		
+		String result = "Your Active Bids: \n";
 		for (int i = 0; i < activeBids.size(); ++i) {
 			result += activeBids.get(i).toStringActive() + "\n";
 		}

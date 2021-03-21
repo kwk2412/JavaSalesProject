@@ -36,24 +36,25 @@ public class AuctionMethods {
 	}
 
 	public static void bidOnAnItem() {
-		if (Driver.ongoingAuctions.size() == 0) {
-			System.out.println("There are no ongoing auctions");
-		}
-		else {
-			int auctionIndex = Menu.pickAuctionToBidOnMenu();
+		if (Driver.ongoingAuctions.size() != 0) {
+			int auctionIndex = Menu.selectAuction();
 			if (auctionIndex >= 0) {
 				Auction auction = Driver.ongoingAuctions.get(auctionIndex);
 				double value = InputMethods.getPositiveDouble("Enter the dollar amount of your bid");
-				if (value > 0) {
-					Customer c = (Customer) Driver.currentUser.getUser();
-					Bid b = new Bid(value, auction, c);
-					Auction a = Driver.ongoingAuctions.get(auctionIndex);
-					SystemMessage.print("Processing Bid: \n" + b.toString());
-					if (a.processBid(b) && a.isActive()) {
-						c.addCurrentBid(b);
-					}
-				}
-			} 
+
+				Bid b = new Bid(value, auction, (Customer) Driver.currentUser.getUser());
+				SystemMessage.print("Processing Bid: \n" + b.toString());
+
+				if (auction.isActive()) {
+					auction.process(b);
+					auction.printAuctionStatus();
+				} else
+					SystemMessage.print("That auction is not active");
+
+			}
+		}
+		else {
+			System.out.println("There are no ongoing auctions");
 		}
 	}
 

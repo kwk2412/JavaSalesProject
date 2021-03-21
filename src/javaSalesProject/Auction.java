@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Auction {
 	
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
-	private ArrayList<Bid> processedBids = new ArrayList<Bid>();	// ArrayList of bids for keeping track of bids that are part of an active auction. Also for record keeping
+	private Stack<Bid> processedBids = new Stack<Bid>();	// Stack of bids for keeping track of bids that are part of an active auction. Also for record keeping
 	private Queue<Bid> unprocessedBids = new Queue<>();	// This is a queue full of bids yet to be processed in the auction
 	private Item item;
 	private Bid currentHighest; // bid with highest max value willing to pay lives here
@@ -28,6 +28,9 @@ public class Auction {
 	// how to keep track of the window for which the auction will be active
 	// LocalDate date = new LocalDate();
 
+	
+	
+	
 	public Auction() {
 		auctionID = nextNum;
 		nextNum++;
@@ -46,7 +49,8 @@ public class Auction {
 	
 	public String toString() {
 		NumberFormat cf = NumberFormat.getCurrencyInstance();
-		String result = "\tAuction ID: " + auctionID + "\n" + item.selectAuctionToString() + "\tCurrent Sales Price: " + cf.format(currentSalesPrice) + "\n";
+		String result = "\tAuction ID: " + auctionID + "\n" + 
+				item.selectAuctionToString() + "\tCurrent Sales Price: " + cf.format(currentSalesPrice) + "\n";
 		if(currentHighest != null) {
 			result += "\tCurrent high bidder: " + currentHighest.getCustomer().getUsername() + "\n";
 			result += "\tMax current high bidder is willing to pay: " + cf.format(currentHighest.getValue()) + "\n";
@@ -58,16 +62,17 @@ public class Auction {
 		NumberFormat cf = NumberFormat.getCurrencyInstance();
 		String result = "\tAuction ID: " + auctionID + "\n" + item.selectAuctionToString() + "\tCurrent Sales Price: " + cf.format(currentSalesPrice) + "\n";
 		if(currentHighest != null) {
-			if(Driver.currentUser.getUser().getUserID() == currentHighest.getCustomer().getUserID()) {
+			if (Driver.currentUser.getUser().getUserID() == currentHighest.getCustomer().getUserID()) {
 				result += "\tYou are the high bidder\n";
 			} else {
-			result += "\tCurrent high bidder: " + currentHighest.getCustomer().getUsername() + "\n";
+				result += "\tCurrent high bidder: " + currentHighest.getCustomer().getUsername() + "\n";
 			}
 			result += "\tMax current high bidder is willing to pay: " + cf.format(currentHighest.getValue()) + "\n";
 		}
 		return result;
 	}
 
+	/*
 	// returns true if the bid is accepted. Returns false if the bid is rejected
 	public boolean processBid(Bid theNewBid) {
 		boolean validBid = false;
@@ -123,52 +128,40 @@ public class Auction {
 		System.out.println("There are " + (BIDSALLOWED - numBids) + " bids left in this auction");
 		
 		if(validBid) {
-			processedBids.add(theNewBid);
+			processedBids.push(theNewBid);
 		}
 		
 		if(numBids >= BIDSALLOWED) {
-			active = false;
-			System.out.println("Auction over");
-			System.out.println("The winner is " + currentHighest.getCustomer().usernameIdString());
-			clearActiveBids();
-			Driver.completedAuctions.add(this);
-			Driver.ongoingAuctions.remove(this);
-			currentHighest.getCustomer().addWinningBid(currentHighest);
-
+			endAuction();
 		}
 		return validBid;
 	}
-
 	
-	public void process() {
-		Bid b = unprocessedBids.dequeue();
-		
-		if (currentHighest == null && b.getValue() >= currentSalesPrice + increment) {
-			currentHighest = b;
-			currentSalesPrice += increment; 
-		}
-		else if (isValid(b)) {
-			if (b.getValue() > currentHighest.getValue()) {
+	*/
+	
+	
+	public void process(Bid bid) {
+		if (currentHighest == null) firstBid(bid);
+		else if (isValid(bid)) {
+			if (bid.getValue() > currentHighest.getValue()) {
 				currentSalesPrice = currentHighest.getValue() + increment;
-				currentHighest = b;
+				currentHighest = bid;
 			}
 			else {
-				currentSalesPrice = b.getValue() + increment;
+				currentSalesPrice = bid.getValue() + increment;
 			}
+			bid.getCustomer().addCurrentBid(bid);	// Add bid to Customer's list of bids
+			processedBids.push(bid);	// Add list to Auction's list of bids
+			numBids++;
 		}
 		else {
 			System.out.println("Invalid bid");
 		}
-		
-		processedBids.add(b);	// Whether the bid was invalid or not, it will get added to the ArrayList of active bids
+		checkEnd();
 	}
 	
 	
 	public boolean isValid(Bid bid) {
-		if (currentHighest == null && bid.getValue() >= currentSalesPrice + increment) {
-			currentHighest = bid;
-			return true;
-		}
 		if (bid.getValue() >= currentHighest.getValue()  && bid.getValue() < currentHighest.getValue() + increment) {
 			System.out.println("Invalid Bid: Bid cannot be between the current highest bid and an increment up from that");
 			// Throw new InvalidRange();
@@ -181,14 +174,76 @@ public class Auction {
 		if (bid.getValue() < currentSalesPrice) {
 			return false;
 		}
-		return true;
+		bid.setValid(true);
+		return bid.isValid();
 	}
 	
 	
-	public static void loadQueue(Auction auction, Bid bid) {
-		auction.unprocessedBids.enqueue(bid);
+	public void firstBid(Bid bid) {
+		if (bid.getValue() >= currentSalesPrice + increment) {
+			bid.getCustomer().addCurrentBid(bid);	// Add bid to Customer's list of bids
+			processedBids.push(bid);	// Add list to Auction's list of bids
+			currentHighest = processedBids.peek();
+			numBids++;
+		}
+		else {
+			System.out.println("First bid must at least be higher than the sales price of the item + increment\n");
+		}
 	}
 	
+	public void checkEnd() {
+		if (numBids >= BIDSALLOWED) {
+			endAuction();
+		}
+	}
+	
+	public void endAuction() {
+		active = false;
+		System.out.println("Auction over");
+		System.out.println("The winner is " + currentHighest.getCustomer().usernameIdString());
+		clearActiveBids();
+		Driver.completedAuctions.add(this);
+		Driver.ongoingAuctions.remove(this);
+		currentHighest.getCustomer().addWinningBid(currentHighest);
+	}
+	
+	//This algorithm needs to be fixed, Kevin tried but made a mess
+	// This is supposed to remove the active bids from the activeBids arraylist 
+	// of all customers that participated in the auction. but it doesn't do that
+	public void clearActiveBids() {
+		Stack<Bid> copyBids = processedBids;
+		for (int i = copyBids.size(); i < 0; i--) {
+			if (copyBids.pop().getCustomer().getActiveBids().get(i).getAuction() == this) {
+				copyBids.pop().getCustomer().getActiveBids().remove(copyBids.pop().getCustomer().getActiveBids().get(i));
+			}
+		}	
+	}
+	
+	
+	public void printAuctionStatus() {
+		System.out.println("Item: " + item.getName());
+		if (currentHighest != null) {
+			System.out.println("Highest Bid: " + cf.format(currentHighest.getValue()));
+		}
+		else {
+			System.out.println("Highest Bid: none");
+		}
+		System.out.println("Selling Price: " + cf.format(currentSalesPrice));
+		System.out.println("Increment: " + cf.format(increment));
+		System.out.println("Active: " + active);
+		System.out.println("Auction ID: " + auctionID);
+		System.out.println("Number of Bids: " + numBids);
+		System.out.println("Bids Allowed: " + BIDSALLOWED);
+		System.out.println();
+	}
+	
+	private void clearProcessedBids() {
+		processedBids.clear();
+	}
+	
+	public void loadQueue(Bid bid) {
+		unprocessedBids.enqueue(bid);
+	}
 	
 	public boolean isActive() {
 		return active;
@@ -196,12 +251,6 @@ public class Auction {
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	private void clearActiveBids() {
-		for(Bid b: processedBids) {
-			b.getCustomer().removeActiveBid(b);
-		}
 	}
 
 	public Item getItem() {
@@ -232,11 +281,11 @@ public class Auction {
 		this.currentSalesPrice = sellingPrice;
 	}
 
-	public ArrayList<Bid> getBids() {
+	public Stack<Bid> getBids() {
 		return processedBids;
 	}
 
-	public void setBids(ArrayList<Bid> bids) {
+	public void setBids(Stack<Bid> bids) {
 		this.processedBids = bids;
 	}
 

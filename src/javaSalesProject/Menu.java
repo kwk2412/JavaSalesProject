@@ -76,7 +76,7 @@ public class Menu {
 
 	// returns the index of the ongoing auction.
 	// returns -1 if the user backs out
-	public static int pickAuctionToBidOnMenu() {
+	public static int selectAuction() {
 
 		String menu = "Select an auction:\n";
 		for (int i = 0; i < Driver.ongoingAuctions.size(); ++i) {

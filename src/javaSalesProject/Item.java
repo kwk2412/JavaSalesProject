@@ -43,8 +43,6 @@ public class Item {
 		return "\tItem name: " + name + "\n" + 
 			   "\tStarting Price: " + cf.format(startingPrice) + "\n" +
 			   "\tIncrement: " + increment + "\n";
-			   
-		
 	}
 	
 	
