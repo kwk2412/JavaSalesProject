@@ -14,7 +14,7 @@ public class MainMenuOptions {
 			int menuChoice = Menu.mainMenuLoggedOut();
 
 			if (menuChoice == 1) {
-				Driver.loadSampleItemsIntoInventory();
+				Driver.loadInventory();
 				SystemMessage.print("Data has been loaded into the ArrayList");
 			}
 			
@@ -87,7 +87,7 @@ public class MainMenuOptions {
 			
 			//Load sample data
 			if (menuChoice == 1) {
-				Driver.loadSampleItemsIntoInventory();
+				Driver.loadInventory();
 				SystemMessage.print("Data has been loaded into the ArrayList");
 			}
 			
@@ -141,7 +141,7 @@ public class MainMenuOptions {
 			
 			//Load sample data
 			if (menuChoice == 1) {
-				Driver.loadSampleItemsIntoInventory();
+				Driver.loadInventory();
 				SystemMessage.print("Data has been loaded into the ArrayList");
 			}
 			

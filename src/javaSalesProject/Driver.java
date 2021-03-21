@@ -18,12 +18,12 @@ public class Driver {
 		init();	
 		
 		Item testItem = new Item(50, "Item 1", 5);
-		Auction auction = new Auction(testItem);
-		ongoingAuctions.add(auction);
+		//Auction auction = new Auction(testItem);
+		//ongoingAuctions.add(auction);
 		
 		Item testItem2 = new Item(100, "testItem2", 10);
-		Auction auctionTest2 = new Auction(testItem2);
-		ongoingAuctions.add(auctionTest2);
+		//Auction auctionTest2 = new Auction(testItem2);
+		//ongoingAuctions.add(auctionTest2);
 		
 		Customer john = new Customer("John", "password", "permissions");
 		Customer ralph = new Customer("Ralph", "password", "permissions");
@@ -72,16 +72,6 @@ public class Driver {
 		return menu;
 	}
 	
-	public static void printItems() {
-		if (items.size() == 0) 
-			SystemMessage.print("Items ArrayList is empty");
-		for (int i = 0; i < items.size(); i++) {
-			System.out.println(items.get(i).toString());
-		}
-	}
-	
-	
-	
 	/*
 	 * the purpose of this method is for setting the currentUser to 
 	 * the rootUser instance variable present in this class.
@@ -95,7 +85,7 @@ public class Driver {
 	public static void logout() {
 		currentUser.setUser(rootUser);
 	}
-	
+
 	//stub method that may be used to govern the functionality of actions associated
 	//with processing backlogged data
 	public static void processBackloggedData() {
@@ -103,16 +93,24 @@ public class Driver {
 	}
 	
 	
-	public static void loadSampleItemsIntoInventory() {
+	public static void printItems() {
+		if (items.size() == 0) 
+			SystemMessage.print("Items ArrayList is empty");
+		for (int i = 0; i < items.size(); i++) {
+			System.out.println(items.get(i).toString());
+		}
+	}
+
+	public static void loadInventory() {
 		items.add(new Item(130, "Nintendo GameCube", 10));
 		items.add(new Item(160, "Sony PlayStation", 10));
 		items.add(new Item(150, "Nintendo GameBoy", 5));
-		items.add(new Item(170, "Microsoft XboX", 10));
+		items.add(new Item(170, "Microsoft Xbox", 10));
 		items.add(new Item(125, "Nintendo 64", 5));
 		items.add(new Item(180, "Sony PlayStation 2", 5));
 		items.add(new Item(90, "Sega Dreamcast", 10));
 		items.add(new Item(190, "Sony PlayStation Portable", 10));
-		items.add(new Item(230, "Microsoft XboX 360", 10));
+		items.add(new Item(230, "Microsoft Xbox 360", 10));
 		items.add(new Item(80, "Atari 2600", 15));
 		items.add(new Item(120, "Sega CD", 10));
 		items.add(new Item(90, "Magnavox Odyssey", 15));
@@ -121,7 +119,7 @@ public class Driver {
 		items.add(new Item(80, "Nintendo Entertainment System", 10));
 		items.add(new Item(200, "Sony PlayStation 3", 15));
 		items.add(new Item(130, "Sega GameGear", 10));
-		items.add(new Item(250, "Microsoft XboX One", 15));
+		items.add(new Item(250, "Microsoft Xbox One", 15));
 	}
 	
 	public static void loadAuctions() {
@@ -143,7 +141,7 @@ public class Driver {
 		items = new ArrayList<Item>();
 		ongoingAuctions = new ArrayList<Auction>();
 		completedAuctions = new ArrayList<Auction>();
-		loadSampleItemsIntoInventory();
+		loadInventory();
 		//loadAuctions();
 		currentUser.setUser(new Customer("Clay", "password", "customer"));
 	}

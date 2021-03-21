@@ -23,6 +23,7 @@ public class Customer extends Account {
 
 	}
 
+	/*
 	public String activeBidsToString() {
 
 		if (activeBids.size() == 0) {
@@ -37,7 +38,22 @@ public class Customer extends Account {
 
 		return result;
 	}
-
+	*/
+	
+	public void printActiveBids() {
+		if (activeBids.size() == 0) {
+			System.out.println("You have placed no bids that are part of an ongoing auction");
+		}
+		else {
+			System.out.println("Your Active Bids");
+			System.out.println("=================");
+			for (int i = 0; i < activeBids.size(); i++) {
+				System.out.println(activeBids.get(i).toStringActive());
+			}
+		}
+	}
+	
+	/*
 	public String winningBidsToString() {
 
 		if (winningBids.size() == 0) {
@@ -49,6 +65,19 @@ public class Customer extends Account {
 		}
 
 		return result;
+	}
+	*/
+	public void printWinningBids() {
+		if (winningBids.size() == 0) {
+			System.out.println("You have placed no bids that have won an auction");
+		}
+		else {
+			System.out.println("Your Winning Bids");
+			System.out.println("=================");
+			for (int i = 0; i < winningBids.size(); i++) {
+				System.out.println(winningBids.get(i).toStringWinning());
+			}
+		}
 	}
 
 	public String usernameIdString() {
@@ -68,12 +97,28 @@ public class Customer extends Account {
 		
 	}
 
-	public void addWinningBid(Bid bid) {
-		winningBids.add(bid);
+	public void placeBid() {
+		if (Driver.ongoingAuctions.size() != 0) {
+			int auctionIndex = Menu.selectAuction();
+			if (auctionIndex >= 0) {
+				Auction auction = Driver.ongoingAuctions.get(auctionIndex);
+				double value = InputMethods.getPositiveDouble("Enter the dollar amount of your bid");
+				Bid b = new Bid(value, auction, this);				
+				SystemMessage.print("Processing Bid: \n" + b.toString());
+				if (auction.isActive()) {
+					auction.process(b);
+					auction.printAuctionStatus();
+				}
+				else SystemMessage.print("That auction is not active");
+			}
+		}
+		else {
+			System.out.println("There are no ongoing auctions");
+		}
 	}
 
-	public void placeBid() {
-
+	public void addWinningBid(Bid bid) {
+		winningBids.add(bid);
 	}
 
 	public ArrayList<Bid> getActiveBids() {

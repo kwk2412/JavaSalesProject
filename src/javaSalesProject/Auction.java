@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class Auction {
 	
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
-	private Stack<Bid> processedBids = new Stack<Bid>();	// Stack of bids for keeping track of bids that are part of an active auction. Also for record keeping
+	private Stack<Bid> processedBids = new Stack<>();	// Stack of bids for keeping track of bids that are part of an active auction. Also for record keeping
 	private Queue<Bid> unprocessedBids = new Queue<>();	// This is a queue full of bids yet to be processed in the auction
 	private Item item;
 	private Bid currentHighest; // bid with highest max value willing to pay lives here
@@ -26,9 +26,7 @@ public class Auction {
 	private final int BIDSALLOWED = 3;
 	
 	// how to keep track of the window for which the auction will be active
-	// LocalDate date = new LocalDate();
-
-	
+	// LocalDate date = new LocalDate();	
 	
 	
 	public Auction() {
@@ -86,8 +84,8 @@ public class Auction {
 			} else {
 				System.out.println("Your bid was too low. It has been rejected");
 			}
-
 		}
+		
 		// The current highest is not equal to null and the new bid is at least an increment greater than the sales price
 		else if (theNewBid.getValue() - currentSalesPrice >= increment) {
 			validBid = true;
@@ -209,7 +207,7 @@ public class Auction {
 	
 	//This algorithm needs to be fixed, Kevin tried but made a mess
 	// This is supposed to remove the active bids from the activeBids arraylist 
-	// of all customers that participated in the auction. but it doesn't do that
+	// of all customers that participated in the auction. but it doesn't do that 
 	public void clearActiveBids() {
 		Stack<Bid> copyBids = processedBids;
 		for (int i = copyBids.size(); i < 0; i--) {

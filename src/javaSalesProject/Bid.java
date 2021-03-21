@@ -40,16 +40,20 @@ public class Bid {
 	}
 
 	public String toStringActive() {
-		String result = "Item name: " + auction.getItem().getName() + "\nAuctionID: " + auction.getAuctionID()
-				+ "\nBid amount: " + cf.format(value) + "\n" + "Current sales price: "
-				+ cf.format(auction.getCurrentSalesPrice());
+		String result = "Item name: " + auction.getItem().getName() + "\n" +
+				"AuctionID: " + auction.getAuctionID() + "\n" +
+				"Bid amount: " + cf.format(value) + "\n" + 
+				"Current sales price: " + cf.format(auction.getCurrentSalesPrice());
+		
 		if (auction.getCurrentHighest().getCustomer().getUserID() == customer.getUserID()) {
 			result += "\nYou are the highest bidder";
-		} else {
+		}
+		else {
 			result += "\n" + auction.getCurrentHighest().getCustomer().getUsername() + " is the highest bidder"
 					+ "\nThe max the highest bidder is willing to pay is "
 					+ cf.format(auction.getCurrentHighest().getValue());
 		}
+		
 		result += "\n";
 		return result;
 	}
@@ -63,15 +67,15 @@ public class Bid {
 	}
 
 	public String toStringWinningBid() {
-		return "Item name: " + auction.getItem().getName() + "\nBid amount: " + cf.format(value) + "\nAuctionID: "
-				+ auction.getAuctionID() + "\n";
+		return "Item name: " + auction.getItem().getName() + "\n" + 
+				"Bid amount: " + cf.format(value) + "\n" +
+				"AuctionID: " + auction.getAuctionID() + "\n";
 	}
 	
 	public boolean equals(Bid b) {
-		if(b.getValue() == this.value)
-		{
-			if(b.getCustomer().userID == this.getCustomer().userID) {
-				if(b.getAuction().getAuctionID() == this.getAuction().getAuctionID()) {
+		if (b.getValue() == this.value) {
+			if (b.getCustomer().userID == this.getCustomer().userID) {
+				if (b.getAuction().getAuctionID() == this.getAuction().getAuctionID()) {
 					return true;
 				}
 			}

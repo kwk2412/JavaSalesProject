@@ -19,20 +19,16 @@ public class InputMethods {
 				}
 				validInput = true;
 			}
-			
-			catch (InvalidInputException iie){
+			catch (InvalidInputException iie) {
 				System.out.println("Invalid input");
 				System.out.println("Please enter either a yes or no");
 			}
-			
 			catch (Exception e) {
 				System.out.println("Invalid input");
 				System.out.println("Please enter either a yes or no");
 			}
-		
 		}
-		
-		if(input.trim().equalsIgnoreCase("yes")) {
+		if (input.trim().equalsIgnoreCase("yes")) {
 			return true;
 		}
 		else {
@@ -63,7 +59,6 @@ public class InputMethods {
 				System.out.println("Please make sure your input does not contain letters or special characters.");
 				done = !yesNoToBool("Would you like to try again?");
 			}
-			
 		}
 		return dub;
 	}
@@ -88,7 +83,6 @@ public class InputMethods {
 				System.out.println("Invalid input");
 				System.out.println("Please make sure your input does not contain letters or special characters.");
 			}
-			
 		}
 		return choice;
 	}
@@ -116,7 +110,6 @@ public class InputMethods {
 				System.out.println("Please make sure your input does not contain letters or special characters.");
 				done = !yesNoToBool("Would you like to try again?");
 			}
-			
 		}
 		return -1;
 	}
