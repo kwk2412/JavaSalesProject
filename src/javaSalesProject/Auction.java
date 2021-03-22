@@ -112,6 +112,7 @@ public class Auction {
 			return false;
 		}
 		if (bid.getValue() < currentSalesPrice) {
+			System.out.println("Invalid Bid: Bid cannot be less than the current sales price");
 			return false;
 		}
 		bid.setValid(true);
