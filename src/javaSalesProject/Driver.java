@@ -17,43 +17,6 @@ public class Driver {
 		
 		init();	
 
-		checkpointC();
-		
-		
-		/*
-		for (int i = 0; i < accounts.size(); i++) {
-			System.out.println(accounts.get(i).toString());
-		}
-		
-		Customer jake = new Customer("Jake", "password", "customer");
-		
-		for (int i = 0; i < accounts.size(); i++) {
-			System.out.println(accounts.get(i).toString());
-		}
-		
-		Bid bid = new Bid(70, auction, jake);
-		*/
-		/*
-		ArrayList<Bid> bids = new ArrayList<>();
-		
-		bids.add(new Bid(60, auction, john));
-		bids.add(new Bid(80, auction, ralph));
-		bids.add(new Bid(60, auction, billy));
-		bids.add(new Bid(70, auction, joel));
-		
-		auction.getUnprocessedBids().enqueue(bids.get(0));
-		auction.getUnprocessedBids().enqueue(bids.get(1));
-		auction.getUnprocessedBids().enqueue(bids.get(2));
-		auction.getUnprocessedBids().enqueue(bids.get(3));
-		
-		for (int i = 0; i < bids.size(); i++) {
-			auction.process(bids.get(i));
-			System.out.println("Bid " + (i+1));
-			System.out.println("Current Sales Price: " + auction.getCurrentSalesPrice());
-			System.out.println("Current Highest Bid: " + auction.getCurrentHighest().getValue());
-		}
-		*/
-
 		while (running) {
 			if (currentUser.getUser().getUserID() == 1) 
 				MainMenuOptions.menuNoUser();
@@ -62,26 +25,53 @@ public class Driver {
 			else
 				MainMenuOptions.menuCustomerLoggedIn();
 		}		
-
 	}
 	
 	
 	public static void checkpointC() {
-		Customer john = new Customer("John", "password", "permissions");
+		Customer larry = new Customer("Larry", "password", "permissions");
+		Customer morton = new Customer("Morton", "password", "permissions");
+		Customer wendy = new Customer("Wendy", "password", "permissions");
+		Customer iggy = new Customer("Iggy", "password", "permissions");
+		Customer roy = new Customer("Roy", "password", "permissions");
+		Customer lemmy = new Customer("Lemmy", "password", "permissions");
+		Customer ludwig = new Customer("Ludwig", "password", "permissions");
 		
-		Auction a = new Auction(items.get(0));
+		Auction auction = new Auction(items.get(0));
 		
-		Bid bid1 = new Bid(200, a, john);		
-		Bid bid2 = new Bid(300, a, john);
-		Bid bid3 = new Bid(400, a, john);
-		Bid bid4 = new Bid(500, a, john);
+		System.out.println("Auction created for the first item in the inventory");
 		
-		a.getUnprocessedBids().enqueue(bid1);
-		a.getUnprocessedBids().enqueue(bid2);
-		a.getUnprocessedBids().enqueue(bid3);
-		a.getUnprocessedBids().enqueue(bid4);
+		Bid bid1 = new Bid(140, auction, larry);		
+		Bid bid2 = new Bid(155, auction, morton);
+		Bid bid3 = new Bid(165, auction, wendy);
+		Bid bid4 = new Bid(160, auction, iggy);
+		Bid bid5 = new Bid(180, auction, iggy);
+		Bid bid6 = new Bid(210, auction, roy);
+		Bid bid7 = new Bid(230, auction, lemmy);
+		Bid bid8 = new Bid(220, auction, ludwig);
+		Bid bid9 = new Bid(245, auction, iggy);
+		Bid bid10 = new Bid(250, auction, morton);
+		Bid bid11 = new Bid(260, auction, ludwig);
+		Bid bid12 = new Bid(270, auction, roy);
+		Bid bid13 = new Bid(300, auction, ludwig);
 		
-		a.automateAuction();
+		auction.getUnprocessedBids().enqueue(bid1);
+		auction.getUnprocessedBids().enqueue(bid2);
+		auction.getUnprocessedBids().enqueue(bid3);
+		auction.getUnprocessedBids().enqueue(bid4);
+		auction.getUnprocessedBids().enqueue(bid5);
+		auction.getUnprocessedBids().enqueue(bid6);
+		auction.getUnprocessedBids().enqueue(bid7);
+		auction.getUnprocessedBids().enqueue(bid8);
+		auction.getUnprocessedBids().enqueue(bid9);
+		auction.getUnprocessedBids().enqueue(bid10);
+		auction.getUnprocessedBids().enqueue(bid11);
+		auction.getUnprocessedBids().enqueue(bid12);
+		auction.getUnprocessedBids().enqueue(bid13);
+		
+		System.out.println();
+		
+		auction.automateAuction();
 	}
 	
 	public static boolean loginAttemptCheck(boolean menu) {
@@ -108,8 +98,8 @@ public class Driver {
 		currentUser.setUser(rootUser);
 	}
 
-	//stub method that may be used to govern the functionality of actions associated
-	//with processing backlogged data
+	// Stub method that may be used to govern the functionality of actions associated
+	// with processing backlogged data
 	public static void processBackloggedData() {
 		
 	}
@@ -165,7 +155,7 @@ public class Driver {
 		completedAuctions = new ArrayList<Auction>();
 		loadInventory();
 		//loadAuctions();
-		currentUser.setUser(new Customer("Clay", "password", "customer"));
+		//currentUser.setUser(new Customer("Clay", "password", "customer"));
 	}
 	
 }

@@ -23,7 +23,7 @@ public class Auction {
 	private int auctionID;
 	private static int nextNum = 100;
 	private int numBids = 0;
-	private final int BIDSALLOWED = 3;
+	private final int BIDSALLOWED = 10;
 	
 	// how to keep track of the window for which the auction will be active
 	// LocalDate date = new LocalDate();	
@@ -70,13 +70,16 @@ public class Auction {
 		return result;
 	}
 	
+	// Something is eliminating an invalid bid and the following one
+	// causing the out of bounds exception when you go to continue the auction 
+	// without any bids left to process
 	
 	public void automateAuction() {
-		
-		while (unprocessedBids.size() > 0) {
+		while (active) {
+			System.out.println("Processing bid...");
 			process(unprocessedBids.dequeue());
+			printAuctionStatus();	
 		}
-		
 	}
 	
 	
@@ -94,26 +97,24 @@ public class Auction {
 			processedBids.push(bid);	// Add list to Auction's list of bids
 			numBids++;
 		}
-		else {
-			System.out.println("Invalid bid");
-		}
 		checkEnd();
 	}
 	
 	
 	public boolean isValid(Bid bid) {
 		if (bid.getValue() >= currentHighest.getValue()  && bid.getValue() < currentHighest.getValue() + increment) {
-			System.out.println("Invalid Bid: Bid cannot be between the current highest bid and an increment up from that");
-			// Throw new InvalidRange();
+			System.out.println("Invalid Bid: Bid cannot be between the current highest bid and an increment up from that\n");
 			return false;
 		}
 		if (bid.getValue() >= currentSalesPrice && bid.getValue() < currentSalesPrice + increment) {
-			System.out.println("Invalid Bid: Bid cannot be between current sales price and sales price + increment");
+			System.out.println("Invalid Bid: Bid cannot be between current sales price and sales price + increment\n");
 			return false;
 		}
 		if (bid.getValue() < currentSalesPrice) {
+			System.out.println("Invalid Bid: Bid cannot be less than the current sales price\n");
 			return false;
 		}
+		
 		bid.setValid(true);
 		return bid.isValid();
 	}

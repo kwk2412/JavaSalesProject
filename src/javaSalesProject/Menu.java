@@ -6,11 +6,17 @@ public class Menu {
 
 	// Main menu when there is no user logged in
 	public static int mainMenuLoggedOut() {
-		String menu = "Main Menu\n" + "=========\n" + "1. Load sample data\r\n" + "2. Process the backlogged data\r\n"
-				+ "3. Print items ArrayList\n" + "4. Log in as administrator\r\n" + "5. Log in as customer\r\n"
-				+ "6. Exit the application\r\n";
+		String menu = "Main Menu\n" 
+				+ "=========\n" 
+				+ "1. Load sample data\r\n" 
+				+ "2. Process the backlogged data\r\n"
+				+ "3. Print items ArrayList\n" 
+				+ "4. Log in as administrator\r\n" 
+				+ "5. Log in as customer\r\n"
+				+ "6. Run automated auction for checkpoint C\n"
+				+ "7. Exit the application\r\n";
 
-		int choice = InputMethods.getIntFromMenu(1, 6, menu);
+		int choice = InputMethods.getIntFromMenu(1, 7, menu);
 		return choice;
 	}
 
@@ -45,8 +51,10 @@ public class Menu {
 	public static int adminMenu() {
 		String menu = "Admin Menu\n" + "==========\n" + "1. List current ongoing auctions\r\n"
 				+ "2. Choose an ongoing auction and check the bidding history\r\n"
-				+ "3. List information about completed auctions\r\n" + "4. Summary data of winning bids\r\n"
-				+ "5. Add and activate a new auction\r\n" + "6. Create new admin account\r\n"
+				+ "3. List information about completed auctions\r\n"
+				+ "4. Summary data of winning bids\r\n"
+				+ "5. Add and activate a new auction\r\n"
+				+ "6. Create new admin account\r\n"
 				+ "7. Return to the previous menu\r\n";
 		int choice = InputMethods.getIntFromMenu(1, 7, menu);
 		return choice;

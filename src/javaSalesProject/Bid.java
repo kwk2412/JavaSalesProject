@@ -10,8 +10,6 @@ public class Bid {
 	private Auction auction;
 	private boolean valid;
 	private Customer customer;
-	private int time;
-
 
 	public Bid(double value) {
 		this.value = value;
@@ -25,14 +23,6 @@ public class Bid {
 		this.valid = false;
 	}
 	
-	public Bid(double value, Auction auction, Customer customer, int time) {
-		super();
-		this.value = value;
-		this.auction = auction;
-		this.customer = customer;
-		this.valid = false;
-		this.time = time;
-	}
 
 	public String toString() {
 		return "\tItem name: " + auction.getItem().getName() + "\n" + 
