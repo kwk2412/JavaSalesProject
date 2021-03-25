@@ -1,5 +1,6 @@
 package javaSalesProject;
 
+
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
  *
  */
 public class Auction {
+
 	
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
 	private Stack<Bid> processedBids = new Stack<>();	// Stack of bids for keeping track of bids that are part of an active auction. Also for record keeping
@@ -25,9 +27,11 @@ public class Auction {
 	private int numBids = 0;
 	private final int BIDSALLOWED = 10;
 	
+
 	// how to keep track of the window for which the auction will be active
 	// LocalDate date = new LocalDate();	
 	
+
 	
 	public Auction() {
 		auctionID = nextNum;
@@ -83,6 +87,7 @@ public class Auction {
 	}
 	
 	
+
 	public void process(Bid bid) {
 		if (currentHighest == null) firstBid(bid);
 		else if (isValid(bid)) {
@@ -229,6 +234,7 @@ public class Auction {
 		this.currentSalesPrice = sellingPrice;
 	}
 
+
 	public Stack<Bid> getBids() {
 		return processedBids;
 	}
@@ -236,6 +242,7 @@ public class Auction {
 	public void setBids(Stack<Bid> bids) {
 		this.processedBids = bids;
 	}
+
 
 	public Queue<Bid> getUnprocessedBids() {
 		return unprocessedBids;

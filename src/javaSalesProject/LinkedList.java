@@ -1,20 +1,20 @@
 package javaSalesProject;
 
-public class Stack<E> {
+public class LinkedList {
 	
 	private class Node {
 		
-		private E item;
+		private Item item;
 		private Node next;
 		private Node prev;
 		
-		Node(E item, Node next, Node prev) {
+		Node(Item item, Node next, Node prev) {
 			this.item = item;
 			this.next = next;
 			this.prev = prev;
 		}
 		
-		Node(E item) {
+		Node(Item item) {
 			this(item, null, null);
 		}
 	}
@@ -22,7 +22,7 @@ public class Stack<E> {
 	private Node first;
 	private Node last;
 	
-	public Stack() {
+	public LinkedList() {
 		first = null;
 		last = null;
 	}
@@ -46,19 +46,17 @@ public class Stack<E> {
 	}
 	
 	
-	public void push(E elementToAdd) {
+	public void add(Item itemToAdd) {
 		if (isEmpty() == true) {
-			first = new Node(elementToAdd);
+			first = new Node(itemToAdd);
 			last = first;
 		}
 		else {
-			last.next = new Node(elementToAdd, null, last);
+			last.next = new Node(itemToAdd);
 			last = last.next;
 		}
 	}
 	
-	
-	/*
 	
 	public void add(int index, Item itemToAdd) {
 		if (index < 0 || index > this.size()) {
@@ -85,42 +83,6 @@ public class Stack<E> {
 		}
 	}
 	
-	*/
-	
-	
-	public E pop() {
-		if (isEmpty()) {
-			throw new IndexOutOfBoundsException();
-		}
-		
-		Node p = last;
-		E e = p.item;	// The grabbing the item that we are to return
-		if (p.prev != null) {	// If it is not the only item in the list
-			last = p.prev;	// Set last to the second to last item
-			last.next = null;
-		}
-		
-		// How to handle the popping of an element when there is only one element in the stack?
-		else {
-			last = first = null;
-		}
-
-		remove(p.item);
-		return e;
-	}
-	
-	
-	public E peek() {
-		if (isEmpty()) {
-			throw new IndexOutOfBoundsException();
-		}
-		return first.item;
-	}
-	
-	
-	
-	// The remove methods will get replaced with the pop method
-	/*
 	public Item remove(int index) {
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException(String.valueOf(index));
@@ -147,11 +109,7 @@ public class Stack<E> {
 		return element;
 	}
 	
-	
-	*/
-	
-	
-	private boolean remove(E itemToBeRemoved) {
+	public boolean remove(Item itemToBeRemoved) {
 		if (isEmpty() == true) {
 			return false;
 		}
@@ -179,29 +137,27 @@ public class Stack<E> {
 		return true;
 	}
 	
-	
-	
 	/**
 	 * 
 	 * When supplied a given item, it will return the index at 
 	 * which that item is located in the linked list. Returns -1
 	 * if that item can't be found in the list
-	 * @param element
+	 * @param item
 	 * @return
 	 */
 	
-	public int indexOf(E element) {
+	public int indexOf(Item item) {
 		int count = 0;
 		Node p = first;
-		for (count = 0; p.item != element; count++) {
+		for (count = 0; p.item != item; count++) {
 			p = p.next;
 		}
-		if (p.item == element) return count;
+		if (p.item == item) return count;
 		else return -1;
 	}
 	
 	
-	private E get(int index) {
+	public Item get(int index) {
 		if (index < 0 || index > this.size()) {
 			throw new IndexOutOfBoundsException(String.valueOf(index));
 		}
@@ -214,12 +170,6 @@ public class Stack<E> {
 			p = p.next;
 		}
 		return null;
-	}
-	
-	public void clear() {
-		for (int i = 0; i < size(); i++) {
-			remove(this.get(i));
-		}
 	}
 
 }

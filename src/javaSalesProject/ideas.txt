@@ -119,4 +119,12 @@ Menu
 	- Utilized one method to validate input for all of the menu selections in the menu class. The method that does this is in the InputMethods class
 	
 	- Changed yesNoToBool in the InputMethods class so that the method prints the question the first time.
+	
+	_____________________________________________________________________________________________________________________
+	Kevin 3/17/21
+	
+	- Added the Queue and Stack classes 
+	- Added the throw error line when user tries to pop from an empty stack or dequeue from an empty cue
+	  and fixed a bug in which the prev field of each Node would never get overwritten
+	- Also made Queue class and the Stack class generic
  	  
