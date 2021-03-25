@@ -86,7 +86,6 @@ public class Auction {
 		}
 	}
 	
-	
 
 	public void process(Bid bid) {
 		if (currentHighest == null) firstBid(bid);

@@ -44,12 +44,25 @@ Auctions
 	  There exist some classes that are capable of taking the time from your local machine and producing input based on that
 
 
-Menu 
-	- Perhaps a good application of linked lists would be to make menu items nodes in a list.
-	  Under certain circumstances we could add, remove, or otherwise alter specific nodes in the list
-	  according to conditions present in the program
-	  
-	  
+Menu items that still don't work:
+	
+	Main Menu (for Admin/Customer/logged out)
+	- Process backlogged data
+	
+	Admin Options Menu
+	- Choose an ongoing auction and check the bidding history
+	- List information about completed auctions
+	- Summary data of winning bids
+
+	Customer Options Menu
+	- Pay for an item that I won
+
+Additional menu options
+	
+	Customer Options Menu
+	- Implement a balance for each account
+	- menu option that allows each customer to make a deposit on their account balance
+	  (We can then tie the "pay for an item that I won" option to this account balance)
 	  
 
 	-------------------------------------------------------------------------------------------------
