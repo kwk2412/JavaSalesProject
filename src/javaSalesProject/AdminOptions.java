@@ -4,7 +4,7 @@ public class AdminOptions {
 	
 	public static void adminMenu() {
 		
-		
+		Admin a = (Admin) Driver.currentUser.getUser();
 		boolean menu = true;
 		while (menu) {
 			
@@ -12,7 +12,7 @@ public class AdminOptions {
 			
 			//List current ongoing auctions
 			if (choice == 1) {
-				System.out.println("You selected option 1");
+				a.showOngoingAuctions();
 			}
 			
 			//Chose an ongoing auction and check the bidding history
@@ -32,7 +32,8 @@ public class AdminOptions {
 			
 			//Add and activate a new auction
 			else if (choice == 5) {
-				System.out.println("You selected option 5");
+				a.startNewAuction();
+				//AuctionMethods.startNewAuction();
 			} 
 			
 			// Create a new admin account. 

@@ -120,8 +120,3 @@ Menu
 	
 	- Changed yesNoToBool in the InputMethods class so that the method prints the question the first time.
  	  
-	______________________________________________________________________________________________________________________
-	Kevin 3/7/21
-	
-	- Added a Customer object present in the customer array list upon program startup for testing purposes
-	- Updated the readme with its credentials

@@ -10,7 +10,14 @@ Main menu
 	- 3) Prints the items in the items arraylist
 	- 4) Initiates admin login process
 	- 5) Initiates customer login process
-	- 6) Exit the application after asking for user's confirmation
+	- 6) Runs the specialized proof of concept for checkpoint C
+	- 7) Exit the application after asking for user's confirmation
+		
+		Specialized POC for checkpoint C:
+			This is a pre-programmed auction that runs on its own from start to finish. Customers, an auction, and bids are 
+			created and then handled and processed without input from the user. The method that starts this process is called 
+			"checkpointC()" and is located just after the main method in Driver.java, at line 31. After each bid is processed, 
+			a summary of the auction's status is printed to the screen.
 	
 	User Present:
 	- 1) Loads items array list with sample data
@@ -24,10 +31,6 @@ Logging in
 
 	- When the user chooses to log in as a customer, a sub menu shows up. From here the user can choose
 	  to create a new customer account, login as an existing customer account, or return to the previous menu.
-	  
-	- A test customer account exists, its credentials are as follows:
-		username: Customer
-		password: password
 	  
 	- The breakdown of the options is as follows:
 	  
@@ -51,11 +54,10 @@ Logging in
 		username: Admin
 		password: password
 	  	  		
-Admin Main Menu
+Admin Menu
+	- The only menu options that are working are the transition back to the main menu
+	  and the creation of a new admin account
+	
+Customer Menu
 	- The only menu option that is working is the transition back to the main menu
 	
-Admin Options Menu
-	- The creation of a new admin account can happen from within this menu 
-	
-Customer Main Menu
-	- The only menu option that is working is the transition back to the main menu

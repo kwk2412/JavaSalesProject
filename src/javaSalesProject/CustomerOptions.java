@@ -2,26 +2,26 @@ package javaSalesProject;
 
 public class CustomerOptions {
 	
-public static void customerMenu() {
-		
+	public static void customerMenu() {
+		Customer c = (Customer) Driver.currentUser.getUser();
 		boolean menu = true;
 		while (menu) {
 			
 			int choice = Menu.customerMenu();
 			
+			// Check my active bids
 			if (choice == 1) {
-				System.out.println("You selected option 1");
+				c.printActiveBids();
 			}
 			
 			//Check my winning bids
-			
 			else if (choice == 2) {
-				System.out.println("You selected option 2");
+				c.printWinningBids();
 			}
 			
 			//Bid on an item
 			else if (choice == 3) {
-				System.out.println("You selected option 3");
+				c.placeBid();
 			}
 			
 			//Pay for an item that I won
