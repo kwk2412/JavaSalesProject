@@ -52,7 +52,7 @@ public class AdminOptions {
 	
 	private static void printCompletedAuctions() {
 		System.out.println("Summary of Completed Auctions: ");
-		if (Driver.completedAuctions.size()>1) {
+		if (Driver.completedAuctions.size() >= 1) {
 			for (int i = 0; i < Driver.completedAuctions.size(); i++) {
 				System.out.println(Driver.completedAuctions.get(i).toString());
 			}
