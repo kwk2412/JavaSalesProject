@@ -5,6 +5,7 @@ import java.text.NumberFormat;
 
 public class Bid {
 
+
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
 	private double value;
 	private Auction auction;

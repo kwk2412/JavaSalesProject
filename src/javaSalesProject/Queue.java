@@ -101,6 +101,7 @@ public class Queue<E> {
 	
 
 
+
 	public E remove(int index) {
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException(String.valueOf(index));
@@ -185,6 +186,7 @@ public class Queue<E> {
 		}
 		
 		
+
 	}
 	
 	/**

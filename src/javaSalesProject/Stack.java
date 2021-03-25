@@ -104,6 +104,7 @@ public class Stack<E> {
 		else {
 			last = first = null;
 		}
+
 		remove(p.item);
 		return e;
 	}
