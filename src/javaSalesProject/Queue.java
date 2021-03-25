@@ -97,11 +97,8 @@ public class Queue<E> {
 		}
 	}
 	*/
-	
-	
-	//We will replace these with dequeue
-	/*
-	public Item remove(int index) {
+
+	public E remove(int index) {
 		if (index < 0 || index >= size()) {
 			throw new IndexOutOfBoundsException(String.valueOf(index));
 		}
@@ -110,7 +107,7 @@ public class Queue<E> {
 		for (int k = 1; k <= index; k++)
 			target = target.next;
 
-		Item element = target.item;
+		E element = target.item;
 		Node pred = target.prev;
 		Node succ = target.next;
 
@@ -127,13 +124,14 @@ public class Queue<E> {
 		return element;
 	}
 	
-	public boolean remove(Item itemToBeRemoved) {
+	
+	public boolean remove(E elementToBeRemoved) {
 		if (isEmpty() == true) {
 			return false;
 		}
 
 		Node target = first;
-		while (target != null && !itemToBeRemoved.equals(target.item))
+		while (target != null && !elementToBeRemoved.equals(target.item))
 			target = target.next;
 
 		if (target == null)
@@ -155,7 +153,7 @@ public class Queue<E> {
 		return true;
 	}
 	
-	*/
+	
 	
 	
 	
@@ -167,11 +165,23 @@ public class Queue<E> {
 		if (isEmpty()) {
 			throw new IndexOutOfBoundsException();
 		}
-		Node p = first;
-		E e = p.item; // Item to be returned
-		first = p.next;
-		first.prev = null;
-		return e;
+		
+		if (size() != 1) {
+			//Node p = first; 
+			E item = first.item;
+			remove(0);
+			//first = p.next;
+			//first.prev = null;
+			return item;
+		}
+		else {
+			E e = last.item;
+			remove(last.item);
+			return e;
+		}
+		
+		
+
 	}
 	
 	/**
