@@ -22,7 +22,7 @@ public class AdminOptions {
 			
 			//List information about completed auctions
 			else if (choice == 3) {
-				System.out.println("You selected option 3");
+				printCompletedAuctions();
 			}
 			
 			//Summary data of winnings bids
@@ -47,6 +47,13 @@ public class AdminOptions {
 				menu = false;
 			}
 			
+		}
+	}
+	
+	private static void printCompletedAuctions() {
+		System.out.println("Summary of Completed Auctions: ");
+		for (int i = 0; i < Driver.completedAuctions.size(); i++) {
+			System.out.println(Driver.completedAuctions.get(i).toString());
 		}
 	}
 
