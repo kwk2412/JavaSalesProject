@@ -52,8 +52,13 @@ public class AdminOptions {
 	
 	private static void printCompletedAuctions() {
 		System.out.println("Summary of Completed Auctions: ");
-		for (int i = 0; i < Driver.completedAuctions.size(); i++) {
-			System.out.println(Driver.completedAuctions.get(i).toString());
+		if (Driver.completedAuctions.size()>1) {
+			for (int i = 0; i < Driver.completedAuctions.size(); i++) {
+				System.out.println(Driver.completedAuctions.get(i).toString());
+			}
+		}
+		else {
+			System.out.println("There are no completed Auctions at this time.");
 		}
 	}
 
