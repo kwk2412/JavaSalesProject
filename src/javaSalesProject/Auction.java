@@ -32,6 +32,7 @@ public class Auction {
 	public Auction() {
 		auctionID = nextNum;
 		nextNum++;
+		
 	}
 
 	public Auction(Item item) {

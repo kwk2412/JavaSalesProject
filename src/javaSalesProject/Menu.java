@@ -96,4 +96,17 @@ public class Menu {
 		}
 		return -1;
 	}
+	
+	public static int selectWinningAuction(Customer c) {
+
+		String menu = "Select an auction that you have won:\n";
+		for (int i = 0; i < c.getWinningBids().size(); ++i) {
+			menu += (i + 1) + ". " + c.getWinningBids().get(i).getAuction().toString() + "\n";
+		}
+		int userSelection = InputMethods.getIntOrReturnNeg1(1, c.getWinningBids().size(), menu);
+		if(userSelection > 0) {
+			return (userSelection - 1);
+		}
+		return -1;
+	}
 }
