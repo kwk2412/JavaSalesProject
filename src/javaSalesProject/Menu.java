@@ -43,9 +43,9 @@ public class Menu {
 
 	public static int customerMenu() {
 		String menu = "Customer Menu\n" + "=============\n" + "1. Check my active bids\r\n"
-				+ "2. Check my winning bids\r\n" + "3. Bid on an item\r\n" + "4. Pay for an item that I won\r\n"
-				+ "5. Return to the previous menu\r\n";
-		int choice = InputMethods.getIntFromMenu(1, 5, menu);
+				+ "2. Check my winning bids\r\n" + "3. Bid on an item\r\n"+ "4. Add money to balance\r\n" + "5. Pay for an item that I won\r\n"
+				+ "6. Return to the previous menu\r\n";
+		int choice = InputMethods.getIntFromMenu(1, 6, menu);
 		return choice;
 	}
 
@@ -92,6 +92,19 @@ public class Menu {
 			menu += (i + 1) + ". " + Driver.ongoingAuctions.get(i).custVersionToString() + "\n";
 		}
 		int userSelection = InputMethods.getIntOrReturnNeg1(1, Driver.ongoingAuctions.size(), menu);
+		if(userSelection > 0) {
+			return (userSelection - 1);
+		}
+		return -1;
+	}
+	
+	public static int selectWinningAuction(Customer c) {
+
+		String menu = "Select an auction that you have won:\n";
+		for (int i = 0; i < c.getWinningBids().size(); ++i) {
+			menu += (i + 1) + ". " + c.getWinningBids().get(i).getAuction().toString() + "\n";
+		}
+		int userSelection = InputMethods.getIntOrReturnNeg1(1, c.getWinningBids().size(), menu);
 		if(userSelection > 0) {
 			return (userSelection - 1);
 		}
