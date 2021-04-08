@@ -28,7 +28,7 @@ public class Driver {
 
 		init();
 		
-		Read.read();
+		//Read.read();
 
 		/*
 		 * for (int i = 0; i < accounts.size(); i++) {
