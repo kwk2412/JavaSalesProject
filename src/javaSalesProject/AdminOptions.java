@@ -1,63 +1,66 @@
 package javaSalesProject;
 
 public class AdminOptions {
-	
+
 	public static void adminMenu() {
-		
+
 		Admin a = (Admin) Driver.currentUser.getUser();
 		boolean menu = true;
 		while (menu) {
-			
+
 			int choice = Menu.adminMenu();
-			
-			//List current ongoing auctions
+
+			// List current ongoing auctions
 			if (choice == 1) {
 				a.showOngoingAuctions();
 			}
-			
-			//Chose an ongoing auction and check the bidding history
+
 			else if (choice == 2) {
+				a.showFutureAuctions();
+			}
+
+			// Chose an ongoing auction and check the bidding history
+			else if (choice == 3) {
 				System.out.println("You selected option 2");
 			}
-			
-			//List information about completed auctions
-			else if (choice == 3) {
+
+			// List information about completed auctions
+			else if (choice == 4) {
 				printCompletedAuctions();
 			}
-			
-			//Summary data of winnings bids
-			else if (choice == 4) {
+
+			// Summary data of winnings bids
+			else if (choice == 5) {
 				System.out.println("You selected option 4");
 			}
-			
-			//Add and activate a new auction
-			else if (choice == 5) {
-				a.startNewAuction();
-				//AuctionMethods.startNewAuction();
-			} 
-			
-			// Create a new admin account. 
+
+			// Add and activate a new auction
 			else if (choice == 6) {
+				a.startNewAuction();
+				// AuctionMethods.startNewAuction();
+			}
+
+			// Create a new admin account.
+			else if (choice == 7) {
 				CreateAccount.createAdminAccount();
 				Driver.loginAttemptCheck(menu);
-				
+
 			}
-			//Return to main menu
-			else if (choice == 7) {
+			// Return to main menu
+			else if (choice == 8) {
 				menu = false;
+
 			}
-			
 		}
 	}
-	
+
 	private static void printCompletedAuctions() {
 		System.out.println("Summary of Completed Auctions: ");
 		if (Driver.completedAuctions.size() >= 1) {
 			for (int i = 0; i < Driver.completedAuctions.size(); i++) {
 				System.out.println(Driver.completedAuctions.get(i).toString());
 			}
-		}
-		else {
+		} else {
 			System.out.println("There are no completed Auctions at this time.");
 		}
 	}
