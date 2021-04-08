@@ -38,7 +38,7 @@ public class MainMenuOptions {
 			}
 			
 			else if (menuChoice == 6) {
-				//Driver.checkpointC();
+				Driver.checkpointC();
 			}
 			
 			else if (menuChoice == 7) {

@@ -67,7 +67,8 @@ public class Driver {
 				MainMenuOptions.menuCustomerLoggedIn();
 		}
 	}
-/*
+
+	
 	public static void checkpointC() {
 		Customer larry = new Customer("Larry", "password", "permissions");
 		Customer morton = new Customer("Morton", "password", "permissions");
@@ -76,25 +77,12 @@ public class Driver {
 		Customer roy = new Customer("Roy", "password", "permissions");
 		Customer lemmy = new Customer("Lemmy", "password", "permissions");
 		Customer ludwig = new Customer("Ludwig", "password", "permissions");
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		Auction auction = new Auction(items.get(0));
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		System.out.println("Auction created for the first item in the inventory");
-<<<<<<< HEAD
-		
-		Bid bid1 = new Bid(140, auction, larry);		
-=======
 
 		Bid bid1 = new Bid(140, auction, larry);
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		Bid bid2 = new Bid(155, auction, morton);
 		Bid bid3 = new Bid(165, auction, wendy);
 		Bid bid4 = new Bid(160, auction, iggy);
@@ -127,7 +115,7 @@ public class Driver {
 		auction.automateAuction();
 
 	}
-*/
+
 	public static boolean loginAttemptCheck(boolean menu) {
 		if (currentUser.getUser().userID != 1) {
 			menu = false;
