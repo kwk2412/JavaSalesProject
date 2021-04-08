@@ -21,16 +21,12 @@ public class Auction {
 	private double currentSalesPrice;
 	private int increment;
 	private boolean active;
+	
 
 	private int auctionID;
-	private static int nextNum = 100;
+	private static int nextNum = 1000;
 	private int numBids = 0;
 	private final int BIDSALLOWED = 10;
-	
-
-	// how to keep track of the window for which the auction will be active
-	// LocalDate date = new LocalDate();	
-	
 
 	
 	public Auction() {
@@ -46,6 +42,26 @@ public class Auction {
 		auctionID = nextNum;
 		Driver.items.remove(item);
 		nextNum++;
+		active = true;
+	}
+	
+	public Auction(Item item, int auctionID) {
+		this.item = item;
+		this.auctionID = auctionID;
+		currentHighest = null;
+		currentSalesPrice = item.getStartingPrice();
+		increment = item.getIncrement();
+		//Driver.items.remove(item);
+		active = true;
+	}
+	
+	public Auction(Item item, int auctionID, double currentSalesPrice) {
+		this.item = item;
+		this.auctionID = auctionID;
+		currentHighest = null;
+		this.currentSalesPrice = currentSalesPrice;
+		increment = item.getIncrement();
+		//Driver.items.remove(item);
 		active = true;
 	}
 	
@@ -79,6 +95,13 @@ public class Auction {
 	// without any bids left to process
 	
 	public void automateAuction() {
+		
+		// We will have to change what governs this loop from the auction being active to the presence of 
+		// bids to read. Otherwise, when the auction has processed all of the bids that we pre-programmed to be
+		// in the auction, the auction won't stop because it hasn't ended and when it goes to grab the next
+		// bid it will throw a null pointer exception because there is nothing left to process
+		
+		// Unprocessedbids.size() > 0
 		while (active) {
 			System.out.println("Processing bid...");
 			process(unprocessedBids.dequeue());
@@ -106,7 +129,7 @@ public class Auction {
 	
 	
 	public boolean isValid(Bid bid) {
-		if (bid.getValue() >= currentHighest.getValue()  && bid.getValue() < currentHighest.getValue() + increment) {
+		if (bid.getValue() >= currentHighest.getValue()  && bid.getValue() < (currentHighest.getValue() + increment)) {
 			System.out.println("Invalid Bid: Bid cannot be between the current highest bid and an increment up from that\n");
 			return false;
 		}
@@ -241,7 +264,15 @@ public class Auction {
 	public void setBids(Stack<Bid> bids) {
 		this.processedBids = bids;
 	}
+	
 
+	public Stack<Bid> getProcessedBids() {
+		return processedBids;
+	}
+
+	public void setProcessedBids(Stack<Bid> processedBids) {
+		this.processedBids = processedBids;
+	}
 
 	public Queue<Bid> getUnprocessedBids() {
 		return unprocessedBids;

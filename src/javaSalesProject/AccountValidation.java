@@ -73,7 +73,7 @@ public class AccountValidation {
 		//returns false if it is not.
 		public boolean validateUsername(String username, String privileges) {
 			for (Account acc : Driver.accounts) {
-				if (acc.getPrivileges().equals(privileges) && acc.username.equals(username)) {
+				if (acc.getPrivileges().equalsIgnoreCase(privileges) && acc.username.equals(username)) {
 					return true;
 				}
 			}

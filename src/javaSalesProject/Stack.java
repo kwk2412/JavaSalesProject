@@ -114,7 +114,7 @@ public class Stack<E> {
 		if (isEmpty()) {
 			throw new IndexOutOfBoundsException();
 		}
-		return first.item;
+		return last.item;
 	}
 	
 	

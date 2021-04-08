@@ -15,7 +15,10 @@ public class Driver {
 		
 	public static void main(String[] args) {
 		
-		init();	
+		init();
+		
+		Read.read();
+		//ArrayList<Bid> bids = read.read();
 
 		while (running) {
 			if (currentUser.getUser().getUserID() == 1) 
@@ -155,7 +158,7 @@ public class Driver {
 		completedAuctions = new ArrayList<Auction>();
 		loadInventory();
 		//loadAuctions();
-		//currentUser.setUser(new Customer("Clay", "password", "customer"));
+		currentUser.setUser(new Customer("Clay", "password", "customer"));
 	}
 	
 }
