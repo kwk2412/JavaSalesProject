@@ -10,7 +10,6 @@ import javax.swing.Timer;
 
 public class Driver {
 
-
 	private static Timer timer;
 	private static boolean opening;
 	static boolean running = false;
@@ -108,11 +107,7 @@ public class Driver {
 		Bid bid11 = new Bid(260, auction, ludwig);
 		Bid bid12 = new Bid(270, auction, roy);
 		Bid bid13 = new Bid(300, auction, ludwig);
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		auction.getUnprocessedBids().enqueue(bid1);
 		auction.getUnprocessedBids().enqueue(bid2);
 		auction.getUnprocessedBids().enqueue(bid3);
@@ -130,10 +125,7 @@ public class Driver {
 		System.out.println();
 
 		auction.automateAuction();
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 	}
 */
 	public static boolean loginAttemptCheck(boolean menu) {
