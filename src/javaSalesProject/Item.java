@@ -28,6 +28,12 @@ public class Item {
 		nextNum++;
 	}
 	
+	public Item(double startingPrice, String name, int increment, int itemID) {
+		this.startingPrice = startingPrice;
+		this.name = name;
+		this.increment = increment;
+		this.itemID = itemID;
+	}
 	
 	public String toString() {
 		NumberFormat cf = NumberFormat.getCurrencyInstance();
@@ -80,8 +86,20 @@ public class Item {
 	public int getIncrement() {
 		return increment;
 	}
-	
-	
-	
+
+
+	public int getItemID() {
+		return itemID;
+	}
+
+
+	public void setItemID(int itemID) {
+		this.itemID = itemID;
+	}
+
+
+	public void setIncrement(int increment) {
+		this.increment = increment;
+	}
 
 }

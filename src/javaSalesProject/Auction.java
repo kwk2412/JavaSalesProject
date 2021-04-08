@@ -26,7 +26,7 @@ public class Auction {
 	private boolean active;
 
 	private int auctionID;
-	private static int nextNum = 100;
+	private static int nextNum = 1000;
 
 	private int numBids = 0;
 
@@ -39,7 +39,10 @@ public class Auction {
 	public Auction() {
 		auctionID = nextNum;
 		nextNum++;
+	}
 
+	public Auction(Item item) {
+		this.item = item;
 	}
 	
 	public Auction(Item item, LocalDateTime startDateTime, LocalDateTime endDateTime) {
@@ -53,6 +56,27 @@ public class Auction {
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 	}
+	
+	public Auction(Item item, int auctionID) {
+		this.item = item;
+		this.auctionID = auctionID;
+		currentHighest = null;
+		currentSalesPrice = item.getStartingPrice();
+		increment = item.getIncrement();
+		//Driver.items.remove(item);
+		active = true;
+	}
+	
+	public Auction(Item item, int auctionID, double currentSalesPrice) {
+		this.item = item;
+		this.auctionID = auctionID;
+		currentHighest = null;
+		this.currentSalesPrice = currentSalesPrice;
+		increment = item.getIncrement();
+		//Driver.items.remove(item);
+		active = true;
+	}
+	
 
 	public String toString() {
 		NumberFormat cf = NumberFormat.getCurrencyInstance();
@@ -78,7 +102,6 @@ public class Auction {
 			result += "\tMax current high bidder is willing to pay: " + cf.format(currentHighest.getValue()) + "\n";
 		}
 		return result;
-
 	}
 
 	// Something is eliminating an invalid bid and the following one
@@ -117,7 +140,6 @@ public class Auction {
 		} else {
 			return false;
 		}
-
 	}
 
 	public void firstBid(Bid bid) {
@@ -144,6 +166,7 @@ public class Auction {
 		}
 	}
 
+	
 	public void clearActiveBids() {
 		Stack<Bid> copy = new Stack<>();
 		copy = processedBids;
@@ -193,6 +216,7 @@ public class Auction {
 		this.active = active;
 	}
 
+
 	public Item getItem() {
 		return item;
 	}
@@ -227,6 +251,14 @@ public class Auction {
 
 	public void setBids(Stack<Bid> bids) {
 		this.processedBids = bids;
+	}
+
+	public Stack<Bid> getProcessedBids() {
+		return processedBids;
+	}
+
+	public void setProcessedBids(Stack<Bid> processedBids) {
+		this.processedBids = processedBids;
 	}
 
 	public Queue<Bid> getUnprocessedBids() {

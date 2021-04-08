@@ -17,6 +17,7 @@ public class Menu {
 				+ "6. Run automated auction for checkpoint C\n"
 				+ "7. Exit the application\r\n";
 
+
 		int choice = InputMethods.getIntFromMenu(1, 7, menu);
 		return choice;
 	}
@@ -51,6 +52,7 @@ public class Menu {
 
 	public static int adminMenu() {
 		String menu = "Admin Menu\n" + "==========\n" + "1. List current ongoing auctions\r\n"
+
 				+ "2. List future auctions\r\n"
 				+ "3. Choose an ongoing auction and check the bidding history\r\n"
 				+ "4. List information about completed auctions\r\n"

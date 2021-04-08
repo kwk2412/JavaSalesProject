@@ -7,6 +7,8 @@ public class Customer extends Account {
 
 	private ArrayList<Bid> activeBids = new ArrayList<Bid>();
 	private ArrayList<Bid> winningBids = new ArrayList<Bid>();
+	private ArrayList<Bid> historicBids = new ArrayList<>();
+
 	private double balance;
 
 	public Customer() {
@@ -16,12 +18,26 @@ public class Customer extends Account {
 	public Customer(String username, String password, String privileges) {
 		super(username, password, privileges);
 		Driver.accounts.add(this);
+	}
+
+	// Constructor used when (re)creating accounts imported from a text file
+
+	public Customer(String username, String password, int userID, String privileges) {
+		super(username, password, userID, privileges);
 		this.balance = 0;
 	}
 
 	// Constructor used when (re)creating accounts imported from a text file
-	public Customer(String username, String password, int userID, String privileges) {
+	public Customer(String username, String password, int userID, String privileges, double balance) {
 		super(username, password, userID, privileges);
+		this.balance = balance;
+	}
+	
+	
+	public String toString() {
+		return "Username: " + username + "\n" +
+				"Password: " + password + "\n" + 
+				"Balance: " + balance + "\n";
 	}
 
 	
@@ -112,14 +128,20 @@ public class Customer extends Account {
 		this.winningBids = winningBids;
 	}
 
+	public ArrayList<Bid> getHistoricBids() {
+		return historicBids;
+	}
+
+	public void setHistoricBids(ArrayList<Bid> historicBids) {
+		this.historicBids = historicBids;
+	}
+
 	public double getBalance() {
 		return balance;
 	}
 
 	public void setBalance(double balance) {
 		this.balance = balance;
-	}
-	
-	
+	}	
 
 }

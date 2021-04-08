@@ -7,12 +7,16 @@ import java.time.format.DateTimeFormatter;
 
 public class Bid {
 
+
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd, YYYY h:mm a");
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
 	private double value;
 	private Auction auction;
 	private boolean valid;
 	private Customer customer;
+	private int bidID;
+	
+	protected static int nextNum = 500;
 	private LocalDateTime dateTime;
 
 
@@ -26,9 +30,30 @@ public class Bid {
 		this.auction = auction;
 		this.customer = customer;
 		this.valid = false;
+		this.bidID = nextNum;
+		nextNum++;
 		this.dateTime = LocalDateTime.now();
+
 	}
 	
+	public Bid(double value, Auction auction, int userID) {
+		super();
+		this.value = value;
+		this.auction = auction;
+		this.customer = findCustomer(userID);
+		this.valid = false;
+		this.bidID = nextNum;
+		nextNum++;
+	}
+	
+	public Bid(double value, Auction auction, Customer customer, int bidID) {
+		super();
+		this.value = value;
+		this.auction = auction;
+		this.customer = customer;
+		this.valid = false;
+		this.bidID = bidID;
+	}
 
 	public Bid(double value, Auction auction, Customer customer, LocalDateTime dateTime) {
 		super();
@@ -36,6 +61,7 @@ public class Bid {
 		this.auction = auction;
 		this.customer = customer;
 		this.valid = false;
+		this.bidID = bidID;
 		this.dateTime = dateTime;
 	}
 
@@ -83,6 +109,15 @@ public class Bid {
 				"Time of bid:  " + dtf.format(dateTime) + "\n";
 	}
 	
+	public Customer findCustomer(int userID) {
+		for (int i = 0; i < Driver.accounts.size(); i++) {
+			if (Driver.accounts.get(i).userID == userID) {
+				return (Customer) Driver.accounts.get(i);
+			}
+		}
+		return null;
+	}
+	
 	public boolean equals(Bid b) {
 		if (b == this) return true;
 		return false;
@@ -119,6 +154,15 @@ public class Bid {
 
 	public void setValid(boolean valid) {
 		this.valid = valid;
+	}
+	
+	
+	public int getBidID() {
+		return bidID;
+	}
+
+	public void setBidID(int bidID) {
+		this.bidID = bidID;
 	}
 	
 }

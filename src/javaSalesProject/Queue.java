@@ -184,9 +184,6 @@ public class Queue<E> {
 
 			return e;
 		}
-		
-		
-
 	}
 	
 	/**

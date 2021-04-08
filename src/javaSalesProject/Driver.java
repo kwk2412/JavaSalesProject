@@ -10,7 +10,6 @@ import javax.swing.Timer;
 
 public class Driver {
 
-
 	private static Timer timer;
 	private static boolean opening;
 	static boolean running = false;
@@ -27,6 +26,8 @@ public class Driver {
 	public static void main(String[] args) {
 
 		init();
+		
+		Read.read();
 
 		/*
 		 * for (int i = 0; i < accounts.size(); i++) {
@@ -66,7 +67,8 @@ public class Driver {
 				MainMenuOptions.menuCustomerLoggedIn();
 		}
 	}
-/*
+
+	
 	public static void checkpointC() {
 		Customer larry = new Customer("Larry", "password", "permissions");
 		Customer morton = new Customer("Morton", "password", "permissions");
@@ -113,7 +115,7 @@ public class Driver {
 		auction.automateAuction();
 
 	}
-*/
+
 	public static boolean loginAttemptCheck(boolean menu) {
 		if (currentUser.getUser().userID != 1) {
 			menu = false;
@@ -137,10 +139,7 @@ public class Driver {
 		currentUser.setUser(rootUser);
 	}
 
-	// Stub method that may be used to govern the functionality of actions
-	// associated
-	// with processing backlogged data
-
+	
 	public static void processBackloggedData() {
 
 	}

@@ -105,16 +105,16 @@ public class Stack<E> {
 			last = first = null;
 		}
 
+
 		remove(p.item);
 		return e;
 	}
-	
 	
 	public E peek() {
 		if (isEmpty()) {
 			throw new IndexOutOfBoundsException();
 		}
-		return first.item;
+		return last.item;
 	}
 	
 	
