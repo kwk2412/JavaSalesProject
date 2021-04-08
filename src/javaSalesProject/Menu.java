@@ -6,10 +6,7 @@ public class Menu {
 
 	// Main menu when there is no user logged in
 	public static int mainMenuLoggedOut() {
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		String menu = "Main Menu\n" 
 				+ "=========\n" 
 				+ "1. Load sample data\r\n" 
@@ -20,11 +17,8 @@ public class Menu {
 				+ "6. Run automated auction for checkpoint C\n"
 				+ "7. Exit the application\r\n";
 
-<<<<<<< HEAD
+
 		int choice = InputMethods.getIntFromMenu(1, 7, menu);
-=======
-		int choice = InputMethods.getIntFromMenu(1, 7, menu);
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		return choice;
 	}
 
@@ -58,15 +52,7 @@ public class Menu {
 
 	public static int adminMenu() {
 		String menu = "Admin Menu\n" + "==========\n" + "1. List current ongoing auctions\r\n"
-<<<<<<< HEAD
-				+ "2. Choose an ongoing auction and check the bidding history\r\n"
-				+ "3. List information about completed auctions\r\n"
-				+ "4. Summary data of winning bids\r\n"
-				+ "5. Add and activate a new auction\r\n"
-				+ "6. Create new admin account\r\n"
-				+ "7. Return to the previous menu\r\n";
-		int choice = InputMethods.getIntFromMenu(1, 7, menu);
-=======
+
 				+ "2. List future auctions\r\n"
 				+ "3. Choose an ongoing auction and check the bidding history\r\n"
 				+ "4. List information about completed auctions\r\n"
@@ -75,7 +61,6 @@ public class Menu {
 				+ "7. Create new admin account\r\n"
 				+ "8. Return to the previous menu\r\n";
 		int choice = InputMethods.getIntFromMenu(1, 8, menu);
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		return choice;
 	}
 
