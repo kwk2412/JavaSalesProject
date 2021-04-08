@@ -38,8 +38,9 @@ public class MainMenuOptions {
 			}
 			
 			else if (menuChoice == 6) {
-				Driver.checkpointC();
+				//Driver.checkpointC();
 			}
+			
 			else if (menuChoice == 7) {
 				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
 				if (sure) {
