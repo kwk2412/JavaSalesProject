@@ -10,7 +10,6 @@ import javax.swing.Timer;
 
 public class Driver {
 
-
 	private static Timer timer;
 	private static boolean opening;
 	static boolean running = false;
@@ -68,7 +67,8 @@ public class Driver {
 				MainMenuOptions.menuCustomerLoggedIn();
 		}
 	}
-/*
+
+	
 	public static void checkpointC() {
 		Customer larry = new Customer("Larry", "password", "permissions");
 		Customer morton = new Customer("Morton", "password", "permissions");
@@ -77,25 +77,12 @@ public class Driver {
 		Customer roy = new Customer("Roy", "password", "permissions");
 		Customer lemmy = new Customer("Lemmy", "password", "permissions");
 		Customer ludwig = new Customer("Ludwig", "password", "permissions");
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		Auction auction = new Auction(items.get(0));
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		System.out.println("Auction created for the first item in the inventory");
-<<<<<<< HEAD
-		
-		Bid bid1 = new Bid(140, auction, larry);		
-=======
 
 		Bid bid1 = new Bid(140, auction, larry);
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		Bid bid2 = new Bid(155, auction, morton);
 		Bid bid3 = new Bid(165, auction, wendy);
 		Bid bid4 = new Bid(160, auction, iggy);
@@ -108,11 +95,7 @@ public class Driver {
 		Bid bid11 = new Bid(260, auction, ludwig);
 		Bid bid12 = new Bid(270, auction, roy);
 		Bid bid13 = new Bid(300, auction, ludwig);
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 		auction.getUnprocessedBids().enqueue(bid1);
 		auction.getUnprocessedBids().enqueue(bid2);
 		auction.getUnprocessedBids().enqueue(bid3);
@@ -130,12 +113,9 @@ public class Driver {
 		System.out.println();
 
 		auction.automateAuction();
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'Clay' of https://github.com/kwk2412/JavaSalesProject.git
 	}
-*/
+
 	public static boolean loginAttemptCheck(boolean menu) {
 		if (currentUser.getUser().userID != 1) {
 			menu = false;
