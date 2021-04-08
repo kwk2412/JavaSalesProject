@@ -6,6 +6,7 @@ public class Menu {
 
 	// Main menu when there is no user logged in
 	public static int mainMenuLoggedOut() {
+
 		String menu = "Main Menu\n" 
 				+ "=========\n" 
 				+ "1. Load sample data\r\n" 
@@ -42,27 +43,48 @@ public class Menu {
 
 	public static int customerMenu() {
 		String menu = "Customer Menu\n" + "=============\n" + "1. Check my active bids\r\n"
-				+ "2. Check my winning bids\r\n" + "3. Bid on an item\r\n" + "4. Pay for an item that I won\r\n"
-				+ "5. Return to the previous menu\r\n";
-		int choice = InputMethods.getIntFromMenu(1, 5, menu);
+				+ "2. Check my winning bids\r\n" + "3. Bid on an item\r\n"+ "4. Add money to balance\r\n" + "5. Pay for an item that I won\r\n"
+				+ "6. Return to the previous menu\r\n";
+		int choice = InputMethods.getIntFromMenu(1, 6, menu);
 		return choice;
 	}
 
 	public static int adminMenu() {
 		String menu = "Admin Menu\n" + "==========\n" + "1. List current ongoing auctions\r\n"
-				+ "2. Choose an ongoing auction and check the bidding history\r\n"
-				+ "3. List information about completed auctions\r\n"
-				+ "4. Summary data of winning bids\r\n"
-				+ "5. Add and activate a new auction\r\n"
-				+ "6. Create new admin account\r\n"
-				+ "7. Return to the previous menu\r\n";
-		int choice = InputMethods.getIntFromMenu(1, 7, menu);
+				+ "2. List future auctions\r\n"
+				+ "3. Choose an ongoing auction and check the bidding history\r\n"
+				+ "4. List information about completed auctions\r\n"
+				+ "5. Summary data of winning bids\r\n"
+				+ "6. Add and activate a new auction\r\n"
+				+ "7. Create new admin account\r\n"
+				+ "8. Return to the previous menu\r\n";
+		int choice = InputMethods.getIntFromMenu(1, 8, menu);
 		return choice;
 	}
 
 	public static int customerSubMenu() {
 		String menu = "Customer Sub Menu\n" + "=================\n" + "1. Returning Customer\n" + "2. New Customer\n"
 				+ "3. Return to previous menu\n";
+		int choice = InputMethods.getIntFromMenu(1, 3, menu);
+		return choice;
+	}
+	
+	public static int startDateMenu() {
+		String menu = "When would you like the auction to start?\n" + "1. Immediately\n" + "2. Later today\n" + "3. A later date\n"
+				+ "4. Return to previous menu\n";
+		int choice = InputMethods.getIntFromMenu(1, 4, menu);
+		return choice;
+	}
+	
+	public static int endDateMenu() {
+		String menu = "When would you like the auction to end?\n" + "1. Later today\n" +  "2. A later date\n"
+				+ "3. Return to previous menu\n";
+		int choice = InputMethods.getIntFromMenu(1, 3, menu);
+		return choice;
+	}
+	
+	public static int amPmMenu() {
+		String menu = "a.m or p.m?\n" + "1. a.m\n" + "2. p.m\n" + "3.Return to previous menu\n";
 		int choice = InputMethods.getIntFromMenu(1, 3, menu);
 		return choice;
 	}
@@ -96,4 +118,19 @@ public class Menu {
 		}
 		return -1;
 	}
+	
+	public static int selectWinningAuction(Customer c) {
+
+		String menu = "Select an auction that you have won:\n";
+		for (int i = 0; i < c.getWinningBids().size(); ++i) {
+			menu += (i + 1) + ". " + c.getWinningBids().get(i).getAuction().toString() + "\n";
+		}
+		int userSelection = InputMethods.getIntOrReturnNeg1(1, c.getWinningBids().size(), menu);
+		if(userSelection > 0) {
+			return (userSelection - 1);
+		}
+		return -1;
+	}
+	
+	
 }

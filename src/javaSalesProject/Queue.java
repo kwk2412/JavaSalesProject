@@ -97,6 +97,10 @@ public class Queue<E> {
 		}
 	}
 	*/
+	
+	
+
+
 
 	public E remove(int index) {
 		if (index < 0 || index >= size()) {
@@ -177,6 +181,7 @@ public class Queue<E> {
 		else {
 			E e = last.item;
 			remove(last.item);
+
 			return e;
 		}
 		

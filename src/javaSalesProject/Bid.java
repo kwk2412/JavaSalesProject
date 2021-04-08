@@ -2,15 +2,19 @@ package javaSalesProject;
 
 import java.sql.Timestamp;
 import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Bid {
 
-
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd, YYYY h:mm a");
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
 	private double value;
 	private Auction auction;
 	private boolean valid;
 	private Customer customer;
+	private LocalDateTime dateTime;
+
 
 	public Bid(double value) {
 		this.value = value;
@@ -22,21 +26,34 @@ public class Bid {
 		this.auction = auction;
 		this.customer = customer;
 		this.valid = false;
+		this.dateTime = LocalDateTime.now();
 	}
 	
+
+	public Bid(double value, Auction auction, Customer customer, LocalDateTime dateTime) {
+		super();
+		this.value = value;
+		this.auction = auction;
+		this.customer = customer;
+		this.valid = false;
+		this.dateTime = dateTime;
+	}
+
 
 	public String toString() {
 		return "\tItem name: " + auction.getItem().getName() + "\n" + 
 				"\tCustomer Username: " + customer.getUsername() + "\n" +
 				"\tBid amount: " + cf.format(value) + "\n" +
-				"\tAuction ID: " + auction.getAuctionID() + "\n";
+				"\tAuction ID: " + auction.getAuctionID() + "\n" + 
+				"\tTime of bid: " + dtf.format(dateTime) + "\n";
 	}
 
 	public String toStringActive() {
 		String result = "Item name: " + auction.getItem().getName() + "\n" +
 				"AuctionID: " + auction.getAuctionID() + "\n" +
 				"Bid amount: " + cf.format(value) + "\n" + 
-				"Current sales price: " + cf.format(auction.getCurrentSalesPrice());
+				"Current sales price: " + cf.format(auction.getCurrentSalesPrice()) + 
+				"\tTime of bid: " + dtf.format(dateTime) + "\n";
 		
 		if (auction.getCurrentHighest().getCustomer().getUserID() == customer.getUserID()) {
 			result += "\nYou are the highest bidder";
@@ -54,7 +71,7 @@ public class Bid {
 	public String toStringWinning() {
 		String result = "Item name: " + auction.getItem().getName() + "\nAuctionID: " + auction.getAuctionID()
 				+ "\nBid amount: " + cf.format(value) + "\nFinal sales price: "
-				+ cf.format(auction.getCurrentSalesPrice()) + "\n";
+				+ cf.format(auction.getCurrentSalesPrice()) + "\n" + "Time of bid:  " + dtf.format(dateTime) + "\n";
 
 		return result;
 	}
@@ -62,7 +79,8 @@ public class Bid {
 	public String toStringWinningBid() {
 		return "Item name: " + auction.getItem().getName() + "\n" + 
 				"Bid amount: " + cf.format(value) + "\n" +
-				"AuctionID: " + auction.getAuctionID() + "\n";
+				"AuctionID: " + auction.getAuctionID() + "\n" + 
+				"Time of bid:  " + dtf.format(dateTime) + "\n";
 	}
 	
 	public boolean equals(Bid b) {

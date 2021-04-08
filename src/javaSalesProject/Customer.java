@@ -7,6 +7,7 @@ public class Customer extends Account {
 
 	private ArrayList<Bid> activeBids = new ArrayList<Bid>();
 	private ArrayList<Bid> winningBids = new ArrayList<Bid>();
+	private double balance;
 
 	public Customer() {
 		super();
@@ -15,12 +16,12 @@ public class Customer extends Account {
 	public Customer(String username, String password, String privileges) {
 		super(username, password, privileges);
 		Driver.accounts.add(this);
+		this.balance = 0;
 	}
 
 	// Constructor used when (re)creating accounts imported from a text file
 	public Customer(String username, String password, int userID, String privileges) {
 		super(username, password, userID, privileges);
-
 	}
 
 	
@@ -75,11 +76,15 @@ public class Customer extends Account {
 				double value = InputMethods.getPositiveDouble("Enter the dollar amount of your bid");
 				Bid b = new Bid(value, auction, this);				
 				SystemMessage.print("Processing Bid: \n" + b.toString());
-				if (auction.isActive()) {
+				if (Driver.isOpen()) {
+					SystemMessage.print("Processing Bid: \n" + b.toString());
 					auction.process(b);
 					auction.printAuctionStatus();
 				}
-				else SystemMessage.print("That auction is not active");
+				else {
+					SystemMessage.print("This bid will be processed when we open tomorrow: \n" + b.toString());
+					auction.loadQueue(b);
+				}
 			}
 		}
 		else {
@@ -106,5 +111,15 @@ public class Customer extends Account {
 	public void setWinningBids(ArrayList<Bid> winningBids) {
 		this.winningBids = winningBids;
 	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+	
+	
 
 }
