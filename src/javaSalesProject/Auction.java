@@ -1,6 +1,5 @@
 package javaSalesProject;
 
-
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
  *
  */
 public class Auction {
-
 	
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
 	private Stack<Bid> processedBids = new Stack<>();	// Stack of bids for keeping track of bids that are part of an active auction. Also for record keeping
@@ -21,12 +19,12 @@ public class Auction {
 	private double currentSalesPrice;
 	private int increment;
 	private boolean active;
-	
 
 	private int auctionID;
 	private static int nextNum = 1000;
 	private int numBids = 0;
 	private final int BIDSALLOWED = 10;
+
 
 	
 	public Auction() {
@@ -127,9 +125,8 @@ public class Auction {
 		checkEnd();
 	}
 	
-	
 	public boolean isValid(Bid bid) {
-		if (bid.getValue() >= currentHighest.getValue()  && bid.getValue() < (currentHighest.getValue() + increment)) {
+		if (bid.getValue() >= currentHighest.getValue()  && bid.getValue() < currentHighest.getValue() + increment) {
 			System.out.println("Invalid Bid: Bid cannot be between the current highest bid and an increment up from that\n");
 			return false;
 		}
@@ -177,6 +174,7 @@ public class Auction {
 	}
 	
 	
+
 	public void clearActiveBids() {
 		Stack<Bid> copy = new Stack<>();
 		copy = processedBids;
@@ -256,7 +254,6 @@ public class Auction {
 		this.currentSalesPrice = sellingPrice;
 	}
 
-
 	public Stack<Bid> getBids() {
 		return processedBids;
 	}
@@ -264,7 +261,6 @@ public class Auction {
 	public void setBids(Stack<Bid> bids) {
 		this.processedBids = bids;
 	}
-	
 
 	public Stack<Bid> getProcessedBids() {
 		return processedBids;

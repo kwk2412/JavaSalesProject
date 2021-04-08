@@ -5,7 +5,6 @@ import java.text.NumberFormat;
 
 public class Bid {
 
-
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
 	private double value;
 	private Auction auction;
@@ -14,6 +13,7 @@ public class Bid {
 	private int bidID;
 	
 	protected static int nextNum = 500;
+
 
 	public Bid(double value) {
 		this.value = value;
@@ -135,7 +135,8 @@ public class Bid {
 	public void setValid(boolean valid) {
 		this.valid = valid;
 	}
-
+	
+	
 	public int getBidID() {
 		return bidID;
 	}
@@ -143,7 +144,5 @@ public class Bid {
 	public void setBidID(int bidID) {
 		this.bidID = bidID;
 	}
-	
-	
 	
 }

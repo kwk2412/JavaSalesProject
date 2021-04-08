@@ -18,7 +18,9 @@ public class Customer extends Account {
 		super(username, password, privileges);
 		Driver.accounts.add(this);
 	}
-	
+
+	// Constructor used when (re)creating accounts imported from a text file
+
 	public Customer(String username, String password, int userID, String privileges) {
 		super(username, password, userID, privileges);
 	}
@@ -34,6 +36,7 @@ public class Customer extends Account {
 		return "Username: " + username + "\n" +
 				"Password: " + password + "\n" + 
 				"Balance: " + balance + "\n";
+
 	}
 
 	
@@ -127,4 +130,5 @@ public class Customer extends Account {
 	public void setHistoricBids(ArrayList<Bid> historicBids) {
 		this.historicBids = historicBids;
 	}
+
 }

@@ -96,6 +96,7 @@ public class Queue<E> {
 				succ.prev = nodeToAdd;
 		}
 	}
+<<<<<<< HEAD
 	*/
 
 	public E remove(int index) {
@@ -180,8 +181,6 @@ public class Queue<E> {
 			return e;
 		}
 		
-		
-
 	}
 	
 	/**

@@ -109,7 +109,6 @@ public class Stack<E> {
 		return e;
 	}
 	
-	
 	public E peek() {
 		if (isEmpty()) {
 			throw new IndexOutOfBoundsException();
