@@ -197,6 +197,7 @@ public class Driver {
 		completedAuctions = new ArrayList<Auction>();
 		futureAuctions = new ArrayList<Auction>();
 		loadInventory();
+		/*
 		timer = new Timer(1000, null);
 		timer.addActionListener(new ActionListener() {
 
@@ -215,7 +216,7 @@ public class Driver {
 		} else {
 			opening = false;
 		}
-
+		*/
 		currentUser.setUser(new Admin("Clay", "p", "admin"));
 
 	}

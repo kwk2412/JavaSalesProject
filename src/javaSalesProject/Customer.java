@@ -74,6 +74,7 @@ public class Customer extends Account {
 
 	public void addCurrentBid(Bid bid) {
 		activeBids.add(bid);
+		historicBids.add(bid);
 	}
 
 	public void removeActiveBid(Bid bid) {

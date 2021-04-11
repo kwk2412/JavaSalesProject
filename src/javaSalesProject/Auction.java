@@ -57,7 +57,7 @@ public class Auction {
 		this.endDateTime = endDateTime;
 	}
 	
-	public Auction(Item item, int auctionID) {
+	public Auction(Item item, int auctionID, LocalDateTime startDateTime,  LocalDateTime endDateTime) {
 		this.item = item;
 		this.auctionID = auctionID;
 		currentHighest = null;
@@ -65,9 +65,11 @@ public class Auction {
 		increment = item.getIncrement();
 		//Driver.items.remove(item);
 		active = true;
+		this.startDateTime = startDateTime;
+		this.endDateTime = endDateTime;
 	}
 	
-	public Auction(Item item, int auctionID, double currentSalesPrice) {
+	public Auction(Item item, int auctionID, double currentSalesPrice, LocalDateTime startDateTime, LocalDateTime endDateTime) {
 		this.item = item;
 		this.auctionID = auctionID;
 		currentHighest = null;
@@ -75,6 +77,8 @@ public class Auction {
 		increment = item.getIncrement();
 		//Driver.items.remove(item);
 		active = true;
+		this.startDateTime = startDateTime;
+		this.endDateTime = endDateTime;
 	}
 	
 

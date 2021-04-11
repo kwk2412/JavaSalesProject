@@ -6,10 +6,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-
-
 
 /**
  * This can read information from a text file and create objects that the program can manipulate.
@@ -34,18 +35,18 @@ import java.util.StringTokenizer;
  * 150,Nintendo GameBoy,5,102
  * }
  * 
- * auctionID,itemID,sellingPrice,currentHighest,processedBids,unprocessedBids
- * 1000,100,890,504,503#507#508,510#511#512|
- * 1003,101,710,518,523#525#526#527,528
+ * auctionID,itemID,sellingPrice,currentHighest,processedBids,unprocessedBids,openingTime,closingTime
+ * 1000,100,890,504,503#507#508,510#511#512,2020#4#8#9#0#0,2020#4#15#17#0#0|
+ * 1003,101,710,518,523#525#526#527,528,2020#4#11#9#0#0,2020#4#13#17#0#0
  * 
- * auctionID,itemID,sellingPrice,winningBid,historicBids
- * 1002,102,650,518,513#514#515,516#517#518
+ * auctionID,itemID,sellingPrice,winningBid,historicBids,openingTime,closingTime
+ * 1002,102,650,518,513#514#515,516#517#518,2020#4#9#12#0#0,2020#4#9#14#0#0
  * }
  * 
- * bidValue,auctionID,customerID,bidID
- * 140,0,3,500|
- * 155,0,4,501|
- * 165,0,5,502
+ * bidValue,auctionID,customerID,bidID,year,month,day,hour,minute,second
+ * 140,0,3,500,2020#4#8#11#0#0|
+ * 155,0,4,501,2020#4#8#11#2#0|
+ * 165,0,5,502,2020#4#8#11#3#0
  * }
  * @author waveo
  *
@@ -56,6 +57,8 @@ public class Read {
 	// BEEN THOUROUGHLY TESTED AND RELIABLY WORKS
 	public static void main(String[] args) {
 		Driver.accounts = new ArrayList<Account>();
+		Driver.ongoingAuctions = new ArrayList<Auction>();
+		Driver.completedAuctions = new ArrayList<Auction>();
 		Driver.items = new ArrayList<Item>();
 		read();
 	}
@@ -96,6 +99,8 @@ public class Read {
 		// 4. Create objects based off of the information stored in the arrays
 		//    and adds them to the rest of the program
 		createObjects(blockArrays);
+		
+		System.out.println("No errors in the importing process");
 	}
 	
 	
@@ -208,18 +213,31 @@ public class Read {
 	
 	
 	public static String nullCheckString(String[] info, int index) {
-		if (!info[index].equals("")) {
-			return info[index];
+		try {
+			if (!info[index].equals("")) {
+				return info[index];
+			}
+			throw new NullDataException("Missing Customer data: username or password not found");
 		}
-		else return null;
+		catch (Exception e) {
+			System.out.println("The text file didn't contain sufficient information to populate the program. "
+					+ "Check to make sure that the text file includes all necessary information.");
+		}
+		return null;
 	}
 	
 	
 	public static int nullCheckInteger(String[] info, int index) {
-		if (!info[index].equals("")) {
-			return Integer.parseInt(info[index]);
+		try {
+			if (!info[index].equals("")) {
+				return Integer.parseInt(info[index]);
+			}
+			throw new NullDataException("the ");
 		}
-		else return 0;
+		catch (Exception E) {
+			
+		}
+		return 0;
 	}
 	
 	
@@ -232,21 +250,25 @@ public class Read {
 	
 	public static String[] createBidInfo(String[] info) {
 		String[] bidInfo = new String[3];
-		if(!info[4].equals("")) {
-			bidInfo[0] = info[4];
+		
+		if (info.length > 4) {
+			if(!info[4].equals("")) {
+				bidInfo[0] = info[4];
+			}
+			else
+				bidInfo[0] = "";
+			if (!info[5].equals("")) {
+				bidInfo[1] = info[5];
+			}
+			else
+				bidInfo[1] = "";
+			if (!info[6].equals("")) {
+				bidInfo[2] = info[6];
+			}
+			else 
+				bidInfo[2] = "";
 		}
-		else
-			bidInfo[0] = "";
-		if (!info[5].equals("")) {
-			bidInfo[1] = info[5];
-		}
-		else
-			bidInfo[1] = "";
-		if (!info[6].equals("")) {
-			bidInfo[2] = info[6];
-		}
-		else 
-			bidInfo[2] = "";
+		
 		return bidInfo;
 	}
 	
@@ -275,8 +297,10 @@ public class Read {
 		Item item = findItem(Integer.parseInt(info[1]), items);
 		double currentSellingPrice = nullCheckDouble(info, 2);
 		int auctionID = nullCheckInteger(info, 0);
+		LocalDateTime openingTime = createDateTime(info[6]);
+		LocalDateTime closingTime = createDateTime(info[7]);
 		
-		Auction auction = new Auction(item, auctionID, currentSellingPrice);
+		Auction auction = new Auction(item, auctionID, currentSellingPrice, openingTime, closingTime);
 		auctions.add(auction);
 		
 		String[] bidInfo = new String[2];
@@ -296,7 +320,9 @@ public class Read {
 	public static String createCompletedAuction(String data, ArrayList<Item> items, ArrayList<Auction> completedAuctions) {
 		String[] info = toArray(data);
 		Item item = findItem(Integer.parseInt(info[1]), items);
-		Auction auction = new Auction(item, Integer.parseInt(info[0]));
+		LocalDateTime openingTime = createDateTime(info[5]);
+		LocalDateTime closingTime = createDateTime(info[6]);
+		Auction auction = new Auction(item, Integer.parseInt(info[0]), openingTime, closingTime);
 		items.remove(item);
 		auction.setActive(false);
 		completedAuctions.add(auction);
@@ -319,14 +345,16 @@ public class Read {
 	
 	public static Bid createBidActive(String data, ArrayList<Customer> customersAdded, ArrayList<Auction> auctionsAdded) {
 		String[] info = toArray(data);
-		Bid bid = new Bid(Double.parseDouble(info[0]), findAuction(Integer.parseInt(info[1]), auctionsAdded), findCustomer(Integer.parseInt(info[2]), customersAdded), Integer.parseInt(info[3]));
+		LocalDateTime dateTime = createDateTime(info[4]);
+		Bid bid = new Bid(Double.parseDouble(info[0]), findAuction(Integer.parseInt(info[1]), auctionsAdded), findCustomer(Integer.parseInt(info[2]), customersAdded), Integer.parseInt(info[3]), dateTime);
 		return bid;
 	}
 	
 	
 	public static Bid createBidCompleted(String data, ArrayList<Customer> customersAdded, ArrayList<Auction> completedAuctionsAdded) {
 		String[] info = toArray(data);
-		Bid bid = new Bid(Double.parseDouble(info[0]), findAuction(Integer.parseInt(info[1]), completedAuctionsAdded), findCustomer(Integer.parseInt(info[2]), customersAdded), Integer.parseInt(info[3]));
+		LocalDateTime dateTime = createDateTime(info[4]);
+		Bid bid = new Bid(Double.parseDouble(info[0]), findAuction(Integer.parseInt(info[1]), completedAuctionsAdded), findCustomer(Integer.parseInt(info[2]), customersAdded), Integer.parseInt(info[3]), dateTime);
 		return bid;
 	}
 	
@@ -335,17 +363,17 @@ public class Read {
 		for (int i = 0; i < customers.size(); i++) {		
 				
 			String[] winningBidIDs = {};
-			if (!bidBuffer.get(i)[0].equals("")) {
+			if (bidBuffer.get(i)[0] != null) {
 				winningBidIDs = bidBuffer.get(i)[0].split("#");
 			}
 			
 			String[] activeBidIDs = {};
-			if (!bidBuffer.get(i)[1].equals("")) {
+			if (bidBuffer.get(i)[1] != null) {
 				activeBidIDs = bidBuffer.get(i)[1].split("#");
 			}
 			
 			String[] historicBidIDs = {};
-			if (!bidBuffer.get(i)[2].equals("")) {
+			if (bidBuffer.get(i)[2] != null) {
 				historicBidIDs = bidBuffer.get(i)[2].split("#");
 			}
 				
@@ -400,6 +428,26 @@ public class Read {
 		}
 	}
 	
+	
+	/*
+	 * Uses a list of bids to find establish the selling price of an item for given auction.
+	 * May not be necessary if the text file already has this information present
+	 */
+	public static double estSellingPrice(Auction auction, String[] processedBidIDs, ArrayList<Bid> bids) {
+		int search = processedBidIDs.length - 1;
+		Bid b = findBid(search, bids);
+		boolean found = false;
+		while (!found) {
+			if (b.isValid() && b.getValue() < auction.getCurrentHighest().getValue()) {
+				auction.setSellingPrice(b.getValue());
+				found = true;
+			}
+			else search -= 1;
+		}
+		return b.getValue();
+	}
+	
+	
 	public static void populateCompletedAuctionBids(ArrayList<String> historicBids, ArrayList<Auction> completedAuctions, ArrayList<Bid> bids) {
 		for (int i = 0; i < historicBids.size(); i++) {
 			String[] bidIDs = historicBids.get(i).split("#");
@@ -437,6 +485,7 @@ public class Read {
 		}
 	}
 	
+	
 	public static Customer findCustomer(int customerID, ArrayList<Customer> customers) {
 		for (int i = 0; i < customers.size(); i++) {
 			if (customerID == customers.get(i).getUserID()) {
@@ -446,6 +495,7 @@ public class Read {
 		return null;
 	}
 
+	
 	public static Auction findAuction(int auctionID, ArrayList<Auction> auctions) {
 		for (int i = 0; i < auctions.size(); i++) {
 			if (auctionID == auctions.get(i).getAuctionID()) {
@@ -455,6 +505,7 @@ public class Read {
 		return null;
 	}
 
+	
 	public static Item findItem(int itemID, ArrayList<Item> items) {
 		for (int i = 0; i < items.size(); i++) {
 			if (itemID == items.get(i).getItemID()) {
@@ -464,7 +515,7 @@ public class Read {
 		return null;
 	}
 
-	// This method always returns null
+	
 	public static Bid findBid(int bidID, ArrayList<Bid> bids) {
 		for (int i = 0; i < bids.size(); i++) {
 			if (bidID == bids.get(i).getBidID()) {
@@ -473,11 +524,29 @@ public class Read {
 		}
 		return null;
 	}
+	
+	
+	public static LocalDateTime createDateTime(String data) {
+		String[] info = data.split("#");
+		int year = Integer.parseInt(info[0]);
+		int month = Integer.parseInt(info[1]);
+		int day = Integer.parseInt(info[2]);
+		int hour = Integer.parseInt(info[3]);
+		int minute = Integer.parseInt(info[4]);
+		int second = Integer.parseInt(info[5]);
+		
+		LocalDate date = LocalDate.of(year, month, day);
+		LocalTime time = LocalTime.of(hour, minute, second);
+		LocalDateTime dateTime = LocalDateTime.of(date, time);
+		return dateTime;
+	}
 
+	
 	public static String[] toArray(String data) {
 		String[] array = data.split(",");
 		return array;
 	}
+	
 	
 	public static BufferedReader openRead() {
 		Frame f = new Frame();
@@ -504,6 +573,7 @@ public class Read {
 		}
 		return in;
 	}
+	
 	
 	public static String inputData() {
 		String concatLine = "";

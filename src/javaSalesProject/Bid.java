@@ -33,7 +33,6 @@ public class Bid {
 		this.bidID = nextNum;
 		nextNum++;
 		this.dateTime = LocalDateTime.now();
-
 	}
 	
 	public Bid(double value, Auction auction, int userID) {
@@ -46,13 +45,14 @@ public class Bid {
 		nextNum++;
 	}
 	
-	public Bid(double value, Auction auction, Customer customer, int bidID) {
+	public Bid(double value, Auction auction, Customer customer, int bidID, LocalDateTime dateTime) {
 		super();
 		this.value = value;
 		this.auction = auction;
 		this.customer = customer;
-		this.valid = false;
+		this.valid = true;
 		this.bidID = bidID;
+		this.dateTime = dateTime;
 	}
 
 	public Bid(double value, Auction auction, Customer customer, LocalDateTime dateTime) {
