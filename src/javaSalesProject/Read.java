@@ -490,11 +490,13 @@ public class Read {
 	
 	
 	public static void addToDriver(ArrayList<Item> items, ArrayList<Auction> activeAuctions, ArrayList<Auction> completedAuctions, ArrayList<Auction> futureAuctions, ArrayList<Customer> customersAdded) {
-		for (int i = 0; i < items.size(); i++) {
-			if (!items.isEmpty()) {
-				Driver.items.add(items.get(i));
+		
+		if (!items.isEmpty()) {
+			for (int i = 0; i < items.size(); i++) {
+					Driver.items.add(items.get(i));
 			}
 		}
+		
 		
 		for (int i = 0; i < activeAuctions.size(); i++) {
 			if (!activeAuctions.isEmpty()) {

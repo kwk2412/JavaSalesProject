@@ -2,7 +2,7 @@ package javaSalesProject;
 
 import java.text.NumberFormat;
 
-public class Item {
+public class Item implements Comparable<Item> {
 	
 	private double startingPrice;
 	private String name;
@@ -52,7 +52,16 @@ public class Item {
 	}
 	
 	
+	public int compareTo(Item e) {
+		if (e.getItemID() < this.getItemID()) 
+			return -1;
+		else if (e.getItemID() > this.getItemID()) {
+			return 1;
+		}
+		else return 0;
+	}
 
+	
 	public double getStartingPrice() {
 		return startingPrice;
 	}
@@ -111,5 +120,5 @@ public class Item {
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
-	
+
 }
