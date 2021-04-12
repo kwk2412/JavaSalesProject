@@ -38,10 +38,14 @@ public class MainMenuOptions {
 			}
 			
 			else if (menuChoice == 6) {
-				Driver.checkpointC();
+				Read.read();
 			}
 			
 			else if (menuChoice == 7) {
+				Write.write();
+			}
+			
+			else if (menuChoice == 8) {
 				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
 				if (sure) {
 					System.out.println("Ending program...");

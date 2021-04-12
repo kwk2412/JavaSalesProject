@@ -10,7 +10,7 @@ public class Item {
 	private int increment;
 	private int itemID;
 	private static int nextNum = 100;
-	
+	private boolean available = true;
 	
 	
 	public Item() {
@@ -102,4 +102,14 @@ public class Item {
 		this.increment = increment;
 	}
 
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+	
 }

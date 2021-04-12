@@ -164,5 +164,13 @@ public class Bid {
 	public void setBidID(int bidID) {
 		this.bidID = bidID;
 	}
+
+	public LocalDateTime getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(LocalDateTime dateTime) {
+		this.dateTime = dateTime;
+	}
 	
 }

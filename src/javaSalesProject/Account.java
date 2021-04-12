@@ -39,7 +39,6 @@ public abstract class Account {
 		password = pw;
 		privileges = pr;
 		userID = id;
-		Driver.accounts.add(this);
 	}
 
 	public String toString() {

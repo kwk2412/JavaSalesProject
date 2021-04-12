@@ -1,5 +1,7 @@
 package javaSalesProject;
 
+import java.util.ArrayList;
+
 public class Stack<E> {
 	
 	private class Node {
@@ -220,6 +222,51 @@ public class Stack<E> {
 		for (int i = 0; i < size(); i++) {
 			remove(this.get(i));
 		}
+	}
+	
+	public Stack<E> clone() {
+		Stack<E> copy = new Stack<>();
+		if (!isEmpty()) {
+			Node copyFirst = new Node(first.item, null, null);
+			copy.first = copyFirst;
+			copy.last = copy.first;
+			
+			int counter = 1;
+			while (counter < this.size()) {
+				copy.push(this.get(counter));
+				counter++;
+			}
+		}
+		return copy;
+	}
+	
+	
+	public ArrayList<E> toArrayList() {
+		ArrayList<E> list = new ArrayList<>();
+		for (int i = 0; i < this.size(); i++) {
+			list.add(get(i));
+		}
+		return list;
+	}
+	
+	
+	public static void main(String[] args) {
+		Stack test = new Stack();
+		Item testItem = new Item(100, "1", 15);
+		Item testItem2 = new Item(100, "2", 15);
+		Item testItem3 = new Item(100, "3", 15);
+		Item testItem4 = new Item(100, "4", 15);
+		
+		test.push(testItem);
+		test.push(testItem2);
+		test.push(testItem3);
+		test.push(testItem4);
+		
+		Stack clone = test.clone();
+		
+		clone.pop();
+		clone.pop();
+		clone.pop();
 	}
 
 }

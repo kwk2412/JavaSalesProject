@@ -26,37 +26,6 @@ public class Driver {
 	public static void main(String[] args) {
 
 		init();
-		
-		Read.read();
-
-		/*
-		 * for (int i = 0; i < accounts.size(); i++) {
-		 * System.out.println(accounts.get(i).toString()); }
-		 * 
-		 * Customer jake = new Customer("Jake", "password", "customer");
-		 * 
-		 * for (int i = 0; i < accounts.size(); i++) {
-		 * System.out.println(accounts.get(i).toString()); }
-		 * 
-		 * Bid bid = new Bid(70, auction, jake);
-		 */
-		/*
-		 * ArrayList<Bid> bids = new ArrayList<>();
-		 * 
-		 * bids.add(new Bid(60, auction, john)); bids.add(new Bid(80, auction, ralph));
-		 * bids.add(new Bid(60, auction, billy)); bids.add(new Bid(70, auction, joel));
-		 * 
-		 * auction.getUnprocessedBids().enqueue(bids.get(0));
-		 * auction.getUnprocessedBids().enqueue(bids.get(1));
-		 * auction.getUnprocessedBids().enqueue(bids.get(2));
-		 * auction.getUnprocessedBids().enqueue(bids.get(3));
-		 * 
-		 * for (int i = 0; i < bids.size(); i++) { auction.process(bids.get(i));
-		 * System.out.println("Bid " + (i+1));
-		 * System.out.println("Current Sales Price: " + auction.getCurrentSalesPrice());
-		 * System.out.println("Current Highest Bid: " +
-		 * auction.getCurrentHighest().getValue()); }
-		 */
 
 		while (running) {
 			if (currentUser.getUser().getUserID() == 1)
@@ -144,6 +113,7 @@ public class Driver {
 
 	}
 
+	
 	public static void printItems() {
 		if (items.size() == 0)
 			SystemMessage.print("Items ArrayList is empty");
@@ -197,7 +167,8 @@ public class Driver {
 		completedAuctions = new ArrayList<Auction>();
 		futureAuctions = new ArrayList<Auction>();
 		loadInventory();
-		/*
+		
+		
 		timer = new Timer(1000, null);
 		timer.addActionListener(new ActionListener() {
 
@@ -216,8 +187,8 @@ public class Driver {
 		} else {
 			opening = false;
 		}
-		*/
-		currentUser.setUser(new Admin("Clay", "p", "admin"));
+		
+		//currentUser.setUser(new Admin("Clay", "p", "admin"));
 
 	}
 

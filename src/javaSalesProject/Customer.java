@@ -17,7 +17,7 @@ public class Customer extends Account {
 
 	public Customer(String username, String password, String privileges) {
 		super(username, password, privileges);
-		Driver.accounts.add(this);
+		//Driver.accounts.add(this);
 	}
 
 	// Constructor used when (re)creating accounts imported from a text file

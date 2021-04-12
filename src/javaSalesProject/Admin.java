@@ -170,7 +170,12 @@ public class Admin extends Account {
 			if (minute >= 0) {
 				int amPm = Menu.amPmMenu();
 				if (amPm == 2) { // pm
-					endTime = LocalTime.of(hour + 12, minute);
+					if (hour != 12) {
+						endTime = LocalTime.of((hour % 12) + 12, minute);
+					}
+					else {
+						endTime = LocalTime.of(0, minute);
+					}
 					return endTime;
 				} else if (amPm == 1) { // am
 					if (hour == 12) {

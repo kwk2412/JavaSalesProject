@@ -14,11 +14,12 @@ public class Menu {
 				+ "3. Print items ArrayList\n" 
 				+ "4. Log in as administrator\r\n" 
 				+ "5. Log in as customer\r\n"
-				+ "6. Run automated auction for checkpoint C\n"
-				+ "7. Exit the application\r\n";
+				+ "6. Load information from external file\n"
+				+ "7. Save program's status to external file\n"
+				+ "8. Exit the application\r\n";
 
 
-		int choice = InputMethods.getIntFromMenu(1, 7, menu);
+		int choice = InputMethods.getIntFromMenu(1, 9, menu);
 		return choice;
 	}
 

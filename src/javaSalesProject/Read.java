@@ -59,6 +59,7 @@ public class Read {
 		Driver.accounts = new ArrayList<Account>();
 		Driver.ongoingAuctions = new ArrayList<Auction>();
 		Driver.completedAuctions = new ArrayList<Auction>();
+		Driver.futureAuctions = new ArrayList<Auction>();
 		Driver.items = new ArrayList<Item>();
 		read();
 	}
@@ -126,6 +127,14 @@ public class Read {
 				completedAuctionBuffer.add(createCompletedAuction(blockArrays.get(3)[i], items, completedAuctions));
 			}
 		}
+		
+		//Creates future auctions
+		ArrayList<Auction> futureAuctions = new ArrayList<>();
+		if (blockArrays.get(4)[0] != null) {
+			for (int i = 0; i < blockArrays.get(4).length; i++) {
+				futureAuctions.add(createFutureAuction(blockArrays.get(4)[i], items));
+			}
+		}
 
 		// An ArrayList full of bid information that corresponds to the ArrayList of
 		// customersAdded
@@ -138,14 +147,14 @@ public class Read {
 
 		// Creates an ArrayList that stores all of the bids found in the text file
 		ArrayList<Bid> bids = new ArrayList<>();
-		for (int i = 0; i < blockArrays.get(4).length; i++) {
-			bids.add(createBid(blockArrays.get(4)[i], customersAdded, activeAuctions, completedAuctions));
+		for (int i = 0; i < blockArrays.get(5).length; i++) {
+			bids.add(createBid(blockArrays.get(5)[i], customersAdded, activeAuctions, completedAuctions));
 		}
 		
 		populateCustomerBids(customersAdded, customerBidBuffer, bids);
 		populateAuctionBids(activeAuctions, auctionBidBuffer, bids);
 		populateCompletedAuctionBids(completedAuctionBuffer, completedAuctions, bids);
-		addToDriver(items, activeAuctions, completedAuctions, customersAdded);
+		addToDriver(items, activeAuctions, completedAuctions, futureAuctions, customersAdded);
 	}
 	
 	
@@ -323,10 +332,21 @@ public class Read {
 		LocalDateTime openingTime = createDateTime(info[5]);
 		LocalDateTime closingTime = createDateTime(info[6]);
 		Auction auction = new Auction(item, Integer.parseInt(info[0]), openingTime, closingTime);
-		items.remove(item);
+		item.setAvailable(false);
 		auction.setActive(false);
 		completedAuctions.add(auction);
 		return info[4];
+	}
+	
+	
+	public static Auction createFutureAuction(String data, ArrayList<Item> items) {
+		String[] info = toArray(data);
+		Item item = findItem(Integer.parseInt(info[1]), items);
+		LocalDateTime openingTime = createDateTime(info[2]);
+		LocalDateTime closingTime = createDateTime(info[3]);
+		Auction auction = new Auction(item, Integer.parseInt(info[0]), openingTime, closingTime);
+		auction.setActive(false);
+		return auction;
 	}
 	
 	
@@ -429,13 +449,34 @@ public class Read {
 	}
 	
 	
+	public static void populateCompletedAuctionBids(ArrayList<String> historicBids, ArrayList<Auction> completedAuctions, ArrayList<Bid> bids) {
+		for (int i = 0; i < historicBids.size(); i++) {
+			String[] bidIDs = historicBids.get(i).split("#");
+			
+			if (bidIDs.length != 0) { 
+				for (int j = 0; j < bidIDs.length; j++) {
+					completedAuctions.get(i).getProcessedBids().push(findBid(Integer.parseInt(bidIDs[j]), bids));
+				}
+			}
+			
+			completedAuctions.get(i).setCurrentHighest(completedAuctions.get(i).getProcessedBids().peek());
+			completedAuctions.get(i).setSellingPrice(estSellingPrice(completedAuctions.get(i), bidIDs, bids));
+		}
+	}
+
 	/*
 	 * Uses a list of bids to find establish the selling price of an item for given auction.
 	 * May not be necessary if the text file already has this information present
 	 */
 	public static double estSellingPrice(Auction auction, String[] processedBidIDs, ArrayList<Bid> bids) {
-		int search = processedBidIDs.length - 1;
-		Bid b = findBid(search, bids);
+		int search = processedBidIDs.length - 2;
+		Bid b = findBid(Integer.parseInt(processedBidIDs[search]), bids);
+		
+		
+		boolean testBoolean = b.isValid();
+		double value = b.getValue();
+		double value2 = auction.getCurrentHighest().getValue();
+		
 		boolean found = false;
 		while (!found) {
 			if (b.isValid() && b.getValue() < auction.getCurrentHighest().getValue()) {
@@ -448,18 +489,7 @@ public class Read {
 	}
 	
 	
-	public static void populateCompletedAuctionBids(ArrayList<String> historicBids, ArrayList<Auction> completedAuctions, ArrayList<Bid> bids) {
-		for (int i = 0; i < historicBids.size(); i++) {
-			String[] bidIDs = historicBids.get(i).split("#");
-			
-			for (int j = 0; j < bidIDs.length; j++) {
-				completedAuctions.get(i).getProcessedBids().push(findBid(Integer.parseInt(bidIDs[j]), bids));
-			}
-		}
-	}
-	
-	
-	public static void addToDriver(ArrayList<Item> items, ArrayList<Auction> activeAuctions, ArrayList<Auction> completedAuctions, ArrayList<Customer> customersAdded) {
+	public static void addToDriver(ArrayList<Item> items, ArrayList<Auction> activeAuctions, ArrayList<Auction> completedAuctions, ArrayList<Auction> futureAuctions, ArrayList<Customer> customersAdded) {
 		for (int i = 0; i < items.size(); i++) {
 			if (!items.isEmpty()) {
 				Driver.items.add(items.get(i));
@@ -475,6 +505,12 @@ public class Read {
 		for (int i = 0; i < completedAuctions.size(); i++) {
 			if (!completedAuctions.isEmpty()) {
 				Driver.completedAuctions.add(completedAuctions.get(i));
+			}
+		}
+		
+		for (int i = 0; i < futureAuctions.size(); i++) {
+			if (!futureAuctions.isEmpty()) {
+				Driver.futureAuctions.add(futureAuctions.get(i));
 			}
 		}
 		
