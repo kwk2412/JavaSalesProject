@@ -167,29 +167,28 @@ public class Driver {
 		completedAuctions = new ArrayList<Auction>();
 		futureAuctions = new ArrayList<Auction>();
 		loadInventory();
+		timer();
 		
-		
+		//currentUser.setUser(new Admin("Clay", "p", "admin"));
+
+	}
+	
+	public static void timer() {
 		timer = new Timer(1000, null);
 		timer.addActionListener(new ActionListener() {
-
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				checkTime();
-
 			}
-
 		});
-		timer.start();
-		loadAuctions();
 		
-		if(isOpen()) {
+		timer.start();
+		//loadAuctions();
+
+		if (isOpen()) {
 			opening = true;
 		} else {
 			opening = false;
 		}
-		
-		//currentUser.setUser(new Admin("Clay", "p", "admin"));
-
 	}
 
 	// This method is called everytime the actionlistener hears the timer

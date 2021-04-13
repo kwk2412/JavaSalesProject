@@ -52,6 +52,9 @@ public class MainMenuOptions {
 					System.exit(0);
 				}
 			}
+			else if (menuChoice == 9) {
+				Driver.checkpointC();
+			}
 		}
 	}
 	

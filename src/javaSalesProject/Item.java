@@ -11,6 +11,7 @@ public class Item implements Comparable<Item> {
 	private int itemID;
 	private static int nextNum = 100;
 	private boolean available = true;
+	private boolean paidFor;
 	
 	
 	public Item() {
@@ -28,11 +29,12 @@ public class Item implements Comparable<Item> {
 		nextNum++;
 	}
 	
-	public Item(double startingPrice, String name, int increment, int itemID) {
+	public Item(double startingPrice, String name, int increment, int itemID, boolean paidFor) {
 		this.startingPrice = startingPrice;
 		this.name = name;
 		this.increment = increment;
 		this.itemID = itemID;
+		this.paidFor = paidFor;
 	}
 	
 	public String toString() {
@@ -53,12 +55,12 @@ public class Item implements Comparable<Item> {
 	
 	
 	public int compareTo(Item e) {
-		if (e.getItemID() < this.getItemID()) 
-			return -1;
-		else if (e.getItemID() > this.getItemID()) {
+		if (e.getItemID() > this.getItemID())
 			return 1;
-		}
-		else return 0;
+		else if (e.getItemID() < this.getItemID()) 
+			return -1;
+		else
+			return 0;
 	}
 
 	
@@ -121,4 +123,14 @@ public class Item implements Comparable<Item> {
 		this.available = available;
 	}
 
+
+	public boolean isPaidFor() {
+		return paidFor;
+	}
+
+
+	public void setPaidFor(boolean paidFor) {
+		this.paidFor = paidFor;
+	}
+	
 }

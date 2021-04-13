@@ -29,10 +29,10 @@ import java.util.StringTokenizer;
  * Wendy,password,5,9000,5#7,2#7#8#11#5,5#7#18#3#2#7#8#11#5
  * }
  * 
- * startingPrice, name, increment, itemID
- * 130,Nintendo GameCube,10,100|
- * 160,Sony PlayStation,10,101|
- * 150,Nintendo GameBoy,5,102
+ * startingPrice,name,increment,itemID,isPaidFor
+ * 130,Nintendo GameCube,10,100,0|
+ * 160,Sony PlayStation,10,101,0|
+ * 150,Nintendo GameBoy,5,102,1
  * }
  * 
  * auctionID,itemID,sellingPrice,currentHighest,processedBids,unprocessedBids,openingTime,closingTime
@@ -40,7 +40,11 @@ import java.util.StringTokenizer;
  * 1003,101,710,518,523#525#526#527,528,2020#4#11#9#0#0,2020#4#13#17#0#0
  * 
  * auctionID,itemID,sellingPrice,winningBid,historicBids,openingTime,closingTime
- * 1002,102,650,518,513#514#515,516#517#518,2020#4#9#12#0#0,2020#4#9#14#0#0
+ * 1002,102,650,518,513#514#515,516#517#518,
+ * }
+ * 
+ * auctionID, itemID, openingTime, closingTime
+ * 1004,103,2020#4#9#12#0#0,2020#4#9#14#0#0
  * }
  * 
  * bidValue,auctionID,customerID,bidID,year,month,day,hour,minute,second
@@ -219,44 +223,7 @@ public class Read {
 		String[] bidInfo = createBidInfo(info);
 		return bidInfo;
 	}
-	
-	
-	public static String nullCheckString(String[] info, int index) {
-		try {
-			if (!info[index].equals("")) {
-				return info[index];
-			}
-			throw new NullDataException("Missing Customer data: username or password not found");
-		}
-		catch (Exception e) {
-			System.out.println("The text file didn't contain sufficient information to populate the program. "
-					+ "Check to make sure that the text file includes all necessary information.");
-		}
-		return null;
-	}
-	
-	
-	public static int nullCheckInteger(String[] info, int index) {
-		try {
-			if (!info[index].equals("")) {
-				return Integer.parseInt(info[index]);
-			}
-			throw new NullDataException("the ");
-		}
-		catch (Exception E) {
-			
-		}
-		return 0;
-	}
-	
-	
-	public static double nullCheckDouble(String[] info, int index) {
-		if (!info[index].equals("")) {
-			return Double.parseDouble(info[index]);
-		}
-		else return 0.0;
-	}
-	
+
 	public static String[] createBidInfo(String[] info) {
 		String[] bidInfo = new String[3];
 		
@@ -288,8 +255,11 @@ public class Read {
 	 */
 	public static Item createItem(String data, ArrayList<Item> items) {
 		String[] info = toArray(data);
+		boolean paidFor = false;
+		int paidForFlag = nullCheckInteger(info, 4);
+		if (paidForFlag == 1) paidFor = true;
 		//Driver.items.add(new Item(Integer.parseInt(info[0]), info[1], Integer.parseInt(info[2])));
-		Item item = new Item(Double.parseDouble(info[0]), info[1], Integer.parseInt(info[2]), Integer.parseInt(info[3]));
+		Item item = new Item(Double.parseDouble(info[0]), info[1], Integer.parseInt(info[2]), Integer.parseInt(info[3]), paidFor);
 		return item;
 	}
 	
@@ -303,9 +273,9 @@ public class Read {
 	 */
 	public static String[] createActiveAuction(String data, ArrayList<Item> items, ArrayList<Auction> auctions) {
 		String[] info = toArray(data);
+		int auctionID = nullCheckInteger(info, 0);
 		Item item = findItem(Integer.parseInt(info[1]), items);
 		double currentSellingPrice = nullCheckDouble(info, 2);
-		int auctionID = nullCheckInteger(info, 0);
 		LocalDateTime openingTime = createDateTime(info[6]);
 		LocalDateTime closingTime = createDateTime(info[7]);
 		
@@ -317,7 +287,7 @@ public class Read {
 			bidInfo[0] = info[4];
 		else
 			bidInfo[0] = null;
-		if (info.length == 6 && info[5] != null)
+		if (info.length >= 6 && info[5] != null)
 			bidInfo[1] = info[5];
 		else
 			bidInfo[1] = null;
@@ -436,13 +406,13 @@ public class Read {
 					auctions.get(i).getProcessedBids().push(findBid(Integer.parseInt(processedBidIDs[j]), bids));
 				}
 			}
-			
-			if (unprocessedBidIDs.length != 0) {
+
+			if (!unprocessedBidIDs[0].equals("") || unprocessedBidIDs.length == 0) {
 				for (int j = 0; j < unprocessedBidIDs.length; j++) {
 					auctions.get(i).getUnprocessedBids().enqueue(findBid(Integer.parseInt(unprocessedBidIDs[j]), bids));
 				}
 			}
-			
+
 			Bid highest = auctions.get(i).getProcessedBids().peek();
 			auctions.get(i).setCurrentHighest(highest);
 		}
@@ -458,7 +428,6 @@ public class Read {
 					completedAuctions.get(i).getProcessedBids().push(findBid(Integer.parseInt(bidIDs[j]), bids));
 				}
 			}
-			
 			completedAuctions.get(i).setCurrentHighest(completedAuctions.get(i).getProcessedBids().peek());
 			completedAuctions.get(i).setSellingPrice(estSellingPrice(completedAuctions.get(i), bidIDs, bids));
 		}
@@ -564,6 +533,42 @@ public class Read {
 	}
 	
 	
+	public static String nullCheckString(String[] info, int index) {
+		try {
+			if (!info[index].equals("")) {
+				return info[index];
+			}
+			throw new NullDataException("Missing Customer data: username or password not found");
+		}
+		catch (Exception e) {
+			System.out.println("The text file didn't contain sufficient information to populate the program. "
+					+ "Check to make sure that the text file includes all necessary information.");
+		}
+		return null;
+	}
+
+	public static int nullCheckInteger(String[] info, int index) {
+		try {
+			if (!info[index].equals("")) {
+				return Integer.parseInt(info[index]);
+			}
+			throw new NullDataException("Null data at info[" + index + "]");
+		}
+		catch (Exception E) {
+			
+		}
+		return 0;
+	}
+	
+
+	public static double nullCheckDouble(String[] info, int index) {
+		if (!info[index].equals("")) {
+			return Double.parseDouble(info[index]);
+		}
+		else return 0.0;
+	}
+	
+
 	public static LocalDateTime createDateTime(String data) {
 		String[] info = data.split("#");
 		int year = Integer.parseInt(info[0]);

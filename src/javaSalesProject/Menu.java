@@ -92,7 +92,7 @@ public class Menu {
 		return choice;
 	}
 
-	// returns the idex of the item chosen
+	// returns the index of the item chosen
 	public static int pickItemMenu() {
 		if (Driver.items.size() > 0) {
 			String menu = "Select the item to be sold:\n";
@@ -124,11 +124,13 @@ public class Menu {
 	
 	public static int selectWinningAuction(Customer c) {
 
-		String menu = "Select an auction that you have won:\n";
+		System.out.println("Select an auction that you have won: ");
 		for (int i = 0; i < c.getWinningBids().size(); ++i) {
-			menu += (i + 1) + ". " + c.getWinningBids().get(i).getAuction().toString() + "\n";
+			if (!c.getWinningBids().get(i).getAuction().getItem().isPaidFor()) {
+				System.out.println((i + 1) + ". " + c.getWinningBids().get(i).getAuction().toString());
+			}
 		}
-		int userSelection = InputMethods.getIntOrReturnNeg1(1, c.getWinningBids().size(), menu);
+		int userSelection = InputMethods.validateInput(1, c.getWinningBids().size());
 		if(userSelection > 0) {
 			return (userSelection - 1);
 		}

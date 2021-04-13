@@ -5,7 +5,7 @@ import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Bid {
+public class Bid implements Comparable<Bid> {
 
 
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd, YYYY h:mm a");
@@ -123,6 +123,16 @@ public class Bid {
 		return false;
 	}
 
+	public int compareTo(Bid b) {
+		if (b.bidID > this.bidID) {
+			return 1;
+		}
+		else if (b.bidID < this.bidID) {
+			return -1;
+		}
+		else 
+			return 0;
+	}
 
 	public double getValue() {
 		return value;

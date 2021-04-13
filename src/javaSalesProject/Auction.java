@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * @author waveo Auctions will be filled with bid objects
  *
  */
-public class Auction {
+public class Auction implements Comparable<Auction> {
 
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd, YYYY h:mm a");
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
@@ -172,20 +172,12 @@ public class Auction {
 
 	
 	public void clearActiveBids() {
-		Stack<Bid> copy = new Stack<>();
-		copy = processedBids;
-
+		Stack<Bid> copy = processedBids.clone();
+		
 		while (copy.size() > 0) {
 			Bid b = copy.pop();
 			b.getCustomer().removeActiveBid(b);
 		}
-
-		/*
-		 * System.out.
-		 * println("To ensure that the original stack was untouched in the process of clearing active bids"
-		 * ); for (int i = processedBids.size(); i > 0; i--) {
-		 * System.out.println(processedBids.pop().toString()); }
-		 */
 	}
 
 	public void printAuctionStatus() {
@@ -201,6 +193,17 @@ public class Auction {
 		System.out.println("Auction ID: " + auctionID);
 		System.out.println("Number of Bids: " + numBids);
 		System.out.println();
+	}
+	
+	
+	public int compareTo(Auction a) {
+		if (this.auctionID < a.auctionID) {
+			return 1;
+		}
+		else if (this.auctionID > a.auctionID) {
+			return -1;
+		}
+		else return 0;
 	}
 	
 

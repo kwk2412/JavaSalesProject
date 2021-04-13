@@ -80,6 +80,27 @@ public class InputMethods {
 		}
 		return choice;
 	}
+	
+	public static int validateInput(int upper, int lower) {
+		Scanner scan = new Scanner(System.in);
+		int input = 0;
+		boolean valid = false;
+		while (!valid) {
+			try {
+				System.out.print("Input: ");
+				input = scan.nextInt();
+				if (input <= upper && input >= lower) {
+					valid = true;
+				}
+				else 
+					System.out.println("That input is not valid. Please input something between " + upper + " and " + lower);
+			}
+			catch (Exception e) {
+				System.out.println("Make sure your input is an integer");
+			}
+		}
+		return input;
+	}
 
 	public static int getIntOrReturnNeg1(int lower, int upper, String menu) {
 		int choice;

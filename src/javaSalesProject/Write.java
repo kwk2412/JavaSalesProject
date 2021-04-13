@@ -15,6 +15,7 @@ public class Write {
 		Driver.accounts = new ArrayList<Account>();
 		Driver.ongoingAuctions = new ArrayList<Auction>();
 		Driver.completedAuctions = new ArrayList<Auction>();
+		Driver.futureAuctions = new ArrayList<Auction>();
 		Driver.items = new ArrayList<Item>();
 		Read.read();
 		write();
@@ -48,14 +49,9 @@ public class Write {
 		ArrayList<Customer> accounts = new ArrayList<>();
 		for (int i = 0; i < Driver.accounts.size();i++) {
 			if (Driver.accounts.get(i) instanceof Customer) 
-				accounts.add((Customer) Driver.accounts.get(i));
-		}
-		
-		for (int i = 0; i < Driver.accounts.size(); i++) {
-			if (Driver.accounts.get(i) instanceof Customer) {
 				customers.add((Customer) Driver.accounts.get(i));
-			}
 		}
+		ObjectALInsertionSort.insertionSort(customers);
 		return customers;
 	}
 	
@@ -65,6 +61,7 @@ public class Write {
 		for (int i = 0; i < Driver.items.size(); i++) {
 			items.add(Driver.items.get(i));
 		}
+		ObjectALInsertionSort.insertionSort(items);
 		return items;
 	}
 	
@@ -74,6 +71,7 @@ public class Write {
 		for (int i = 0; i < Driver.ongoingAuctions.size(); i++) {
 			activeAuctions.add(Driver.ongoingAuctions.get(i));
 		}
+		ObjectALInsertionSort.insertionSort(activeAuctions);
 		return activeAuctions;
 	}
 	
@@ -85,6 +83,7 @@ public class Write {
 				completedAuctions.add(Driver.completedAuctions.get(i));			
 			}
 		}
+		ObjectALInsertionSort.insertionSort(completedAuctions);
 		return completedAuctions;
 	}
 	
@@ -96,6 +95,7 @@ public class Write {
 				futureAuctions.add(Driver.futureAuctions.get(i));	
 			}
 		}
+		ObjectALInsertionSort.insertionSort(futureAuctions);
 		return futureAuctions;
 	}
 	
@@ -110,18 +110,23 @@ public class Write {
 		}
 		
 		for (int i = 0; i < activeAuctions.size(); i++) {
-			Stack<Bid> processedBids = activeAuctions.get(i).getProcessedBids().clone();
-			bids.add((Bid) processedBids.pop());
-			
-			for (int j = 0; j < processedBids.size(); j++)	{
+			if (activeAuctions.get(i).getProcessedBids().size() != 0) {
+				Stack<Bid> processedBids = activeAuctions.get(i).getProcessedBids().clone();
 				bids.add((Bid) processedBids.pop());
+				
+				for (int j = 0; j < processedBids.size(); j++)	{
+					bids.add((Bid) processedBids.pop());
+				}
 			}
 			
-			Queue<Bid> unprocessedBids = activeAuctions.get(i).getUnprocessedBids().clone();
-			for (int j = 0; j < unprocessedBids.size(); j++) {
-				bids.add((Bid) unprocessedBids.dequeue());
+			if (activeAuctions.get(i).getUnprocessedBids().size() != 0) {
+				Queue<Bid> unprocessedBids = activeAuctions.get(i).getUnprocessedBids().clone();
+				for (int j = 0; j < unprocessedBids.size(); j++) {
+					bids.add((Bid) unprocessedBids.dequeue());
+				}
 			}
 		}
+		ObjectALMergeSort.mergeSort(bids);
 		return bids;
 	}
 	
@@ -159,13 +164,15 @@ public class Write {
 				block = block + items.get(i).getStartingPrice() + ","
 						+ items.get(i).getName()  + ","
 						+ items.get(i).getIncrement() + ","
-						+ items.get(i).getItemID();
+						+ items.get(i).getItemID() + ","
+						+ checkPaidFor(items.get(i));
 			}
 			else {
 				block = block + items.get(i).getStartingPrice() + ","
 						+ items.get(i).getName()  + ","
 						+ items.get(i).getIncrement() + ","
-						+ items.get(i).getItemID() + "|\n";
+						+ items.get(i).getItemID() + ","
+						+ checkPaidFor(items.get(i)) + "|\n";
 			}
 		}
 		return block;
@@ -174,24 +181,25 @@ public class Write {
 	
 	public static String writeActiveAuctions(ArrayList<Auction> auctions) {
 		String block = "";
-		for (int i = 0; i < auctions.size(); i++) {
-			if (i == auctions.size() - 1) {
-				block = block + auctions.get(i).getAuctionID() + ","
-						+ auctions.get(i).getItem().getItemID() + "," + auctions.get(i).getCurrentSalesPrice() + "," 
-						+ auctions.get(i).getCurrentHighest().getBidID() + ","
-						+ compileBidIDs(auctions.get(i).getProcessedBids().toArrayList()) + "," 
-						+ compileBidIDs(auctions.get(i).getUnprocessedBids().toArrayList()) + "," 
-						+ compileDateTime(auctions.get(i).getStartDateTime()) + "," 
-						+ compileDateTime(auctions.get(i).getEndDateTime());
-			}
-			else {
-				block = block + auctions.get(i).getAuctionID() + ","
-						+ auctions.get(i).getItem().getItemID() + "," + auctions.get(i).getCurrentSalesPrice() + "," 
-						+ auctions.get(i).getCurrentHighest().getBidID() + ","
-						+ compileBidIDs(auctions.get(i).getProcessedBids().toArrayList()) + "," 
-						+ compileBidIDs(auctions.get(i).getUnprocessedBids().toArrayList()) + "," 
-						+ compileDateTime(auctions.get(i).getStartDateTime()) + "," 
-						+ compileDateTime(auctions.get(i).getEndDateTime()) + "|\n";
+		if (auctions != null) {
+			for (int i = 0; i < auctions.size(); i++) {
+				if (i == auctions.size() - 1) {
+					block = block + auctions.get(i).getAuctionID() + ","
+							+ auctions.get(i).getItem().getItemID() + ","
+							+ auctions.get(i).getCurrentSalesPrice() + ","
+							+ checkNullProcessed(auctions.get(i)) + ","
+							+ checkNullUnprocessed(auctions.get(i)) + ","
+							+ compileDateTime(auctions.get(i).getStartDateTime()) + "," 
+							+ compileDateTime(auctions.get(i).getEndDateTime());
+				}
+				else {
+					block = block + auctions.get(i).getAuctionID() + ","
+							+ auctions.get(i).getItem().getItemID() + "," + auctions.get(i).getCurrentSalesPrice() + "," 
+							+ checkNullProcessed(auctions.get(i)) + ","
+							+ checkNullUnprocessed(auctions.get(i)) + ","
+							+ compileDateTime(auctions.get(i).getStartDateTime()) + "," 
+							+ compileDateTime(auctions.get(i).getEndDateTime()) + "|\n";
+				}
 			}
 		}
 		return block;
@@ -205,8 +213,7 @@ public class Write {
 				block = block + auctions.get(i).getAuctionID() + ","
 						+ auctions.get(i).getItem().getItemID() + ","
 						+ auctions.get(i).getCurrentSalesPrice() + ","
-						+ auctions.get(i).getCurrentHighest().getBidID() + ","
-						+ compileBidIDs(auctions.get(i).getProcessedBids().toArrayList()) + ","
+						+ checkNullProcessed(auctions.get(i)) + ","
 						+ compileDateTime(auctions.get(i).getStartDateTime()) + ","
 						+ compileDateTime(auctions.get(i).getEndDateTime());
 			}
@@ -214,8 +221,7 @@ public class Write {
 				block = block + auctions.get(i).getAuctionID() + ","
 						+ auctions.get(i).getItem().getItemID() + ","
 						+ auctions.get(i).getCurrentSalesPrice() + ","
-						+ auctions.get(i).getCurrentHighest().getBidID() + ","
-						+ compileBidIDs(auctions.get(i).getProcessedBids().toArrayList()) + ","
+						+ checkNullProcessed(auctions.get(i)) + ","
 						+ compileDateTime(auctions.get(i).getStartDateTime()) + ","
 						+ compileDateTime(auctions.get(i).getEndDateTime()) + "|\n";
 			}
@@ -247,6 +253,9 @@ public class Write {
 	public static String writeBids(ArrayList<Bid> bids) {
 		String block = "";
 		for (int i = 0; i < bids.size(); i++) {
+			if (i != 0 && bids.get(i - 1).getAuction().getAuctionID() != bids.get(i).getAuction().getAuctionID()) {
+				block = block + "\n";
+			}
 			if (i == bids.size() - 1) {
 				block = block + bids.get(i).getValue() + ","
 						+ bids.get(i).getAuction().getAuctionID() + ","
@@ -266,11 +275,12 @@ public class Write {
 	}
 	
 	
-	public static String compileBlocks(String customers, String items, String activeAuctions, String completedAuctions, String futureAuctins, String bids) {
+	public static String compileBlocks(String customers, String items, String activeAuctions, String completedAuctions, String futureAuctions, String bids) {
 		return customers + "\n}\n\n"
 					+ items + "\n}\n\n"
 					+ activeAuctions + "\n}\n\n"
 					+ completedAuctions + "\n}\n\n"
+					+ futureAuctions + "\n}\n\n"
 					+ bids;
 	}
 	
@@ -293,6 +303,31 @@ public class Write {
 		return dateTime.getYear() + "#" + dateTime.getMonthValue() + "#" 
 				+ dateTime.getDayOfMonth() + "#" + dateTime.getHour() + "#" 
 				+ dateTime.getMinute() + "#" + dateTime.getSecond();
+	}
+	
+	
+	public static String checkNullProcessed(Auction auction) {
+		String output = "";
+		if (auction.getProcessedBids().size() != 0) {
+			output = output + auction.getCurrentHighest().getBidID() + ","
+					+ compileBidIDs(auction.getProcessedBids().toArrayList()); 
+		}
+		return output;
+	}
+	
+	
+	public static String checkNullUnprocessed(Auction auction) {
+		String output = "";
+		if (auction.getUnprocessedBids() != null) {
+			output = output + compileBidIDs(auction.getUnprocessedBids().toArrayList());
+		}
+		return output;
+	}
+	
+	
+	public static String checkPaidFor(Item i) {
+		if (!i.isPaidFor()) return "0";
+		else return "1";
 	}
 	
 	
@@ -333,5 +368,4 @@ public class Write {
 		}
 	}
 	
-
 }
