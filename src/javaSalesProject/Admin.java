@@ -22,27 +22,34 @@ public class Admin extends Account {
 
 	}
 
-	public void startNewAuction() {
+	public void createAuction() {
 		if (Driver.items.size() > 0) {
-			Item toBeSold = null;
 			LocalDateTime startDateTime = null;
 			LocalDateTime endDateTime = null;
 
-			toBeSold = getItemToBeSold();
-			if (toBeSold != null) {
+			Item item = getItemToBeSold();
+			if (item != null) {
 				startDateTime = getAuctionStartDateTime();
 				if (startDateTime != null) {
-					endDateTime = getAuctionEndDateTime();
+					
+					boolean valid = false;
+					while (valid == false) {
+						endDateTime = getAuctionEndDateTime();
+						if (endDateTime.isAfter(startDateTime)) 
+							valid = true;
+						else System.out.println("End date cannot be before start date.\n");
+					}
+					
 					if (endDateTime != null) {
-
-						Auction a = new Auction(toBeSold, startDateTime, endDateTime);
+						Auction a = new Auction(item, startDateTime, endDateTime);
 						SystemMessage.print("Auction Added:\n" + a.toString());
 						Driver.futureAuctions.add(a);
 					}
 				}
 			}
-		} else {
-			System.out.println("No auction created");
+		}
+		else {
+			System.out.println("An auction cannot be created because there are no items for which to create an auction");
 		}
 	}
 
@@ -50,7 +57,8 @@ public class Admin extends Account {
 		int indexOfItem = Menu.pickItemMenu();
 		if (indexOfItem == -1) {
 			return null;
-		} else
+		}
+		else
 			return Driver.items.get(indexOfItem);
 	}
 
@@ -77,7 +85,29 @@ public class Admin extends Account {
 			}
 		}
 	}
+	
+	public LocalDateTime getAuctionStartDateTime() {
+		LocalDateTime startDateTime = null;
+		
+		int input = Menu.startDateMenu();
 
+		if (input == 1) { // Immediately
+			startDateTime = LocalDateTime.now();
+		}
+		else if (input == 2) { // Later today
+			LocalDate ld = LocalDate.now();
+			LocalTime lt = markAuctionTime("start");
+			startDateTime = LocalDateTime.of(ld, lt);
+		}
+		else if (input == 3) { // A later date
+			LocalDate ld = markAuctionDate("start");
+			LocalTime lt = markAuctionTime("start");
+			startDateTime = LocalDateTime.of(ld, lt);
+		}
+		return startDateTime;
+	}
+
+	/*
 	public LocalDateTime getAuctionStartDateTime() {
 		LocalDateTime sdt = null;
 		// When would you like the auction to start?
@@ -97,11 +127,33 @@ public class Admin extends Account {
 		}
 		return sdt;
 	}
+	*/
 
+	
+	public LocalDateTime getAuctionEndDateTime() {
+		LocalDateTime edt = null;
+
+		int input = Menu.endDateMenu();
+		
+		if (input == 1) { // Later today
+			LocalDate ld = LocalDate.now();
+			LocalTime lt = markAuctionTime("end");
+			edt = LocalDateTime.of(ld, lt);
+		}
+		else if (input == 2) { // A later date
+			LocalDate ld = markAuctionDate("end");
+			LocalTime lt = markAuctionTime("end");
+			edt = LocalDateTime.of(ld, lt);
+		}
+		return edt;
+	}
+	
+	/*
 	public LocalDateTime getAuctionEndDateTime() {
 		LocalDateTime edt = null;
 		// When would you like the auction to end?
 		int input = Menu.endDateMenu();
+		
 		if (input == 1) { // Later today
 			LocalDate ld = LocalDate.now();
 			LocalTime lt = getAuctionEndTime();
@@ -113,7 +165,10 @@ public class Admin extends Account {
 		}
 		return edt;
 	}
-
+	 */
+	
+	
+	/*
 	public LocalTime getAuctionStartTime() {
 		LocalTime startTime = null;
 		int minute = -1;
@@ -122,20 +177,21 @@ public class Admin extends Account {
 			minute = InputMethods.getIntOrReturnNeg1(0, 59, "What minute would you like the auction to start?");
 			if (minute >= 0) {
 				int amPm = Menu.amPmMenu();
-				if (amPm == 2) { // pm
-					startTime = LocalTime.of(hour + 12, minute);
-					return startTime;
-				} else if (amPm == 1) { // am
-					if (hour == 12) {
-						hour = 0;
-					}
-					startTime = LocalTime.of(hour, minute);
+
+				if (amPm == 1) { // am
+					if (hour == 12) hour = 0;
 				}
+				else { // pm
+					startTime = LocalTime.of(hour + 12, minute);
+				}
+				startTime = LocalTime.of(hour, minute);
 			}
 		}
 		return null;
 	}
+	*/
 
+	/*
 	public LocalDate getAuctionStartDate() {
 		LocalDate startDate = null;
 		// Get a year from this year to this year + 3 years
@@ -160,16 +216,44 @@ public class Admin extends Account {
 		}
 		return null;
 	}
-
+	*/
+	
+	/*
 	public LocalTime getAuctionEndTime() {
-		LocalTime endTime = null;
+		int hour = InputMethods.getIntOrReturnNeg1(1, 12, "What hour would you like the auction to end?");
+		int minute = InputMethods.getIntOrReturnNeg1(0, 59, "What minute would you like the auction to end?");
+		LocalTime endTime = specifyHour(hour, minute);
+		return endTime;
+	}
+	*/
+	
+	public LocalTime markAuctionTime(String mark) {
+		int hour = InputMethods.getIntOrReturnNeg1(1, 12, "What hour would you like the auction to " + mark + "?");
+		int minute = InputMethods.getIntOrReturnNeg1(0, 59, "What minute would you like the auction to " + mark + "?");
+		LocalTime time = specifyHour(hour, minute);
+		return time;
+	}
+	
+	
+
+	/*
+	public LocalTime getAuctionEndTime() {
+		LocalTime endTime;
 		int minute = -1;
 		int hour = InputMethods.getIntOrReturnNeg1(1, 12, "What hour would you like the auction to end?");
 		if (hour > 0) {
 			minute = InputMethods.getIntOrReturnNeg1(0, 59, "What minute would you like the auction to end?");
 			if (minute >= 0) {
 				int amPm = Menu.amPmMenu();
-				if (amPm == 2) { // pm
+				
+				if (amPm == 1) { // am
+					if (hour == 12) {
+						hour = 0;
+					}
+					endTime = LocalTime.of(hour, minute);
+					return endTime;
+				}
+				else { // pm
 					if (hour != 12) {
 						endTime = LocalTime.of((hour % 12) + 12, minute);
 					}
@@ -177,17 +261,68 @@ public class Admin extends Account {
 						endTime = LocalTime.of(0, minute);
 					}
 					return endTime;
-				} else if (amPm == 1) { // am
-					if (hour == 12) {
-						hour = 0;
-					}
-					endTime = LocalTime.of(hour, minute);
 				}
 			}
 		}
 		return null;
 	}
+	*/
+	
+	
+	public LocalDate markAuctionDate(String mark) {
+		LocalDate date = null;
+		int year = 0;
+		Month month = null;
+		int dayOfMonth = 0;
+		
+		String dayQuestion = "What day would you like the auction to " + mark + "? (" + "1" + " - "
+				+ LocalDate.now().getMonth().maxLength() + ")";
+		String yearQuestion = "What year would you like the auction to end? (" + LocalDate.now().getYear() + " - "
+				+ LocalDate.now().plusYears(6).getYear() + ")";
 
+		// Get a year from this year to this year + 6 years
+		year = InputMethods.getIntOrReturnNeg1(LocalDate.now().getYear(), LocalDate.now().plusYears(6).getYear(),
+				yearQuestion);
+		
+		if (year > 0) {
+			int monthInt = InputMethods.getIntOrReturnNeg1(1, 12, "What month would you like the auction to " + mark + "?");
+			if (monthInt > 0) {
+				month = Month.of(monthInt);
+				dayOfMonth = InputMethods.getIntOrReturnNeg1(1, month.maxLength(), dayQuestion);
+				if (dayOfMonth > 0) {
+					date = LocalDate.of(year, month, dayOfMonth);
+				}
+			}
+		}
+
+		return date;
+		
+	}
+
+	/*
+	 * Takes in a hour and a minute and asks the user these numbers refer to am or pm
+	 * returns a LocalTime object that reflects the user's choice
+	 */
+	public LocalTime specifyHour(int hour, int minute) {
+		LocalTime endTime;
+		int amPm = Menu.amPmMenu();
+		
+		if (amPm == 1) { // am
+			if (hour == 12) hour = 0;
+			endTime = LocalTime.of(hour, minute);
+		}
+		else { // pm
+			if (hour != 12) {
+				endTime = LocalTime.of(hour + 12, minute);
+			}
+			else {
+				endTime = LocalTime.of(hour, minute);
+			}
+		}
+		return endTime;
+	}
+
+	/*
 	public LocalDate getAuctionEndDate() {
 		LocalDate endDate = null;
 
@@ -215,5 +350,6 @@ public class Admin extends Account {
 		}
 		return null;
 	}
+	*/
 
 }

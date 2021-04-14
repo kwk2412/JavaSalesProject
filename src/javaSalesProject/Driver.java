@@ -24,7 +24,7 @@ public class Driver {
 	private static final LocalTime CLOSETIME = LocalTime.of(17, 0);
 
 	public static void main(String[] args) {
-
+		
 		init();
 
 		while (running) {
@@ -82,7 +82,6 @@ public class Driver {
 		System.out.println();
 
 		auction.automateAuction();
-
 	}
 
 	public static boolean loginAttemptCheck(boolean menu) {
@@ -168,7 +167,6 @@ public class Driver {
 		futureAuctions = new ArrayList<Auction>();
 		loadInventory();
 		timer();
-		
 		//currentUser.setUser(new Admin("Clay", "p", "admin"));
 
 	}
@@ -186,7 +184,8 @@ public class Driver {
 
 		if (isOpen()) {
 			opening = true;
-		} else {
+		}
+		else {
 			opening = false;
 		}
 	}

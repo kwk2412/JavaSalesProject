@@ -273,13 +273,26 @@ public class Read {
 	 */
 	public static String[] createActiveAuction(String data, ArrayList<Item> items, ArrayList<Auction> auctions) {
 		String[] info = toArray(data);
+		
 		int auctionID = nullCheckInteger(info, 0);
 		Item item = findItem(Integer.parseInt(info[1]), items);
 		double currentSellingPrice = nullCheckDouble(info, 2);
-		LocalDateTime openingTime = createDateTime(info[6]);
-		LocalDateTime closingTime = createDateTime(info[7]);
+		LocalDateTime openingTime;
+		LocalDateTime closingTime;
+		Auction auction;
 		
-		Auction auction = new Auction(item, auctionID, currentSellingPrice, openingTime, closingTime);
+		// info[8] could be a 1 or 0 value that determines whether to make 
+		// this auction object a dynamic one or not
+		if (info.length > 7 && Integer.parseInt(info[8]) == 1) {
+			openingTime = LocalDateTime.now();
+			closingTime = LocalDateTime.of(openingTime.toLocalDate(), LocalTime.of(openingTime.getHour(), openingTime.getMinute() + 2));
+		}
+		else {
+			openingTime = createDateTime(info[6]);
+			closingTime = createDateTime(info[7]);
+		}
+		
+		auction = new Auction(item, auctionID, currentSellingPrice, openingTime, closingTime);
 		auctions.add(auction);
 		
 		String[] bidInfo = new String[2];
@@ -302,7 +315,7 @@ public class Read {
 		LocalDateTime openingTime = createDateTime(info[5]);
 		LocalDateTime closingTime = createDateTime(info[6]);
 		Auction auction = new Auction(item, Integer.parseInt(info[0]), openingTime, closingTime);
-		item.setAvailable(false);
+		if (item != null) item.setAvailable(false);
 		auction.setActive(false);
 		completedAuctions.add(auction);
 		return info[4];
@@ -401,7 +414,7 @@ public class Read {
 				unprocessedBidIDs = auctionBidBuffer.get(i)[1].split("#");
 			}
 			
-			if (processedBidIDs.length != 0) {
+			if (!processedBidIDs[0].equals("")) {
 				for (int j = 0; j < processedBidIDs.length; j++) {
 					auctions.get(i).getProcessedBids().push(findBid(Integer.parseInt(processedBidIDs[j]), bids));
 				}
@@ -413,8 +426,10 @@ public class Read {
 				}
 			}
 
-			Bid highest = auctions.get(i).getProcessedBids().peek();
-			auctions.get(i).setCurrentHighest(highest);
+			if (!processedBidIDs[0].equals("")) {
+				Bid highest = auctions.get(i).getProcessedBids().peek();
+				auctions.get(i).setCurrentHighest(highest);
+			}
 		}
 	}
 	

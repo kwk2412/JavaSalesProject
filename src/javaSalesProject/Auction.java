@@ -56,19 +56,25 @@ public class Auction implements Comparable<Auction> {
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 	}
-	
+
 	public Auction(Item item, int auctionID, LocalDateTime startDateTime,  LocalDateTime endDateTime) {
 		this.item = item;
 		this.auctionID = auctionID;
 		currentHighest = null;
-		currentSalesPrice = item.getStartingPrice();
-		increment = item.getIncrement();
+		if (item != null) {
+			currentSalesPrice = item.getStartingPrice();
+			increment = item.getIncrement();
+		}
+		else {
+			currentSalesPrice = 0;
+			increment = 0;
+		}
 		//Driver.items.remove(item);
 		active = true;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 	}
-	
+
 	public Auction(Item item, int auctionID, double currentSalesPrice, LocalDateTime startDateTime, LocalDateTime endDateTime) {
 		this.item = item;
 		this.auctionID = auctionID;
@@ -80,7 +86,6 @@ public class Auction implements Comparable<Auction> {
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 	}
-	
 
 	public String toString() {
 		NumberFormat cf = NumberFormat.getCurrencyInstance();
@@ -107,13 +112,12 @@ public class Auction implements Comparable<Auction> {
 		}
 		return result;
 	}
-
+	
+	//Has this bug been fixed?
 	// Something is eliminating an invalid bid and the following one
 	// causing the out of bounds exception when you go to continue the auction
 	// without any bids left to process
-
 	public void automateAuction() {
-
 		while (unprocessedBids.size() > 0) {
 			process(unprocessedBids.dequeue());
 		}
@@ -125,14 +129,16 @@ public class Auction implements Comparable<Auction> {
 		else if (isValid(bid)) {
 			if (bid.getValue() <= currentHighest.getValue()) {
 				currentSalesPrice = bid.getValue();
-			} else {
+			}
+			else {
 				currentSalesPrice = currentHighest.getValue();
 				currentHighest = bid;
 			}
 			bid.getCustomer().addCurrentBid(bid); // Add bid to Customer's list of bids
 			processedBids.push(bid); // Add list to Auction's list of bids
 			numBids++;
-		} else {
+		}
+		else {
 			System.out.println("Invalid bid");
 		}
 	}
@@ -141,7 +147,8 @@ public class Auction implements Comparable<Auction> {
 		if (bid.getValue() >= (currentSalesPrice + increment)) {
 			bid.setValid(true);
 			return bid.isValid();
-		} else {
+		}
+		else {
 			return false;
 		}
 	}
@@ -153,7 +160,8 @@ public class Auction implements Comparable<Auction> {
 			currentHighest = processedBids.peek();
 			numBids++;
 			bid.setValid(true);
-		} else {
+		}
+		else {
 			System.out.println("First bid must be at least the sales price of the item\n");
 		}
 	}
@@ -169,11 +177,9 @@ public class Auction implements Comparable<Auction> {
 			currentHighest.getCustomer().addWinningBid(currentHighest);
 		}
 	}
-
 	
 	public void clearActiveBids() {
 		Stack<Bid> copy = processedBids.clone();
-		
 		while (copy.size() > 0) {
 			Bid b = copy.pop();
 			b.getCustomer().removeActiveBid(b);
@@ -195,7 +201,6 @@ public class Auction implements Comparable<Auction> {
 		System.out.println();
 	}
 	
-	
 	public int compareTo(Auction a) {
 		if (this.auctionID < a.auctionID) {
 			return 1;
@@ -205,7 +210,6 @@ public class Auction implements Comparable<Auction> {
 		}
 		else return 0;
 	}
-	
 
 	private void clearProcessedBids() {
 		processedBids.clear();

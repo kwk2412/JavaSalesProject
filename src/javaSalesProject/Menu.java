@@ -97,7 +97,9 @@ public class Menu {
 		if (Driver.items.size() > 0) {
 			String menu = "Select the item to be sold:\n";
 			for (int i = 0; i < Driver.items.size(); ++i) {
-				menu += (i + 1) + ". " + Driver.items.get(i).toString() + "\n";
+				if (Driver.items.get(i).isAvailable()) {
+					menu += (i + 1) + ". " + Driver.items.get(i).toString() + "\n";
+				}
 			}
 			int choice = InputMethods.getIntOrReturnNeg1(1, Driver.items.size(), menu);
 			if(choice > 0) {

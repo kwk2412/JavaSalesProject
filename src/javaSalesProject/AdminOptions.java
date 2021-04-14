@@ -32,11 +32,16 @@ public class AdminOptions {
 			// Summary data of winnings bids
 			else if (choice == 5) {
 				System.out.println("You selected option 4");
+				
+				for (int i = 0; i < Driver.completedAuctions.size(); i++) {
+					System.out.println("Auction " + (i + 1));
+					System.out.println(Driver.completedAuctions.get(i).getProcessedBids().peek().toString());
+				}
 			}
 
 			// Add and activate a new auction
 			else if (choice == 6) {
-				a.startNewAuction();
+				a.createAuction();
 				// AuctionMethods.startNewAuction();
 			}
 

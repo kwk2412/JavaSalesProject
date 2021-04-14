@@ -190,7 +190,8 @@ public class Write {
 							+ checkNullProcessed(auctions.get(i)) + ","
 							+ checkNullUnprocessed(auctions.get(i)) + ","
 							+ compileDateTime(auctions.get(i).getStartDateTime()) + "," 
-							+ compileDateTime(auctions.get(i).getEndDateTime());
+							+ compileDateTime(auctions.get(i).getEndDateTime()) + ","
+							+ "0";
 				}
 				else {
 					block = block + auctions.get(i).getAuctionID() + ","
@@ -198,7 +199,8 @@ public class Write {
 							+ checkNullProcessed(auctions.get(i)) + ","
 							+ checkNullUnprocessed(auctions.get(i)) + ","
 							+ compileDateTime(auctions.get(i).getStartDateTime()) + "," 
-							+ compileDateTime(auctions.get(i).getEndDateTime()) + "|\n";
+							+ compileDateTime(auctions.get(i).getEndDateTime()) + ","
+							+ "0" + "|\n";
 				}
 			}
 		}
@@ -311,6 +313,9 @@ public class Write {
 		if (auction.getProcessedBids().size() != 0) {
 			output = output + auction.getCurrentHighest().getBidID() + ","
 					+ compileBidIDs(auction.getProcessedBids().toArrayList()); 
+		}
+		else {
+			output = output + ",";
 		}
 		return output;
 	}
