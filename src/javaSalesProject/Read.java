@@ -524,9 +524,7 @@ public class Read {
 		
 		for (int i = 0; i < customersAdded.size(); i++) {
 			if (!customersAdded.isEmpty()) {
-				if (!searchDriver(Driver.accounts, (Account) customersAdded.get(i))) {
-					Driver.accounts.add(customersAdded.get(i));
-				}
+				Driver.accounts.add(customersAdded.get(i));
 			}
 		}
 	}
