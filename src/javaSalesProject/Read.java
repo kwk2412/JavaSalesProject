@@ -167,7 +167,6 @@ public class Read {
 			if (blockArrays.get(5)[0] != null) {
 				bids.add(createBid(blockArrays.get(5)[i], customersAdded, activeAuctions, completedAuctions));
 			}
-			
 		}
 		
 		populateCustomerBids(customersAdded, customerBidBuffer, bids);
@@ -453,13 +452,16 @@ public class Read {
 		for (int i = 0; i < historicBids.size(); i++) {
 			String[] bidIDs = historicBids.get(i).split("#");
 			
-			if (bidIDs.length != 0) { 
+			if (!bidIDs[0].equals("")) { 
 				for (int j = 0; j < bidIDs.length; j++) {
 					completedAuctions.get(i).getProcessedBids().push(findBid(Integer.parseInt(bidIDs[j]), bids));
 				}
 			}
-			completedAuctions.get(i).setCurrentHighest(completedAuctions.get(i).getProcessedBids().peek());
-			completedAuctions.get(i).setSellingPrice(estSellingPrice(completedAuctions.get(i), bidIDs, bids));
+			
+			if (!completedAuctions.get(i).getProcessedBids().isEmpty()) {
+				completedAuctions.get(i).setCurrentHighest(completedAuctions.get(i).getProcessedBids().peek());
+				completedAuctions.get(i).setSellingPrice(estSellingPrice(completedAuctions.get(i), bidIDs, bids));
+			}
 		}
 	}
 
