@@ -42,6 +42,10 @@ public class AdminOptions {
 			// Add and activate a new auction
 			else if (choice == 6) {
 				a.createAuction();
+				
+				for (int i = 0; i < Driver.items.size(); i++) {
+					System.out.println(Driver.items.get(i).toString());
+				}
 				// AuctionMethods.startNewAuction();
 			}
 

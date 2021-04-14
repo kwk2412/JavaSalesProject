@@ -322,6 +322,17 @@ public class Admin extends Account {
 		return endTime;
 	}
 
+	public int compareTo(Account o) {
+		if (this.userID < o.userID) {
+			return 1;
+		}
+		else if (this.userID > o.userID) {
+			return -1;
+		}
+		else
+			return 0;
+	}
+
 	/*
 	public LocalDate getAuctionEndDate() {
 		LocalDate endDate = null;

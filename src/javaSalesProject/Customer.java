@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Customer extends Account implements Comparable<Customer> {
+public class Customer extends Account {
 
 	private ArrayList<Bid> activeBids = new ArrayList<Bid>();
 	private ArrayList<Bid> winningBids = new ArrayList<Bid>();
@@ -142,18 +142,19 @@ public class Customer extends Account implements Comparable<Customer> {
 		winningBids.add(bid);
 	}
 	
-	
-	public int compareTo(Customer c) {
-		if (c.userID > this.userID) {
+	/*
+	public int compareTo(Customer o) {
+		if (this.userID < o.userID) {
 			return 1;
 		}
-		else if (c.userID < this.userID) {
+		else if (this.userID > o.userID) {
 			return -1;
 		}
 		else
 			return 0;
-	}
-
+	}	
+	*/
+	
 	public ArrayList<Bid> getActiveBids() {
 		return activeBids;
 	}
@@ -184,6 +185,12 @@ public class Customer extends Account implements Comparable<Customer> {
 
 	public void setBalance(double balance) {
 		this.balance = balance;
-	}	
+	}
+
+	@Override
+	public int compareTo(Account o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

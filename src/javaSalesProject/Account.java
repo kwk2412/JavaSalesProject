@@ -2,7 +2,7 @@ package javaSalesProject;
 
 import java.util.Scanner;
 
-public abstract class Account {
+public abstract class Account implements Comparable<Account> {
 
 	protected String username;
 	protected String password;

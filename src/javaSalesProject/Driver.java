@@ -124,6 +124,7 @@ public class Driver {
 	public static void loadInventory() {
 		items.add(new Item(130, "Nintendo GameCube", 10));
 		items.add(new Item(160, "Sony PlayStation", 10));
+		/*
 		items.add(new Item(150, "Nintendo GameBoy", 5));
 		items.add(new Item(170, "Microsoft Xbox", 10));
 		items.add(new Item(125, "Nintendo 64", 5));
@@ -140,6 +141,7 @@ public class Driver {
 		items.add(new Item(200, "Sony PlayStation 3", 15));
 		items.add(new Item(130, "Sega GameGear", 10));
 		items.add(new Item(250, "Microsoft Xbox One", 15));
+		*/
 	}
 
 	public static void loadAuctions() {
@@ -167,7 +169,7 @@ public class Driver {
 		futureAuctions = new ArrayList<Auction>();
 		loadInventory();
 		timer();
-		//currentUser.setUser(new Admin("Clay", "p", "admin"));
+		currentUser.setUser(new Admin("Clay", "p", "admin"));
 
 	}
 	

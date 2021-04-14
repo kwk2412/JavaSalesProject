@@ -113,14 +113,19 @@ public class Read {
 		// Creates items
 		ArrayList<Item> items = new ArrayList<Item>();
 		for (int i = 0; i < blockArrays.get(1).length; i++) {
-			items.add(createItem(blockArrays.get(1)[i], items));
+			if (blockArrays.get(1).length != 0) {
+				items.add(createItem(blockArrays.get(1)[i], items));
+			}
+			
 		}
 
 		// Creates active auctions
 		ArrayList<Auction> activeAuctions = new ArrayList<>();
 		ArrayList<String[]> auctionBidBuffer = new ArrayList<>();
 		for (int i = 0; i < blockArrays.get(2).length; i++) {
-			auctionBidBuffer.add(createActiveAuction(blockArrays.get(2)[i], items, activeAuctions));
+			if  (blockArrays.get(2).length != 0) {
+				auctionBidBuffer.add(createActiveAuction(blockArrays.get(2)[i], items, activeAuctions));
+			}
 		}
 
 		// Creates completed auctions
@@ -128,7 +133,9 @@ public class Read {
 		ArrayList<String> completedAuctionBuffer = new ArrayList<>();
 		if (blockArrays.get(3)[0] != null) {
 			for (int i = 0; i < blockArrays.get(3).length; i++) {
-				completedAuctionBuffer.add(createCompletedAuction(blockArrays.get(3)[i], items, completedAuctions));
+				if (blockArrays.get(3).length != 0) {
+					completedAuctionBuffer.add(createCompletedAuction(blockArrays.get(3)[i], items, completedAuctions));
+				}
 			}
 		}
 		
@@ -136,7 +143,9 @@ public class Read {
 		ArrayList<Auction> futureAuctions = new ArrayList<>();
 		if (blockArrays.get(4)[0] != null) {
 			for (int i = 0; i < blockArrays.get(4).length; i++) {
-				futureAuctions.add(createFutureAuction(blockArrays.get(4)[i], items));
+				if (blockArrays.get(4).length != 0) {
+					futureAuctions.add(createFutureAuction(blockArrays.get(4)[i], items));
+				}
 			}
 		}
 
@@ -145,14 +154,20 @@ public class Read {
 		ArrayList<Customer> customersAdded = new ArrayList<>();
 		ArrayList<String[]> customerBidBuffer = new ArrayList<>();
 		for (int i = 0; i < blockArrays.get(0).length; i++) {
-			String[] bidInfo = createCustomer(blockArrays.get(0)[i], customersAdded);
-			customerBidBuffer.add(bidInfo);
+			if (blockArrays.get(0)[0] != null) {
+				String[] bidInfo = createCustomer(blockArrays.get(0)[i], customersAdded);
+				customerBidBuffer.add(bidInfo);
+			}
+			
 		}
 
 		// Creates an ArrayList that stores all of the bids found in the text file
 		ArrayList<Bid> bids = new ArrayList<>();
 		for (int i = 0; i < blockArrays.get(5).length; i++) {
-			bids.add(createBid(blockArrays.get(5)[i], customersAdded, activeAuctions, completedAuctions));
+			if (blockArrays.get(5)[0] != null) {
+				bids.add(createBid(blockArrays.get(5)[i], customersAdded, activeAuctions, completedAuctions));
+			}
+			
 		}
 		
 		populateCustomerBids(customersAdded, customerBidBuffer, bids);
@@ -477,32 +492,41 @@ public class Read {
 		
 		if (!items.isEmpty()) {
 			for (int i = 0; i < items.size(); i++) {
+				if (!searchDriver(Driver.items, items.get(i))) {
 					Driver.items.add(items.get(i));
+				}
 			}
 		}
 		
-		
 		for (int i = 0; i < activeAuctions.size(); i++) {
 			if (!activeAuctions.isEmpty()) {
-				Driver.ongoingAuctions.add(activeAuctions.get(i));
+				if (!searchDriver(Driver.ongoingAuctions, activeAuctions.get(i))) {
+					Driver.ongoingAuctions.add(activeAuctions.get(i));
+				}
 			}
 		}
 		
 		for (int i = 0; i < completedAuctions.size(); i++) {
 			if (!completedAuctions.isEmpty()) {
-				Driver.completedAuctions.add(completedAuctions.get(i));
+				if (!searchDriver(Driver.completedAuctions, completedAuctions.get(i))) {
+					Driver.completedAuctions.add(completedAuctions.get(i));
+				}
 			}
 		}
 		
 		for (int i = 0; i < futureAuctions.size(); i++) {
 			if (!futureAuctions.isEmpty()) {
-				Driver.futureAuctions.add(futureAuctions.get(i));
+				if (!searchDriver(Driver.futureAuctions, futureAuctions.get(i))) {
+					Driver.futureAuctions.add(futureAuctions.get(i));
+				}
 			}
 		}
 		
 		for (int i = 0; i < customersAdded.size(); i++) {
 			if (!customersAdded.isEmpty()) {
-				Driver.accounts.add(customersAdded.get(i));
+				if (!searchDriver(Driver.accounts, (Account) customersAdded.get(i))) {
+					Driver.accounts.add(customersAdded.get(i));
+				}
 			}
 		}
 	}
@@ -548,6 +572,15 @@ public class Read {
 	}
 	
 	
+	public static <E extends Comparable<E>> boolean searchDriver(ArrayList<E> driverList, E object) {
+		for (int i = 0; i < driverList.size(); i++) {
+			if (driverList.get(i).compareTo(object) == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static String nullCheckString(String[] info, int index) {
 		try {
 			if (!info[index].equals("")) {

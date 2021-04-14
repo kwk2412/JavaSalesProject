@@ -51,7 +51,7 @@ public class Auction implements Comparable<Auction> {
 		currentSalesPrice = item.getStartingPrice();
 		increment = item.getIncrement();
 		auctionID = nextNum;
-		Driver.items.remove(item);
+		//Driver.items.remove(item);
 		nextNum++;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
