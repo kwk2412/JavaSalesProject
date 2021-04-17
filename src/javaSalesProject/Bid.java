@@ -1,12 +1,11 @@
 package javaSalesProject;
 
-import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class Bid implements Comparable<Bid> {
-
 
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd, YYYY h:mm a");
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
@@ -30,7 +29,7 @@ public class Bid implements Comparable<Bid> {
 		this.auction = auction;
 		this.customer = customer;
 		this.valid = false;
-		this.bidID = nextNum;
+		this.bidID = findNextNum();
 		nextNum++;
 		this.dateTime = LocalDateTime.now();
 	}
@@ -64,7 +63,6 @@ public class Bid implements Comparable<Bid> {
 		this.bidID = bidID;
 		this.dateTime = dateTime;
 	}
-
 
 	public String toString() {
 		return "\tItem name: " + auction.getItem().getName() + "\n" + 
@@ -121,6 +119,49 @@ public class Bid implements Comparable<Bid> {
 	public boolean equals(Bid b) {
 		if (b == this) return true;
 		return false;
+	}
+	
+	public int findNextNum() {
+		ArrayList<Bid> bids = gatherBids();
+		return highest(bids) + 1;
+	}
+	
+	public ArrayList<Bid> gatherBids() {
+		ArrayList<Bid> bids = new ArrayList<>();
+		for (int i = 0; i < Driver.completedAuctions.size(); i++) {
+			for (int j = 0; j < Driver.completedAuctions.get(i).getProcessedBids().size(); i++) {
+				Stack<Bid> clone = Driver.completedAuctions.get(i).getProcessedBids().clone();
+				while (clone.size() > 0) {
+					bids.add(clone.pop());
+				}
+			}
+		}
+
+		for (int i = 0; i < Driver.ongoingAuctions.size(); i++) {
+			for (int j = 0; j < Driver.ongoingAuctions.get(i).getProcessedBids().size(); i++) {
+				Stack<Bid> clone = Driver.ongoingAuctions.get(i).getProcessedBids().clone();
+				while (clone.size() > 0) {
+					bids.add(clone.pop());
+				}
+			}
+			for (int j = 0; j < Driver.ongoingAuctions.get(i).getUnprocessedBids().size(); i++) {
+				Queue<Bid> clone = Driver.ongoingAuctions.get(i).getUnprocessedBids().clone();
+				while (clone.size() > 0) {
+					bids.add(clone.dequeue());
+				}
+			}
+		}
+		return bids;
+	}
+	
+	public int highest(ArrayList<Bid> bids) {
+		int highest = 0;
+		for (int i = 0; i < bids.size(); i++) {
+			if (bids.get(i).getBidID() > highest) {
+				highest = bids.get(i).getBidID();
+			}
+		}
+		return highest;
 	}
 
 	public int compareTo(Bid b) {
