@@ -142,18 +142,6 @@ public class Customer extends Account implements Comparable<Customer> {
 		winningBids.add(bid);
 	}
 	
-	public int findNextNum() {
-		int highest = 0;
-		for (int i = 0; i < Driver.accounts.size(); i++) {
-			if (Driver.accounts.get(i) instanceof Customer) {
-				if (Driver.accounts.get(i).getUserID() > highest) {
-					highest = Driver.accounts.get(i).getUserID();
-				}
-			}
-		}
-		return highest + 1;
-	}
-	
 	public int compareTo(Customer o) {
 		if (this.userID < o.userID) {
 			return 1;

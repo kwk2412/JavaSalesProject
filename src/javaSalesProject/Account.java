@@ -26,7 +26,7 @@ public abstract class Account {
 		username = un;
 		password = pw;
 		privileges = pr;
-		userID = nextNum;
+		userID = findNextNum();
 		nextNum++;
 		Driver.accounts.add(this);
 
@@ -48,6 +48,16 @@ public abstract class Account {
 
 	public void logout(Account account) {
 		Driver.currentUser.setUser(account);
+	}
+	
+	public int findNextNum() {
+		int highest = 0;
+		for (int i = 0; i < Driver.accounts.size(); i++) {
+			if (Driver.accounts.get(i).getUserID() > highest) {
+				highest = Driver.accounts.get(i).getUserID();
+			}
+		}
+		return highest + 1;
 	}
 
 	public String getUsername() {
