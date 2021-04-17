@@ -169,8 +169,7 @@ public class Driver {
 		futureAuctions = new ArrayList<Auction>();
 		loadInventory();
 		timer();
-		currentUser.setUser(new Admin("Clay", "p", "admin"));
-
+		//currentUser.setUser(new Admin("Clay", "p", "admin"));
 	}
 	
 	public static void timer() {
@@ -205,6 +204,9 @@ public class Driver {
 		}
 	}
 
+	/*
+	 * Puts stuff into the Driver.ongoingAuctions
+	 */
 	private static void checkForEndingAuctions() {
 		for (int i = 0; i < ongoingAuctions.size(); ++i) {
 			if (ongoingAuctions.get(i).getEndDateTime().isBefore(LocalDateTime.now())) {
@@ -240,7 +242,8 @@ public class Driver {
 	public static boolean isOpen() {
 		if (LocalTime.now().isAfter(OPENTIME) && LocalTime.now().isBefore(CLOSETIME)) {
 			return true;
-		} else {
+		}
+		else {
 			return false;
 		}
 	}

@@ -1,7 +1,6 @@
 package javaSalesProject;
 
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class InputMethods {
 	public static boolean yesNoToBool(String question) {
@@ -128,7 +127,7 @@ public class InputMethods {
 	}
 
 
-	private static String checkAmPm(String amPm) {
+	public static String checkAmPm(String amPm) {
 		String result = null;
 		if(amPm.trim().equalsIgnoreCase("am")) {
 			result = "am";

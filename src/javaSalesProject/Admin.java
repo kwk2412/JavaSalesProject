@@ -1,6 +1,5 @@
 package javaSalesProject;
 
-import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -107,28 +106,6 @@ public class Admin extends Account {
 		return startDateTime;
 	}
 
-	/*
-	public LocalDateTime getAuctionStartDateTime() {
-		LocalDateTime sdt = null;
-		// When would you like the auction to start?
-		int input = Menu.startDateMenu();
-
-		if (input == 1) { // Immediately
-			sdt = LocalDateTime.now();
-		} else if (input == 2) { // Later today
-			LocalDate ld = LocalDate.now();
-			LocalTime lt = getAuctionStartTime();
-			sdt = LocalDateTime.of(ld, lt);
-		} else if (input == 3) { // A later date
-			LocalDate ld = getAuctionStartDate();
-			LocalTime lt = getAuctionStartTime();
-			sdt = LocalDateTime.of(ld, lt);
-
-		}
-		return sdt;
-	}
-	*/
-
 	
 	public LocalDateTime getAuctionEndDateTime() {
 		LocalDateTime edt = null;
@@ -148,125 +125,12 @@ public class Admin extends Account {
 		return edt;
 	}
 	
-	/*
-	public LocalDateTime getAuctionEndDateTime() {
-		LocalDateTime edt = null;
-		// When would you like the auction to end?
-		int input = Menu.endDateMenu();
-		
-		if (input == 1) { // Later today
-			LocalDate ld = LocalDate.now();
-			LocalTime lt = getAuctionEndTime();
-			edt = LocalDateTime.of(ld, lt);
-		} else if (input == 2) { // A later date
-			LocalDate ld = getAuctionEndDate();
-			LocalTime lt = getAuctionEndTime();
-			edt = LocalDateTime.of(ld, lt);
-		}
-		return edt;
-	}
-	 */
-	
-	
-	/*
-	public LocalTime getAuctionStartTime() {
-		LocalTime startTime = null;
-		int minute = -1;
-		int hour = InputMethods.getIntOrReturnNeg1(1, 12, "What hour would you like the auction to start?");
-		if (hour > 0) {
-			minute = InputMethods.getIntOrReturnNeg1(0, 59, "What minute would you like the auction to start?");
-			if (minute >= 0) {
-				int amPm = Menu.amPmMenu();
-
-				if (amPm == 1) { // am
-					if (hour == 12) hour = 0;
-				}
-				else { // pm
-					startTime = LocalTime.of(hour + 12, minute);
-				}
-				startTime = LocalTime.of(hour, minute);
-			}
-		}
-		return null;
-	}
-	*/
-
-	/*
-	public LocalDate getAuctionStartDate() {
-		LocalDate startDate = null;
-		// Get a year from this year to this year + 3 years
-		int dayOfMonth = -1;
-		Month month = null;
-		String yearQuestion = "What year would you like the auction to start? (" + LocalDate.now().getYear() + " - "
-				+ LocalDate.now().plusYears(3).getYear() + ")";
-		int year = InputMethods.getIntOrReturnNeg1(LocalDate.now().getYear(), LocalDate.now().plusYears(3).getYear(),
-				yearQuestion);
-		String dayQuestion = "What day would you like the auction to start? (" + "1" + " - "
-				+ LocalDate.now().getMonth().maxLength() + ")";
-		if (year > 0) {
-			int mon = InputMethods.getIntOrReturnNeg1(1, 12, "What month would you like the auction to start");
-			if (mon > 0) {
-				month = Month.of(mon);
-				dayOfMonth = InputMethods.getIntOrReturnNeg1(1, month.maxLength(), dayQuestion);
-				if (dayOfMonth > 0) {
-					startDate = LocalDate.of(year, month, dayOfMonth);
-					return startDate;
-				}
-			}
-		}
-		return null;
-	}
-	*/
-	
-	/*
-	public LocalTime getAuctionEndTime() {
-		int hour = InputMethods.getIntOrReturnNeg1(1, 12, "What hour would you like the auction to end?");
-		int minute = InputMethods.getIntOrReturnNeg1(0, 59, "What minute would you like the auction to end?");
-		LocalTime endTime = specifyHour(hour, minute);
-		return endTime;
-	}
-	*/
-	
 	public LocalTime markAuctionTime(String mark) {
 		int hour = InputMethods.getIntOrReturnNeg1(1, 12, "What hour would you like the auction to " + mark + "?");
 		int minute = InputMethods.getIntOrReturnNeg1(0, 59, "What minute would you like the auction to " + mark + "?");
 		LocalTime time = specifyHour(hour, minute);
 		return time;
 	}
-	
-	
-
-	/*
-	public LocalTime getAuctionEndTime() {
-		LocalTime endTime;
-		int minute = -1;
-		int hour = InputMethods.getIntOrReturnNeg1(1, 12, "What hour would you like the auction to end?");
-		if (hour > 0) {
-			minute = InputMethods.getIntOrReturnNeg1(0, 59, "What minute would you like the auction to end?");
-			if (minute >= 0) {
-				int amPm = Menu.amPmMenu();
-				
-				if (amPm == 1) { // am
-					if (hour == 12) {
-						hour = 0;
-					}
-					endTime = LocalTime.of(hour, minute);
-					return endTime;
-				}
-				else { // pm
-					if (hour != 12) {
-						endTime = LocalTime.of((hour % 12) + 12, minute);
-					}
-					else {
-						endTime = LocalTime.of(0, minute);
-					}
-					return endTime;
-				}
-			}
-		}
-		return null;
-	}
-	*/
 	
 	
 	public LocalDate markAuctionDate(String mark) {
@@ -332,35 +196,43 @@ public class Admin extends Account {
 		else
 			return 0;
 	}
-
-	/*
-	public LocalDate getAuctionEndDate() {
-		LocalDate endDate = null;
-
-		int dayOfMonth = -1;
-		Month month = null;
-		String dayQuestion = "What day would you like the auction to end? (" + "1" + " - "
-				+ LocalDate.now().getMonth().maxLength() + ")";
-		String yearQuestion = "What year would you like the auction to end? (" + LocalDate.now().getYear() + " - "
-				+ LocalDate.now().plusYears(6).getYear() + ")";
-
-		// Get a year from this year to this year + 6 years
-		int year = InputMethods.getIntOrReturnNeg1(LocalDate.now().getYear(), LocalDate.now().plusYears(6).getYear(),
-				yearQuestion);
-
-		if (year > 0) {
-			int mon = InputMethods.getIntOrReturnNeg1(1, 12, "What month would you like the auction to start");
-			if (mon > 0) {
-				month = Month.of(mon);
-				dayOfMonth = InputMethods.getIntOrReturnNeg1(1, month.maxLength(), dayQuestion);
-				if (dayOfMonth > 0) {
-					endDate = LocalDate.of(year, month, dayOfMonth);
-					return endDate;
+	
+	public void printCompletedAuctions() {
+		System.out.println("Summary of Completed Auctions: ");
+		if (Driver.completedAuctions.size() >= 1) {
+			for (int i = 0; i < Driver.completedAuctions.size(); i++) {
+				System.out.println(Driver.completedAuctions.get(i).toString());
+			}
+		} else {
+			System.out.println("There are no completed Auctions at this time.");
+		}
+	}
+	
+	public void printWinningBids() {
+		if (!Driver.completedAuctions.isEmpty()) {
+			for (int i = 0; i < Driver.completedAuctions.size(); i++) {
+				if (Driver.completedAuctions.get(i).getProcessedBids().peek() != null) {
+					System.out.println("Auction " + (i + 1));
+					System.out.println(Driver.completedAuctions.get(i).getCurrentHighest().toString());	
 				}
 			}
 		}
-		return null;
+		else {
+			System.out.println("No winning bids - no auctions have been completed");
+		}
 	}
-	*/
+	
+	public void printAuctionBids() {
+		if (!Driver.ongoingAuctions.isEmpty()) {
+			int auctionIndex = Menu.selectAuction();
+			Stack<Bid> clone = Driver.ongoingAuctions.get(auctionIndex - 1).getProcessedBids().clone();
+			for (int i = 0; i < clone.size(); i++) {
+				System.out.println(clone.pop().toString());
+			}
+		}
+		else {
+			System.out.println("There are no ongoing auctions to check the bidding history for");
+		}
+	}
 
 }

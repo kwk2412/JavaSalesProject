@@ -1,9 +1,7 @@
 package javaSalesProject;
 
-import java.time.LocalDateTime;
 import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -43,14 +41,16 @@ public class Auction implements Comparable<Auction> {
 
 	public Auction(Item item) {
 		this.item = item;
+		item.setAvailable(false);
 	}
 	
 	public Auction(Item item, LocalDateTime startDateTime, LocalDateTime endDateTime) {
 		this.item = item;
+		item.setAvailable(false);
 		currentHighest = null;
 		currentSalesPrice = item.getStartingPrice();
 		increment = item.getIncrement();
-		auctionID = nextNum;
+		auctionID = findNextNum();
 		//Driver.items.remove(item);
 		nextNum++;
 		this.startDateTime = startDateTime;
@@ -64,6 +64,7 @@ public class Auction implements Comparable<Auction> {
 		if (item != null) {
 			currentSalesPrice = item.getStartingPrice();
 			increment = item.getIncrement();
+			item.setAvailable(false);
 		}
 		else {
 			currentSalesPrice = 0;
@@ -77,6 +78,7 @@ public class Auction implements Comparable<Auction> {
 
 	public Auction(Item item, int auctionID, double currentSalesPrice, LocalDateTime startDateTime, LocalDateTime endDateTime) {
 		this.item = item;
+		item.setAvailable(false);
 		this.auctionID = auctionID;
 		currentHighest = null;
 		this.currentSalesPrice = currentSalesPrice;
@@ -176,6 +178,7 @@ public class Auction implements Comparable<Auction> {
 			//System.out.println("The winner is " + currentHighest.getCustomer().usernameIdString());
 			currentHighest.getCustomer().addWinningBid(currentHighest);
 		}
+		this.item.setAvailable(true);
 	}
 	
 	public void clearActiveBids() {
@@ -201,6 +204,33 @@ public class Auction implements Comparable<Auction> {
 		System.out.println();
 	}
 	
+	public int findNextNum() {
+		int completed = 0;
+		int active = 0;
+		int future = 0;
+		if (Driver.completedAuctions != null) {
+			completed = Driver.completedAuctions.get(Driver.completedAuctions.size() - 1).getAuctionID();
+		}
+		if (Driver.ongoingAuctions != null) {
+			active = Driver.ongoingAuctions.get(Driver.ongoingAuctions.size() - 1).getAuctionID();
+		}
+		if (Driver.futureAuctions != null) {
+			future = Driver.futureAuctions.get(Driver.futureAuctions.size() - 1).getAuctionID();
+		}
+		int[] integers = {completed, active, future};
+		return returnHighestInt(integers) + 1;
+	}
+
+	public int returnHighestInt(int[] integers) {
+		int highest = 0;
+		for (int i = 0; i < integers.length; i++) {
+			if (integers[i] > highest) {
+				highest = integers[i];
+			}
+		}
+		return highest;
+	}
+	
 	public int compareTo(Auction a) {
 		if (this.auctionID < a.auctionID) {
 			return 1;
@@ -211,7 +241,7 @@ public class Auction implements Comparable<Auction> {
 		else return 0;
 	}
 
-	private void clearProcessedBids() {
+	public void clearProcessedBids() {
 		processedBids.clear();
 	}
 

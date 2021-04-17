@@ -493,6 +493,7 @@ public class Read {
 	public static void addToDriver(ArrayList<Item> items, ArrayList<Auction> activeAuctions, ArrayList<Auction> completedAuctions, ArrayList<Auction> futureAuctions, ArrayList<Customer> customersAdded) {
 		
 		if (!items.isEmpty()) {
+			ObjectALInsertionSort.insertionSort(items);
 			for (int i = 0; i < items.size(); i++) {
 				if (!searchDriver(Driver.items, items.get(i))) {
 					Driver.items.add(items.get(i));
@@ -501,6 +502,7 @@ public class Read {
 		}
 		
 		for (int i = 0; i < activeAuctions.size(); i++) {
+			ObjectALInsertionSort.insertionSort(activeAuctions);
 			if (!activeAuctions.isEmpty()) {
 				if (!searchDriver(Driver.ongoingAuctions, activeAuctions.get(i))) {
 					Driver.ongoingAuctions.add(activeAuctions.get(i));
@@ -509,6 +511,7 @@ public class Read {
 		}
 		
 		for (int i = 0; i < completedAuctions.size(); i++) {
+			ObjectALInsertionSort.insertionSort(completedAuctions);
 			if (!completedAuctions.isEmpty()) {
 				if (!searchDriver(Driver.completedAuctions, completedAuctions.get(i))) {
 					Driver.completedAuctions.add(completedAuctions.get(i));
@@ -517,6 +520,7 @@ public class Read {
 		}
 		
 		for (int i = 0; i < futureAuctions.size(); i++) {
+			ObjectALInsertionSort.insertionSort(futureAuctions);
 			if (!futureAuctions.isEmpty()) {
 				if (!searchDriver(Driver.futureAuctions, futureAuctions.get(i))) {
 					Driver.futureAuctions.add(futureAuctions.get(i));
@@ -525,6 +529,7 @@ public class Read {
 		}
 		
 		for (int i = 0; i < customersAdded.size(); i++) {
+			ObjectALInsertionSort.insertionSort(customersAdded);
 			if (!customersAdded.isEmpty()) {
 				Driver.accounts.add(customersAdded.get(i));
 			}
