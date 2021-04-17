@@ -299,7 +299,9 @@ public class Read {
 		// this auction object a dynamic one or not
 		if (info.length > 7 && Integer.parseInt(info[8]) == 1) {
 			openingTime = LocalDateTime.now();
-			closingTime = LocalDateTime.of(openingTime.toLocalDate(), LocalTime.of(openingTime.getHour(), openingTime.getMinute() + 2));
+			LocalTime now = LocalTime.now();
+			closingTime = openingTime.plusMinutes(2);
+			
 		}
 		else {
 			openingTime = createDateTime(info[6]);

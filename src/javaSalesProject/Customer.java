@@ -34,13 +34,11 @@ public class Customer extends Account implements Comparable<Customer> {
 		this.balance = balance;
 	}
 	
-	
 	public String toString() {
 		return "Username: " + username + "\n" +
 				"Password: " + password + "\n" + 
 				"Balance: " + balance + "\n";
 	}
-
 	
 	public void printActiveBids() {
 		if (activeBids.size() == 0) {

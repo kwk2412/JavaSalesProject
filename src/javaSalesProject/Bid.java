@@ -68,6 +68,7 @@ public class Bid implements Comparable<Bid> {
 		return "\tItem name: " + auction.getItem().getName() + "\n" + 
 				"\tCustomer Username: " + customer.getUsername() + "\n" +
 				"\tBid amount: " + cf.format(value) + "\n" +
+				"\tBid ID: " + getBidID() + "\n" +
 				"\tAuction ID: " + auction.getAuctionID() + "\n" + 
 				"\tTime of bid: " + dtf.format(dateTime) + "\n";
 	}
@@ -128,26 +129,30 @@ public class Bid implements Comparable<Bid> {
 	
 	public ArrayList<Bid> gatherBids() {
 		ArrayList<Bid> bids = new ArrayList<>();
-		for (int i = 0; i < Driver.completedAuctions.size(); i++) {
-			for (int j = 0; j < Driver.completedAuctions.get(i).getProcessedBids().size(); i++) {
-				Stack<Bid> clone = Driver.completedAuctions.get(i).getProcessedBids().clone();
-				while (clone.size() > 0) {
-					bids.add(clone.pop());
+		if (!Driver.completedAuctions.isEmpty()) {
+			for (int i = 0; i < Driver.completedAuctions.size(); i++) {
+				for (int j = 0; j < Driver.completedAuctions.get(i).getProcessedBids().size(); j++) {
+					Stack<Bid> clone = Driver.completedAuctions.get(i).getProcessedBids().clone();
+					while (clone.size() > 0) {
+						bids.add(clone.pop());
+					}
 				}
 			}
 		}
 
-		for (int i = 0; i < Driver.ongoingAuctions.size(); i++) {
-			for (int j = 0; j < Driver.ongoingAuctions.get(i).getProcessedBids().size(); i++) {
-				Stack<Bid> clone = Driver.ongoingAuctions.get(i).getProcessedBids().clone();
-				while (clone.size() > 0) {
-					bids.add(clone.pop());
+		if (!Driver.ongoingAuctions.isEmpty()) {
+			for (int i = 0; i < Driver.ongoingAuctions.size(); i++) {
+				for (int j = 0; j < Driver.ongoingAuctions.get(i).getProcessedBids().size(); i++) {
+					Stack<Bid> clone = Driver.ongoingAuctions.get(i).getProcessedBids().clone();
+					while (clone.size() > 0) {
+						bids.add(clone.pop());
+					}
 				}
-			}
-			for (int j = 0; j < Driver.ongoingAuctions.get(i).getUnprocessedBids().size(); i++) {
-				Queue<Bid> clone = Driver.ongoingAuctions.get(i).getUnprocessedBids().clone();
-				while (clone.size() > 0) {
-					bids.add(clone.dequeue());
+				for (int j = 0; j < Driver.ongoingAuctions.get(i).getUnprocessedBids().size(); i++) {
+					Queue<Bid> clone = Driver.ongoingAuctions.get(i).getUnprocessedBids().clone();
+					while (clone.size() > 0) {
+						bids.add(clone.dequeue());
+					}
 				}
 			}
 		}
