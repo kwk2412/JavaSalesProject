@@ -105,22 +105,23 @@ public class Write {
 		for (int i = 0; i < completedAuctions.size(); i++) {
 			Stack<Bid> completedBids = completedAuctions.get(i).getProcessedBids().clone();
 			
-			for (int j = 0; j < completedBids.size(); j++)	{
+			while (completedBids.size() > 0) {
 				bids.add((Bid) completedBids.pop());
 			}
 		}
 		
 		for (int i = 0; i < activeAuctions.size(); i++) {
-			if (activeAuctions.get(i).getProcessedBids().size() != 0) {
+			if (!activeAuctions.get(i).getProcessedBids().isEmpty()) {
 				Stack<Bid> processedBids = activeAuctions.get(i).getProcessedBids().clone();
-				bids.add((Bid) processedBids.pop());
-				
-				for (int j = 0; j < processedBids.size(); j++)	{
+				//bids.add((Bid) processedBids.pop());
+				while (processedBids.size() > 0) {
 					bids.add((Bid) processedBids.pop());
 				}
+					
+				
 			}
 			
-			if (activeAuctions.get(i).getUnprocessedBids().size() != 0) {
+			if (!activeAuctions.get(i).getUnprocessedBids().isEmpty()) {
 				Queue<Bid> unprocessedBids = activeAuctions.get(i).getUnprocessedBids().clone();
 				for (int j = 0; j < unprocessedBids.size(); j++) {
 					bids.add((Bid) unprocessedBids.dequeue());
