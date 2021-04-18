@@ -209,13 +209,13 @@ public class Auction implements Comparable<Auction> {
 		int completed = 0;
 		int active = 0;
 		int future = 0;
-		if (Driver.completedAuctions != null) {
+		if (Driver.completedAuctions.size() != 0) {
 			completed = Driver.completedAuctions.get(Driver.completedAuctions.size() - 1).getAuctionID();
 		}
-		if (Driver.ongoingAuctions != null) {
+		if (Driver.ongoingAuctions.size() != 0) {
 			active = Driver.ongoingAuctions.get(Driver.ongoingAuctions.size() - 1).getAuctionID();
 		}
-		if (Driver.futureAuctions != null) {
+		if (Driver.futureAuctions.size() != 0) {
 			future = Driver.futureAuctions.get(Driver.futureAuctions.size() - 1).getAuctionID();
 		}
 		int[] integers = {completed, active, future};
