@@ -21,7 +21,7 @@ public class Driver {
 	static ArrayList<Auction> ongoingAuctions; // All active auctions
 	static ArrayList<Auction> completedAuctions; // Auctions that have finished
 	static ArrayList<Auction> futureAuctions;
-	private static final LocalTime OPENTIME = LocalTime.of(12, 0);
+	private static final LocalTime OPENTIME = LocalTime.of(9, 0);
 	private static final LocalTime CLOSETIME = LocalTime.of(17, 0);
 
 	public static void main(String[] args) {
