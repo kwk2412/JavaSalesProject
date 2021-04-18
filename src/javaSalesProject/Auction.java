@@ -1,9 +1,7 @@
 package javaSalesProject;
 
-import java.time.LocalDateTime;
 import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -11,7 +9,8 @@ import java.time.format.DateTimeFormatter;
  * @author waveo Auctions will be filled with bid objects
  *
  */
-public class Auction implements Comparable<Auction>{
+
+public class Auction implements Comparable<Auction> {
 
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd, YYYY h:mm a");
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
@@ -43,40 +42,53 @@ public class Auction implements Comparable<Auction>{
 
 	public Auction(Item item) {
 		this.item = item;
+		item.setAvailable(false);
 	}
 	
 	public Auction(Item item, LocalDateTime startDateTime, LocalDateTime endDateTime) {
 		this.item = item;
+		item.setAvailable(false);
 		currentHighest = null;
 		currentSalesPrice = item.getStartingPrice();
 		increment = item.getIncrement();
-		auctionID = nextNum;
-		Driver.items.remove(item);
+		auctionID = findNextNum();
+		//Driver.items.remove(item);
 		nextNum++;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 	}
-	
-	public Auction(Item item, int auctionID) {
+
+	public Auction(Item item, int auctionID, LocalDateTime startDateTime,  LocalDateTime endDateTime) {
 		this.item = item;
 		this.auctionID = auctionID;
 		currentHighest = null;
-		currentSalesPrice = item.getStartingPrice();
-		increment = item.getIncrement();
+		if (item != null) {
+			currentSalesPrice = item.getStartingPrice();
+			increment = item.getIncrement();
+			item.setAvailable(false);
+		}
+		else {
+			currentSalesPrice = 0;
+			increment = 0;
+		}
 		//Driver.items.remove(item);
 		active = true;
+		this.startDateTime = startDateTime;
+		this.endDateTime = endDateTime;
 	}
-	
-	public Auction(Item item, int auctionID, double currentSalesPrice) {
+
+	public Auction(Item item, int auctionID, double currentSalesPrice, LocalDateTime startDateTime, LocalDateTime endDateTime) {
 		this.item = item;
+		item.setAvailable(false);
 		this.auctionID = auctionID;
 		currentHighest = null;
 		this.currentSalesPrice = currentSalesPrice;
 		increment = item.getIncrement();
 		//Driver.items.remove(item);
 		active = true;
+		this.startDateTime = startDateTime;
+		this.endDateTime = endDateTime;
 	}
-	
 
 	public String toString() {
 		NumberFormat cf = NumberFormat.getCurrencyInstance();
@@ -103,13 +115,12 @@ public class Auction implements Comparable<Auction>{
 		}
 		return result;
 	}
-
+	
+	//Has this bug been fixed?
 	// Something is eliminating an invalid bid and the following one
 	// causing the out of bounds exception when you go to continue the auction
 	// without any bids left to process
-
 	public void automateAuction() {
-
 		while (unprocessedBids.size() > 0) {
 			process(unprocessedBids.dequeue());
 		}
@@ -121,14 +132,16 @@ public class Auction implements Comparable<Auction>{
 		else if (isValid(bid)) {
 			if (bid.getValue() <= currentHighest.getValue()) {
 				currentSalesPrice = bid.getValue();
-			} else {
+			}
+			else {
 				currentSalesPrice = currentHighest.getValue();
 				currentHighest = bid;
 			}
 			bid.getCustomer().addCurrentBid(bid); // Add bid to Customer's list of bids
 			processedBids.push(bid); // Add list to Auction's list of bids
 			numBids++;
-		} else {
+		}
+		else {
 			System.out.println("Invalid bid");
 		}
 	}
@@ -137,7 +150,8 @@ public class Auction implements Comparable<Auction>{
 		if (bid.getValue() >= (currentSalesPrice + increment)) {
 			bid.setValid(true);
 			return bid.isValid();
-		} else {
+		}
+		else {
 			return false;
 		}
 	}
@@ -149,7 +163,8 @@ public class Auction implements Comparable<Auction>{
 			currentHighest = processedBids.peek();
 			numBids++;
 			bid.setValid(true);
-		} else {
+		}
+		else {
 			System.out.println("First bid must be at least the sales price of the item\n");
 		}
 	}
@@ -164,24 +179,15 @@ public class Auction implements Comparable<Auction>{
 			//System.out.println("The winner is " + currentHighest.getCustomer().usernameIdString());
 			currentHighest.getCustomer().addWinningBid(currentHighest);
 		}
+		this.item.setAvailable(true);
 	}
-
 	
 	public void clearActiveBids() {
-		Stack<Bid> copy = new Stack<>();
-		copy = processedBids;
-
+		Stack<Bid> copy = processedBids.clone();
 		while (copy.size() > 0) {
 			Bid b = copy.pop();
 			b.getCustomer().removeActiveBid(b);
 		}
-
-		/*
-		 * System.out.
-		 * println("To ensure that the original stack was untouched in the process of clearing active bids"
-		 * ); for (int i = processedBids.size(); i > 0; i--) {
-		 * System.out.println(processedBids.pop().toString()); }
-		 */
 	}
 
 	public void printAuctionStatus() {
@@ -199,8 +205,44 @@ public class Auction implements Comparable<Auction>{
 		System.out.println();
 	}
 	
+	public int findNextNum() {
+		int completed = 0;
+		int active = 0;
+		int future = 0;
+		if (Driver.completedAuctions != null) {
+			completed = Driver.completedAuctions.get(Driver.completedAuctions.size() - 1).getAuctionID();
+		}
+		if (Driver.ongoingAuctions != null) {
+			active = Driver.ongoingAuctions.get(Driver.ongoingAuctions.size() - 1).getAuctionID();
+		}
+		if (Driver.futureAuctions != null) {
+			future = Driver.futureAuctions.get(Driver.futureAuctions.size() - 1).getAuctionID();
+		}
+		int[] integers = {completed, active, future};
+		return returnHighestInt(integers) + 1;
+	}
 
-	private void clearProcessedBids() {
+	public int returnHighestInt(int[] integers) {
+		int highest = 0;
+		for (int i = 0; i < integers.length; i++) {
+			if (integers[i] > highest) {
+				highest = integers[i];
+			}
+		}
+		return highest;
+	}
+	
+	public int compareTo(Auction a) {
+		if (this.auctionID < a.auctionID) {
+			return 1;
+		}
+		else if (this.auctionID > a.auctionID) {
+			return -1;
+		}
+		else return 0;
+	}
+
+	public void clearProcessedBids() {
 		processedBids.clear();
 	}
 
@@ -285,10 +327,5 @@ public class Auction implements Comparable<Auction>{
 		this.endDateTime = endDateTime;
 	}
 
-	@Override
-	public int compareTo(Auction o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

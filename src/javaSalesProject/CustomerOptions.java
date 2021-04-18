@@ -37,30 +37,15 @@ public class CustomerOptions {
 			
 			//Pay for an item that I won
 			else if (choice == 5) {
-				if (c.getWinningBids().size()>=1) {
-					payForWonAuction(c);
+				if (!c.allPaidFor()) {
+					c.payForWonAuction();
 				}
+				else System.out.println("You have items to pay for.");
 			}
 			
 			//Return to main menu
 			else if (choice == 6) {
 				menu = false;
-			}
-		}
-	}
-	
-	private static void payForWonAuction(Customer c) {
-		NumberFormat cf = NumberFormat.getCurrencyInstance();
-		System.out.println("Customer balance: " + cf.format(c.getBalance()));
-		int choice = Menu.selectWinningAuction(c);
-		if (choice >= 0) {
-			if (c.getBalance() >= c.getWinningBids().get(choice).getAuction().getCurrentSalesPrice()) {
-				c.setBalance(c.getBalance()-c.getWinningBids().get(choice).getAuction().getCurrentSalesPrice());
-				System.out.println("Transaction accepted:");
-				System.out.println("	Customer balance after transaction: " +  cf.format(c.getBalance()));
-			}
-			else if (c.getBalance() < c.getWinningBids().get(choice).getAuction().getCurrentSalesPrice()) {
-				System.out.println("Transaction declined: Balance is lower than sales price.");
 			}
 		}
 	}

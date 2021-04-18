@@ -1,9 +1,10 @@
 package javaSalesProject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Customer extends Account {
+public class Customer extends Account implements Comparable<Customer> {
 
 	private ArrayList<Bid> activeBids = new ArrayList<Bid>();
 	private ArrayList<Bid> winningBids = new ArrayList<Bid>();
@@ -17,7 +18,7 @@ public class Customer extends Account {
 
 	public Customer(String username, String password, String privileges) {
 		super(username, password, privileges);
-		Driver.accounts.add(this);
+		//Driver.accounts.add(this);
 	}
 
 	// Constructor used when (re)creating accounts imported from a text file
@@ -33,13 +34,11 @@ public class Customer extends Account {
 		this.balance = balance;
 	}
 	
-	
 	public String toString() {
 		return "Username: " + username + "\n" +
 				"Password: " + password + "\n" + 
 				"Balance: " + balance + "\n";
 	}
-
 	
 	public void printActiveBids() {
 		if (activeBids.size() == 0) {
@@ -74,6 +73,7 @@ public class Customer extends Account {
 
 	public void addCurrentBid(Bid bid) {
 		activeBids.add(bid);
+		historicBids.add(bid);
 	}
 
 	public void removeActiveBid(Bid bid) {
@@ -107,11 +107,50 @@ public class Customer extends Account {
 			System.out.println("There are no ongoing auctions");
 		}
 	}
+	
+	public void payForWonAuction() {
+		NumberFormat cf = NumberFormat.getCurrencyInstance();
+		System.out.println("Customer balance: " + cf.format(getBalance()));
+		int choice = Menu.selectWinningAuction(this);
+		if (choice >= 0) {
+			if (getBalance() >= getWinningBids().get(choice).getAuction().getCurrentSalesPrice()) {
+				setBalance(getBalance() - getWinningBids().get(choice).getAuction().getCurrentSalesPrice());
+				getWinningBids().get(choice).getAuction().getItem().setPaidFor(true);
+				System.out.println("Transaction accepted:");
+				System.out.println("	Customer balance after transaction: " +  cf.format(getBalance()));
+			}
+			else if (getBalance() < getWinningBids().get(choice).getAuction().getCurrentSalesPrice()) {
+				System.out.println("Transaction declined: Balance is lower than sales price.");
+			}
+		}
+	}
 
+	public boolean allPaidFor() {
+		if (winningBids.size() > 0) { 
+			for (int i = 0; i < winningBids.size(); i++) {
+				if (!winningBids.get(i).getAuction().getItem().isPaidFor()) 
+					return false;
+			}
+			return true;
+		}
+		return false;
+	}
+	
 	public void addWinningBid(Bid bid) {
 		winningBids.add(bid);
 	}
-
+	
+	public int compareTo(Customer o) {
+		if (this.userID < o.userID) {
+			return 1;
+		}
+		else if (this.userID > o.userID) {
+			return -1;
+		}
+		else
+			return 0;
+	}	
+	
 	public ArrayList<Bid> getActiveBids() {
 		return activeBids;
 	}
@@ -142,6 +181,6 @@ public class Customer extends Account {
 
 	public void setBalance(double balance) {
 		this.balance = balance;
-	}	
+	}
 
 }

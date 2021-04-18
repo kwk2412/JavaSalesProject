@@ -14,11 +14,12 @@ public class Menu {
 				+ "3. Print items ArrayList\n" 
 				+ "4. Log in as administrator\r\n" 
 				+ "5. Log in as customer\r\n"
-				+ "6. Run automated auction for checkpoint C\n"
-				+ "7. Exit the application\r\n";
+				+ "6. Load information from external file\n"
+				+ "7. Save program's status to external file\n"
+				+ "8. Exit the application\r\n";
 
 
-		int choice = InputMethods.getIntFromMenu(1, 7, menu);
+		int choice = InputMethods.getIntFromMenu(1, 9, menu);
 		return choice;
 	}
 
@@ -91,12 +92,14 @@ public class Menu {
 		return choice;
 	}
 
-	// returns the idex of the item chosen
+	// returns the index of the item chosen
 	public static int pickItemMenu() {
 		if (Driver.items.size() > 0) {
 			String menu = "Select the item to be sold:\n";
 			for (int i = 0; i < Driver.items.size(); ++i) {
-				menu += (i + 1) + ". " + Driver.items.get(i).toString() + "\n";
+				if (Driver.items.get(i).isAvailable()) {
+					menu += (i + 1) + ". " + Driver.items.get(i).toString() + "\n";
+				}
 			}
 			int choice = InputMethods.getIntOrReturnNeg1(1, Driver.items.size(), menu);
 			if(choice > 0) {
@@ -123,11 +126,13 @@ public class Menu {
 	
 	public static int selectWinningAuction(Customer c) {
 
-		String menu = "Select an auction that you have won:\n";
+		System.out.println("Select an auction that you have won: ");
 		for (int i = 0; i < c.getWinningBids().size(); ++i) {
-			menu += (i + 1) + ". " + c.getWinningBids().get(i).getAuction().toString() + "\n";
+			if (!c.getWinningBids().get(i).getAuction().getItem().isPaidFor()) {
+				System.out.println((i + 1) + ". " + c.getWinningBids().get(i).getAuction().toString());
+			}
 		}
-		int userSelection = InputMethods.getIntOrReturnNeg1(1, c.getWinningBids().size(), menu);
+		int userSelection = InputMethods.validateInput(1, c.getWinningBids().size());
 		if(userSelection > 0) {
 			return (userSelection - 1);
 		}

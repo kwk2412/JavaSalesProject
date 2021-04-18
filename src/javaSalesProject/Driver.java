@@ -24,8 +24,6 @@ public class Driver {
 	private static final LocalTime CLOSETIME = LocalTime.of(17, 0);
 
 	public static void main(String[] args) {
-
-		init();
 		
 		//Read.read();
 
@@ -57,6 +55,8 @@ public class Driver {
 		 * System.out.println("Current Highest Bid: " +
 		 * auction.getCurrentHighest().getValue()); }
 		 */
+
+		init();
 
 		while (running) {
 			if (currentUser.getUser().getUserID() == 1)
@@ -113,7 +113,6 @@ public class Driver {
 		System.out.println();
 
 		auction.automateAuction();
-
 	}
 
 	public static boolean loginAttemptCheck(boolean menu) {
@@ -144,6 +143,7 @@ public class Driver {
 
 	}
 
+	
 	public static void printItems() {
 		if (items.size() == 0)
 			SystemMessage.print("Items ArrayList is empty");
@@ -155,6 +155,7 @@ public class Driver {
 	public static void loadInventory() {
 		items.add(new Item(130, "Nintendo GameCube", 10));
 		items.add(new Item(160, "Sony PlayStation", 10));
+		/*
 		items.add(new Item(150, "Nintendo GameBoy", 5));
 		items.add(new Item(170, "Microsoft Xbox", 10));
 		items.add(new Item(125, "Nintendo 64", 5));
@@ -171,6 +172,7 @@ public class Driver {
 		items.add(new Item(200, "Sony PlayStation 3", 15));
 		items.add(new Item(130, "Sega GameGear", 10));
 		items.add(new Item(250, "Microsoft Xbox One", 15));
+		*/
 	}
 
 	public static void loadAuctions() {
@@ -197,27 +199,27 @@ public class Driver {
 		completedAuctions = new ArrayList<Auction>();
 		futureAuctions = new ArrayList<Auction>();
 		loadInventory();
+		timer();
+		//currentUser.setUser(new Admin("Clay", "p", "admin"));
+	}
+	
+	public static void timer() {
 		timer = new Timer(1000, null);
 		timer.addActionListener(new ActionListener() {
-
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				checkTime();
-
 			}
-
 		});
-		timer.start();
-		loadAuctions();
 		
-		if(isOpen()) {
+		timer.start();
+		//loadAuctions();
+
+		if (isOpen()) {
 			opening = true;
-		} else {
+		}
+		else {
 			opening = false;
 		}
-
-		currentUser.setUser(new Admin("Clay", "p", "admin"));
-
 	}
 
 	// This method is called everytime the actionlistener hears the timer
@@ -233,6 +235,9 @@ public class Driver {
 		}
 	}
 
+	/*
+	 * Puts stuff into the Driver.ongoingAuctions
+	 */
 	private static void checkForEndingAuctions() {
 		for (int i = 0; i < ongoingAuctions.size(); ++i) {
 			if (ongoingAuctions.get(i).getEndDateTime().isBefore(LocalDateTime.now())) {
@@ -268,7 +273,8 @@ public class Driver {
 	public static boolean isOpen() {
 		if (LocalTime.now().isAfter(OPENTIME) && LocalTime.now().isBefore(CLOSETIME)) {
 			return true;
-		} else {
+		}
+		else {
 			return false;
 		}
 	}

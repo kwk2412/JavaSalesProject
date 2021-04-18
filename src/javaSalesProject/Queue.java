@@ -1,5 +1,7 @@
 package javaSalesProject;
 
+import java.util.ArrayList;
+
 public class Queue<E> {
 	
 	private class Node {
@@ -229,40 +231,50 @@ public class Queue<E> {
 	}
 	
 	
+	public Queue<E> clone() {
+		Queue<E> copy = new Queue<>();
+		if (!isEmpty()) {
+			copy.first = new Node(this.first.item, null, null);
+			copy.last = copy.first;
+			
+			int counter = 1;
+			while (counter < this.size()) {
+				copy.enqueue(this.get(counter));
+				counter++;
+			}
+		}
+		return copy;
+	}
+	
+	
+	public ArrayList<E> toArrayList() {
+		ArrayList<E> list = new ArrayList<>();
+		for (int i = 0; i < this.size(); i++) {
+			list.add(get(i));
+		}
+		return list;
+	}
+	
+	
 	public static void main(String[] args) {
 		
 		Queue<Item> items = new Queue<>();
-		Queue<Bid> bids = new Queue<>();
+		
 		
 		Item a = new Item(25, "a", 12);
 		Item b = new Item(13, "b", 21);
 		Item c = new Item(64, "c", 26);
 		
-		Bid b1 = new Bid(0);
-		Bid b2 = new Bid(0);
-		Bid b3 = new Bid(0);
-		Bid b4 = new Bid(0);
 		
 		items.enqueue(a);
 		items.enqueue(b);
 		items.enqueue(c);
 		
-		items.dequeue();
-		items.dequeue();
-		items.dequeue();
+		Queue<Item> clone = items.clone();
 		
-		bids.enqueue(b1);
-		bids.enqueue(b2);
-		bids.enqueue(b3);
-		bids.enqueue(b4);
-		
-		bids.dequeue();
-		bids.dequeue();
-		bids.dequeue();
-		bids.dequeue();
-		
-		System.out.println("Now we attempt the dequeue when there is nothing to dequeue");
-		items.dequeue();
+		clone.dequeue();
+		clone.dequeue();
+		clone.dequeue();
 
 	}
 

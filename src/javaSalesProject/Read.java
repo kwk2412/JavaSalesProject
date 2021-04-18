@@ -6,10 +6,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
-
-
 
 /**
  * This can read information from a text file and create objects that the program can manipulate.
@@ -28,24 +29,28 @@ import java.util.StringTokenizer;
  * Wendy,password,5,9000,5#7,2#7#8#11#5,5#7#18#3#2#7#8#11#5
  * }
  * 
- * startingPrice, name, increment, itemID
- * 130,Nintendo GameCube,10,100|
- * 160,Sony PlayStation,10,101|
- * 150,Nintendo GameBoy,5,102
+ * startingPrice,name,increment,itemID,isPaidFor
+ * 130,Nintendo GameCube,10,100,0|
+ * 160,Sony PlayStation,10,101,0|
+ * 150,Nintendo GameBoy,5,102,1
  * }
  * 
- * auctionID,itemID,sellingPrice,currentHighest,processedBids,unprocessedBids
- * 1000,100,890,504,503#507#508,510#511#512|
- * 1003,101,710,518,523#525#526#527,528
+ * auctionID,itemID,sellingPrice,currentHighest,processedBids,unprocessedBids,openingTime,closingTime
+ * 1000,100,890,504,503#507#508,510#511#512,2020#4#8#9#0#0,2020#4#15#17#0#0|
+ * 1003,101,710,518,523#525#526#527,528,2020#4#11#9#0#0,2020#4#13#17#0#0
  * 
- * auctionID,itemID,sellingPrice,winningBid,historicBids
- * 1002,102,650,518,513#514#515,516#517#518
+ * auctionID,itemID,sellingPrice,winningBid,historicBids,openingTime,closingTime
+ * 1002,102,650,518,513#514#515,516#517#518,
  * }
  * 
- * bidValue,auctionID,customerID,bidID
- * 140,0,3,500|
- * 155,0,4,501|
- * 165,0,5,502
+ * auctionID, itemID, openingTime, closingTime
+ * 1004,103,2020#4#9#12#0#0,2020#4#9#14#0#0
+ * }
+ * 
+ * bidValue,auctionID,customerID,bidID,year,month,day,hour,minute,second
+ * 140,0,3,500,2020#4#8#11#0#0|
+ * 155,0,4,501,2020#4#8#11#2#0|
+ * 165,0,5,502,2020#4#8#11#3#0
  * }
  * @author waveo
  *
@@ -56,6 +61,9 @@ public class Read {
 	// BEEN THOUROUGHLY TESTED AND RELIABLY WORKS
 	public static void main(String[] args) {
 		Driver.accounts = new ArrayList<Account>();
+		Driver.ongoingAuctions = new ArrayList<Auction>();
+		Driver.completedAuctions = new ArrayList<Auction>();
+		Driver.futureAuctions = new ArrayList<Auction>();
 		Driver.items = new ArrayList<Item>();
 		read();
 	}
@@ -96,6 +104,8 @@ public class Read {
 		// 4. Create objects based off of the information stored in the arrays
 		//    and adds them to the rest of the program
 		createObjects(blockArrays);
+		
+		System.out.println("No errors in the importing process");
 	}
 	
 	
@@ -103,14 +113,19 @@ public class Read {
 		// Creates items
 		ArrayList<Item> items = new ArrayList<Item>();
 		for (int i = 0; i < blockArrays.get(1).length; i++) {
-			items.add(createItem(blockArrays.get(1)[i], items));
+			if (blockArrays.get(1).length != 0) {
+				items.add(createItem(blockArrays.get(1)[i], items));
+			}
+			
 		}
 
 		// Creates active auctions
 		ArrayList<Auction> activeAuctions = new ArrayList<>();
 		ArrayList<String[]> auctionBidBuffer = new ArrayList<>();
 		for (int i = 0; i < blockArrays.get(2).length; i++) {
-			auctionBidBuffer.add(createActiveAuction(blockArrays.get(2)[i], items, activeAuctions));
+			if  (blockArrays.get(2).length != 0) {
+				auctionBidBuffer.add(createActiveAuction(blockArrays.get(2)[i], items, activeAuctions));
+			}
 		}
 
 		// Creates completed auctions
@@ -118,7 +133,19 @@ public class Read {
 		ArrayList<String> completedAuctionBuffer = new ArrayList<>();
 		if (blockArrays.get(3)[0] != null) {
 			for (int i = 0; i < blockArrays.get(3).length; i++) {
-				completedAuctionBuffer.add(createCompletedAuction(blockArrays.get(3)[i], items, completedAuctions));
+				if (blockArrays.get(3).length != 0) {
+					completedAuctionBuffer.add(createCompletedAuction(blockArrays.get(3)[i], items, completedAuctions));
+				}
+			}
+		}
+		
+		//Creates future auctions
+		ArrayList<Auction> futureAuctions = new ArrayList<>();
+		if (blockArrays.get(4)[0] != null) {
+			for (int i = 0; i < blockArrays.get(4).length; i++) {
+				if (blockArrays.get(4).length != 0) {
+					futureAuctions.add(createFutureAuction(blockArrays.get(4)[i], items));
+				}
 			}
 		}
 
@@ -127,20 +154,25 @@ public class Read {
 		ArrayList<Customer> customersAdded = new ArrayList<>();
 		ArrayList<String[]> customerBidBuffer = new ArrayList<>();
 		for (int i = 0; i < blockArrays.get(0).length; i++) {
-			String[] bidInfo = createCustomer(blockArrays.get(0)[i], customersAdded);
-			customerBidBuffer.add(bidInfo);
+			if (blockArrays.get(0)[0] != null) {
+				String[] bidInfo = createCustomer(blockArrays.get(0)[i], customersAdded);
+				customerBidBuffer.add(bidInfo);
+			}
+			
 		}
 
 		// Creates an ArrayList that stores all of the bids found in the text file
 		ArrayList<Bid> bids = new ArrayList<>();
-		for (int i = 0; i < blockArrays.get(4).length; i++) {
-			bids.add(createBid(blockArrays.get(4)[i], customersAdded, activeAuctions, completedAuctions));
+		for (int i = 0; i < blockArrays.get(5).length; i++) {
+			if (blockArrays.get(5)[0] != null) {
+				bids.add(createBid(blockArrays.get(5)[i], customersAdded, activeAuctions, completedAuctions));
+			}
 		}
 		
 		populateCustomerBids(customersAdded, customerBidBuffer, bids);
 		populateAuctionBids(activeAuctions, auctionBidBuffer, bids);
 		populateCompletedAuctionBids(completedAuctionBuffer, completedAuctions, bids);
-		addToDriver(items, activeAuctions, completedAuctions, customersAdded);
+		addToDriver(items, activeAuctions, completedAuctions, futureAuctions, customersAdded);
 	}
 	
 	
@@ -205,48 +237,28 @@ public class Read {
 		String[] bidInfo = createBidInfo(info);
 		return bidInfo;
 	}
-	
-	
-	public static String nullCheckString(String[] info, int index) {
-		if (!info[index].equals("")) {
-			return info[index];
-		}
-		else return null;
-	}
-	
-	
-	public static int nullCheckInteger(String[] info, int index) {
-		if (!info[index].equals("")) {
-			return Integer.parseInt(info[index]);
-		}
-		else return 0;
-	}
-	
-	
-	public static double nullCheckDouble(String[] info, int index) {
-		if (!info[index].equals("")) {
-			return Double.parseDouble(info[index]);
-		}
-		else return 0.0;
-	}
-	
+
 	public static String[] createBidInfo(String[] info) {
 		String[] bidInfo = new String[3];
-		if(!info[4].equals("")) {
-			bidInfo[0] = info[4];
+		
+		if (info.length > 4) {
+			if(!info[4].equals("")) {
+				bidInfo[0] = info[4];
+			}
+			else
+				bidInfo[0] = "";
+			if (!info[5].equals("")) {
+				bidInfo[1] = info[5];
+			}
+			else
+				bidInfo[1] = "";
+			if (!info[6].equals("")) {
+				bidInfo[2] = info[6];
+			}
+			else 
+				bidInfo[2] = "";
 		}
-		else
-			bidInfo[0] = "";
-		if (!info[5].equals("")) {
-			bidInfo[1] = info[5];
-		}
-		else
-			bidInfo[1] = "";
-		if (!info[6].equals("")) {
-			bidInfo[2] = info[6];
-		}
-		else 
-			bidInfo[2] = "";
+		
 		return bidInfo;
 	}
 	
@@ -257,8 +269,11 @@ public class Read {
 	 */
 	public static Item createItem(String data, ArrayList<Item> items) {
 		String[] info = toArray(data);
+		boolean paidFor = false;
+		int paidForFlag = nullCheckInteger(info, 4);
+		if (paidForFlag == 1) paidFor = true;
 		//Driver.items.add(new Item(Integer.parseInt(info[0]), info[1], Integer.parseInt(info[2])));
-		Item item = new Item(Double.parseDouble(info[0]), info[1], Integer.parseInt(info[2]), Integer.parseInt(info[3]));
+		Item item = new Item(Double.parseDouble(info[0]), info[1], Integer.parseInt(info[2]), Integer.parseInt(info[3]), paidFor);
 		return item;
 	}
 	
@@ -272,11 +287,28 @@ public class Read {
 	 */
 	public static String[] createActiveAuction(String data, ArrayList<Item> items, ArrayList<Auction> auctions) {
 		String[] info = toArray(data);
+		
+		int auctionID = nullCheckInteger(info, 0);
 		Item item = findItem(Integer.parseInt(info[1]), items);
 		double currentSellingPrice = nullCheckDouble(info, 2);
-		int auctionID = nullCheckInteger(info, 0);
+		LocalDateTime openingTime;
+		LocalDateTime closingTime;
+		Auction auction;
 		
-		Auction auction = new Auction(item, auctionID, currentSellingPrice);
+		// info[8] could be a 1 or 0 value that determines whether to make 
+		// this auction object a dynamic one or not
+		if (info.length > 7 && Integer.parseInt(info[8]) == 1) {
+			openingTime = LocalDateTime.now();
+			LocalTime now = LocalTime.now();
+			closingTime = openingTime.plusMinutes(2);
+			
+		}
+		else {
+			openingTime = createDateTime(info[6]);
+			closingTime = createDateTime(info[7]);
+		}
+		
+		auction = new Auction(item, auctionID, currentSellingPrice, openingTime, closingTime);
 		auctions.add(auction);
 		
 		String[] bidInfo = new String[2];
@@ -284,7 +316,7 @@ public class Read {
 			bidInfo[0] = info[4];
 		else
 			bidInfo[0] = null;
-		if (info.length == 6 && info[5] != null)
+		if (info.length >= 6 && info[5] != null)
 			bidInfo[1] = info[5];
 		else
 			bidInfo[1] = null;
@@ -296,11 +328,24 @@ public class Read {
 	public static String createCompletedAuction(String data, ArrayList<Item> items, ArrayList<Auction> completedAuctions) {
 		String[] info = toArray(data);
 		Item item = findItem(Integer.parseInt(info[1]), items);
-		Auction auction = new Auction(item, Integer.parseInt(info[0]));
-		items.remove(item);
+		LocalDateTime openingTime = createDateTime(info[5]);
+		LocalDateTime closingTime = createDateTime(info[6]);
+		Auction auction = new Auction(item, Integer.parseInt(info[0]), openingTime, closingTime);
+		if (item != null) item.setAvailable(false);
 		auction.setActive(false);
 		completedAuctions.add(auction);
 		return info[4];
+	}
+	
+	
+	public static Auction createFutureAuction(String data, ArrayList<Item> items) {
+		String[] info = toArray(data);
+		Item item = findItem(Integer.parseInt(info[1]), items);
+		LocalDateTime openingTime = createDateTime(info[2]);
+		LocalDateTime closingTime = createDateTime(info[3]);
+		Auction auction = new Auction(item, Integer.parseInt(info[0]), openingTime, closingTime);
+		auction.setActive(false);
+		return auction;
 	}
 	
 	
@@ -319,14 +364,16 @@ public class Read {
 	
 	public static Bid createBidActive(String data, ArrayList<Customer> customersAdded, ArrayList<Auction> auctionsAdded) {
 		String[] info = toArray(data);
-		Bid bid = new Bid(Double.parseDouble(info[0]), findAuction(Integer.parseInt(info[1]), auctionsAdded), findCustomer(Integer.parseInt(info[2]), customersAdded), Integer.parseInt(info[3]));
+		LocalDateTime dateTime = createDateTime(info[4]);
+		Bid bid = new Bid(Double.parseDouble(info[0]), findAuction(Integer.parseInt(info[1]), auctionsAdded), findCustomer(Integer.parseInt(info[2]), customersAdded), Integer.parseInt(info[3]), dateTime);
 		return bid;
 	}
 	
 	
 	public static Bid createBidCompleted(String data, ArrayList<Customer> customersAdded, ArrayList<Auction> completedAuctionsAdded) {
 		String[] info = toArray(data);
-		Bid bid = new Bid(Double.parseDouble(info[0]), findAuction(Integer.parseInt(info[1]), completedAuctionsAdded), findCustomer(Integer.parseInt(info[2]), customersAdded), Integer.parseInt(info[3]));
+		LocalDateTime dateTime = createDateTime(info[4]);
+		Bid bid = new Bid(Double.parseDouble(info[0]), findAuction(Integer.parseInt(info[1]), completedAuctionsAdded), findCustomer(Integer.parseInt(info[2]), customersAdded), Integer.parseInt(info[3]), dateTime);
 		return bid;
 	}
 	
@@ -335,17 +382,17 @@ public class Read {
 		for (int i = 0; i < customers.size(); i++) {		
 				
 			String[] winningBidIDs = {};
-			if (!bidBuffer.get(i)[0].equals("")) {
+			if (bidBuffer.get(i)[0] != null) {
 				winningBidIDs = bidBuffer.get(i)[0].split("#");
 			}
 			
 			String[] activeBidIDs = {};
-			if (!bidBuffer.get(i)[1].equals("")) {
+			if (bidBuffer.get(i)[1] != null) {
 				activeBidIDs = bidBuffer.get(i)[1].split("#");
 			}
 			
 			String[] historicBidIDs = {};
-			if (!bidBuffer.get(i)[2].equals("")) {
+			if (bidBuffer.get(i)[2] != null) {
 				historicBidIDs = bidBuffer.get(i)[2].split("#");
 			}
 				
@@ -383,59 +430,114 @@ public class Read {
 				unprocessedBidIDs = auctionBidBuffer.get(i)[1].split("#");
 			}
 			
-			if (processedBidIDs.length != 0) {
+			if (!processedBidIDs[0].equals("")) {
 				for (int j = 0; j < processedBidIDs.length; j++) {
 					auctions.get(i).getProcessedBids().push(findBid(Integer.parseInt(processedBidIDs[j]), bids));
 				}
 			}
-			
-			if (unprocessedBidIDs.length != 0) {
+
+			if (!unprocessedBidIDs[0].equals("") || unprocessedBidIDs.length == 0) {
 				for (int j = 0; j < unprocessedBidIDs.length; j++) {
 					auctions.get(i).getUnprocessedBids().enqueue(findBid(Integer.parseInt(unprocessedBidIDs[j]), bids));
 				}
 			}
-			
-			Bid highest = auctions.get(i).getProcessedBids().peek();
-			auctions.get(i).setCurrentHighest(highest);
+
+			if (!processedBidIDs[0].equals("")) {
+				Bid highest = auctions.get(i).getProcessedBids().peek();
+				auctions.get(i).setCurrentHighest(highest);
+			}
 		}
 	}
+	
 	
 	public static void populateCompletedAuctionBids(ArrayList<String> historicBids, ArrayList<Auction> completedAuctions, ArrayList<Bid> bids) {
 		for (int i = 0; i < historicBids.size(); i++) {
 			String[] bidIDs = historicBids.get(i).split("#");
 			
-			for (int j = 0; j < bidIDs.length; j++) {
-				completedAuctions.get(i).getProcessedBids().push(findBid(Integer.parseInt(bidIDs[j]), bids));
+			if (!bidIDs[0].equals("")) { 
+				for (int j = 0; j < bidIDs.length; j++) {
+					completedAuctions.get(i).getProcessedBids().push(findBid(Integer.parseInt(bidIDs[j]), bids));
+				}
+			}
+			
+			if (!completedAuctions.get(i).getProcessedBids().isEmpty()) {
+				completedAuctions.get(i).setCurrentHighest(completedAuctions.get(i).getProcessedBids().peek());
+				completedAuctions.get(i).setSellingPrice(estSellingPrice(completedAuctions.get(i), bidIDs, bids));
 			}
 		}
 	}
+
+	/*
+	 * Uses a list of bids to find establish the selling price of an item for given auction.
+	 * May not be necessary if the text file already has this information present
+	 */
+	public static double estSellingPrice(Auction auction, String[] processedBidIDs, ArrayList<Bid> bids) {
+		int search = processedBidIDs.length - 2;
+		Bid b = findBid(Integer.parseInt(processedBidIDs[search]), bids);
+		
+		
+		boolean testBoolean = b.isValid();
+		double value = b.getValue();
+		double value2 = auction.getCurrentHighest().getValue();
+		
+		boolean found = false;
+		while (!found) {
+			if (b.isValid() && b.getValue() < auction.getCurrentHighest().getValue()) {
+				auction.setSellingPrice(b.getValue());
+				found = true;
+			}
+			else search -= 1;
+		}
+		return b.getValue();
+	}
 	
 	
-	public static void addToDriver(ArrayList<Item> items, ArrayList<Auction> activeAuctions, ArrayList<Auction> completedAuctions, ArrayList<Customer> customersAdded) {
-		for (int i = 0; i < items.size(); i++) {
-			if (!items.isEmpty()) {
-				Driver.items.add(items.get(i));
+	public static void addToDriver(ArrayList<Item> items, ArrayList<Auction> activeAuctions, ArrayList<Auction> completedAuctions, ArrayList<Auction> futureAuctions, ArrayList<Customer> customersAdded) {
+		
+		if (!items.isEmpty()) {
+			ObjectALInsertionSort.insertionSort(items);
+			for (int i = 0; i < items.size(); i++) {
+				if (!searchDriver(Driver.items, items.get(i))) {
+					Driver.items.add(items.get(i));
+				}
 			}
 		}
 		
 		for (int i = 0; i < activeAuctions.size(); i++) {
+			ObjectALInsertionSort.insertionSort(activeAuctions);
 			if (!activeAuctions.isEmpty()) {
-				Driver.ongoingAuctions.add(activeAuctions.get(i));
+				if (!searchDriver(Driver.ongoingAuctions, activeAuctions.get(i))) {
+					Driver.ongoingAuctions.add(activeAuctions.get(i));
+				}
 			}
 		}
 		
 		for (int i = 0; i < completedAuctions.size(); i++) {
+			ObjectALInsertionSort.insertionSort(completedAuctions);
 			if (!completedAuctions.isEmpty()) {
-				Driver.completedAuctions.add(completedAuctions.get(i));
+				if (!searchDriver(Driver.completedAuctions, completedAuctions.get(i))) {
+					Driver.completedAuctions.add(completedAuctions.get(i));
+				}
+			}
+		}
+		
+		for (int i = 0; i < futureAuctions.size(); i++) {
+			ObjectALInsertionSort.insertionSort(futureAuctions);
+			if (!futureAuctions.isEmpty()) {
+				if (!searchDriver(Driver.futureAuctions, futureAuctions.get(i))) {
+					Driver.futureAuctions.add(futureAuctions.get(i));
+				}
 			}
 		}
 		
 		for (int i = 0; i < customersAdded.size(); i++) {
+			ObjectALInsertionSort.insertionSort(customersAdded);
 			if (!customersAdded.isEmpty()) {
 				Driver.accounts.add(customersAdded.get(i));
 			}
 		}
 	}
+	
 	
 	public static Customer findCustomer(int customerID, ArrayList<Customer> customers) {
 		for (int i = 0; i < customers.size(); i++) {
@@ -446,6 +548,7 @@ public class Read {
 		return null;
 	}
 
+	
 	public static Auction findAuction(int auctionID, ArrayList<Auction> auctions) {
 		for (int i = 0; i < auctions.size(); i++) {
 			if (auctionID == auctions.get(i).getAuctionID()) {
@@ -455,6 +558,7 @@ public class Read {
 		return null;
 	}
 
+	
 	public static Item findItem(int itemID, ArrayList<Item> items) {
 		for (int i = 0; i < items.size(); i++) {
 			if (itemID == items.get(i).getItemID()) {
@@ -464,7 +568,7 @@ public class Read {
 		return null;
 	}
 
-	// This method always returns null
+	
 	public static Bid findBid(int bidID, ArrayList<Bid> bids) {
 		for (int i = 0; i < bids.size(); i++) {
 			if (bidID == bids.get(i).getBidID()) {
@@ -473,11 +577,74 @@ public class Read {
 		}
 		return null;
 	}
+	
+	
+	public static <E extends Comparable<E>> boolean searchDriver(ArrayList<E> driverList, E object) {
+		for (int i = 0; i < driverList.size(); i++) {
+			if (driverList.get(i).compareTo(object) == 0) {
+				return true;
+			}
+		}
+		return false;
+	}
 
+	public static String nullCheckString(String[] info, int index) {
+		try {
+			if (!info[index].equals("")) {
+				return info[index];
+			}
+			throw new NullDataException("Missing Customer data: username or password not found");
+		}
+		catch (Exception e) {
+			System.out.println("The text file didn't contain sufficient information to populate the program. "
+					+ "Check to make sure that the text file includes all necessary information.");
+		}
+		return null;
+	}
+
+	public static int nullCheckInteger(String[] info, int index) {
+		try {
+			if (!info[index].equals("")) {
+				return Integer.parseInt(info[index]);
+			}
+			throw new NullDataException("Null data at info[" + index + "]");
+		}
+		catch (Exception E) {
+			
+		}
+		return 0;
+	}
+	
+
+	public static double nullCheckDouble(String[] info, int index) {
+		if (!info[index].equals("")) {
+			return Double.parseDouble(info[index]);
+		}
+		else return 0.0;
+	}
+	
+
+	public static LocalDateTime createDateTime(String data) {
+		String[] info = data.split("#");
+		int year = Integer.parseInt(info[0]);
+		int month = Integer.parseInt(info[1]);
+		int day = Integer.parseInt(info[2]);
+		int hour = Integer.parseInt(info[3]);
+		int minute = Integer.parseInt(info[4]);
+		int second = Integer.parseInt(info[5]);
+		
+		LocalDate date = LocalDate.of(year, month, day);
+		LocalTime time = LocalTime.of(hour, minute, second);
+		LocalDateTime dateTime = LocalDateTime.of(date, time);
+		return dateTime;
+	}
+
+	
 	public static String[] toArray(String data) {
 		String[] array = data.split(",");
 		return array;
 	}
+	
 	
 	public static BufferedReader openRead() {
 		Frame f = new Frame();
@@ -504,6 +671,7 @@ public class Read {
 		}
 		return in;
 	}
+	
 	
 	public static String inputData() {
 		String concatLine = "";

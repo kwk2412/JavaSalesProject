@@ -3,7 +3,7 @@ package javaSalesProject;
 
 import java.text.NumberFormat;
 
-public class Item {
+public class Item implements Comparable<Item> {
 	
 	private double startingPrice;
 	private String name;
@@ -11,7 +11,8 @@ public class Item {
 	private int increment;
 	private int itemID;
 	private static int nextNum = 100;
-	
+	private boolean available = true;
+	private boolean paidFor;
 	
 	
 	public Item() {
@@ -29,11 +30,12 @@ public class Item {
 		nextNum++;
 	}
 	
-	public Item(double startingPrice, String name, int increment, int itemID) {
+	public Item(double startingPrice, String name, int increment, int itemID, boolean paidFor) {
 		this.startingPrice = startingPrice;
 		this.name = name;
 		this.increment = increment;
 		this.itemID = itemID;
+		this.paidFor = paidFor;
 	}
 	
 	public String toString() {
@@ -53,7 +55,16 @@ public class Item {
 	}
 	
 	
+	public int compareTo(Item e) {
+		if (e.getItemID() > this.getItemID())
+			return 1;
+		else if (e.getItemID() < this.getItemID()) 
+			return -1;
+		else
+			return 0;
+	}
 
+	
 	public double getStartingPrice() {
 		return startingPrice;
 	}
@@ -103,4 +114,24 @@ public class Item {
 		this.increment = increment;
 	}
 
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+
+
+	public boolean isPaidFor() {
+		return paidFor;
+	}
+
+
+	public void setPaidFor(boolean paidFor) {
+		this.paidFor = paidFor;
+	}
+	
 }

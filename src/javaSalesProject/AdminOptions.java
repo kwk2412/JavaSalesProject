@@ -15,28 +15,29 @@ public class AdminOptions {
 				a.showOngoingAuctions();
 			}
 
+			// List future auctions
 			else if (choice == 2) {
 				a.showFutureAuctions();
 			}
 
 			// Chose an ongoing auction and check the bidding history
 			else if (choice == 3) {
-				System.out.println("You selected option 2");
+				a.printAuctionBids();
 			}
 
 			// List information about completed auctions
 			else if (choice == 4) {
-				printCompletedAuctions();
+				a.printCompletedAuctions();
 			}
 
 			// Summary data of winnings bids
 			else if (choice == 5) {
-				System.out.println("You selected option 4");
+				a.printWinningBids();
 			}
 
 			// Add and activate a new auction
 			else if (choice == 6) {
-				a.startNewAuction();
+				a.createAuction();
 				// AuctionMethods.startNewAuction();
 			}
 
@@ -44,25 +45,11 @@ public class AdminOptions {
 			else if (choice == 7) {
 				CreateAccount.createAdminAccount();
 				Driver.loginAttemptCheck(menu);
-
 			}
 			// Return to main menu
 			else if (choice == 8) {
 				menu = false;
-
 			}
 		}
 	}
-
-	private static void printCompletedAuctions() {
-		System.out.println("Summary of Completed Auctions: ");
-		if (Driver.completedAuctions.size() >= 1) {
-			for (int i = 0; i < Driver.completedAuctions.size(); i++) {
-				System.out.println(Driver.completedAuctions.get(i).toString());
-			}
-		} else {
-			System.out.println("There are no completed Auctions at this time.");
-		}
-	}
-
 }
