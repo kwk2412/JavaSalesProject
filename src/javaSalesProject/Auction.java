@@ -206,20 +206,30 @@ public class Auction implements Comparable<Auction> {
 	}
 	
 	public int findNextNum() {
-		int completed = 0;
-		int active = 0;
-		int future = 0;
-		if (Driver.completedAuctions.size() != 0) {
-			completed = Driver.completedAuctions.get(Driver.completedAuctions.size() - 1).getAuctionID();
+
+		if (Driver.completedAuctions.isEmpty() && Driver.ongoingAuctions.isEmpty() && Driver.futureAuctions.isEmpty()) {
+			return 1000;
+
 		}
-		if (Driver.ongoingAuctions.size() != 0) {
-			active = Driver.ongoingAuctions.get(Driver.ongoingAuctions.size() - 1).getAuctionID();
+
+		else {
+			int completed = 0;
+			int active = 0;
+			int future = 0;
+			if (!Driver.completedAuctions.isEmpty()) {
+				completed = Driver.completedAuctions.get(Driver.completedAuctions.size() - 1).getAuctionID();
+			}
+			if (!Driver.ongoingAuctions.isEmpty()) {
+				active = Driver.ongoingAuctions.get(Driver.ongoingAuctions.size() - 1).getAuctionID();
+			}
+			if (!Driver.futureAuctions.isEmpty()) {
+				future = Driver.futureAuctions.get(Driver.futureAuctions.size() - 1).getAuctionID();
+			}
+			int[] integers = {completed, active, future};
+			return returnHighestInt(integers) + 1;	
 		}
-		if (Driver.futureAuctions.size() != 0) {
-			future = Driver.futureAuctions.get(Driver.futureAuctions.size() - 1).getAuctionID();
-		}
-		int[] integers = {completed, active, future};
-		return returnHighestInt(integers) + 1;
+
+
 	}
 
 	public int returnHighestInt(int[] integers) {

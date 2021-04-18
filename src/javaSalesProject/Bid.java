@@ -124,35 +124,27 @@ public class Bid implements Comparable<Bid> {
 	
 	public int findNextNum() {
 		ArrayList<Bid> bids = gatherBids();
-		return highest(bids) + 1;
+		if (bids.size() == 0) {
+			return 500;
+		}
+		else return highest(bids) + 1;
 	}
 	
 	public ArrayList<Bid> gatherBids() {
 		ArrayList<Bid> bids = new ArrayList<>();
 		if (!Driver.completedAuctions.isEmpty()) {
-			for (int i = 0; i < Driver.completedAuctions.size(); i++) {
-				for (int j = 0; j < Driver.completedAuctions.get(i).getProcessedBids().size(); j++) {
-					Stack<Bid> clone = Driver.completedAuctions.get(i).getProcessedBids().clone();
-					while (clone.size() > 0) {
-						bids.add(clone.pop());
-					}
-				}
-			}
+			Auction auction = Driver.completedAuctions.get(Driver.completedAuctions.size() - 1);
+			bids.add(auction.getProcessedBids().peek());
 		}
-
+		
 		if (!Driver.ongoingAuctions.isEmpty()) {
 			for (int i = 0; i < Driver.ongoingAuctions.size(); i++) {
-				for (int j = 0; j < Driver.ongoingAuctions.get(i).getProcessedBids().size(); i++) {
-					Stack<Bid> clone = Driver.ongoingAuctions.get(i).getProcessedBids().clone();
-					while (clone.size() > 0) {
-						bids.add(clone.pop());
-					}
+				Auction auction = Driver.ongoingAuctions.get(i);
+				if (!auction.getProcessedBids().isEmpty()) {
+					bids.add(auction.getProcessedBids().peek());
 				}
-				for (int j = 0; j < Driver.ongoingAuctions.get(i).getUnprocessedBids().size(); i++) {
-					Queue<Bid> clone = Driver.ongoingAuctions.get(i).getUnprocessedBids().clone();
-					while (clone.size() > 0) {
-						bids.add(clone.dequeue());
-					}
+				if (!auction.getUnprocessedBids().isEmpty()) {
+					bids.add(auction.getUnprocessedBids().peek());
 				}
 			}
 		}
