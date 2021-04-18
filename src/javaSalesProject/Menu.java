@@ -1,5 +1,6 @@
 package javaSalesProject;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -94,16 +95,19 @@ public class Menu {
 
 	// returns the index of the item chosen
 	public static int pickItemMenu() {
+		int offset = 0;
+		int counter = 1;
 		if (Driver.items.size() > 0) {
 			String menu = "Select the item to be sold:\n";
 			for (int i = 0; i < Driver.items.size(); ++i) {
 				if (Driver.items.get(i).isAvailable()) {
-					menu += (i + 1) + ". " + Driver.items.get(i).toString() + "\n";
+					menu += (counter++) + ". " + Driver.items.get(i).toString() + "\n";
 				}
+				else offset++;
 			}
 			int choice = InputMethods.getIntOrReturnNeg1(1, Driver.items.size(), menu);
 			if(choice > 0) {
-				return choice - 1;
+				return (choice - 1) + offset;
 			}
 		}
 		return -1;

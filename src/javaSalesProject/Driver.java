@@ -169,7 +169,7 @@ public class Driver {
 		futureAuctions = new ArrayList<Auction>();
 		loadInventory();
 		timer();
-		//currentUser.setUser(new Admin("Clay", "p", "admin"));
+		currentUser.setUser(new Admin("Clay", "p", "admin"));
 	}
 	
 	public static void timer() {
