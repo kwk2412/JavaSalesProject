@@ -43,8 +43,15 @@ public class CustomerOptions {
 				else System.out.println("You have items to pay for.");
 			}
 			
-			//Return to main menu
+			//Check my historic bids
 			else if (choice == 6) {
+				if (!c.getHistoricBids().isEmpty()) {
+					c.printHistoricBids();
+				}
+			}
+			
+			//Return to main menu
+			else if (choice == 7) {
 				menu = false;
 			}
 		}
