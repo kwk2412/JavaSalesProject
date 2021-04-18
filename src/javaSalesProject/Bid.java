@@ -138,7 +138,6 @@ public class Bid implements Comparable<Bid> {
 		}
 		
 		if (!Driver.ongoingAuctions.isEmpty()) {
-
 			for (int i = 0; i < Driver.ongoingAuctions.size(); i++) {
 				Auction auction = Driver.ongoingAuctions.get(i);
 				if (!auction.getProcessedBids().isEmpty()) {
