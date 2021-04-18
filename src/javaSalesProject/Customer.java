@@ -66,6 +66,12 @@ public class Customer extends Account implements Comparable<Customer> {
 			}
 		}
 	}
+	
+	public void printHistoricBids() {
+		for (int i = 0; i < historicBids.size(); i++) {
+			System.out.println(historicBids.get(i).toString());
+		}
+	}
 
 	public String usernameIdString() {
 		return "Username: " + username + " UserID: " + userID;
