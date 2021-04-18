@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  * @author waveo Auctions will be filled with bid objects
  *
  */
-public class Auction {
+public class Auction implements Comparable<Auction>{
 
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd, YYYY h:mm a");
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
@@ -283,6 +283,12 @@ public class Auction {
 
 	public void setEndDateTime(LocalDateTime endDateTime) {
 		this.endDateTime = endDateTime;
+	}
+
+	@Override
+	public int compareTo(Auction o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

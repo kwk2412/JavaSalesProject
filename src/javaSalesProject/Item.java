@@ -1,3 +1,4 @@
+
 package javaSalesProject;
 
 import java.text.NumberFormat;
