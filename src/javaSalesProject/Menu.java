@@ -18,9 +18,8 @@ public class Menu {
 				+ "6. Load information from external file\n"
 				+ "7. Save program's status to external file\n"
 				+ "8. Exit the application\r\n";
-
-
-		int choice = InputMethods.getIntFromMenu(1, 9, menu);
+		
+		int choice = InputMethods.getIntFromMenu(1, 8, menu);
 		return choice;
 	}
 

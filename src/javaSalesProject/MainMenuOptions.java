@@ -20,7 +20,7 @@ public class MainMenuOptions {
 			
 			else if (menuChoice == 2) {
 				System.out.println("you selected 2, this will process backlogged data when we know what that means\n");
-				Driver.processBackloggedData();
+				//Driver.processBackloggedData();
 			}
 			
 			else if (menuChoice == 3) {
@@ -51,9 +51,6 @@ public class MainMenuOptions {
 					System.out.println("Ending program...");
 					System.exit(0);
 				}
-			}
-			else if (menuChoice == 9) {
-				Driver.checkpointC();
 			}
 		}
 	}
@@ -105,7 +102,7 @@ public class MainMenuOptions {
 			//Process backlogged data
 			else if (menuChoice == 2) {
 				System.out.println("you selected 2, this will process backlogged data when we know what that means\n");
-				Driver.processBackloggedData();
+				//Driver.processBackloggedData();
 			}
 			
 			// Load item data
@@ -153,13 +150,12 @@ public class MainMenuOptions {
 			//Load sample data
 			if (menuChoice == 1) {
 				Driver.loadInventory();
-				SystemMessage.print("Data has been loaded into the ArrayList");
 			}
 			
 			//Process backlogged data
 			else if (menuChoice == 2) {
 				System.out.println("you selected 2, this will process backlogged data when we know what that means\n");
-				Driver.processBackloggedData();
+				//Driver.processBackloggedData();
 			}
 			
 			// Load item data

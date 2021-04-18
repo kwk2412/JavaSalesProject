@@ -13,6 +13,7 @@ public class Driver {
 	private static Timer timer;
 	private static boolean opening;
 	static boolean running = false;
+	static boolean invLoaded = false;
 	static CurrentUser currentUser;
 	static ArrayList<Account> accounts;
 	static Admin rootUser;
@@ -37,53 +38,6 @@ public class Driver {
 		}
 	}
 
-	
-	public static void checkpointC() {
-		Customer larry = new Customer("Larry", "password", "permissions");
-		Customer morton = new Customer("Morton", "password", "permissions");
-		Customer wendy = new Customer("Wendy", "password", "permissions");
-		Customer iggy = new Customer("Iggy", "password", "permissions");
-		Customer roy = new Customer("Roy", "password", "permissions");
-		Customer lemmy = new Customer("Lemmy", "password", "permissions");
-		Customer ludwig = new Customer("Ludwig", "password", "permissions");
-
-		Auction auction = new Auction(items.get(0));
-
-		System.out.println("Auction created for the first item in the inventory");
-
-		Bid bid1 = new Bid(140, auction, larry);
-		Bid bid2 = new Bid(155, auction, morton);
-		Bid bid3 = new Bid(165, auction, wendy);
-		Bid bid4 = new Bid(160, auction, iggy);
-		Bid bid5 = new Bid(180, auction, iggy);
-		Bid bid6 = new Bid(210, auction, roy);
-		Bid bid7 = new Bid(230, auction, lemmy);
-		Bid bid8 = new Bid(220, auction, ludwig);
-		Bid bid9 = new Bid(245, auction, iggy);
-		Bid bid10 = new Bid(250, auction, morton);
-		Bid bid11 = new Bid(260, auction, ludwig);
-		Bid bid12 = new Bid(270, auction, roy);
-		Bid bid13 = new Bid(300, auction, ludwig);
-
-		auction.getUnprocessedBids().enqueue(bid1);
-		auction.getUnprocessedBids().enqueue(bid2);
-		auction.getUnprocessedBids().enqueue(bid3);
-		auction.getUnprocessedBids().enqueue(bid4);
-		auction.getUnprocessedBids().enqueue(bid5);
-		auction.getUnprocessedBids().enqueue(bid6);
-		auction.getUnprocessedBids().enqueue(bid7);
-		auction.getUnprocessedBids().enqueue(bid8);
-		auction.getUnprocessedBids().enqueue(bid9);
-		auction.getUnprocessedBids().enqueue(bid10);
-		auction.getUnprocessedBids().enqueue(bid11);
-		auction.getUnprocessedBids().enqueue(bid12);
-		auction.getUnprocessedBids().enqueue(bid13);
-
-		System.out.println();
-
-		auction.automateAuction();
-	}
-
 	public static boolean loginAttemptCheck(boolean menu) {
 		if (currentUser.getUser().userID != 1) {
 			menu = false;
@@ -92,8 +46,6 @@ public class Driver {
 		}
 		return menu;
 	}
-	
-	
 
 	/*
 	 * the purpose of this method is for setting the currentUser to the rootUser
@@ -106,12 +58,6 @@ public class Driver {
 	public static void logout() {
 		currentUser.setUser(rootUser);
 	}
-
-	
-	public static void processBackloggedData() {
-
-	}
-
 	
 	public static void printItems() {
 		if (items.size() == 0)
@@ -122,26 +68,32 @@ public class Driver {
 	}
 
 	public static void loadInventory() {
-		items.add(new Item(130, "Nintendo GameCube", 10));
-		items.add(new Item(160, "Sony PlayStation", 10));
-		/*
-		items.add(new Item(150, "Nintendo GameBoy", 5));
-		items.add(new Item(170, "Microsoft Xbox", 10));
-		items.add(new Item(125, "Nintendo 64", 5));
-		items.add(new Item(180, "Sony PlayStation 2", 5));
-		items.add(new Item(90, "Sega Dreamcast", 10));
-		items.add(new Item(190, "Sony PlayStation Portable", 10));
-		items.add(new Item(230, "Microsoft Xbox 360", 10));
-		items.add(new Item(80, "Atari 2600", 15));
-		items.add(new Item(120, "Sega CD", 10));
-		items.add(new Item(90, "Magnavox Odyssey", 15));
-		items.add(new Item(250, "Nintendo GameCube", 10));
-		items.add(new Item(180, "Nintendo Virtual Boy", 20));
-		items.add(new Item(80, "Nintendo Entertainment System", 10));
-		items.add(new Item(200, "Sony PlayStation 3", 15));
-		items.add(new Item(130, "Sega GameGear", 10));
-		items.add(new Item(250, "Microsoft Xbox One", 15));
-		*/
+		if (!invLoaded) {
+			items.add(new Item(130, "Nintendo GameCube", 10));
+			items.add(new Item(160, "Sony PlayStation", 10));
+			items.add(new Item(150, "Nintendo GameBoy", 5));
+			items.add(new Item(170, "Microsoft Xbox", 10));
+			items.add(new Item(125, "Nintendo 64", 5));
+			/*
+			items.add(new Item(180, "Sony PlayStation 2", 5));
+			items.add(new Item(90, "Sega Dreamcast", 10));
+			items.add(new Item(190, "Sony PlayStation Portable", 10));
+			items.add(new Item(230, "Microsoft Xbox 360", 10));
+			items.add(new Item(80, "Atari 2600", 15));
+			items.add(new Item(120, "Sega CD", 10));
+			items.add(new Item(90, "Magnavox Odyssey", 15));
+			items.add(new Item(250, "Nintendo GameCube", 10));
+			items.add(new Item(180, "Nintendo Virtual Boy", 20));
+			items.add(new Item(80, "Nintendo Entertainment System", 10));
+			items.add(new Item(200, "Sony PlayStation 3", 15));
+			items.add(new Item(130, "Sega GameGear", 10));
+			items.add(new Item(250, "Microsoft Xbox One", 15));
+			*/
+			System.out.println("The data has been loaded into the ArrayList");
+		}
+		else {
+			System.out.println("The data is already loaded");
+		}
 	}
 
 	public static void loadAuctions() {
@@ -168,6 +120,7 @@ public class Driver {
 		completedAuctions = new ArrayList<Auction>();
 		futureAuctions = new ArrayList<Auction>();
 		loadInventory();
+		invLoaded = true;
 		timer();
 		currentUser.setUser(new Admin("Clay", "p", "admin"));
 	}
