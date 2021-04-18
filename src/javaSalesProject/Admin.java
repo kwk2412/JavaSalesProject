@@ -225,9 +225,14 @@ public class Admin extends Account {
 	public void printAuctionBids() {
 		if (!Driver.ongoingAuctions.isEmpty()) {
 			int auctionIndex = Menu.selectAuction();
-			Stack<Bid> clone = Driver.ongoingAuctions.get(auctionIndex - 1).getProcessedBids().clone();
-			for (int i = 0; i < clone.size(); i++) {
-				System.out.println(clone.pop().toString());
+			Stack<Bid> clone = Driver.ongoingAuctions.get(auctionIndex).getProcessedBids().clone();
+			if (!clone.isEmpty()) {
+				for (int i = 0; i < clone.size(); i++) {
+					System.out.println(clone.pop().toString());
+				}
+			}
+			else {
+				System.out.println("No bids have been submitted to this auction");
 			}
 		}
 		else {
