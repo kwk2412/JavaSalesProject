@@ -127,11 +127,11 @@ public class InputMethods {
 	}
 	
 	public static int getIntOrStuckForever(int lower, int upper, String menu) {
+		Scanner scan = new Scanner(System.in);
 		int choice;
 		while (true) {
 			try {
 				System.out.println(menu);
-				Scanner scan = new Scanner(System.in);
 				choice = scan.nextInt();
 				if (choice < lower || choice > upper)
 					throw new InvalidInputException();

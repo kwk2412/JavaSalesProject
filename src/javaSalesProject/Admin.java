@@ -53,7 +53,7 @@ public class Admin extends Account {
 	}
 
 	private Item getItemToBeSold() {
-		int indexOfItem = Menu.pickItemMenu();
+		int indexOfItem = Menu.pickItemMenuV2();
 		if (indexOfItem == -1) {
 			return null;
 		}
