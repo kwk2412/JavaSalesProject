@@ -1,4 +1,4 @@
-package javaSalesProject;
+package rinosJavaSalesProject;
 // : InsertionSort.java
 // Sorting an array with insertion sort.
 import java.security.SecureRandom;

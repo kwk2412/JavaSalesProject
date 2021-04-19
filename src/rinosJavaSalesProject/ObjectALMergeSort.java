@@ -1,4 +1,4 @@
-package javaSalesProject;
+package rinosJavaSalesProject;
 // MergeSort.java
 // Sorting an array with merge sort.
 import java.security.SecureRandom;

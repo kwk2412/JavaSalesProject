@@ -1,4 +1,4 @@
-package javaSalesProject;
+package rinosJavaSalesProject;
 
 import static org.junit.jupiter.api.Assertions.*;
 

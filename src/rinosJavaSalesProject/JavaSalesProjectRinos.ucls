@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="javaSalesProject.JUnit_returnHighestInt" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/JUnit_returnHighestInt.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="1" language="java" name="rinosJavaSalesProject.JUnit_returnHighestInt" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_returnHighestInt.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="142" width="186" x="236" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -10,8 +10,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="javaSalesProject.Testing" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Testing.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="2" language="java" name="rinosJavaSalesProject.Testing" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Testing.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="178" width="232" x="462" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -19,8 +19,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="javaSalesProject.Read" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Read.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="3" language="java" name="rinosJavaSalesProject.Read" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Read.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="664" width="695" x="734" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -28,8 +28,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="javaSalesProject.Admin" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Admin.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="rinosJavaSalesProject.Admin" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Admin.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="376" width="269" x="5991" y="1228"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -37,8 +37,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="javaSalesProject.ObjectALMergeSort" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/ObjectALMergeSort.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="rinosJavaSalesProject.ObjectALMergeSort" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/ObjectALMergeSort.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="142" width="214" x="1469" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -46,8 +46,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="javaSalesProject.TimeMethods" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/TimeMethods.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="rinosJavaSalesProject.TimeMethods" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/TimeMethods.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="88" width="121" x="1723" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -55,8 +55,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="javaSalesProject.ReadWriteAccounts" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/ReadWriteAccounts.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="7" language="java" name="rinosJavaSalesProject.ReadWriteAccounts" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/ReadWriteAccounts.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="160" width="184" x="1884" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -64,8 +64,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="javaSalesProject.Stack.Node" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Stack.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="8" language="java" name="rinosJavaSalesProject.Stack.Node" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Stack.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="124" width="141" x="6007" y="4116"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="javaSalesProject.MainMenuOptions" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/MainMenuOptions.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="rinosJavaSalesProject.MainMenuOptions" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/MainMenuOptions.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="160" width="200" x="2108" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -82,8 +82,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="javaSalesProject.Queue.Node" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Queue.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="rinosJavaSalesProject.Queue.Node" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Queue.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="124" width="141" x="5789" y="4116"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -91,8 +91,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="javaSalesProject.Menu" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Menu.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="11" language="java" name="rinosJavaSalesProject.Menu" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Menu.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="304" width="234" x="2348" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -100,8 +100,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="javaSalesProject.Write" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Write.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="12" language="java" name="rinosJavaSalesProject.Write" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Write.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="502" width="417" x="2622" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -109,8 +109,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="javaSalesProject.Driver" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Driver.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="13" language="java" name="rinosJavaSalesProject.Driver" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Driver.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="430" width="238" x="5991" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -118,8 +118,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="javaSalesProject.CurrentUser" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/CurrentUser.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="14" language="java" name="rinosJavaSalesProject.CurrentUser" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/CurrentUser.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="142" width="153" x="5760" y="595"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -127,8 +127,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="javaSalesProject.LinkedList" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/LinkedList.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="15" language="java" name="rinosJavaSalesProject.LinkedList" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/LinkedList.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="232" width="149" x="5342" y="1788"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -136,8 +136,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="javaSalesProject.NullDataException" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/NullDataException.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="16" language="java" name="rinosJavaSalesProject.NullDataException" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/NullDataException.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="106" width="175" x="3079" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -145,8 +145,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="javaSalesProject.LinkedList.Node" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/LinkedList.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="17" language="java" name="rinosJavaSalesProject.LinkedList.Node" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/LinkedList.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="106" width="157" x="5342" y="2510"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -154,8 +154,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="javaSalesProject.AccountValidation" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/AccountValidation.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="18" language="java" name="rinosJavaSalesProject.AccountValidation" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/AccountValidation.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="142" width="257" x="3294" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -163,8 +163,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="javaSalesProject.SystemMessage" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/SystemMessage.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="19" language="java" name="rinosJavaSalesProject.SystemMessage" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/SystemMessage.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="106" width="139" x="3591" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -172,8 +172,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="javaSalesProject.Customer" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Customer.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="20" language="java" name="rinosJavaSalesProject.Customer" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Customer.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="520" width="260" x="5552" y="1228"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -181,8 +181,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="javaSalesProject.InputMethods" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/InputMethods.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="21" language="java" name="rinosJavaSalesProject.InputMethods" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/InputMethods.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="196" width="244" x="3770" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -190,8 +190,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="javaSalesProject.Auction" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Auction.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="22" language="java" name="rinosJavaSalesProject.Auction" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Auction.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="934" width="343" x="5898" y="2510"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -199,8 +199,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="javaSalesProject.AdminOptions" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/AdminOptions.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="23" language="java" name="rinosJavaSalesProject.AdminOptions" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/AdminOptions.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="106" width="127" x="4054" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -208,8 +208,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="javaSalesProject.Bid" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Bid.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="24" language="java" name="rinosJavaSalesProject.Bid" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Bid.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="682" width="306" x="5552" y="1788"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -217,8 +217,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="javaSalesProject.CreateAccount" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/CreateAccount.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="25" language="java" name="rinosJavaSalesProject.CreateAccount" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/CreateAccount.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="195" width="226" x="4221" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -226,8 +226,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="26" language="java" name="javaSalesProject.CustomerOptions" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/CustomerOptions.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="26" language="java" name="rinosJavaSalesProject.CustomerOptions" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/CustomerOptions.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="106" width="149" x="4487" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -235,8 +235,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="27" language="java" name="javaSalesProject.ObjectALInsertionSort" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/ObjectALInsertionSort.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="27" language="java" name="rinosJavaSalesProject.ObjectALInsertionSort" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/ObjectALInsertionSort.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="106" width="203" x="4676" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -244,8 +244,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="28" language="java" name="javaSalesProject.Queue" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Queue.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="28" language="java" name="rinosJavaSalesProject.Queue" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Queue.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="304" width="178" x="5789" y="3484"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -253,8 +253,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="29" language="java" name="javaSalesProject.Stack" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Stack.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="29" language="java" name="rinosJavaSalesProject.Stack" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Stack.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="304" width="178" x="6007" y="3484"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -262,8 +262,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="30" language="java" name="javaSalesProject.JUnit_isValid_Test1" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/JUnit_isValid_Test1.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="30" language="java" name="rinosJavaSalesProject.JUnit_isValid_Test1" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_isValid_Test1.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="142" width="161" x="5898" y="1788"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -271,8 +271,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="31" language="java" name="javaSalesProject.JUnit_validatePassword_Test3" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/JUnit_validatePassword_Test3.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="31" language="java" name="rinosJavaSalesProject.JUnit_validatePassword_Test3" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_validatePassword_Test3.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="142" width="241" x="4919" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -280,8 +281,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="javaSalesProject.JUnit_isValid_Test2" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/JUnit_isValid_Test2.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="32" language="java" name="rinosJavaSalesProject.JUnit_isValid_Test2" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_isValid_Test2.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="142" width="161" x="6099" y="1788"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -289,8 +290,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="33" language="java" name="javaSalesProject.JUnit_validatePassword_Test2" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/JUnit_validatePassword_Test2.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="33" language="java" name="rinosJavaSalesProject.JUnit_validatePassword_Test2" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_validatePassword_Test2.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="142" width="241" x="5200" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -298,8 +300,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="34" language="java" name="javaSalesProject.Item" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Item.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="34" language="java" name="rinosJavaSalesProject.Item" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Item.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="592" width="269" x="5342" y="3484"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -307,8 +309,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="35" language="java" name="javaSalesProject.Account" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/Account.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="35" language="java" name="rinosJavaSalesProject.Account" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/Account.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="411" width="210" x="5760" y="777"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -316,8 +318,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="36" language="java" name="javaSalesProject.InvalidInputException" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/InvalidInputException.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="36" language="java" name="rinosJavaSalesProject.InvalidInputException" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/InvalidInputException.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="106" width="189" x="5481" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -325,8 +327,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="37" language="java" name="javaSalesProject.JUnit_validatePassword_Test1" project="JavaSalesProject" 
-    file="/JavaSalesProject/src/javaSalesProject/JUnit_validatePassword_Test1.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="37" language="java" name="rinosJavaSalesProject.JUnit_validatePassword_Test1" project="JavaSalesProject" 
+    file="/JavaSalesProject/src/rinosJavaSalesProject/JUnit_validatePassword_Test1.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
     <position height="142" width="241" x="5710" y="-109"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      

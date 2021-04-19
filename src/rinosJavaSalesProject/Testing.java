@@ -1,4 +1,4 @@
-package javaSalesProject;
+package rinosJavaSalesProject;
 
 import java.util.ArrayList;
 import java.util.Scanner;

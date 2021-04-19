@@ -1,5 +1,5 @@
 
-package javaSalesProject;
+package rinosJavaSalesProject;
 
 import java.text.NumberFormat;
 

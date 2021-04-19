@@ -1,4 +1,4 @@
-package javaSalesProject;
+package rinosJavaSalesProject;
 
 public class NullDataException extends Exception {
 

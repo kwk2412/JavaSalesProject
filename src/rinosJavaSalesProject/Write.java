@@ -1,4 +1,4 @@
-package javaSalesProject;
+package rinosJavaSalesProject;
 
 import java.awt.FileDialog;
 import java.awt.Frame;

@@ -1,4 +1,4 @@
-package javaSalesProject;
+package rinosJavaSalesProject;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
