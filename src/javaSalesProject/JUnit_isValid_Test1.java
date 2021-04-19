@@ -29,8 +29,10 @@ class JUnit_isValid_Test1 {
 		// Next bid should be invalid if it is below $135
 		Customer cust3 = new Customer("Bob", "northmont1984", "customer");
 		Bid testBid = new Bid(130, auction, cust3, LocalDateTime.now());
-		// The bid of $130 should be invalid and return false
+		// The bid of $130 should be invalid and return false because 
+		// it is less than $135.
 		boolean result = auction.isValid(testBid);
+		
 		
 		if(result) {
 			fail("The bid should have been marked invalid");
