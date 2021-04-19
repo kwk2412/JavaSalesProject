@@ -111,33 +111,6 @@ public class Menu {
 		}
 		return -1;
 	}
-	
-	public static int pickItemMenuV2() {
-		ArrayList<Item> itemsCopy = new ArrayList<>();
-		for(Item i: Driver.items) {
-			itemsCopy.add(i);
-		}
-		ObjectALMergeSort.mergeSort(itemsCopy);
-		int numAvailable = 0;
-		for(int i = 0; i < itemsCopy.size(); ++i) {
-			if(itemsCopy.get(i).isAvailable())
-				++numAvailable;
-		}
-		String menu = "Select the item to be sold:\n";
-		for(int i = 0; i < itemsCopy.size(); ++i) {
-			menu += ((i + 1) + ". " + itemsCopy.get(i).toString()) + "\n";
-		}
-		int choice = InputMethods.getIntOrStuckForever(1 ,numAvailable, menu) - 1;
-		Item item = itemsCopy.get(choice);
-		item.setAvailable(false);
-		for(int i = 0; i < Driver.items.size(); ++i) {
-			if(item.compareTo(Driver.items.get(i)) == 0) {
-				return i;
-			}
-		}
-		return 0;
-	}
-	
 
 
 	// returns the index of the ongoing auction.
