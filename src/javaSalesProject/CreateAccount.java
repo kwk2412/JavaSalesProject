@@ -2,7 +2,6 @@ package javaSalesProject;
 
 import java.util.Scanner;
 
-
 public abstract class CreateAccount {
 
 	public static void createCustomerAccount() {
@@ -28,7 +27,6 @@ public abstract class CreateAccount {
 			SystemMessage.print("The new account has been created");
 		}
 	}
-
 
 	public static String getUsername(String privileges) {
 		String username = null;
@@ -59,7 +57,6 @@ public abstract class CreateAccount {
 		}
 		return null;
 	}
-
 
 	public static String getPassword(String privileges) {
 		String password = null;
@@ -94,11 +91,15 @@ public abstract class CreateAccount {
 	public static int validateUsername(String privileges, String username) {
 
 		boolean containsPipe = false;
+		boolean containsBracket = false;
 		boolean alreadyTaken = false;
 
 		for (int i = 0; i < username.length(); ++i) {
 			if (username.charAt(i) == '|') {
 				containsPipe = true;
+			}
+			if (username.charAt(i) == '}') {
+				containsBracket = true;
 			}
 		}
 
@@ -110,7 +111,7 @@ public abstract class CreateAccount {
 			}
 		}
 
-		if (containsPipe) {
+		if (containsPipe || containsBracket) {
 			return 2;
 		} else if (alreadyTaken) {
 			return 1;
@@ -127,14 +128,18 @@ public abstract class CreateAccount {
 	public static int validatePassword(String password) {
 
 		boolean containsPipe = false;
+		boolean containsBracket = false;
 
 		for (int i = 0; i < password.length(); ++i) {
 			if (password.charAt(i) == '|') {
 				containsPipe = true;
 			}
+			if(password.charAt(i) == '}') {
+				containsBracket = true;
+			}
 		}
 
-		if (containsPipe) {
+		if (containsPipe || containsBracket) {
 			return 1;
 		} else {
 			return 0;

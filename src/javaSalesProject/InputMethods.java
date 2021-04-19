@@ -125,17 +125,26 @@ public class InputMethods {
 		}
 		return -1;
 	}
-
-
-	public static String checkAmPm(String amPm) {
-		String result = null;
-		if(amPm.trim().equalsIgnoreCase("am")) {
-			result = "am";
-		} else if(amPm.trim().equalsIgnoreCase("pm")) {
-			result = "pm";
-		} 
-		return result;
-	}
 	
+	public static int getIntOrStuckForever(int lower, int upper, String menu) {
+		int choice;
+		while (true) {
+			try {
+				System.out.println(menu);
+				Scanner scan = new Scanner(System.in);
+				choice = scan.nextInt();
+				if (choice < lower || choice > upper)
+					throw new InvalidInputException();
+				return choice;
+			} catch (InvalidInputException iie) {
+				System.out.println("Invalid input");
+				System.out.println("Please input a number between " + lower + " and " + upper);
+			} catch (Exception e) {
+				System.out.println("Invalid input");
+				System.out.println("Please make sure your input does not contain letters or special characters.");
+			}
+		}
+	}
+
 
 }
