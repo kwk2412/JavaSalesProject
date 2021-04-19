@@ -32,9 +32,6 @@ public class Auction implements Comparable<Auction> {
 	private LocalDateTime startDateTime;
 	private LocalDateTime endDateTime;
 
-	// how to keep track of the window for which the auction will be active
-	// LocalDate date = new LocalDate();
-
 	public Auction() {
 		auctionID = nextNum;
 		nextNum++;
@@ -116,10 +113,6 @@ public class Auction implements Comparable<Auction> {
 		return result;
 	}
 	
-	//Has this bug been fixed?
-	// Something is eliminating an invalid bid and the following one
-	// causing the out of bounds exception when you go to continue the auction
-	// without any bids left to process
 	public void automateAuction() {
 		while (unprocessedBids.size() > 0) {
 			process(unprocessedBids.dequeue());

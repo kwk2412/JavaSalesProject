@@ -32,7 +32,7 @@ public class CustomerOptions {
 			else if (choice == 4) {
 				System.out.println("How much money would you like to add to your balance?");
 				double moneyToBeAdded = scan.nextDouble();				
-				c.setBalance(c.getBalance()+moneyToBeAdded);
+				c.setBalance(c.getBalance() + moneyToBeAdded);
 			}
 			
 			//Pay for an item that I won

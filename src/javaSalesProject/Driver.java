@@ -21,43 +21,11 @@ public class Driver {
 	static ArrayList<Auction> ongoingAuctions; // All active auctions
 	static ArrayList<Auction> completedAuctions; // Auctions that have finished
 	static ArrayList<Auction> futureAuctions;
-	private static final LocalTime OPENTIME = LocalTime.of(9, 0);
 	
-	//private static final LocalTime CLOSETIME = LocalTime.of(17, 0);
-	private static final LocalTime CLOSETIME = LocalTime.of(23, 0);
-
+	private static final LocalTime OPENTIME = LocalTime.of(9, 0);
+	private static final LocalTime CLOSETIME = LocalTime.of(17, 0);
+	
 	public static void main(String[] args) {
-		
-		//Read.read();
-
-		/*
-		 * for (int i = 0; i < accounts.size(); i++) {
-		 * System.out.println(accounts.get(i).toString()); }
-		 * 
-		 * Customer jake = new Customer("Jake", "password", "customer");
-		 * 
-		 * for (int i = 0; i < accounts.size(); i++) {
-		 * System.out.println(accounts.get(i).toString()); }
-		 * 
-		 * Bid bid = new Bid(70, auction, jake);
-		 */
-		/*
-		 * ArrayList<Bid> bids = new ArrayList<>();
-		 * 
-		 * bids.add(new Bid(60, auction, john)); bids.add(new Bid(80, auction, ralph));
-		 * bids.add(new Bid(60, auction, billy)); bids.add(new Bid(70, auction, joel));
-		 * 
-		 * auction.getUnprocessedBids().enqueue(bids.get(0));
-		 * auction.getUnprocessedBids().enqueue(bids.get(1));
-		 * auction.getUnprocessedBids().enqueue(bids.get(2));
-		 * auction.getUnprocessedBids().enqueue(bids.get(3));
-		 * 
-		 * for (int i = 0; i < bids.size(); i++) { auction.process(bids.get(i));
-		 * System.out.println("Bid " + (i+1));
-		 * System.out.println("Current Sales Price: " + auction.getCurrentSalesPrice());
-		 * System.out.println("Current Highest Bid: " +
-		 * auction.getCurrentHighest().getValue()); }
-		 */
 
 		init();
 
@@ -107,7 +75,6 @@ public class Driver {
 			items.add(new Item(150, "Nintendo GameBoy", 5));
 			items.add(new Item(170, "Microsoft Xbox", 10));
 			items.add(new Item(125, "Nintendo 64", 5));
-			/*
 			items.add(new Item(180, "Sony PlayStation 2", 5));
 			items.add(new Item(90, "Sega Dreamcast", 10));
 			items.add(new Item(190, "Sony PlayStation Portable", 10));
@@ -121,7 +88,7 @@ public class Driver {
 			items.add(new Item(200, "Sony PlayStation 3", 15));
 			items.add(new Item(130, "Sega GameGear", 10));
 			items.add(new Item(250, "Microsoft Xbox One", 15));
-			*/
+			
 			System.out.println("The data has been loaded into the ArrayList");
 		}
 		else {

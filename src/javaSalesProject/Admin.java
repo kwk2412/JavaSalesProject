@@ -266,7 +266,7 @@ public class Admin extends Account {
 			int auctionIndex = Menu.selectAuction();
 			Stack<Bid> clone = Driver.ongoingAuctions.get(auctionIndex).getProcessedBids().clone();
 			if (!clone.isEmpty()) {
-				for (int i = 0; i < clone.size(); i++) {
+				while (clone.size() > 0) {
 					System.out.println(clone.pop().toString());
 				}
 			}

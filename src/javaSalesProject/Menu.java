@@ -137,16 +137,24 @@ public class Menu {
 	
 	public static int selectWinningAuction(Customer c) {
 
-		System.out.println("Select an auction that you have won: ");
-		for (int i = 0; i < c.getWinningBids().size(); ++i) {
-			if (!c.getWinningBids().get(i).getAuction().getItem().isPaidFor()) {
-				System.out.println((i + 1) + ". " + c.getWinningBids().get(i).getAuction().toString());
+		if (!c.getWinningBids().isEmpty()) {
+			System.out.println("Select an auction that you have won: ");
+			for (int i = 0; i < c.getWinningBids().size(); ++i) {
+				if (!c.getWinningBids().get(i).getAuction().getItem().isPaidFor()) {
+					System.out.println((i + 1) + ". " + c.getWinningBids().get(i).getAuction().toString());
+				}
 			}
+			int userSelection = InputMethods.validateInput(1, c.getWinningBids().size());
+			if (userSelection > 0) {
+				return (userSelection - 1);
+
+			}
+
 		}
-		int userSelection = InputMethods.validateInput(1, c.getWinningBids().size());
-		if(userSelection > 0) {
-			return (userSelection - 1);
+		else {
+			System.out.println("There no auctions to choose from");
 		}
+			
 		return -1;
 	}
 	

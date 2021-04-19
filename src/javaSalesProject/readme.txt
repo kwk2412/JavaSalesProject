@@ -64,7 +64,7 @@ Customer Menu
 	- 4) Opens customer menu
 	- 5) Exits program
 	
-Running the flat file
+Running the flat file (called input_file.txt)
 	- The program is now capable of reading and writing information. We have a pre-written text file that has 
 	  information about the state of various auctions.
 	- Pressing 5 on the main menu will trigger reading in a file
