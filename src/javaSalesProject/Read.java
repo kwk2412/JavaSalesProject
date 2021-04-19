@@ -113,7 +113,7 @@ public class Read {
 		// Creates items
 		ArrayList<Item> items = new ArrayList<Item>();
 		for (int i = 0; i < blockArrays.get(1).length; i++) {
-			if (blockArrays.get(1).length != 0) {
+			if (blockArrays.get(1)[0] != null) {
 				items.add(createItem(blockArrays.get(1)[i], items));
 			}
 			
@@ -123,7 +123,7 @@ public class Read {
 		ArrayList<Auction> activeAuctions = new ArrayList<>();
 		ArrayList<String[]> auctionBidBuffer = new ArrayList<>();
 		for (int i = 0; i < blockArrays.get(2).length; i++) {
-			if  (blockArrays.get(2).length != 0) {
+			if  (blockArrays.get(2)[0] != null) {
 				auctionBidBuffer.add(createActiveAuction(blockArrays.get(2)[i], items, activeAuctions));
 			}
 		}

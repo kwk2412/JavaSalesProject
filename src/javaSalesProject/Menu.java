@@ -47,7 +47,7 @@ public class Menu {
 		String menu = "Customer Menu\n" + "=============\n" + "1. Check my active bids\r\n"
 				+ "2. Check my winning bids\r\n" + "3. Bid on an item\r\n"+ "4. Add money to balance\r\n" + "5. Pay for an item that I won\r\n"
 				+ "6. Check my historic bids\n" + "7. Return to the previous menu\r\n";
-		int choice = InputMethods.getIntFromMenu(1, 6, menu);
+		int choice = InputMethods.getIntFromMenu(1, 7, menu);
 		return choice;
 	}
 
