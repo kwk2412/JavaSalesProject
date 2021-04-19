@@ -1,9 +1,11 @@
 package javaSalesProject;
 
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Admin extends Account {
 
@@ -53,12 +55,55 @@ public class Admin extends Account {
 	}
 
 	private Item getItemToBeSold() {
+		
+		ArrayList<Item> merge = availabilitySort();
+		
+		int numAvailable = 0;
+		for (int i = 0; i < merge.size(); i++) {
+			if (merge.get(i).isAvailable()) 
+				numAvailable++; 
+		}
+		
+		System.out.println("Select an item:");
+		for (int i = 0; i < numAvailable; i++) {
+			System.out.println((i + 1) + ". " + merge.get(i).toString());
+		}
+		int choice = InputMethods.validateInput(numAvailable, 1);
+		
+		return Driver.items.get(choice - 1);
+		
+		/*
 		int indexOfItem = Menu.pickItemMenu();
 		if (indexOfItem == -1) {
 			return null;
 		}
 		else
 			return Driver.items.get(indexOfItem);
+		*/
+	}
+	
+	public ArrayList<Item> availabilitySort() {
+		ArrayList<Item> available = new ArrayList<>();
+		ArrayList<Item> unavailable = new ArrayList<>();
+		ArrayList<Item> merge = new ArrayList<>();
+		
+		for (int i = 0; i < Driver.items.size(); i++) {
+			if (Driver.items.get(i).isAvailable()) {
+				available.add(Driver.items.get(i));
+			}
+			else {
+				unavailable.add(Driver.items.get(i));
+			}
+		}
+		
+		for (int i = 0; i < available.size(); i++) {
+			merge.add(available.get(i));
+		}
+		for (int i = 0; i < unavailable.size(); i++) {
+			merge.add(unavailable.get(i));	
+		}
+		return merge;
+		
 	}
 
 	public void showOngoingAuctions() {

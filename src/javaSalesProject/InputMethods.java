@@ -126,16 +126,4 @@ public class InputMethods {
 		return -1;
 	}
 
-
-	public static String checkAmPm(String amPm) {
-		String result = null;
-		if(amPm.trim().equalsIgnoreCase("am")) {
-			result = "am";
-		} else if(amPm.trim().equalsIgnoreCase("pm")) {
-			result = "pm";
-		} 
-		return result;
-	}
-	
-
 }

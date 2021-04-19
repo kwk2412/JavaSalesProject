@@ -29,13 +29,13 @@ import java.util.StringTokenizer;
  * Wendy,password,5,9000,5#7,2#7#8#11#5,5#7#18#3#2#7#8#11#5
  * }
  * 
- * startingPrice,name,increment,itemID,isPaidFor
- * 130,Nintendo GameCube,10,100,0|
- * 160,Sony PlayStation,10,101,0|
- * 150,Nintendo GameBoy,5,102,1
+ * startingPrice,name,increment,itemID,isPaidFor,isAvailable
+ * 130,Nintendo GameCube,10,100,0,1|
+ * 160,Sony PlayStation,10,101,0,0|
+ * 150,Nintendo GameBoy,5,102,1,1
  * }
  * 
- * auctionID,itemID,sellingPrice,currentHighest,processedBids,unprocessedBids,openingTime,closingTime
+ * auctionID,itemID,sellingPrice,currentHighest,processedBids,unprocessedBids,openingTime*,closingTime*
  * 1000,100,890,504,503#507#508,510#511#512,2020#4#8#9#0#0,2020#4#15#17#0#0|
  * 1003,101,710,518,523#525#526#527,528,2020#4#11#9#0#0,2020#4#13#17#0#0
  * 
@@ -51,7 +51,11 @@ import java.util.StringTokenizer;
  * 140,0,3,500,2020#4#8#11#0#0|
  * 155,0,4,501,2020#4#8#11#2#0|
  * 165,0,5,502,2020#4#8#11#3#0
- * }
+ * 
+ * **A $ indicates that the auction being read in is a dynamic auction used for testing purposes
+ * These auctions are set to close 5 minutes after opening when placed in the active auctions block,
+ * and when they are placed in the future auctions block they are scheduled to open 2 minutes after
+ * they get read in and close five minutes after they open.
  * @author waveo
  *
  */
@@ -272,8 +276,11 @@ public class Read {
 		boolean paidFor = false;
 		int paidForFlag = nullCheckInteger(info, 4);
 		if (paidForFlag == 1) paidFor = true;
+		boolean available = false;
+		int availableFlag = nullCheckInteger(info, 5);
+		if (availableFlag == 1) available = true;
 		//Driver.items.add(new Item(Integer.parseInt(info[0]), info[1], Integer.parseInt(info[2])));
-		Item item = new Item(Double.parseDouble(info[0]), info[1], Integer.parseInt(info[2]), Integer.parseInt(info[3]), paidFor);
+		Item item = new Item(Double.parseDouble(info[0]), info[1], Integer.parseInt(info[2]), Integer.parseInt(info[3]), paidFor, available);
 		return item;
 	}
 	
@@ -293,21 +300,15 @@ public class Read {
 		double currentSellingPrice = nullCheckDouble(info, 2);
 		LocalDateTime openingTime;
 		LocalDateTime closingTime;
-		Auction auction;
-		
-		// info[8] could be a 1 or 0 value that determines whether to make 
-		// this auction object a dynamic one or not
-		if (info.length > 7 && Integer.parseInt(info[8]) == 1) {
+		Auction auction;		
+		if (info[6].equals("$")) {
 			openingTime = LocalDateTime.now();
-			LocalTime now = LocalTime.now();
-			closingTime = openingTime.plusMinutes(2);
-			
+			closingTime = openingTime.plusMinutes(5);
 		}
 		else {
 			openingTime = createDateTime(info[6]);
 			closingTime = createDateTime(info[7]);
 		}
-		
 		auction = new Auction(item, auctionID, currentSellingPrice, openingTime, closingTime);
 		auctions.add(auction);
 		
@@ -341,8 +342,16 @@ public class Read {
 	public static Auction createFutureAuction(String data, ArrayList<Item> items) {
 		String[] info = toArray(data);
 		Item item = findItem(Integer.parseInt(info[1]), items);
-		LocalDateTime openingTime = createDateTime(info[2]);
-		LocalDateTime closingTime = createDateTime(info[3]);
+		LocalDateTime openingTime;
+		LocalDateTime closingTime;
+		if (info[2].equals("$")) {
+			openingTime = LocalDateTime.now().plusMinutes(2);
+			closingTime = openingTime.plusMinutes(5);
+		}
+		else {
+			openingTime = createDateTime(info[2]);
+			closingTime = createDateTime(info[3]);
+		}
 		Auction auction = new Auction(item, Integer.parseInt(info[0]), openingTime, closingTime);
 		auction.setActive(false);
 		return auction;

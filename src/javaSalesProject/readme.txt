@@ -6,26 +6,19 @@ Main menu
 	
 	No user present:
 	- 1) Loads sample data into the items arraylist
-	- 2) Doesn't do anything yet
-	- 3) Prints the items in the items arraylist
-	- 4) Initiates admin login process
-	- 5) Initiates customer login process
-	- 6) Runs the specialized proof of concept for checkpoint C
+	- 2) Prints the items in the items arraylist
+	- 3) Initiates admin login process
+	- 4) Initiates customer login process
+	- 5) Loads information from an external file
+	- 6) Writes the status of the program to text file
 	- 7) Exit the application after asking for user's confirmation
-		
-		Specialized POC for checkpoint C:
-			This is a pre-programmed auction that runs on its own from start to finish. Customers, an auction, and bids are 
-			created and then handled and processed without input from the user. The method that starts this process is called 
-			"checkpointC()" and is located just after the main method in Driver.java, at line 31. After each bid is processed, 
-			a summary of the auction's status is printed to the screen.
 	
 	User Present:
 	- 1) Loads items array list with sample data
-	- 2) Doesn't do anything yet
-	- 3) Prints the items present in the items array list
-	- 4) Logs the user out of the application (input "yes" at the prompt to affirm)
-	- 5) Advances the user to the next menu
-	- 6) Exits the application
+	- 2) Prints the items present in the items array list
+	- 3) Logs the user out of the application (input "yes" at the prompt to affirm)
+	- 4) Advances the user to the next menu
+	- 5) Exits the application
 	
 Logging in
 
@@ -55,9 +48,30 @@ Logging in
 		password: password
 	  	  		
 Admin Menu
-	- The only menu options that are working are the transition back to the main menu
-	  and the creation of a new admin account
+	- 1) Lists active auctions
+	- 2) Lists future auctions
+	- 3) Lists active auctions, displays bidding history of chosen one
+	- 4) Lists completed auctions
+	- 5) Lists winning bids
+	- 6) Activates a new auction
+	- 7) Creates a new admin account
+	- 8) Returns to previous menu
 	
 Customer Menu
-	- The only menu option that is working is the transition back to the main menu
+	- 1) Loads sample data
+	- 2) Prints items arraylist
+	- 3) Logs out
+	- 4) Opens customer menu
+	- 5) Exits program
 	
+Running the flat file
+	- The program is now capable of reading and writing information. We have a pre-written text file that has 
+	  information about the state of various auctions.
+	- Pressing 5 on the main menu will trigger reading in a file
+	- Once this file is read in, it will create:
+	  		- 1 Dynamic Active Auction - This auction begins when the file gets read in and ends 5 minutes after its creation
+	  		- 1 Active Auction - This auction has been created already and some bids have already been submitted
+	  		- 1 Completed Auction - This auction has already ended and all bids that were part of it are stored in the text file
+	  		- 1 Dynamic Future Auction - This auction will open 2 minutes after the text file gets read in, and close 5 minutes
+	  		  after that
+	  		- 1 Future Auction - This auction is scheduled to open in October of 2021 and close in December

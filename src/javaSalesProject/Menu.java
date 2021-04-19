@@ -11,23 +11,26 @@ public class Menu {
 		String menu = "Main Menu\n" 
 				+ "=========\n" 
 				+ "1. Load sample data\r\n" 
-				+ "2. Process the backlogged data\r\n"
-				+ "3. Print items ArrayList\n" 
-				+ "4. Log in as administrator\r\n" 
-				+ "5. Log in as customer\r\n"
-				+ "6. Load information from external file\n"
-				+ "7. Save program's status to external file\n"
-				+ "8. Exit the application\r\n";
+				+ "2. Print items ArrayList\n" 
+				+ "3. Log in as administrator\r\n" 
+				+ "4. Log in as customer\r\n"
+				+ "5. Load information from external file\n"
+				+ "6. Save program's status to external file\n"
+				+ "7. Exit the application\r\n";
 		
-		int choice = InputMethods.getIntFromMenu(1, 8, menu);
+		int choice = InputMethods.getIntFromMenu(1, 7, menu);
 		return choice;
 	}
 
 	// Main menu when there is an admin is logged in
 	public static int mainMenuAdminLoggedIn() {
-		String menu = "Main Menu\n" + "=========\n" + "1. Load sample data\r\n" + "2. Process the backlogged data\r\n"
-				+ "3. Print items ArrayList\n" + "4. Log out\r\n" + "5. Admin Options\r\n"
-				+ "6. Exit the application\r\n";
+		String menu = "Main Menu\n" 
+				+ "=========\n" 
+				+ "1. Load sample data\r\n"
+				+ "2. Print items ArrayList\n" 
+				+ "3. Log out\r\n" 
+				+ "4. Admin Options\r\n"
+				+ "5. Exit the application\r\n";
 		int choice = InputMethods.getIntFromMenu(1, 6, menu);
 		return choice;
 	}
@@ -35,9 +38,13 @@ public class Menu {
 	// Main menu for when there is a customer logged in
 	public static int mainMenuCustLoggedIn() {
 
-		String menu = "Main Menu\n" + "=========\n" + "1. Load sample data\r\n" + "2. Process the backlogged data\r\n"
-				+ "3. Print items ArrayList\n" + "4. Log out\r\n" + "5. Open customer menu\r\n"
-				+ "6. Exit the application\r\n";
+		String menu = "Main Menu\n" 
+				+ "=========\n" 
+				+ "1. Load sample data\r\n" 
+				+ "2. Print items ArrayList\n" 
+				+ "3. Log out\r\n" 
+				+ "4. Open customer menu\r\n"
+				+ "5. Exit the application\r\n";
 
 		int choice = InputMethods.getIntFromMenu(1, 6, menu);
 		return choice;

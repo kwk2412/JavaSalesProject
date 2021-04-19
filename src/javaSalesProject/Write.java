@@ -104,7 +104,6 @@ public class Write {
 		ArrayList<Bid> bids = new ArrayList<>();
 		for (int i = 0; i < completedAuctions.size(); i++) {
 			Stack<Bid> completedBids = completedAuctions.get(i).getProcessedBids().clone();
-			
 			while (completedBids.size() > 0) {
 				bids.add((Bid) completedBids.pop());
 			}
@@ -113,12 +112,9 @@ public class Write {
 		for (int i = 0; i < activeAuctions.size(); i++) {
 			if (!activeAuctions.get(i).getProcessedBids().isEmpty()) {
 				Stack<Bid> processedBids = activeAuctions.get(i).getProcessedBids().clone();
-				//bids.add((Bid) processedBids.pop());
 				while (processedBids.size() > 0) {
 					bids.add((Bid) processedBids.pop());
 				}
-					
-				
 			}
 			
 			if (!activeAuctions.get(i).getUnprocessedBids().isEmpty()) {
@@ -167,14 +163,16 @@ public class Write {
 						+ items.get(i).getName()  + ","
 						+ items.get(i).getIncrement() + ","
 						+ items.get(i).getItemID() + ","
-						+ checkPaidFor(items.get(i));
+						+ checkPaidFor(items.get(i)) + ","
+						+ checkAvailable(items.get(i));
 			}
 			else {
 				block = block + items.get(i).getStartingPrice() + ","
 						+ items.get(i).getName()  + ","
 						+ items.get(i).getIncrement() + ","
 						+ items.get(i).getItemID() + ","
-						+ checkPaidFor(items.get(i)) + "|\n";
+						+ checkPaidFor(items.get(i)) + ","
+						+ checkAvailable(items.get(i)) + "|\n";
 			}
 		}
 		return block;
@@ -192,8 +190,7 @@ public class Write {
 							+ checkNullProcessed(auctions.get(i)) + ","
 							+ checkNullUnprocessed(auctions.get(i)) + ","
 							+ compileDateTime(auctions.get(i).getStartDateTime()) + "," 
-							+ compileDateTime(auctions.get(i).getEndDateTime()) + ","
-							+ "0";
+							+ compileDateTime(auctions.get(i).getEndDateTime());
 				}
 				else {
 					block = block + auctions.get(i).getAuctionID() + ","
@@ -201,8 +198,7 @@ public class Write {
 							+ checkNullProcessed(auctions.get(i)) + ","
 							+ checkNullUnprocessed(auctions.get(i)) + ","
 							+ compileDateTime(auctions.get(i).getStartDateTime()) + "," 
-							+ compileDateTime(auctions.get(i).getEndDateTime()) + ","
-							+ "0" + "|\n";
+							+ compileDateTime(auctions.get(i).getEndDateTime()) + "|\n";
 				}
 			}
 		}
@@ -337,6 +333,10 @@ public class Write {
 		else return "1";
 	}
 	
+	public static String checkAvailable(Item i) {
+		if (!i.isAvailable()) return "0";
+		else return "1";
+	}
 	
 	public static PrintWriter openWrite() {
 		Frame f = new Frame();

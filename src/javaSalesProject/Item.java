@@ -29,12 +29,13 @@ public class Item implements Comparable<Item> {
 		nextNum++;
 	}
 	
-	public Item(double startingPrice, String name, int increment, int itemID, boolean paidFor) {
+	public Item(double startingPrice, String name, int increment, int itemID, boolean paidFor, boolean available) {
 		this.startingPrice = startingPrice;
 		this.name = name;
 		this.increment = increment;
 		this.itemID = itemID;
 		this.paidFor = paidFor;
+		this.available = available;
 	}
 	
 	public String toString() {

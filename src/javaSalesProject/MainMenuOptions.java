@@ -18,34 +18,30 @@ public class MainMenuOptions {
 				SystemMessage.print("Data has been loaded into the ArrayList");
 			}
 			
-			else if (menuChoice == 2) {
-				System.out.println("you selected 2, this will process backlogged data when we know what that means\n");
-				//Driver.processBackloggedData();
-			}
 			
-			else if (menuChoice == 3) {
+			else if (menuChoice == 2) {
 				Driver.printItems();
 			}
 			
-			else if (menuChoice == 4) {
+			else if (menuChoice == 3) {
 				av.login("admin");
 				menu = false;
 			}
 			
-			else if (menuChoice == 5) {
+			else if (menuChoice == 4) {
 				customerSubMenu();
 				menu = false;
 			}
 			
-			else if (menuChoice == 6) {
+			else if (menuChoice == 5) {
 				Read.read();
 			}
 			
-			else if (menuChoice == 7) {
+			else if (menuChoice == 6) {
 				Write.write();
 			}
 			
-			else if (menuChoice == 8) {
+			else if (menuChoice == 7) {
 				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit?");
 				if (sure) {
 					System.out.println("Ending program...");
@@ -99,19 +95,13 @@ public class MainMenuOptions {
 				SystemMessage.print("Data has been loaded into the ArrayList");
 			}
 			
-			//Process backlogged data
-			else if (menuChoice == 2) {
-				System.out.println("you selected 2, this will process backlogged data when we know what that means\n");
-				//Driver.processBackloggedData();
-			}
-			
 			// Load item data
-			else if (menuChoice == 3) {
+			else if (menuChoice == 2) {
 				Driver.printItems();
 			}
 			
 			//log out
-			else if (menuChoice == 4) {		
+			else if (menuChoice == 3) {		
 				boolean answer = InputMethods.yesNoToBool("Log out and return to main menu? (yes or no)");
 				
 				if (answer) {
@@ -121,13 +111,13 @@ public class MainMenuOptions {
 			}
 			
 			//Continue as admin
-			else if (menuChoice == 5) {
+			else if (menuChoice == 4) {
 				AdminOptions.adminMenu();
 
 			}
 			
 			//Exit the application
-			else if (menuChoice == 6) {
+			else if (menuChoice == 5) {
 				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit? (yes or no)");
 				if (sure) {
 					System.out.println("Ending program...");
@@ -152,19 +142,13 @@ public class MainMenuOptions {
 				Driver.loadInventory();
 			}
 			
-			//Process backlogged data
-			else if (menuChoice == 2) {
-				System.out.println("you selected 2, this will process backlogged data when we know what that means\n");
-				//Driver.processBackloggedData();
-			}
-			
 			// Load item data
-			else if (menuChoice == 3) {
+			else if (menuChoice == 2) {
 				Driver.printItems();
 			}
 			
 			//log out
-			else if (menuChoice == 4) {		
+			else if (menuChoice == 3) {		
 				boolean answer = InputMethods.yesNoToBool("Log out and return to main menu? (yes or no)");
 				
 				if (answer) {
@@ -174,13 +158,13 @@ public class MainMenuOptions {
 			}
 			
 			//Continue as customer
-			else if (menuChoice == 5) {
+			else if (menuChoice == 4) {
 				CustomerOptions.customerMenu();
 
 			}
 
 			//Exit the application
-			else if (menuChoice == 6) {
+			else if (menuChoice == 5) {
 				boolean sure = InputMethods.yesNoToBool("Are you sure you want to quit? (yes or no)");
 				if (sure) {
 					System.out.println("Ending program...");
