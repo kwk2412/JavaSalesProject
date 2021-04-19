@@ -171,8 +171,8 @@ public class Admin extends Account {
 	}
 	
 	public LocalTime markAuctionTime(String mark) {
-		int hour = InputMethods.getIntOrReturnNeg1(1, 12, "What hour would you like the auction to " + mark + "?");
-		int minute = InputMethods.getIntOrReturnNeg1(0, 59, "What minute would you like the auction to " + mark + "?");
+		int hour = InputMethods.getIntOrStuckForever(1, 12, "What hour would you like the auction to " + mark + "?");
+		int minute = InputMethods.getIntOrStuckForever(0, 59, "What minute would you like the auction to " + mark + "?");
 		LocalTime time = specifyHour(hour, minute);
 		return time;
 	}
@@ -190,19 +190,13 @@ public class Admin extends Account {
 				+ LocalDate.now().plusYears(6).getYear() + ")";
 
 		// Get a year from this year to this year + 6 years
-		year = InputMethods.getIntOrReturnNeg1(LocalDate.now().getYear(), LocalDate.now().plusYears(6).getYear(),
+		year = InputMethods.getIntOrStuckForever(LocalDate.now().getYear(), LocalDate.now().plusYears(6).getYear(),
 				yearQuestion);
 		
-		if (year > 0) {
-			int monthInt = InputMethods.getIntOrReturnNeg1(1, 12, "What month would you like the auction to " + mark + "?");
-			if (monthInt > 0) {
-				month = Month.of(monthInt);
-				dayOfMonth = InputMethods.getIntOrReturnNeg1(1, month.maxLength(), dayQuestion);
-				if (dayOfMonth > 0) {
-					date = LocalDate.of(year, month, dayOfMonth);
-				}
-			}
-		}
+			int monthInt = InputMethods.getIntOrStuckForever(1, 12, "What month would you like the auction to " + mark + "?");
+			month = Month.of(monthInt);
+			dayOfMonth = InputMethods.getIntOrStuckForever(1, month.maxLength(), dayQuestion);
+			date = LocalDate.of(year, month, dayOfMonth);
 
 		return date;
 		

@@ -28,6 +28,37 @@ public class Driver {
 
 	public static void main(String[] args) {
 		
+		//Read.read();
+
+		/*
+		 * for (int i = 0; i < accounts.size(); i++) {
+		 * System.out.println(accounts.get(i).toString()); }
+		 * 
+		 * Customer jake = new Customer("Jake", "password", "customer");
+		 * 
+		 * for (int i = 0; i < accounts.size(); i++) {
+		 * System.out.println(accounts.get(i).toString()); }
+		 * 
+		 * Bid bid = new Bid(70, auction, jake);
+		 */
+		/*
+		 * ArrayList<Bid> bids = new ArrayList<>();
+		 * 
+		 * bids.add(new Bid(60, auction, john)); bids.add(new Bid(80, auction, ralph));
+		 * bids.add(new Bid(60, auction, billy)); bids.add(new Bid(70, auction, joel));
+		 * 
+		 * auction.getUnprocessedBids().enqueue(bids.get(0));
+		 * auction.getUnprocessedBids().enqueue(bids.get(1));
+		 * auction.getUnprocessedBids().enqueue(bids.get(2));
+		 * auction.getUnprocessedBids().enqueue(bids.get(3));
+		 * 
+		 * for (int i = 0; i < bids.size(); i++) { auction.process(bids.get(i));
+		 * System.out.println("Bid " + (i+1));
+		 * System.out.println("Current Sales Price: " + auction.getCurrentSalesPrice());
+		 * System.out.println("Current Highest Bid: " +
+		 * auction.getCurrentHighest().getValue()); }
+		 */
+
 		init();
 
 		while (running) {

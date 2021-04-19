@@ -45,6 +45,7 @@ public abstract class Account {
 		return "Username: " + username + "\nPassword: " + password + "\nPrivileges: " + privileges + "\nUserID: "
 				+ userID;
 	}
+	
 
 	public void logout(Account account) {
 		Driver.currentUser.setUser(account);

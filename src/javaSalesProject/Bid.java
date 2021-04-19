@@ -77,8 +77,8 @@ public class Bid implements Comparable<Bid> {
 		String result = "Item name: " + auction.getItem().getName() + "\n" +
 				"AuctionID: " + auction.getAuctionID() + "\n" +
 				"Bid amount: " + cf.format(value) + "\n" + 
-				"Current sales price: " + cf.format(auction.getCurrentSalesPrice()) + 
-				"\tTime of bid: " + dtf.format(dateTime) + "\n";
+				"Current sales price: " + cf.format(auction.getCurrentSalesPrice()) + "\n" +  
+				"Time of bid: " + dtf.format(dateTime) + "\n";
 		
 		if (auction.getCurrentHighest().getCustomer().getUserID() == customer.getUserID()) {
 			result += "\nYou are the highest bidder";

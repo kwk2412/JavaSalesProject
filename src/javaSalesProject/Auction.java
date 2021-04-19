@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
  * @author waveo Auctions will be filled with bid objects
  *
  */
+
 public class Auction implements Comparable<Auction> {
 
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd, YYYY h:mm a");
@@ -205,9 +206,12 @@ public class Auction implements Comparable<Auction> {
 	}
 	
 	public int findNextNum() {
+
 		if (Driver.completedAuctions.isEmpty() && Driver.ongoingAuctions.isEmpty() && Driver.futureAuctions.isEmpty()) {
 			return 1000;
+
 		}
+
 		else {
 			int completed = 0;
 			int active = 0;
@@ -224,6 +228,8 @@ public class Auction implements Comparable<Auction> {
 			int[] integers = {completed, active, future};
 			return returnHighestInt(integers) + 1;	
 		}
+
+
 	}
 
 	public int returnHighestInt(int[] integers) {
@@ -330,5 +336,6 @@ public class Auction implements Comparable<Auction> {
 	public void setEndDateTime(LocalDateTime endDateTime) {
 		this.endDateTime = endDateTime;
 	}
+
 
 }

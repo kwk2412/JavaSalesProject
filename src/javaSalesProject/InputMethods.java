@@ -125,5 +125,25 @@ public class InputMethods {
 		}
 		return -1;
 	}
-
+	
+	public static int getIntOrStuckForever(int lower, int upper, String menu) {
+		Scanner scan = new Scanner(System.in);
+		int choice;
+		while (true) {
+			try {
+				System.out.println(menu);
+				choice = scan.nextInt();
+				if (choice < lower || choice > upper)
+					throw new InvalidInputException();
+				return choice;
+			} catch (InvalidInputException iie) {
+				System.out.println("Invalid input");
+				System.out.println("Please input a number between " + lower + " and " + upper);
+			} catch (Exception e) {
+				System.out.println("Invalid input");
+				System.out.println("Please make sure your input does not contain letters or special characters.");
+			}
+		}
+	}
+	
 }

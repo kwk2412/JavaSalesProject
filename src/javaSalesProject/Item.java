@@ -1,3 +1,4 @@
+
 package javaSalesProject;
 
 import java.text.NumberFormat;
@@ -62,6 +63,15 @@ public class Item implements Comparable<Item> {
 			return -1;
 		else
 			return 0;
+	}
+	
+	public int compareToA(Item e) {
+		if (e.available && this.available)
+			return 0;
+		else if (e.available) 
+			return 1;
+		else
+			return -1;
 	}
 
 	

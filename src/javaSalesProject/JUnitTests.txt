@@ -1,5 +1,55 @@
 JUnit tests for the Java Sales Project
 
+
+Current tests:
+
+JUnit_isValid_Test1.java
+	- Method being tested: public boolean isValid(Bid bid) in the Auction class
+	- Purpose of the test: Verify a bid that is less than (salesprice + increment) is deemed invalid by the method.
+	- Fails the test if: the method returns true (indicating the bid was marked as valid)
+	- Passes the test if: the method returns false (indicating the bid was marked invalid)
+	- Result: Passed
+
+JUnit_isValid_Test2.java
+	- Method being tested: public boolean isValid(Bid bid) in the Auction class
+	- Purpose of the test: Verify a bid that is equal to (salesprice + increment) is deemed valid by the method.
+	- Fails the test if: the method returns false (indicating the bid was marked as invalid)
+	- Passes the test if: the method returns true (indicating the bid was marked valid)
+	- Result: Passed
+
+JUnit_validatePassword_Test1.java
+	- Method being tested: public static int validatePassword(String password) in the CreateAccount class
+	- Purpose of the test: Verify a password containing a '|' character is deemed invalid
+	- Fails the test if: the method returns 0 (indicating the password was deemed valid). 
+	- Passes the test if: the method returns a 1 (indicating the bid was marked invalid)
+	- Result: Passed
+
+JUnit_validatePassword_Test2.java
+	- Method being tested: public static int validatePassword(String password) in the CreateAccount class
+	- Purpose of the test: Verify a password containing a ',' character is deemed invalid
+	- Fails the test if: the method returns 0 (indicating the password was deemed valid). 
+	- Passes the test if: the method returns a 1 (indicating the bid was marked invalid)
+	- Result: Passed
+
+JUnit_validatePassword_Test3.java
+	- Method being tested: public static int validatePassword(String password) in the CreateAccount class
+	- Purpose of the test: Verify a password containing no illegal characters is deemed valid
+	- Fails the test if: the method returns 1 (indicating the password was deemed invalid). 
+	- Passes the test if: the method returns a 0 (indicating the bid was marked valid)
+	- Result: Passed
+
+JUnit_returnHighestInt
+	- Method being tested: public int returnHighestInt(int[] integers) in the Auction class
+	- Purpose of the test: Verify the method returns 27 when 27 is the greatest integer in the array
+	- Fails the test if: the method returns something other than 27
+	- Passes the test if: the method returns 27
+	- Result: Passed
+
+
+
+
+Ideas for future tests:
+
 Test for Log in method - Creating new Customer:
 	- Ensures that we can create a new customer account. The variables/objects involved are the string 
 	  username and the string password which represent the username and password respectively.
