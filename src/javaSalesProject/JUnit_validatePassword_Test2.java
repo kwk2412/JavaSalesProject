@@ -45,10 +45,10 @@ class JUnit_validatePassword_Test2 {
 
 	@Test
 	void test() {
-		String invalidPw = "pass}word";
+		String invalidPw = "pass,word";
 		int result = CreateAccount.validatePassword(invalidPw);
 		if(result == 0) {
-			fail("The password should have been invalid due to the bracket character");
+			fail("The password should have been invalid due to the comma character");
 		} 
 	}
 

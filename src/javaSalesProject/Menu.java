@@ -87,8 +87,8 @@ public class Menu {
 	}
 	
 	public static int amPmMenu() {
-		String menu = "a.m or p.m?\n" + "1. a.m\n" + "2. p.m\n" + "3.Return to previous menu\n";
-		int choice = InputMethods.getIntFromMenu(1, 3, menu);
+		String menu = "a.m or p.m?\n" + "1. a.m\n" + "2. p.m\n";
+		int choice = InputMethods.getIntFromMenu(1, 2, menu);
 		return choice;
 	}
 
