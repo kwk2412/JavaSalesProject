@@ -33,7 +33,7 @@ class JUnit_isValid_Test2 {
 		boolean result = auction.isValid(testBid);
 		
 		if(!result) {
-			fail("The bid should have been marked invalid");
+			fail("The bid should have been deemed valid");
 		}
 	}
 	

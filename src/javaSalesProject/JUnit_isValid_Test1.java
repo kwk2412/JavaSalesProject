@@ -35,7 +35,7 @@ class JUnit_isValid_Test1 {
 		
 		
 		if(result) {
-			fail("The bid should have been marked invalid");
+			fail("The bid should have been deemed invalid");
 		}
 	}
 	
