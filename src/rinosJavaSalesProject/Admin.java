@@ -278,5 +278,15 @@ public class Admin extends Account {
 			System.out.println("There are no ongoing auctions to check the bidding history for");
 		}
 	}
-
+	
+	public ArrayList<Item> readItems() {
+		ArrayList<Item> items = DBUtilities.readItems();
+		return items;
+	}
+	
+	public void writeItems() {
+		DBUtilities.storeItems(Driver.items);
+	}
+	
+	
 }

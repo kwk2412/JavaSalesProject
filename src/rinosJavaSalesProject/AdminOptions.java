@@ -46,8 +46,22 @@ public class AdminOptions {
 				CreateAccount.createAdminAccount();
 				Driver.loginAttemptCheck(menu);
 			}
-			// Return to main menu
+			
+			
+			// Read from database
 			else if (choice == 8) {
+				Driver.items = a.readItems();
+				SystemMessage.print("The items have been read in from the database");
+			}
+			
+			// Write to database
+			else if (choice == 9) {
+				a.writeItems();
+				SystemMessage.print("The items have been written to the database");
+			}
+			
+			// Return to main menu
+			else if (choice == 10) {
 				menu = false;
 			}
 		}

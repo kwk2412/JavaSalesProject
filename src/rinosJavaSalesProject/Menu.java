@@ -59,16 +59,18 @@ public class Menu {
 	}
 
 	public static int adminMenu() {
-		String menu = "Admin Menu\n" + "==========\n" + "1. List current ongoing auctions\r\n"
-
+		String menu = "Admin Menu\n" + "==========\n"
+				+ "1. List current ongoing auctions\r\n"
 				+ "2. List future auctions\r\n"
 				+ "3. Choose an ongoing auction and check the bidding history\r\n"
 				+ "4. List information about completed auctions\r\n"
 				+ "5. Summary data of winning bids\r\n"
 				+ "6. Add and activate a new auction\r\n"
 				+ "7. Create new admin account\r\n"
-				+ "8. Return to the previous menu\r\n";
-		int choice = InputMethods.getIntFromMenu(1, 8, menu);
+				+ "8. Read from database\n"
+				+ "9. Write to database\n"
+				+ "10. Return to the previous menu\r\n";
+		int choice = InputMethods.getIntFromMenu(1, 10, menu);
 		return choice;
 	}
 
