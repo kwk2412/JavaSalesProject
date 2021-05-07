@@ -288,5 +288,13 @@ public class Admin extends Account {
 		DBUtilities.storeItems(Driver.items);
 	}
 	
+	public void readCustomers() {
+		
+	}
+	
+	public void writeCustomers() {
+		
+	}
+	
 	
 }
