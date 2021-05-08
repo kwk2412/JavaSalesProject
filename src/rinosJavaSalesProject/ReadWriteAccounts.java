@@ -7,9 +7,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+
+
+/**
+ * Perhaps depricated class that handled creating accounts
+ * @author waveo
+ *
+ */
 
 public class ReadWriteAccounts {
 

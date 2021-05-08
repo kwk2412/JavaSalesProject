@@ -1,5 +1,11 @@
 package rinosJavaSalesProject;
 
+/**
+ * Represents the user that is currently logged in
+ * @author waveo
+ *
+ */
+
 public class CurrentUser {
 	
 	private Account user;

@@ -1,7 +1,12 @@
 package rinosJavaSalesProject;
 
-import java.text.NumberFormat;
 import java.util.Scanner;
+
+/**
+ * Contains the decision tree that governs the functions of the Customer menu
+ * @author waveo
+ *
+ */
 
 public class CustomerOptions {
 	

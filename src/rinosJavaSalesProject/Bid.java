@@ -1,5 +1,8 @@
 package rinosJavaSalesProject;
 
+/**
+ * Contains all things associated with creating and processing bids on an individual level
+ */
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

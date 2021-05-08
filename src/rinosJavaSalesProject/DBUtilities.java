@@ -5,10 +5,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.sun.tools.javac.jvm.Items;
+/**
+ * Contains means to connect, read, and write to a MySQL database
+ * @author waveo
+ *
+ */
 
 public class DBUtilities {
 
@@ -177,6 +184,103 @@ public class DBUtilities {
 		checkConnect();
 	}
 	
+	
+	
+	
+	// NOTES ON AUCTIONS
+	// I have yet to test anything, so I don't know if any of these methods work
+	// The only attributes we have not accounted for are opening time and closing time,
+	// which I plan to store as VARCHAR values (Ex. 2021-7-5-18-30-00)
+	// So there is no code that reflects this planning yet.
+	// These two fields need to be accounted for in the reading and the writing of auctions, 
+	// the attributes have already been added to the auctions table in the database
+
+	
+	public static void addAuction(Auction auction) {
+		checkConnect();
+		int auctionID = auction.getAuctionID();
+		int itemID = auction.getItem().getItemID();
+		int active = 0;
+		double currentSalesPrice = auction.getCurrentSalesPrice();
+		if (auction.isActive() == true) active = 1;
+		String open = compileDateTime(auction.getStartDateTime());
+		String close = compileDateTime(auction.getEndDateTime());
+		
+		// INSERT INTO `auctions` (`auction_id`, `item_id`, `active`, 'current_sales_price', 'opening_time', 'closing_time')
+		// VALUES ('12', '103', '1', '63.95', '2021-7-5-18-30-00', '2021-7-5-18-30-00')
+		
+		String query = "INSERT INTO `auctions` (`auction_id`, `item_id`, `active`, `current_sales_price`, `opening_time`, `closing_time`) VALUES "
+				+ "(\'" + auctionID + "\', " + "\'" + itemID + "\', " + "\'" + active + "\', " + "\'" + currentSalesPrice + "\', "
+				+ "\'" + open + "\', " + "\'" + close + "\')";
+		
+		System.out.println(query);
+		
+		 try {
+				stmt.executeUpdate(query);
+				
+			} catch (SQLException e) {
+				// catch that exception and do nothing
+				System.out.println("Something went wrong!!");
+			}
+	}
+	
+	public static void storeAuctions() {
+		checkConnect();
+		deleteTable("auctions");
+		ArrayList<Auction> auctions = new ArrayList<>();
+		for (int i = 0; i < Driver.ongoingAuctions.size(); i++) {
+			auctions.add(Driver.ongoingAuctions.get(i));
+		}
+		
+		for (int i = 0; i < Driver.completedAuctions.size(); i++) {
+			auctions.add(Driver.completedAuctions.get(i));
+		}
+		
+		for (int i = 0; i < Driver.futureAuctions.size(); i++) {
+			auctions.add(Driver.futureAuctions.get(i));
+		}
+		
+		for (int i = 0; i < auctions.size(); i++) {
+			addAuction(auctions.get(i));
+		}
+	}
+	
+	public static ArrayList<Auction> readAuctions() {
+		checkConnect();
+		ArrayList<Auction> auctions = new ArrayList<>();
+		String readData = "SELECT * from auctions";
+		try {
+			ResultSet rs = stmt.executeQuery(readData);
+			System.out.println("result set really is from : " + rs.getClass().getName());	
+			
+			while (rs.next()) {
+				int auctionID = rs.getInt(1);
+				int itemID = rs.getInt(2);
+				int activeInt = rs.getInt(3);
+				double currentSalesPrice = rs.getInt(4);
+				String open = rs.getString(5);
+				String close = rs.getString(6);
+				LocalDateTime opening = createDateTime(open);
+				LocalDateTime closing = createDateTime(close);
+				
+				boolean active;
+				if (activeInt == 1)  active = true; else active = false;
+				
+				Item item = Read.findItem(itemID, Driver.items);
+				
+				// Auction(Item item, int auctionID, double currentSalesPrice, LocalDateTime startDateTime, LocalDateTime endDateTime)
+				Auction auction = new Auction(item, auctionID, currentSalesPrice, opening, closing, active);
+				auctions.add(auction);
+				
+			}
+		}
+		catch(SQLException e)
+		{
+			System.out.println("It didn't work!!");
+		}
+			return auctions;
+	}
+	
 	public static void deleteTable(String tableName) {
 		checkConnect();
 		String delete = "DELETE FROM " + tableName;
@@ -188,6 +292,26 @@ public class DBUtilities {
 		}
 	}	
 	
+	public static String compileDateTime(LocalDateTime ot) {
+		String date = ot.getYear() + "-" + ot.getMonthValue() + "-" + ot.getDayOfMonth()
+			+ "-" + ot.getHour() + "-" + ot.getMinute() + "-" + ot.getSecond();
+		return date;
+	}
+	
+	public static LocalDateTime createDateTime(String data) {
+		String[] info = data.split("-");
+		int year = Integer.parseInt(info[0]);
+		int month = Integer.parseInt(info[1]);
+		int day = Integer.parseInt(info[2]);
+		int hour = Integer.parseInt(info[3]);
+		int minute = Integer.parseInt(info[4]);
+		int second = Integer.parseInt(info[5]);
+		
+		LocalDate date = LocalDate.of(year, month, day);
+		LocalTime time = LocalTime.of(hour, minute, second);
+		LocalDateTime dateTime = LocalDateTime.of(date, time);
+		return dateTime;
+	}
 
 	/*
 	public static void findPup() {

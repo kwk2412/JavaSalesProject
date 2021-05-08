@@ -2,6 +2,12 @@ package rinosJavaSalesProject;
 
 import java.util.Scanner;
 
+/**
+ * Contains methods that validate user input in various ways
+ * @author waveo
+ *
+ */
+
 public class InputMethods {
 	public static boolean yesNoToBool(String question) {
 		Scanner keyboard = new Scanner(System.in);

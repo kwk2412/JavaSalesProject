@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * 
+ * Contains all things associated with creation and actions of Auctions
  * @author waveo Auctions will be filled with bid objects
  *
  */
@@ -83,6 +83,19 @@ public class Auction implements Comparable<Auction> {
 		increment = item.getIncrement();
 		//Driver.items.remove(item);
 		active = true;
+		this.startDateTime = startDateTime;
+		this.endDateTime = endDateTime;
+	}
+	
+	public Auction(Item item, int auctionID, double currentSalesPrice, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean active) {
+		this.item = item;
+		item.setAvailable(false);
+		this.auctionID = auctionID;
+		currentHighest = null;
+		this.currentSalesPrice = currentSalesPrice;
+		increment = item.getIncrement();
+		//Driver.items.remove(item);
+		this.active = active;
 		this.startDateTime = startDateTime;
 		this.endDateTime = endDateTime;
 	}

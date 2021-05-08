@@ -1,5 +1,9 @@
 package rinosJavaSalesProject;
 
+/**
+ * Linear data structure in which the most recently-entered node is the last one to come out
+ */
+
 import java.util.ArrayList;
 
 public class Queue<E> {

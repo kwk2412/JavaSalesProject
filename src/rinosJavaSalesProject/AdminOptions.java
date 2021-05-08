@@ -1,5 +1,12 @@
 package rinosJavaSalesProject;
 
+
+/**
+ * Contains the decision tree that governs the functions of the Admin menu
+ * @author waveo
+ *
+ */
+
 public class AdminOptions {
 
 	public static void adminMenu() {
@@ -51,12 +58,14 @@ public class AdminOptions {
 			// Read from database
 			else if (choice == 8) {
 				Driver.items = a.readItems();
+				a.readAuctions();
 				SystemMessage.print("The items have been read in from the database");
 			}
 			
 			// Write to database
 			else if (choice == 9) {
 				a.writeItems();
+				a.writeAuctions();
 				SystemMessage.print("The items have been written to the database");
 			}
 			

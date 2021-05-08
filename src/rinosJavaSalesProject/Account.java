@@ -1,6 +1,11 @@
 package rinosJavaSalesProject;
 
-import java.util.Scanner;
+/**
+ * Serves as the parent class for the Customer and Admin classes
+ * @
+ * @author waveo
+ *
+ */
 
 public abstract class Account {
 

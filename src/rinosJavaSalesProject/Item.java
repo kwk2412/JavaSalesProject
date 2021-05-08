@@ -3,6 +3,12 @@ package rinosJavaSalesProject;
 
 import java.text.NumberFormat;
 
+/**
+ * Contains information and actions associted with items
+ * @author waveo
+ *
+ */
+
 public class Item implements Comparable<Item> {
 	
 	private double startingPrice;

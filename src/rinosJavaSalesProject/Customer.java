@@ -2,7 +2,12 @@ package rinosJavaSalesProject;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Scanner;
+
+/**
+ * Contains creation and all actions of Customers
+ * @author waveo
+ *
+ */
 
 public class Customer extends Account implements Comparable<Customer> {
 

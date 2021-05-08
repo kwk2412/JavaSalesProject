@@ -2,6 +2,11 @@ package rinosJavaSalesProject;
 
 import java.util.Scanner;
 
+/**
+ * Contains methods that are used to validate input from the user
+ * @author waveo
+ *
+ */
 
 //Call this login/logout??
 public class AccountValidation {

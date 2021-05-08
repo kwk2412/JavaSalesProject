@@ -1,13 +1,21 @@
 package rinosJavaSalesProject;
 
 import java.awt.FileDialog;
+
+
 import java.awt.Frame;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
+
+/**
+ * Exports a text file that contains information on the current state of the program, including
+ * Auctions, Customers, Bids, and Items
+ * @author waveo
+ *
+ */
 
 public class Write {
 	

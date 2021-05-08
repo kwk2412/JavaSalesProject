@@ -2,6 +2,13 @@ package rinosJavaSalesProject;
 
 import java.util.ArrayList;
 
+/**
+ * Linear data structure in which the most recently-entered node is the first one to leave
+ * @author waveo
+ *
+ * @param <E>
+ */
+
 public class Stack<E> {
 	
 	private class Node {

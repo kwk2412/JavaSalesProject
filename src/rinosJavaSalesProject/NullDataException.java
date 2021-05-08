@@ -1,5 +1,11 @@
 package rinosJavaSalesProject;
 
+/**
+ * Exception that is thrown when no data was found in a certain field in which it was expected there would be
+ * @author waveo
+ *
+ */
+
 public class NullDataException extends Exception {
 
 	public NullDataException() {

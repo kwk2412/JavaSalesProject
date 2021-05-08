@@ -5,8 +5,12 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Scanner;
 
+/**
+ * Contains everything relevant to the creation and functions of the Admin account
+ * @author waveo
+ *
+ */
 public class Admin extends Account {
 
 	public Admin() {
@@ -294,6 +298,27 @@ public class Admin extends Account {
 	
 	public void writeCustomers() {
 		
+	}
+	
+	public void readAuctions() {
+		ArrayList<Auction> auctions = DBUtilities.readAuctions();
+		sortAuctions(auctions);
+	}
+	
+	public void writeAuctions() {
+		DBUtilities.storeAuctions();
+	}
+	
+	public void sortAuctions(ArrayList<Auction> auctions) {
+		for (int i = 0; i < auctions.size(); i++) {
+			if (auctions.get(i).isActive()) {
+				Driver.ongoingAuctions.add(auctions.get(i));
+			}
+			else if (auctions.get(i).getStartDateTime().isAfter(LocalDateTime.now())) {
+				Driver.futureAuctions.add(auctions.get(i));
+			}
+			else Driver.completedAuctions.add(auctions.get(i));
+		}
 	}
 	
 	

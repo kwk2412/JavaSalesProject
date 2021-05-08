@@ -1,5 +1,11 @@
 package rinosJavaSalesProject;
 
+/**
+ * Linear data structure in which allows for easy insertion and removal
+ * @author waveo
+ *
+ */
+
 public class LinkedList {
 	
 	private class Node {

@@ -3,7 +3,6 @@ package rinosJavaSalesProject;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import javax.swing.Timer;

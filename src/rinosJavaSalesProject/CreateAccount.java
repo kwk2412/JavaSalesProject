@@ -2,6 +2,11 @@ package rinosJavaSalesProject;
 
 import java.util.Scanner;
 
+/**
+ * Contains methods for the creation and validation of Customer accounts
+ * @author waveo
+ *
+ */
 public abstract class CreateAccount {
 
 	public static void createCustomerAccount() {

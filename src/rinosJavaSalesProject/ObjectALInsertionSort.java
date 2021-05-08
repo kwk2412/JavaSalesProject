@@ -1,12 +1,13 @@
 package rinosJavaSalesProject;
-// : InsertionSort.java
-// Sorting an array with insertion sort.
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
 
+import java.util.List;
+
+
+/**
+ * Insertion sort routine implemented with a List
+ * @author waveo
+ *
+ */
 public class ObjectALInsertionSort {
 
 	public static <E extends Comparable<E>> List<E> insertionSort(List<E> data) {

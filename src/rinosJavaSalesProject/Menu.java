@@ -1,7 +1,10 @@
 package rinosJavaSalesProject;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+/**
+ * Contains the String versions of the various menus used in the application
+ * @author waveo
+ *
+ */
 
 public class Menu {
 

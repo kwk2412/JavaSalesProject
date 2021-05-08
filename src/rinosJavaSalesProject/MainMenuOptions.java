@@ -2,6 +2,12 @@ package rinosJavaSalesProject;
 
 import java.util.Scanner;
 
+/**
+ * Contains the various decision trees responsible for governing the logic behind each menu option
+ * @author waveo
+ *
+ */
+
 public class MainMenuOptions {
 	public static void menuNoUser() {
 		Scanner scan = new Scanner(System.in);
