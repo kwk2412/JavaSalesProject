@@ -176,7 +176,7 @@ public class DBUtilities {
 		
 	}
 	
-	public static void storeCustomers() {
+	public static void storeCustomers(ArrayList<Customer> customers) {
 		checkConnect();
 	}
 	

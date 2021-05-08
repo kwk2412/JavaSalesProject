@@ -293,7 +293,13 @@ public class Admin extends Account {
 	}
 	
 	public void readCustomers() {
-		
+		ArrayList<Customer> customers = new ArrayList<>();
+	    for (int i = 0; i < Driver.accounts.size(); i++) {
+	        if (Driver.accounts.get(i) instanceof Customer) {
+	            customers.add((Customer) Driver.accounts.get(i));
+	        }
+	    }
+	    DBUtilities.storeCustomers(customers);
 	}
 	
 	public void writeCustomers() {
