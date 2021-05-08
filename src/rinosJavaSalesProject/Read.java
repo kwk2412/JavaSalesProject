@@ -57,7 +57,6 @@ import java.util.StringTokenizer;
  * and when they are placed in the future auctions block they are scheduled to open 2 minutes after
  * they get read in and close five minutes after they open.
  * @author waveo
- *
  */
 public class Read {
 	
@@ -285,12 +284,8 @@ public class Read {
 	}
 	
 	
-	/*
-	 * Creates an active auction from the data read in from the text file 
-	 * 
-	 * PLEASE REMOVE ALL ITEMS THAT WERE READ IN FROM THE MAIN ARRAYLIST OF ITEMS
-	 * IF THOSE ITEMS ARE PART OF AN AUCTION. Otherwise, it will be displayed that we
-	 * have more items available to do auctions on than we really do
+	/**
+	 * Creates an active auction from the data read in from the text file
 	 */
 	public static String[] createActiveAuction(String data, ArrayList<Item> items, ArrayList<Auction> auctions) {
 		String[] info = toArray(data);

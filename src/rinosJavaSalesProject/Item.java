@@ -71,6 +71,11 @@ public class Item implements Comparable<Item> {
 			return 0;
 	}
 	
+	/**
+	 * Compares two Item objects
+	 * @param e - The item to which this instance of Item is to be compared
+	 * @return Returns an integer representing the status of comparison of the two Item objects
+	 */
 	public int compareToA(Item e) {
 		if (e.available && this.available)
 			return 0;
