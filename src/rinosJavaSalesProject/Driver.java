@@ -118,7 +118,7 @@ public class Driver {
 		ongoingAuctions = new ArrayList<Auction>();
 		completedAuctions = new ArrayList<Auction>();
 		futureAuctions = new ArrayList<Auction>();
-		loadInventory();
+		//loadInventory();
 		invLoaded = true;
 		timer();
 		currentUser.setUser(new Admin("Clay", "p", "admin"));

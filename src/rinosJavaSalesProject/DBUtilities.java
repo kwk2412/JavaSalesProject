@@ -183,17 +183,6 @@ public class DBUtilities {
 	public static void readCustomers() {
 		checkConnect();
 	}
-	
-	
-	
-	
-	// NOTES ON AUCTIONS
-	// I have yet to test anything, so I don't know if any of these methods work
-	// The only attributes we have not accounted for are opening time and closing time,
-	// which I plan to store as VARCHAR values (Ex. 2021-7-5-18-30-00)
-	// So there is no code that reflects this planning yet.
-	// These two fields need to be accounted for in the reading and the writing of auctions, 
-	// the attributes have already been added to the auctions table in the database
 
 	
 	public static void addAuction(Auction auction) {
@@ -271,7 +260,6 @@ public class DBUtilities {
 				// Auction(Item item, int auctionID, double currentSalesPrice, LocalDateTime startDateTime, LocalDateTime endDateTime)
 				Auction auction = new Auction(item, auctionID, currentSalesPrice, opening, closing, active);
 				auctions.add(auction);
-				
 			}
 		}
 		catch(SQLException e)
