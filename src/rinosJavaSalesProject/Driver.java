@@ -46,7 +46,6 @@ public class Driver {
 		}
 		return menu;
 	}
-	// Go back to discord
 
 	/*
 	 * the purpose of this method is for setting the currentUser to the rootUser
@@ -125,6 +124,12 @@ public class Driver {
 		currentUser.setUser(new Admin("Clay", "p", "admin"));
 	}
 	
+	/**
+	 * Creates and starts a timer that goes off every second.
+	 * Listens for the timer to go off. 
+	 * When it hears the timer go off it calls checkTime()
+	 * 
+	 */
 	public static void timer() {
 		timer = new Timer(1000, null);
 		timer.addActionListener(new ActionListener() {
@@ -134,7 +139,6 @@ public class Driver {
 		});
 		
 		timer.start();
-		//loadAuctions();
 
 		if (isOpen()) {
 			opening = true;
@@ -144,7 +148,14 @@ public class Driver {
 		}
 	}
 
-	// This method is called everytime the actionlistener hears the timer
+	/**
+	 * This method is called every second by timer()
+	 * It calls checkForEndingAuctions() and checkForStartingAuctions() to check for starting and ending auctions
+	 * 
+	 * The first time this method is called after the site opens it will
+	 * call checkUnprocessedBids() to handle any bids were placed after hours.
+	 * 
+	 */
 	private static void checkTime() {
 		checkForEndingAuctions();
 		checkForStartingAuctions();
@@ -158,7 +169,9 @@ public class Driver {
 	}
 
 	/*
-	 * Puts stuff into the Driver.ongoingAuctions
+	 * Called once every second by checkTime().
+	 * Looks through all of the ongoing auctions to see if it is time to end them.
+	 * Calls endAuction() on any auction with an end time in the past.
 	 */
 	private static void checkForEndingAuctions() {
 		for (int i = 0; i < ongoingAuctions.size(); ++i) {
@@ -168,7 +181,12 @@ public class Driver {
 			}
 		}
 	}
-
+	
+	/*
+	 * Called once every second by checkTime().
+	 * Looks through all of the future auctions to see if it is time to start them.
+	 * Any future auction with a start time in the past will be set active and moved to ongoing auctions.
+	 */
 	private static void checkForStartingAuctions() {
 		for (int i = 0; i < futureAuctions.size(); ++i) {
 			if (futureAuctions.get(i).getStartDateTime().isBefore(LocalDateTime.now())) {
@@ -179,7 +197,12 @@ public class Driver {
 			}
 		}
 	}
-
+	
+	/*
+	 * Called once a day the first second that the site is open
+	 * Goes though all of the ongoing auction to see if any bids were placed after hours
+	 * If there were any bids placed after hours will call automateAuction() to process them.
+	 */
 	private static void checkUnprocessedBids() {
 		if (isOpen()) {
 			for (int i = 0; i < ongoingAuctions.size(); ++i) {
@@ -192,6 +215,10 @@ public class Driver {
 		}
 	}
 
+	/*
+	 * Used to determine if the site is currently open
+	 * @return A boolean that is true if the site is open and false if the site is closed.
+	 */
 	public static boolean isOpen() {
 		if (LocalTime.now().isAfter(OPENTIME) && LocalTime.now().isBefore(CLOSETIME)) {
 			return true;

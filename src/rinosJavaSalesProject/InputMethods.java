@@ -4,11 +4,18 @@ import java.util.Scanner;
 
 /**
  * Contains methods that validate user input in various ways
- * @author waveo
  *
  */
 
 public class InputMethods {
+	
+	/**
+	 * Validates input for yes/no questions. 
+	 * 
+	 * @param question The yes/no question you wish to ask the user
+	 * @return A boolean that is true if the user enters yes and false if the user enters no
+	 *
+	 */
 	public static boolean yesNoToBool(String question) {
 		Scanner keyboard = new Scanner(System.in);
 
@@ -38,6 +45,16 @@ public class InputMethods {
 			return false;
 		}
 	}
+	
+	/**
+	 * Validates input for a positive double 
+	 * Returns a positive double if the user enters one.
+	 * Returns -1 if the user backs out.
+	 * 
+	 * @param question The question you wish to ask the user
+	 * @return A positive double if the user enters one. A -1 if the user backs out.
+	 *
+	 */
 
 	public static double getPositiveDouble(String question) {
 		double dub = -1;
@@ -63,6 +80,18 @@ public class InputMethods {
 		}
 		return dub;
 	}
+	
+	/**
+	 * Validates input for a menu of integers.
+	 * Returns the integer the user enters if it is within the valid range.
+	 * If the user enters an integer that is not in the valid range they are prompted to
+	 * enter a new integer
+	 * @param lower the smallest valid integer the user may select
+	 * @param upper the greatest valid integer the user may select
+	 * @param menu the menu options for the user to choose from
+	 * @return the integer the user entered
+	 *
+	 */
 
 	public static int getIntFromMenu(int lower, int upper, String menu) {
 		int choice = 0;
@@ -86,6 +115,7 @@ public class InputMethods {
 		return choice;
 	}
 	
+	
 	public static int validateInput(int upper, int lower) {
 		Scanner scan = new Scanner(System.in);
 		int input = 0;
@@ -106,7 +136,18 @@ public class InputMethods {
 		}
 		return input;
 	}
-
+	
+	/**
+	 * Validates input for a menu of integers.
+	 * Returns the integer the user enters if it is within the valid range.
+	 * If the user backs out it will return -1
+	 * @param lower the smallest valid integer the user may select
+	 * @param upper the greatest valid integer the user may select
+	 * @param menu the menu options for the user to choose from
+	 * @return the integer the user entered or -1 if they back out
+	 *
+	 */
+	
 	public static int getIntOrReturnNeg1(int lower, int upper, String menu) {
 		int choice;
 		boolean done = false;

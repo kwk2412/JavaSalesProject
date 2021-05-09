@@ -3,12 +3,15 @@ package rinosJavaSalesProject;
 
 /**
  * Contains the decision tree that governs the functions of the Admin menu
- * @author waveo
  *
  */
 
 public class AdminOptions {
-
+	
+	/**
+	 * Calls the method to display the menu and get the selection from the admin
+	 * Uses the admin's selection to call the appropriate method.
+	 */
 	public static void adminMenu() {
 
 		Admin a = (Admin) Driver.currentUser.getUser();

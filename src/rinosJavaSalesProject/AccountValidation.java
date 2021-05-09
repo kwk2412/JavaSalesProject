@@ -8,11 +8,13 @@ import java.util.Scanner;
  *
  */
 
-//Call this login/logout??
 public class AccountValidation {
 	
-	
-	//This method will take care of all things related to logging a user in
+	/**
+	 * Handles the logging on of both customers and admins
+	 * @param privileges a String containing either "admin" or "customer"
+	 *
+	 */
 		public void login(String privileges) {
 			
 			boolean validLoginAttempt = false;
@@ -69,13 +71,13 @@ public class AccountValidation {
 		}
 		
 		
-		//This method will handle all things related to fetching usernames from
-		//the collection of usernames that we have (which right now is the is the
-		//arraylist but it may change later (as we implement the database) which is all the more
-		//reason to keep this function of the program as isolated as we can) and 
-		//making sure what the user inputted is a username we have in our collection.
-		//Returns true if the username the user entered is something we have on file,
-		//returns false if it is not.
+		/**
+		 * Checks to see if the username the user entered is on file
+		 * @param username a String containing the username the user entered
+		 * @param privileges a String containing either "admin" or "customer"
+		 * @return A boolean that is true if the username is on file and false if it is not. 
+		 *
+		 */
 		public boolean validateUsername(String username, String privileges) {
 			for (Account acc : Driver.accounts) {
 				if (acc.getPrivileges().equalsIgnoreCase(privileges) && acc.username.equals(username)) {
@@ -91,11 +93,14 @@ public class AccountValidation {
 			//It is the central repository for all accounts
 		}
 		
-		//Since the password to each account is an instance variable we don't have to 
-		//pass that data into this method to verify it - it is stored in the instance of the
-		//Account class itself. So we can just test to see if what the user inputs (and user input 
-		//should happen inside of this method) is equal to this.password or, alternatively,
-		//test if what the user entered is equal to what the getPassword() method returns
+		/**
+		 * Checks to see if the password the user entered matches the username they entered
+		 * @param username a String containing the username the user entered
+		 * @param password a String containing the password the user entered
+		 * @param privileges a String containing either "admin" or "customer"
+		 * @return A boolean that is true if the username matches the password and false if it does not.
+		 *
+		 */
 		public static boolean validatePassword(String username, String password) {
 			Scanner scan = new Scanner(System.in);
 			Account accountToBeLoggedIn = null;

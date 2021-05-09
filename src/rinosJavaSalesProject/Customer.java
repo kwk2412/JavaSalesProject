@@ -5,8 +5,6 @@ import java.util.ArrayList;
 
 /**
  * Contains creation and all actions of Customers
- * 
- * @author waveo
  *
  */
 
@@ -49,6 +47,9 @@ public class Customer extends Account implements Comparable<Customer> {
 		return "Username: " + username + "\n" + "Password: " + password + "\n" + "Balance: " + balance + "\n";
 	}
 
+	/**
+	 * Prints all of the bids made by the customer on auctions that are still ongoing. 
+	 */
 	public void printActiveBids() {
 		if (activeBids.size() == 0) {
 			System.out.println("You have placed no bids that are part of an ongoing auction");
@@ -60,7 +61,10 @@ public class Customer extends Account implements Comparable<Customer> {
 			}
 		}
 	}
-
+	
+	/**
+	 * Prints all of the bids made by the customer that won an item
+	 */
 	public void printWinningBids() {
 		if (winningBids.size() == 0) {
 			System.out.println("You have placed no bids that have won an auction");
@@ -73,6 +77,9 @@ public class Customer extends Account implements Comparable<Customer> {
 		}
 	}
 
+	/**
+	 * Prints all of the bids made by the customer 
+	 */
 	public void printHistoricBids() {
 		for (int i = 0; i < historicBids.size(); i++) {
 			System.out.println(historicBids.get(i).toString());
@@ -83,11 +90,17 @@ public class Customer extends Account implements Comparable<Customer> {
 		return "Username: " + username + " UserID: " + userID;
 	}
 
+	/**
+	 * adds a bid to the active and historic bids ArrayLists's
+	 */
 	public void addCurrentBid(Bid bid) {
 		activeBids.add(bid);
 		historicBids.add(bid);
 	}
 
+	/**
+	 * removes a bid from the activeBids ArrayList
+	 */
 	public void removeActiveBid(Bid bid) {
 		for (int i = 0; i < activeBids.size(); ++i) {
 			if (activeBids.get(i).equals(bid)) {
@@ -96,6 +109,12 @@ public class Customer extends Account implements Comparable<Customer> {
 		}
 	}
 
+	/**
+	 * Calls methods to find out which auction the customer would like to bid on and the amount of the bid
+	 * If the site is open it will call the method to process the bid.
+	 * If the site is closed it will call the method to add the bid to the queue to be processed
+	 * when the site opens back up.
+	 */
 	public void placeBid() {
 		if (Driver.ongoingAuctions.size() != 0) {
 			int auctionIndex = Menu.selectAuction();

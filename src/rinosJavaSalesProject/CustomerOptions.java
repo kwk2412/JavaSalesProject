@@ -4,12 +4,15 @@ import java.util.Scanner;
 
 /**
  * Contains the decision tree that governs the functions of the Customer menu
- * @author waveo
  *
  */
 
 public class CustomerOptions {
 	
+	/**
+	 * Calls the method to display the menu and get the selection from the customer
+	 * Uses the customer's selection to call the appropriate method.
+	 */
 	public static void customerMenu() {
 		Customer c = (Customer) Driver.currentUser.getUser();
 		boolean menu = true;

@@ -4,11 +4,16 @@ import java.util.Scanner;
 
 /**
  * Contains methods for the creation and validation of Customer accounts
- * @author waveo
  *
  */
 public abstract class CreateAccount {
 
+	
+	/**
+	 * Calls methods to get the username and password for the new customer account.
+	 * Creates the account and logs the customer in.
+	 *
+	 */
 	public static void createCustomerAccount() {
 		String username = getUsername("customer");
 		String password = null;
@@ -21,6 +26,12 @@ public abstract class CreateAccount {
 		}
 	}
 
+
+	/**
+	 * Calls methods to get the username and password for the new admin account.
+	 * Creates the account and logs the admin in.
+	 *
+	 */
 	public static void createAdminAccount() {
 		String username = getUsername("admin");
 		String password = null;
@@ -32,6 +43,15 @@ public abstract class CreateAccount {
 			SystemMessage.print("The new account has been created");
 		}
 	}
+	
+
+	/**
+	 * Gets the username for both customers and admins.
+	 * Calls validateUsername() to check if it is valid
+	 * @param privileges a String containing either "admin" or "customer"
+	 * @return A string containing the new username if the user entered a valid one. Null if the user backs out.
+	 *
+	 */
 
 	public static String getUsername(String privileges) {
 		String username = null;
@@ -62,7 +82,14 @@ public abstract class CreateAccount {
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Gets the password for both customers and admins.
+	 * Calls validatePassword to check if it is valid
+	 * @param privileges a String containing either "admin" or "customer"
+	 * @return A string containing the new password if the user entered a valid one. Null if the user backs out.
+	 *
+	 */
 	public static String getPassword(String privileges) {
 		String password = null;
 		int resultOfValidation = 0;
@@ -90,9 +117,13 @@ public abstract class CreateAccount {
 		return null;
 	}
 
-	// returns 2 when it contains an illegal character
-	// returns 1 when the username is already taken
-	// returns 0 when the username is valid
+	/**
+	 * Checks to see if the username being used to create a new account is valid.
+	 * The username is deemed invalid if it is already taken or if it contains an illegal character.
+	 * @param privileges a String containing either "admin" or "customer"
+	 * @return int containing 2 if it contains an illegal character, a 1 if the username is already taken, and 0 if the username is valid.
+	 *
+	 */
 	public static int validateUsername(String privileges, String username) {
 
 		boolean containsPipe = false;
@@ -130,8 +161,13 @@ public abstract class CreateAccount {
 
 	}
 
-	// returns a 1 if the password contains an illegal character
-	// returns a 0 if the password is valid
+	/**
+	 * Checks to see if the password being used to create a new account is valid.
+	 * The password is deemed invalid if it contains an illegal character.
+	 * @param privileges a String containing either "admin" or "customer"
+	 * @return int containing 1 if the password contains an illegal character and 0 if the password is valid.
+	 *
+	 */
 	public static int validatePassword(String password) {
 
 		boolean containsPipe = false;
