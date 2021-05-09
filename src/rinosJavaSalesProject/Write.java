@@ -31,6 +31,9 @@ public class Write {
 		Read.read();
 	}
 	
+	/**
+	 * Writes the information found in the current running program to a text file.
+	 */
 	public static void write() {
 		ArrayList<Customer> customers = collectCustomers();
 		ArrayList<Item> items = collectItems();
@@ -51,7 +54,11 @@ public class Write {
 		outputData(output);
 	}
 	
-	
+	/**
+	 * Gathers the customers present in the driver for further processing.
+	 * 
+	 * @return	an ArrayList of Customers
+	 */
 	public static ArrayList<Customer> collectCustomers() {
 		ArrayList<Customer> customers = new ArrayList<>();
 		
@@ -64,7 +71,11 @@ public class Write {
 		return customers;
 	}
 	
-	
+	/**
+	 * Gathers the items present in the driver for further processing.
+	 * 
+	 * @return	an ArrayList of Items
+	 */
 	public static ArrayList<Item> collectItems() {
 		ArrayList<Item> items = new ArrayList<>();
 		for (int i = 0; i < Driver.items.size(); i++) {
@@ -74,7 +85,11 @@ public class Write {
 		return items;
 	}
 	
-	
+	/**
+	 * Gathers the active auctions present in the driver for further processing.
+	 * 
+	 * @return	an ArrayList of Auctions
+	 */
 	public static ArrayList<Auction> collectActiveAuctions() {
 		ArrayList<Auction> activeAuctions = new ArrayList<>();
 		for (int i = 0; i < Driver.ongoingAuctions.size(); i++) {
@@ -84,7 +99,11 @@ public class Write {
 		return activeAuctions;
 	}
 	
-	
+	/**
+	 * Gathers the completed auctions present in the driver for further processing.
+	 * 
+	 * @return	an ArrayList of Auctions
+	 */
 	public static ArrayList<Auction> collectCompletedAuctions() {
 		ArrayList<Auction> completedAuctions = new ArrayList<>();
 		for (int i = 0; i < Driver.completedAuctions.size(); i++) {
@@ -96,7 +115,11 @@ public class Write {
 		return completedAuctions;
 	}
 	
-	
+	/**
+	 * Gathers the future auctions present in the driver for further processing.
+	 * 
+	 * @return	an ArrayList of Auctions
+	 */
 	public static ArrayList<Auction> collectFutureAuctions() {
 		ArrayList<Auction> futureAuctions = new ArrayList<>();
 		for (int i = 0; i < Driver.futureAuctions.size(); i++) {
@@ -108,6 +131,13 @@ public class Write {
 		return futureAuctions;
 	}
 	
+	
+	/**
+	 * Gathers the bids present in the driver for further processing and
+	 * sorts them to make the process of finding a specific bid easier in the future.
+	 * 
+	 * @return	an ArrayList of Bids
+	 */
 	public static ArrayList<Bid> collectBids(ArrayList<Auction> completedAuctions, ArrayList<Auction> activeAuctions) {
 		ArrayList<Bid> bids = new ArrayList<>();
 		for (int i = 0; i < completedAuctions.size(); i++) {
@@ -136,7 +166,13 @@ public class Write {
 		return bids;
 	}
 	
-	
+	/**
+	 * Writes the collections of customers from the list of customers to a block that will get
+	 * added to a text file.
+	 * 
+	 * @param customers	the list of customers gathered from the driver
+	 * @return			a String formatted as a block
+	 */
 	public static String writeCustomers(ArrayList<Customer> customers) {
 		String block = "";
 		for (int i = 0; i < customers.size(); i++) {
@@ -162,7 +198,13 @@ public class Write {
 		return block;
 	}
 	
-	
+	/**
+	 * Writes the collections of items from the list of items to a block that will get
+	 * added to a text file.
+	 * 
+	 * @param items	the list of items gathered from the driver
+	 * @return		a String formatted as a block
+	 */
 	public static String writeItems(ArrayList<Item> items) {
 		String block = "";
 		for (int i = 0; i < items.size(); i++) {
@@ -186,7 +228,13 @@ public class Write {
 		return block;
 	}
 	
-	
+	/**
+	 * Writes the collections of active auctions from the list of active auctions to a block that will
+	 * get added to a text file.
+	 * 
+	 * @param auctions	the list of auctions gathered from the driver
+	 * @return			a String formatted as a block
+	 */
 	public static String writeActiveAuctions(ArrayList<Auction> auctions) {
 		String block = "";
 		if (auctions != null) {
@@ -213,7 +261,13 @@ public class Write {
 		return block;
 	}
 	
-	
+	/**
+	 * Writes the collections of completed auctions from the list of completed auctions to a block that will
+	 * get added to a text file.
+	 * 
+	 * @param auctions	the list of auctions gathered from the driver
+	 * @return			a String formatted as a block
+	 */
 	public static String writeCompletedAuctions(ArrayList<Auction> auctions) {
 		String block = "";
 		for (int i = 0; i < auctions.size(); i++) {
@@ -237,7 +291,13 @@ public class Write {
 		return block;
 	}
 	
-	
+	/**
+	 * Writes the collections of future auctions from the list of future auctions to a block that will
+	 * get added to a text file.
+	 * 
+	 * @param auctions	the list of auctions gathered from the driver
+	 * @return			a String formatted as a block
+	 */
 	public static String writeFutureAuctions(ArrayList<Auction> auctions) {
 		String block = "";
 		for (int i = 0; i < auctions.size(); i++) {
@@ -257,7 +317,13 @@ public class Write {
 		return block;
 	}
 	
-	
+	/**
+	 * Writes the collections of bids from the list of bids to a block that will
+	 * get added to a text file.
+	 * 
+	 * @param bids	the list of bids gathered from the driver
+	 * @return		a String formatted as a block
+	 */
 	public static String writeBids(ArrayList<Bid> bids) {
 		String block = "";
 		for (int i = 0; i < bids.size(); i++) {
@@ -282,7 +348,17 @@ public class Write {
 		return block;
 	}
 	
-	
+	/**
+	 * Compiles blocks of information together into a single String object
+	 * 
+	 * @param customers			block of information regarding customers
+	 * @param items				block of information regarding items
+	 * @param activeAuctions	block of information regarding active auctions
+	 * @param completedAuctions	block of information regarding completed auctions
+	 * @param futureAuctions	block of information regarding future auctions
+	 * @param bids				block of information regarding bids
+	 * @return					a compilation of blocks of information
+	 */
 	public static String compileBlocks(String customers, String items, String activeAuctions, String completedAuctions, String futureAuctions, String bids) {
 		return customers + "\n}\n\n"
 					+ items + "\n}\n\n"
@@ -292,7 +368,12 @@ public class Write {
 					+ bids;
 	}
 	
-	
+	/**
+	 * Compiles the bid IDs of the bids found in a list of bids into a single String object.
+	 * 
+	 * @param bids	a list of bid objects
+	 * @return		a String containing bid IDs
+	 */
 	public static String compileBidIDs(ArrayList<Bid> bids) {
 		String bidIDs = "";
 		if (bids != null) {
@@ -306,14 +387,26 @@ public class Write {
 		return bidIDs;
 	}
 	
-	
+	/**
+	 * Returns a String created from the information in a LocalDateTime object.
+	 * 
+	 * @param dateTime	a LocalDateTime object
+	 * @return			a String containing information from a LocalDateTime object
+	 */
 	public static String compileDateTime(LocalDateTime dateTime) {
 		return dateTime.getYear() + "#" + dateTime.getMonthValue() + "#" 
 				+ dateTime.getDayOfMonth() + "#" + dateTime.getHour() + "#" 
 				+ dateTime.getMinute() + "#" + dateTime.getSecond();
 	}
 	
-	
+	/**
+	 * Returns a String that represents the contents of the collection of processed
+	 * bids for a specific auction. Needed for the section of the text file that has information about 
+	 * which bid IDs pertain to it.
+	 * 
+	 * @param auction	an Auction object
+	 * @return			a String representing the contents of a collection of bids for a specific auction
+	 */
 	public static String checkNullProcessed(Auction auction) {
 		String output = "";
 		if (auction.getProcessedBids().size() != 0) {
@@ -326,7 +419,14 @@ public class Write {
 		return output;
 	}
 	
-	
+	/**
+	 * Returns a String that represents the contents of the collection of unprocessed
+	 * bids for a specific auction. Needed for the section of the text file that has information about 
+	 * which bid IDs pertain to it.
+	 * 
+	 * @param auction	an Auction object
+	 * @return			a String representing the contents of a collection of bids for a specific auction
+	 */
 	public static String checkNullUnprocessed(Auction auction) {
 		String output = "";
 		if (auction.getUnprocessedBids() != null) {
@@ -335,17 +435,34 @@ public class Write {
 		return output;
 	}
 	
-	
+	/**
+	 * Returns a string object that represents the status of the paidFor field in the Item class.
+	 * 
+	 * @param i	an Item object
+	 * @return	String that represents the paidFor field
+	 */
 	public static String checkPaidFor(Item i) {
 		if (!i.isPaidFor()) return "0";
 		else return "1";
 	}
 	
+	/**
+	 * Returns a string object that represents the status of the available field in the Item class.
+	 * 
+	 * @param i	an Item object
+	 * @return	String that represents the available field
+	 */
 	public static String checkAvailable(Item i) {
 		if (!i.isAvailable()) return "0";
 		else return "1";
 	}
 	
+	/**
+	 * Handles the creation of the dialouge box that allows the user to pick the location
+	 * in which to store a file that the program will create.
+	 * 
+	 * @return	a PrintWriter object
+	 */
 	public static PrintWriter openWrite() {
 		Frame f = new Frame();
 		// decide from where to read the file
@@ -369,7 +486,11 @@ public class Write {
 		return out;
 	}
 	
-	
+	/**
+	 * Outputs the data in the program to a text file. 
+	 * 
+	 * @param output	String that contains the contents to be written to a file
+	 */
 	public static void outputData(String output) {
 		PrintWriter out = null;
 		try {

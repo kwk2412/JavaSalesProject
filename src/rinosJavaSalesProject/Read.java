@@ -531,9 +531,9 @@ public class Read {
 	 * that the class has thus far created from the text file. It does this by taking the data inside the bid buffer
 	 * and applying the correct bids to each of the proper collections. 
 	 * 
-	 * @param customers	collection of customers already created from the flat file
-	 * @param bidBuffer	collection of bid information 
-	 * @param bids		collection of bids already created from the flat file
+	 * @param auctions			collection of auctions already created from the flat file
+	 * @param auctionBidBuffer	list of bid IDs that belong to each auction
+	 * @param bids				collection of bids already created from the flat file
 	 */
 	public static void populateAuctionBids(ArrayList<Auction> auctions, ArrayList<String[]> auctionBidBuffer, ArrayList<Bid> bids) {
 		for (int i = 0; i < auctions.size(); i++) {
@@ -567,7 +567,18 @@ public class Read {
 		}
 	}
 	
-	
+	/**
+	 * Populates the completed bids collection for each of the completed auctions that
+	 * have been read in from the flat file. Each element in the historicBids parameter
+	 * is a list of bid IDs, and each element corresponds to the element with the same
+	 * index in the completedAuctions parameter. The string of IDs is broken into individual IDs,
+	 * and these are used to search for the bid objects present list of bids that have been created
+	 * from the flat file.
+	 * 
+	 * @param historicBids		list of bid IDs to be associated with each auction
+	 * @param completedAuctions	list of completed auctions created from the flat file
+	 * @param bids				list of bids already created from the flat file
+	 */
 	public static void populateCompletedAuctionBids(ArrayList<String> historicBids, ArrayList<Auction> completedAuctions, ArrayList<Bid> bids) {
 		for (int i = 0; i < historicBids.size(); i++) {
 			String[] bidIDs = historicBids.get(i).split("#");
@@ -585,9 +596,12 @@ public class Read {
 		}
 	}
 
-	/*
-	 * Uses a list of bids to find establish the selling price of an item for given auction.
-	 * May not be necessary if the text file already has this information present
+	/**
+	 * Returns a double that represents the selling price of an item in a specified completed auction.
+	 * 
+	 * @param auction			a completed auction object
+	 * @param processedBidIDs	IDs of bids that are associated with the specified auction
+	 * @param bids				list of all bids brought in from the text file
 	 */
 	public static double estSellingPrice(Auction auction, String[] processedBidIDs, ArrayList<Bid> bids) {
 		int search = processedBidIDs.length - 2;
@@ -609,7 +623,16 @@ public class Read {
 		return b.getValue();
 	}
 	
-	
+	/**
+	 * Adds the various collections of Items, Auctions, and Customers created in the process of reading
+	 * the flat file to the driver file for use with the rest of the program.
+	 * 
+	 * @param items				list of items created from the information in the text file
+	 * @param activeAuctions	list of ongoing auctions created from the information in the text file
+	 * @param completedAuctions	list of completed auctions created from the information in the text file
+	 * @param futureAuctions	list of future auctions created from the information in the text file
+	 * @param customersAdded	list of customers created from the information in the text file
+	 */
 	public static void addToDriver(ArrayList<Item> items, ArrayList<Auction> activeAuctions, ArrayList<Auction> completedAuctions, ArrayList<Auction> futureAuctions, ArrayList<Customer> customersAdded) {
 		
 		if (!items.isEmpty()) {
@@ -656,7 +679,13 @@ public class Read {
 		}
 	}
 	
-	
+	/**
+	 * Returns the Customer with the specified customer ID.
+	 * 
+	 * @param customerID	ID of the customer being searched for
+	 * @param customers		the list of customers created from the information in the flat file
+	 * @return				the specified customer
+	 */
 	public static Customer findCustomer(int customerID, ArrayList<Customer> customers) {
 		for (int i = 0; i < customers.size(); i++) {
 			if (customerID == customers.get(i).getUserID()) {
@@ -666,7 +695,13 @@ public class Read {
 		return null;
 	}
 
-	
+	/**
+	 * Returns the Auction with the specified auction ID.
+	 * 
+	 * @param auctionID	ID of the auction being searched for
+	 * @param auctions	list of auctions created from the information in the flat file
+	 * @return			the auction with the specified ID
+	 */
 	public static Auction findAuction(int auctionID, ArrayList<Auction> auctions) {
 		for (int i = 0; i < auctions.size(); i++) {
 			if (auctionID == auctions.get(i).getAuctionID()) {
@@ -676,7 +711,13 @@ public class Read {
 		return null;
 	}
 
-	
+	/**
+	 * Returns the Item with the specified item ID.
+	 * 
+	 * @param itemID	ID of the item being searched for
+	 * @param items		list of items created from the information in the flat file
+	 * @return			the item with the specified ID
+	 */
 	public static Item findItem(int itemID, ArrayList<Item> items) {
 		for (int i = 0; i < items.size(); i++) {
 			if (itemID == items.get(i).getItemID()) {
@@ -686,7 +727,13 @@ public class Read {
 		return null;
 	}
 
-	
+	/**
+	 * Returns the Bid with the specified bid ID.
+	 * 
+	 * @param bidID	ID of the auction being searched for
+	 * @param bids	list of bids created from the information in the flat file
+	 * @return		the bid with the specified ID
+	 */
 	public static Bid findBid(int bidID, ArrayList<Bid> bids) {
 		for (int i = 0; i < bids.size(); i++) {
 			if (bidID == bids.get(i).getBidID()) {
@@ -696,7 +743,14 @@ public class Read {
 		return null;
 	}
 	
-	
+	/**
+	 * Searches a list in the driver for a specific object, returns true if the object is present in the
+	 * specified list, returns false if it is not.
+	 * 
+	 * @param driverList	collection in the driver to be searched
+	 * @param object		the object being searched for
+	 * @return				boolean indicating the status of the object
+	 */
 	public static <E extends Comparable<E>> boolean searchDriver(ArrayList<E> driverList, E object) {
 		for (int i = 0; i < driverList.size(); i++) {
 			if (driverList.get(i).compareTo(object) == 0) {
@@ -706,6 +760,14 @@ public class Read {
 		return false;
 	}
 
+	/**
+	 * Checks the element of an array of Strings at the specified index to determine if it has no characters.
+	 * Returns the contents of the specified element if it is not void of characters, returns null if it is.
+	 * 
+	 * @param info	array of Strings
+	 * @param index	location in the array at which to perform a check 
+	 * @return		the status of the element
+	 */
 	public static String nullCheckString(String[] info, int index) {
 		try {
 			if (!info[index].equals("")) {
@@ -720,6 +782,14 @@ public class Read {
 		return null;
 	}
 
+	/**
+	 * Checks the element of an array of Strings at the specified index to determine if it has no characters.
+	 * Returns the contents of the specified element if it is not void of characters, returns null if it is.
+	 * 
+	 * @param info	array of Strings
+	 * @param index	location in the array at which to perform a check
+	 * @return		the status of the element
+	 */
 	public static int nullCheckInteger(String[] info, int index) {
 		try {
 			if (!info[index].equals("")) {
@@ -733,7 +803,14 @@ public class Read {
 		return 0;
 	}
 	
-
+	/**
+	 * Checks the element of an array of Strings at the specified index to determine if it has no characters.
+	 * Returns the contents of the specified element if it is not void of characters, returns null if it is.
+	 * 
+	 * @param info	array of Strings
+	 * @param index	location in the array at which to perform a check
+	 * @return		the status of the element
+	 */
 	public static double nullCheckDouble(String[] info, int index) {
 		if (!info[index].equals("")) {
 			return Double.parseDouble(info[index]);
@@ -741,7 +818,13 @@ public class Read {
 		else return 0.0;
 	}
 	
-
+	/**
+	 * Creates a LocalDateTime object out of the information found in the data parameter. 
+	 * The data parameter is split up and each piece of data is used to create the LocalDateTime object.
+	 * 
+	 * @param data	the data to create the LocalDateTime object from
+	 * @return		a LocalDateTime object
+	 */
 	public static LocalDateTime createDateTime(String data) {
 		String[] info = data.split("#");
 		int year = Integer.parseInt(info[0]);
@@ -757,13 +840,22 @@ public class Read {
 		return dateTime;
 	}
 
-	
+	/**
+	 * Returns an array of Strings created from a String. The delimiting character is ','.
+	 * 
+	 * @param data	the String to be broken up
+	 * @return		an array of Strings
+	 */
 	public static String[] toArray(String data) {
 		String[] array = data.split(",");
 		return array;
 	}
 	
-	
+	/**
+	 * Handles dialouge box creation for reading a file into the program from the user's computer.
+	 * 
+	 * @return	a BufferedReader object
+	 */
 	public static BufferedReader openRead() {
 		Frame f = new Frame();
 		// decide from where to read the file
@@ -790,7 +882,11 @@ public class Read {
 		return in;
 	}
 	
-	
+	/**
+	 * Handles the way a file is dissected for integration with the program
+	 * 
+	 * @return a String object that represents the text file that was read in
+	 */
 	public static String inputData() {
 		String concatLine = "";
 		BufferedReader bf = null;

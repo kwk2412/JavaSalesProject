@@ -100,6 +100,7 @@ public class Auction implements Comparable<Auction> {
 		this.endDateTime = endDateTime;
 	}
 
+
 	public String toString() {
 		NumberFormat cf = NumberFormat.getCurrencyInstance();
 		String result = "\tAuction ID: " + auctionID + "\n" + item.selectAuctionToString() + "\tCurrent Sales Price: "
@@ -126,6 +127,9 @@ public class Auction implements Comparable<Auction> {
 		return result;
 	}
 	
+	/**
+	 * Automates the processing of bids in an auction
+	 */
 	public void automateAuction() {
 		while (unprocessedBids.size() > 0) {
 			process(unprocessedBids.dequeue());
@@ -152,6 +156,12 @@ public class Auction implements Comparable<Auction> {
 		}
 	}
 
+	/**
+	 * Ensures that a particular bid is valid to an auction.
+	 * 
+	 * @param bid	a Bid object being submitted to this auction
+	 * @return		true or false depending on the validity of the bid
+	 */
 	public boolean isValid(Bid bid) {
 		if (bid.getValue() >= (currentSalesPrice + increment)) {
 			bid.setValid(true);
@@ -162,6 +172,11 @@ public class Auction implements Comparable<Auction> {
 		}
 	}
 
+	/**
+	 * The first bid in an auction has special rules and they are dealt with here. 
+	 * 
+	 * @param bid the first bid submitted to this auction
+	 */
 	public void firstBid(Bid bid) {
 		if (bid.getValue() >= currentSalesPrice) {
 			bid.getCustomer().addCurrentBid(bid); // Add bid to Customer's list of bids
@@ -175,6 +190,11 @@ public class Auction implements Comparable<Auction> {
 		}
 	}
 
+	/**
+	 * Ends the auction and saves the bid history for record keeping.
+	 * The active status is set to false and the auction object is stored in
+	 * the completedAuctions collection in the Driver.
+	 */
 	public void endAuction() {
 		active = false;
 		//System.out.println("Auction over");
@@ -188,6 +208,9 @@ public class Auction implements Comparable<Auction> {
 		this.item.setAvailable(true);
 	}
 	
+	/**
+	 * Clears the active bids of an auction.
+	 */
 	public void clearActiveBids() {
 		Stack<Bid> copy = processedBids.clone();
 		while (copy.size() > 0) {
@@ -196,6 +219,9 @@ public class Auction implements Comparable<Auction> {
 		}
 	}
 
+	/**
+	 * Prints a quick summary of the status of a given auction.
+	 */
 	public void printAuctionStatus() {
 		System.out.println("Item: " + item.getName());
 		if (currentHighest != null) {
@@ -211,6 +237,11 @@ public class Auction implements Comparable<Auction> {
 		System.out.println();
 	}
 	
+	/**
+	 * Finds the value of the nextNum field according to the status of the most recent
+	 * completed auction in the collection in the driver.
+	 * @return	an integer that is to be the value of the nextNum field
+	 */
 	public int findNextNum() {
 
 		if (Driver.completedAuctions.isEmpty() && Driver.ongoingAuctions.isEmpty() && Driver.futureAuctions.isEmpty()) {
