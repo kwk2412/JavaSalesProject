@@ -254,9 +254,14 @@ public class Admin extends Account {
 	public void printWinningBids() {
 		if (!Driver.completedAuctions.isEmpty()) {
 			for (int i = 0; i < Driver.completedAuctions.size(); i++) {
-				if (Driver.completedAuctions.get(i).getProcessedBids().peek() != null) {
-					System.out.println("Auction " + (i + 1));
-					System.out.println(Driver.completedAuctions.get(i).getCurrentHighest().toString());	
+				if (!Driver.completedAuctions.get(i).getProcessedBids().isEmpty()) {
+					if (Driver.completedAuctions.get(i).getProcessedBids().peek() != null) {
+						System.out.println("Auction " + (i + 1));
+						System.out.println(Driver.completedAuctions.get(i).getCurrentHighest().toString());	
+					}
+				}
+				else {
+					System.out.println("There are no winning bids");
 				}
 			}
 		}
