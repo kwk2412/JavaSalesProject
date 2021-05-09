@@ -172,8 +172,8 @@ public class DBUtilities {
 		}
 	}
 	
-	public static void addCustomer() {
-		
+	public static void addCustomer(Customer c) {
+		checkConnect();
 	}
 	
 	public static void storeCustomers(ArrayList<Customer> customers) {
