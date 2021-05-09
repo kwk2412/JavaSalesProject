@@ -27,6 +27,10 @@ public class Admin extends Account {
 
 	}
 
+	/**
+	 * Creates a new Auction object with a starting time and
+	 * ending time specified to the user's input
+	 */
 	public void createAuction() {
 		if (Driver.items.size() > 0) {
 			LocalDateTime startDateTime = null;
@@ -58,6 +62,11 @@ public class Admin extends Account {
 		}
 	}
 
+	/**
+	 * Returns an item that the user selects from a menu. 
+	 * 
+	 * @return	an Item object
+	 */
 	private Item getItemToBeSold() {
 		
 		ArrayList<Item> merge = availabilitySort();
@@ -86,6 +95,12 @@ public class Admin extends Account {
 		*/
 	}
 	
+	/**
+	 * Sorts the items in the driver by their availability, putting all
+	 * available items in the front of the driver's list of items.
+	 * 
+	 * @return	a list of items, sorted by their availability
+	 */
 	public ArrayList<Item> availabilitySort() {
 		ArrayList<Item> available = new ArrayList<>();
 		ArrayList<Item> unavailable = new ArrayList<>();
@@ -110,6 +125,9 @@ public class Admin extends Account {
 		
 	}
 
+	/**
+	 * Displays all ongoing auctions present in the Driver's list of ongoing auctions.
+	 */
 	public void showOngoingAuctions() {
 		if (Driver.ongoingAuctions.size() == 0) {
 			System.out.println("There are no ongoing auctions");
@@ -122,6 +140,9 @@ public class Admin extends Account {
 		}
 	}
 
+	/**
+	 * Displays all future auctions present in the Driver's list of future auctions.
+	 */
 	public void showFutureAuctions() {
 		if (Driver.futureAuctions.size() == 0) {
 			System.out.println("There are no future auctions");
@@ -134,6 +155,12 @@ public class Admin extends Account {
 		}
 	}
 	
+	/**
+	 * Establishes the starting time for the an auction.
+	 * Returns the LocalDateTime object that the user creates.
+	 * 
+	 * @return	a LocalDateTime object
+	 */
 	public LocalDateTime getAuctionStartDateTime() {
 		LocalDateTime startDateTime = null;
 		
@@ -155,7 +182,12 @@ public class Admin extends Account {
 		return startDateTime;
 	}
 
-	
+	/**
+	 * Establishes the ending time for the an auction.
+	 * Returns the LocalDateTime object that the user creates.
+	 * 
+	 * @return	a LocalDateTime object
+	 */
 	public LocalDateTime getAuctionEndDateTime() {
 		LocalDateTime edt = null;
 
@@ -174,6 +206,13 @@ public class Admin extends Account {
 		return edt;
 	}
 	
+	/**
+	 * Gets the hour and minute that the user would like to specify for the creation of a LocalTime object.
+	 * "mark" is either "start" or "end."
+	 * 
+	 * @param mark	String used in the message displayed to the user
+	 * @return		a LocalTime object on which the auction will start or end
+	 */
 	public LocalTime markAuctionTime(String mark) {
 		int hour = InputMethods.getIntOrStuckForever(1, 12, "What hour would you like the auction to " + mark + "?");
 		int minute = InputMethods.getIntOrStuckForever(0, 59, "What minute would you like the auction to " + mark + "?");
@@ -181,7 +220,14 @@ public class Admin extends Account {
 		return time;
 	}
 	
-	
+	/**
+	 * Gets the year, month, and day that the user would like to specify for
+	 * the creation of a LocalDate object.
+	 * "mark" is either "start" or "end."
+	 * 
+	 * @param mark	String used in the message displayed to the user
+	 * @return		a LocalDate object on which the auctions will start or end
+	 */
 	public LocalDate markAuctionDate(String mark) {
 		LocalDate date = null;
 		int year = 0;
@@ -206,9 +252,13 @@ public class Admin extends Account {
 		
 	}
 
-	/*
-	 * Takes in a hour and a minute and asks the user these numbers refer to am or pm
-	 * returns a LocalTime object that reflects the user's choice
+	/**
+	 * Takes in a hour and a minute and asks the user if these numbers refer to AM or PM.
+	 * Returns a LocalTime object that reflects the user's choice.
+	 * 
+	 * @param hour 		hour at which the auction will start or end
+	 * @param minute	minute at which the auction will start or end
+	 * @return 			a LocalTime object of the user's specification
 	 */
 	public LocalTime specifyHour(int hour, int minute) {
 		LocalTime endTime;
@@ -240,6 +290,9 @@ public class Admin extends Account {
 			return 0;
 	}
 	
+	/**
+	 * Displays a list of completed auctions.
+	 */
 	public void printCompletedAuctions() {
 		System.out.println("Summary of Completed Auctions: ");
 		if (Driver.completedAuctions.size() >= 1) {
@@ -251,6 +304,9 @@ public class Admin extends Account {
 		}
 	}
 	
+	/**
+	 * Shows the winning bid associated with each completed auction, if there is one.
+	 */
 	public void printWinningBids() {
 		if (!Driver.completedAuctions.isEmpty()) {
 			for (int i = 0; i < Driver.completedAuctions.size(); i++) {
@@ -270,6 +326,9 @@ public class Admin extends Account {
 		}
 	}
 	
+	/**
+	 * Shows the bids associated with an auction of the user's choosing.
+	 */
 	public void printAuctionBids() {
 		if (!Driver.ongoingAuctions.isEmpty()) {
 			int auctionIndex = Menu.selectAuction();
@@ -288,19 +347,33 @@ public class Admin extends Account {
 		}
 	}
 	
+	/**
+	 * Initiates the connection to the database and triggers the reading of items from it.
+	 * 
+	 * @return a list of items read from the database
+	 */
 	public ArrayList<Item> readItems() {
 		ArrayList<Item> items = DBUtilities.readItems();
 		return items;
 	}
 	
+	/**
+	 * Triggers the writing of items to the database.
+	 */
 	public void writeItems() {
 		DBUtilities.storeItems(Driver.items);
 	}
 	
+	/**
+	 * Triggers the writing of customers to the database
+	 */
 	public void writeCustomers() {
 	    DBUtilities.storeCustomers();
 	}
 	
+	/**
+	 * Triggers the reading of customers from the database
+	 */
 	public void readCustomers() {
 		ArrayList<Customer> customers = DBUtilities.readCustomers();
 		for(Customer c: customers) {
@@ -308,15 +381,27 @@ public class Admin extends Account {
 		}
 	}
 	
+	/**
+	 * Triggers the reading of auctions from the database
+	 */
 	public void readAuctions() {
 		ArrayList<Auction> auctions = DBUtilities.readAuctions();
 		sortAuctions(auctions);
 	}
 	
+	/**
+	 * Triggers the writing of customers from the database
+	 */
 	public void writeAuctions() {
 		DBUtilities.storeAuctions();
 	}
 	
+	/**
+	 * Sorts the auctions that were read in from the database into three
+	 * categories so they may be placed in the right collection in the driver.
+	 * 
+	 * @param auctions	list of auctions read in from the database
+	 */
 	public void sortAuctions(ArrayList<Auction> auctions) {
 		for (int i = 0; i < auctions.size(); i++) {
 			if (auctions.get(i).isActive()) {

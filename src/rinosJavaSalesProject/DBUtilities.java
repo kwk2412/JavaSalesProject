@@ -43,6 +43,11 @@ public class DBUtilities {
 		}
 	}
 
+	/**
+	 * Establishes a connection to the database by logging the user in with an account in the database.
+	 * 
+	 * @return a Connection object
+	 */
 	public static Connection createConnection() {
 
 		System.out.println("What is the username for the database?");
@@ -70,6 +75,9 @@ public class DBUtilities {
 		return con;
 	}
 
+	/**
+	 * Closes the connection to the database.
+	 */
 	public static void closeConnection() {
 		if (con != null) {
 			try {
@@ -81,6 +89,10 @@ public class DBUtilities {
 		}
 	}
 
+	/**
+	 * Checks the connection to the database, if none exists, the
+	 * user is prompted to log in with an user account that has been established with the database
+	 */
 	public static void checkConnect() {
 		if (con == null) {
 			con = createConnection();
@@ -95,6 +107,11 @@ public class DBUtilities {
 		}
 	}
 
+	/**
+	 * Stores the items that are present in the program in the database.
+	 * 
+	 * @param list of items the items that are to be stored in the database
+	 */
 	public static void storeItems(ArrayList<Item> items) {
 		checkConnect();
 		deleteTable("items");
@@ -103,6 +120,11 @@ public class DBUtilities {
 		}
 	}
 
+	/**
+	 * Reads the items in from the database and puts them in the current running program.
+	 * 
+	 * @return list of items to be added to the driver
+	 */
 	public static ArrayList<Item> readItems() {
 		checkConnect();
 		ArrayList<Item> items = new ArrayList<Item>();
@@ -143,6 +165,12 @@ public class DBUtilities {
 		return items;
 	}
 
+	/**
+	 * Individually adds one item to the database. Called many times by storeItems
+	 * as multiple items get added to the database
+	 * 
+	 * @param item	item to be stored in the database
+	 */
 	public static void addItem(Item item) {
 		checkConnect();
 		double startingPrice = item.getStartingPrice();
@@ -183,8 +211,11 @@ public class DBUtilities {
 		}
 	}
 
-	// public Customer(String username, String password, int userID, String
-	// privileges, double balance)
+	/**
+	 * Adds a single customer to the database.
+	 * 
+	 * @param c customer to be added to the database
+	 */
 	public static void addCustomer(Customer c) {
 		checkConnect();
 		String username = c.getUsername();
@@ -206,6 +237,9 @@ public class DBUtilities {
 
 	}
 
+	/**
+	 * Stores the customers in the program in the database.
+	 */
 	public static void storeCustomers() {
 		ArrayList<Customer> customers = new ArrayList<>();
 		for (int i = 0; i < Driver.accounts.size(); i++) {
@@ -221,7 +255,11 @@ public class DBUtilities {
 		}
 	}
 	
-	// `cust_id`, `username`, `password`, `balance`
+	/**
+	 * Reads customers in from the database.
+	 * 
+	 * @return	list of customers to be added to the driver
+	 */
 	public static ArrayList<Customer> readCustomers() {
 		checkConnect();
 		ArrayList<Customer> customers = new ArrayList<>();
@@ -247,6 +285,11 @@ public class DBUtilities {
 		return customers;
 	}
 
+	/**
+	 * Adds a single auction to the database.
+	 * 
+	 * @param auction	auction to be added to the database
+	 */
 	public static void addAuction(Auction auction) {
 		checkConnect();
 		int auctionID = auction.getAuctionID();
@@ -277,6 +320,10 @@ public class DBUtilities {
 		}
 	}
 
+
+	/**
+	 * Stores the auctions that are in the program in the database.
+	 */
 	public static void storeAuctions() {
 		checkConnect();
 		deleteTable("auctions");
@@ -298,6 +345,11 @@ public class DBUtilities {
 		}
 	}
 
+	/**
+	 * Reads in auctions from the database.
+	 * 
+	 * @return	list of auctions to be added to the program
+	 */
 	public static ArrayList<Auction> readAuctions() {
 		checkConnect();
 		ArrayList<Auction> auctions = new ArrayList<>();
@@ -335,6 +387,11 @@ public class DBUtilities {
 		return auctions;
 	}
 
+	/**
+	 * Deletes each record in the specified table.
+	 * 
+	 * @param tableName	the name of the table that is to be deleted
+	 */
 	public static void deleteTable(String tableName) {
 		checkConnect();
 		String delete = "DELETE FROM " + tableName;
@@ -346,12 +403,24 @@ public class DBUtilities {
 		}
 	}
 
+	/**
+	 * Converts a LocalDateTime object into a String of a certain format so that it can be stored
+	 * in the database as a VARCHAR. 
+	 * @param ot	the LocalDateTime object to be converted to a String
+	 * @return		String that represents the LocalDateTime parameter
+	 */
 	public static String compileDateTime(LocalDateTime ot) {
 		String date = ot.getYear() + "-" + ot.getMonthValue() + "-" + ot.getDayOfMonth() + "-" + ot.getHour() + "-"
 				+ ot.getMinute() + "-" + ot.getSecond();
 		return date;
 	}
 
+	/**
+	 * Creates a LocalDateTime object from a String that is passed into it.
+	 * 
+	 * @param data	String from which the LocalDateTime object is to be created
+	 * @return		a LocalDateTime object
+	 */
 	public static LocalDateTime createDateTime(String data) {
 		String[] info = data.split("-");
 		int year = Integer.parseInt(info[0]);

@@ -11,13 +11,49 @@ import java.text.NumberFormat;
 
 public class Item implements Comparable<Item> {
 	
+	/**
+	 * The starting price that the bidding is to start at for this item
+	 */
 	private double startingPrice;
+	
+	/**
+	 * The name of the item
+	 */
 	private String name;
+	
+	/**
+	 * The price for which the item was sold
+	 */
 	private double priceSold;
+	
+	/**
+	 * The increment by which values of bids are to increase.
+	 * Provides a minimum dollar amount that the next bid has to be
+	 * to successfully overtake the current highest bid.
+	 */
 	private int increment;
+	
+	/**
+	 * Unique identifier for each item
+	 */
 	private int itemID;
+	
+	/**
+	 * Number that the ID of the next Item object to be made will have,
+	 * Purpose is to allow for the incrementation of item IDs as they are created
+	 */
 	private static int nextNum = 100;
+	
+	/**
+	 * Represents the availability of the item. Items that have been won in auctions
+	 * are no longer available to be put in another auction.
+	 */
 	private boolean available = true;
+	
+	/**
+	 * Indicates if the item has been paid for. True if it has been paid for,
+	 * false if it has not.
+	 */
 	private boolean paidFor;
 	
 	

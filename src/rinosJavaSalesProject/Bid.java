@@ -111,6 +111,12 @@ public class Bid implements Comparable<Bid> {
 				"Time of bid:  " + dtf.format(dateTime) + "\n";
 	}
 	
+	/**
+	 * Returns the customer with the specified user ID.
+	 * 
+	 * @param userID	the user ID of the user searched for
+	 * @return			the Customer searched for
+	 */
 	public Customer findCustomer(int userID) {
 		for (int i = 0; i < Driver.accounts.size(); i++) {
 			if (Driver.accounts.get(i).userID == userID) {
@@ -120,11 +126,17 @@ public class Bid implements Comparable<Bid> {
 		return null;
 	}
 	
+	
 	public boolean equals(Bid b) {
 		if (b == this) return true;
 		return false;
 	}
 	
+	/**
+	 * Returns the integer that is to take the value of the varible nextNum.
+	 * 
+	 * @return an integer nextNum
+	 */
 	public int findNextNum() {
 		ArrayList<Bid> bids = gatherBids();
 		if (bids.size() == 0) {
@@ -133,6 +145,11 @@ public class Bid implements Comparable<Bid> {
 		else return highest(bids) + 1;
 	}
 	
+	/**
+	 * Returns a list of all bids from completed and ongoing auctions
+	 * 
+	 * @return a list of Bids
+	 */
 	public ArrayList<Bid> gatherBids() {
 		ArrayList<Bid> bids = new ArrayList<>();
 		if (!Driver.completedAuctions.isEmpty()) {
@@ -156,6 +173,12 @@ public class Bid implements Comparable<Bid> {
 		return bids;
 	}
 	
+	/**
+	 * Returns the bid ID of the bid with the highest monetary value.
+	 * 
+	 * @param bids	list of bids 
+	 * @return
+	 */
 	public int highest(ArrayList<Bid> bids) {
 		int highest = 0;
 		for (int i = 0; i < bids.size(); i++) {
