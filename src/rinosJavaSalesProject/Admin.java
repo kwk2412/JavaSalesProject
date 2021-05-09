@@ -297,7 +297,10 @@ public class Admin extends Account {
 	}
 	
 	public void readCustomers() {
-		DBUtilities.readCustomers();
+		ArrayList<Customer> customers = DBUtilities.readCustomers();
+		for(Customer c: customers) {
+			Driver.accounts.add(c);
+		}
 	}
 	
 	public void readAuctions() {

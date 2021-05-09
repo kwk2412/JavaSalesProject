@@ -222,8 +222,9 @@ public class DBUtilities {
 	}
 	
 	// `cust_id`, `username`, `password`, `balance`
-	public static void readCustomers() {
+	public static ArrayList<Customer> readCustomers() {
 		checkConnect();
+		ArrayList<Customer> customers = new ArrayList<>();
 		String readData = "SELECT * from customers";
 		try {
 			ResultSet rs = stmt.executeQuery(readData);
@@ -237,12 +238,13 @@ public class DBUtilities {
 
 				//public Customer(String username, String password, int userID, double balance)
 				Customer cust = new Customer(username, password, cust_id, balance);
-				Driver.accounts.add(cust);
+				customers.add(cust);
 
 			}
 		} catch (SQLException e) {
 			System.out.println("It didn't work!!");
 		}
+		return customers;
 	}
 
 	public static void addAuction(Auction auction) {
