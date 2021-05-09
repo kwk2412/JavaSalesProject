@@ -59,6 +59,7 @@ public class AdminOptions {
 			else if (choice == 8) {
 				Driver.items = a.readItems();
 				a.readAuctions();
+				a.readCustomers();
 				SystemMessage.print("The items have been read in from the database");
 			}
 			
@@ -66,6 +67,7 @@ public class AdminOptions {
 			else if (choice == 9) {
 				a.writeItems();
 				a.writeAuctions();
+				a.writeCustomers();
 				SystemMessage.print("The items have been written to the database");
 			}
 			
