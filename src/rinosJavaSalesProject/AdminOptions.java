@@ -58,17 +58,21 @@ public class AdminOptions {
 			// Read from database
 			else if (choice == 8) {
 				Driver.items = a.readItems();
-				a.readAuctions();
-				a.readCustomers();
 				SystemMessage.print("The items have been read in from the database");
+				a.readAuctions();
+				SystemMessage.print("The auctions have been read in from the database");
+				a.readCustomers();
+				SystemMessage.print("The customers have been read in from the database");
 			}
 			
 			// Write to database
 			else if (choice == 9) {
 				a.writeItems();
-				a.writeAuctions();
-				a.writeCustomers();
 				SystemMessage.print("The items have been written to the database");
+				a.writeAuctions();
+				SystemMessage.print("The auctions have been written to the database");
+				a.writeCustomers();
+				SystemMessage.print("The customers have been written to the database");
 			}
 			
 			// Return to main menu

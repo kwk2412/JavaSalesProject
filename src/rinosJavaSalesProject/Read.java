@@ -71,6 +71,10 @@ public class Read {
 		read();
 	}
 	
+	
+	/**
+	 * Governs the sub-functions of reading information in from a file
+	 */
 	public static void read() {
 
 		ArrayList<String[]> blockArrays = new ArrayList<>();
@@ -117,7 +121,7 @@ public class Read {
 		ArrayList<Item> items = new ArrayList<Item>();
 		for (int i = 0; i < blockArrays.get(1).length; i++) {
 			if (blockArrays.get(1)[0] != null) {
-				items.add(createItem(blockArrays.get(1)[i], items));
+				items.add(createItem(blockArrays.get(1)[i]));
 			}
 			
 		}
@@ -178,7 +182,14 @@ public class Read {
 		addToDriver(items, activeAuctions, completedAuctions, futureAuctions, customersAdded);
 	}
 	
-	
+	/**
+	 * Returns the blocks found in the text file as an array of Strings.
+	 * Blocks are determined by the location of the delimiting character.
+	 * 
+	 * @param string	string created from the text of the flat file
+	 * @param delimiter	character that is to used as a delimiter
+	 * @return			String array in which each element is a block
+	 */
 	public static ArrayList<String> defineBlocks(String string, String delimiter) {
 		ArrayList<String> substrings = new ArrayList<>();
 		StringTokenizer st = new StringTokenizer(string, delimiter);
@@ -189,9 +200,14 @@ public class Read {
 	}
 	
 	
-	/*
-	 * Takes in a string and a character and counts the number of times that
-	 * character appears in the string
+	/**
+	 * Returns the number of delimiters present in the String supplied.
+	 * Counts the number of times the specified delimiting character appears
+	 * in the string.
+	 * 
+	 * @param string	string to be scanned for delimiters
+	 * @param delimiter	character to be used as the delimiter
+	 * @return 			the number of delimiters in the string
 	 */
 	public static int countDelimiters(String string, char delimiter) {
 		int numDelimiters = 0;
@@ -204,10 +220,16 @@ public class Read {
 	}
 	
 	
-	/*
-	 * Fills an array that associated with a block with the information from the text file
-	 * At this point, the arrays will be filled with Strings such as
+	/**
+	 * Fills an array with the information found in the associated block of the text file.
+	 * 
+	 * As part of a larger process, at this point the arrays will be filled with Strings such as
 	 * "Ronald,blue_plant" or "275,Test item 2,10"
+	 * in which each element will contain commas separating pieces of data that will be further
+	 * divided later.
+	 * 
+	 * @param array	empty array of information that is to be filled
+	 * @param block	block of information that is to be used to fill the array
 	 */
 	public static void fillArray(String[] array, String block) {
 		StringTokenizer st = new StringTokenizer(block, "|");
@@ -219,9 +241,17 @@ public class Read {
 	}
 	
 	
-	/*
-	 * Takes in something like "Jake The Dog,Gr@yl!n3" and instantiates
-	 * a customer object using the information separated by the comma
+	/**
+	 * Returns an array of Strings containing bid information that was found in
+	 * the flat file to be processed later.
+	 * 
+	 * Takes in something like "Jake The Dog,Gr@yl!n3,500#508#512#515" and
+	 * instantiates a customer object using the information separated by the comma.
+	 * The bid information gets stored in an array of strings for later use.
+	 * 
+	 * @param data				the data that is to be used to create a Customer object
+	 * @param customersAdded	ArrayList of Customers that have been created from the flat file so far
+	 * @return					bid information that will be further divided later in the process
 	 */
 	public static String[] createCustomer(String data, ArrayList<Customer> customersAdded) {
 		String[] info = toArray(data);
@@ -241,6 +271,13 @@ public class Read {
 		return bidInfo;
 	}
 
+	/**
+	 * Returns an array in which each element is a list of bid IDs found in
+	 * the String parameter supplied to it.
+	 * 
+	 * @param info	String from which to create the elements of the array
+	 * @return		array of separated bid information
+	 */
 	public static String[] createBidInfo(String[] info) {
 		String[] bidInfo = new String[3];
 		
@@ -266,11 +303,13 @@ public class Read {
 	}
 	
 	
-	/*
-	 * Takes in something like "200,GameBoy,5" and creates an Item
-	 * object based on that information
+	/**
+	 * Returns an Item object that is created from the information provided in the parameter
+	 * 
+	 * @param data a String object that holds the information necessary to create an item
+	 * @return		the item created from the information in the String object
 	 */
-	public static Item createItem(String data, ArrayList<Item> items) {
+	public static Item createItem(String data) {
 		String[] info = toArray(data);
 		boolean paidFor = false;
 		int paidForFlag = nullCheckInteger(info, 4);
@@ -285,7 +324,17 @@ public class Read {
 	
 	
 	/**
-	 * Creates an active auction from the data read in from the text file
+	 * 
+	 * Creates an active auction from the data read in from the text file.
+	 * Returns an array of Strings containing bid information that was found in
+	 * the flat file to be processed later.
+	 * Divides the data parameter into an array for use, and those elements are
+	 * used as values from which to create an Auction object.
+	 * 
+	 * @param data		data read in from the text file
+	 * @param items		collection of items that have been created from the flat file so far
+	 * @param auctions	collection of auctions that have been created from the flat file so far
+	 * @return 			bid information that will be further divided later in the process 
 	 */
 	public static String[] createActiveAuction(String data, ArrayList<Item> items, ArrayList<Auction> auctions) {
 		String[] info = toArray(data);
@@ -320,7 +369,18 @@ public class Read {
 		return bidInfo;
 	}
 	
-	 
+	/**
+	 * Creates a completed auction from the data read in from the text file.
+	 * Returns the String object that contains the bid information for the specified
+	 * a particular auction.
+	 * Divides the data parameter into an array for use, and those elements are
+	 * used as values from which to create an Auction object.
+	 * 
+	 * @param data				data read in from the text file
+	 * @param items				collection of items that have been created from the flat file so far
+	 * @param completedAuctions	collection of auctions that have been created from the flat file so far
+	 * @return					bid information that will be further divided later in the process
+	 */
 	public static String createCompletedAuction(String data, ArrayList<Item> items, ArrayList<Auction> completedAuctions) {
 		String[] info = toArray(data);
 		Item item = findItem(Integer.parseInt(info[1]), items);
@@ -333,7 +393,16 @@ public class Read {
 		return info[4];
 	}
 	
-	
+	/**
+	 * Creates a future auction from the data read in from the text file.
+	 * Returns the auction object created from the data in the 
+	 * Divides the data parameter into an array for use, and those elements are
+	 * used as values from which to create an Auction object.
+	 * 
+	 * @param data				data read in from the text file
+	 * @param items				collection of items that have been created from the flat file so far
+	 * @return					bid information that will be further divided later in the process
+	 */
 	public static Auction createFutureAuction(String data, ArrayList<Item> items) {
 		String[] info = toArray(data);
 		Item item = findItem(Integer.parseInt(info[1]), items);
@@ -352,7 +421,17 @@ public class Read {
 		return auction;
 	}
 	
-	
+	/**
+	 * Returns a bid object created from the data parameter.
+	 * Divides the data found in the parameter into an array of Strings
+	 * wherein each element is used to create the Bid object.
+	 * 
+	 * @param data						data read in from the text file
+	 * @param customersAdded			collection of customers that have been created from the flat file so far
+	 * @param auctionsAdded				collection of auctions that have been created from the flat file so far
+	 * @param completedAuctionsAdded	collection of completed auctions that have been created from the flat file so far
+	 * @return							valid bid that belongs to a previously created auction 
+	 */
 	public static Bid createBid(String data, ArrayList<Customer> customersAdded, ArrayList<Auction> auctionsAdded, ArrayList<Auction> completedAuctionsAdded) {
 		String[] info = toArray(data);
 		
@@ -365,7 +444,16 @@ public class Read {
 		return createBidCompleted(data, customersAdded, completedAuctionsAdded);
 	}
 	
-	
+	/**
+	 * Returns a valid bid that belongs to an auction that has been determined to be ongoing.
+	 * Divides the data in the data into an array of Strings and uses the elements therein
+	 * to create the Bid object.
+	 * 
+	 * @param data				data from which the bid is to be created
+	 * @param customersAdded	collection of customers already created from the flat file
+	 * @param auctionsAdded		collection of auctions already created from the flat file
+	 * @return					valid bid that belongs to a previously created active auction
+	 */
 	public static Bid createBidActive(String data, ArrayList<Customer> customersAdded, ArrayList<Auction> auctionsAdded) {
 		String[] info = toArray(data);
 		LocalDateTime dateTime = createDateTime(info[4]);
@@ -373,7 +461,17 @@ public class Read {
 		return bid;
 	}
 	
-	
+	/**
+	 * Returns a valid bid that belongs to an auction that has been previously determined
+	 * to have already ended.
+	 * Divides the data in the data into an array of Strings and uses the elements therein
+	 * to create the Bid object.
+	 * 
+	 * @param data						data from which the bid is to be created
+	 * @param customersAdded			collection of customers already created from the flat file
+	 * @param completedAuctionsAdded	collection of completed auctions already created from the flat file
+	 * @return							valid bid that belongs to a previously created completed auction
+	 */
 	public static Bid createBidCompleted(String data, ArrayList<Customer> customersAdded, ArrayList<Auction> completedAuctionsAdded) {
 		String[] info = toArray(data);
 		LocalDateTime dateTime = createDateTime(info[4]);
@@ -381,7 +479,15 @@ public class Read {
 		return bid;
 	}
 	
-	
+	/**
+	 * Populates the winningBids, activeBids, and historicBids collections of each of the customers
+	 * that the class has thus far created from the text file. It does this by taking the data inside the bid buffer
+	 * and applying the correct bids to each of the proper collections. 
+	 * 
+	 * @param customers	collection of customers already created from the flat file
+	 * @param bidBuffer	collection of bid information 
+	 * @param bids		collection of bids already created from the flat file
+	 */
 	public static void populateCustomerBids(ArrayList<Customer> customers, ArrayList<String[]> bidBuffer, ArrayList<Bid> bids) {
 		for (int i = 0; i < customers.size(); i++) {		
 				
@@ -420,7 +526,15 @@ public class Read {
 		}
 	}
 	
-	
+	/**
+	 * Populates the collections of bids in each auction from 
+	 * that the class has thus far created from the text file. It does this by taking the data inside the bid buffer
+	 * and applying the correct bids to each of the proper collections. 
+	 * 
+	 * @param customers	collection of customers already created from the flat file
+	 * @param bidBuffer	collection of bid information 
+	 * @param bids		collection of bids already created from the flat file
+	 */
 	public static void populateAuctionBids(ArrayList<Auction> auctions, ArrayList<String[]> auctionBidBuffer, ArrayList<Bid> bids) {
 		for (int i = 0; i < auctions.size(); i++) {
 			
