@@ -45,7 +45,7 @@ public class CustomerOptions {
 				if (!c.allPaidFor()) {
 					c.payForWonAuction();
 				}
-				else System.out.println("You have items to pay for.");
+				else System.out.println("You have no items to pay for.");
 			}
 			
 			//Check my historic bids
@@ -53,6 +53,7 @@ public class CustomerOptions {
 				if (!c.getHistoricBids().isEmpty()) {
 					c.printHistoricBids();
 				}
+				else System.out.println("You have no historic bids to check");
 			}
 			
 			//Return to main menu
