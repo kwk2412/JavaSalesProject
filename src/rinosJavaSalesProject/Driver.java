@@ -54,7 +54,6 @@ public class Driver {
 	 * currentUser equal to the rootUser has been given its own method for
 	 * organization purposes. (When a user selects the log out option from the menu,
 	 * we can call this method to set the currentUser back to rootUser)
-	 * 
 	 */
 	public static void logout() {
 		currentUser.setUser(rootUser);
@@ -119,10 +118,10 @@ public class Driver {
 		ongoingAuctions = new ArrayList<Auction>();
 		completedAuctions = new ArrayList<Auction>();
 		futureAuctions = new ArrayList<Auction>();
-		//loadInventory();
+		loadInventory();
 		invLoaded = true;
 		timer();
-		currentUser.setUser(new Admin("Clay", "p", "admin"));
+		//currentUser.setUser(new Admin("Clay", "p", "admin"));
 	}
 	
 	public static void timer() {
